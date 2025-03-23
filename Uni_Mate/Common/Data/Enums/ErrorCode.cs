@@ -1,0 +1,14 @@
+﻿namespace Uni_Mate.Common.Data.Enums;
+
+public enum ErrorCode
+{
+    None,
+    InvalidRequest,
+    InvalidData,
+    NotFound,
+    Unauthorized,
+    Forbidden,
+    InternalServerError,
+    ServiceUnavailable,
+    UnknownError
+}
