@@ -1,4 +1,17 @@
 
+using Autofac.Extensions.DependencyInjection;
+using Autofac;
+using Uni_Mate.Configrution;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.AspNetCore.Identity;
+using Uni_Mate.Models.UserManagment;
+using Uni_Mate.Domain;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.IdentityModel.Tokens;
+using System.Text;
+using Uni_Mate.Common.helper;
+using Uni_Mate.Common.Views;
+
 namespace Uni_Mate
 {
     public class Program
@@ -11,11 +24,56 @@ namespace Uni_Mate
 
             builder.Services.AddControllers();
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
+
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
+         
+            
+            #region Identity Configration
+            builder.Services.AddIdentity<User, IdentityRole>()
+                .AddEntityFrameworkStores<Context>()
+                .AddDefaultTokenProviders();
+            #endregion
+            #region configure AutoFac
+
+            builder.Host.UseServiceProviderFactory(new AutofacServiceProviderFactory());
+            builder.Host.ConfigureContainer<ContainerBuilder>(container =>
+            {
+                container.RegisterModule(new ApplicationModule());
+            });
+
+            #endregion
+            #region JwtSettings
+
+            builder.Services.AddAuthentication(options =>
+            {
+                // Use JWT as the default authentication method
+                options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+                options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+            })
+           .AddJwtBearer(options =>
+          {
+              var jwtSettings = builder.Configuration.GetSection("JwtSettings").Get<JwtSettings>();
+
+              // Set Token Validation Rules
+              options.TokenValidationParameters = new TokenValidationParameters
+              {
+                  ValidateIssuer = true,
+                  ValidateAudience = true,
+                  ValidateLifetime = true,
+                  ValidateIssuerSigningKey = true,
+
+                  ValidIssuer = jwtSettings.Issuer,
+                  ValidAudience = jwtSettings.Audience,
+                  IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(jwtSettings.Key))
+              };
+          });
+            #endregion
+           
+            builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssemblyContaining<Program>());
+            builder.Services.Configure<MailSettings>(builder.Configuration.GetSection("MailSettings"));
 
             var app = builder.Build();
-
             // Configure the HTTP request pipeline.
             if (app.Environment.IsDevelopment())
             {
@@ -24,9 +82,8 @@ namespace Uni_Mate
             }
 
             app.UseHttpsRedirection();
-
+            app.UseAuthentication();
             app.UseAuthorization();
-
 
             app.MapControllers();
 

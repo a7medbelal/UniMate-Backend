@@ -10,5 +10,5 @@ public enum ErrorCode
     Forbidden,
     InternalServerError,
     ServiceUnavailable,
-    UnknownError
+    UnknownError,
 }

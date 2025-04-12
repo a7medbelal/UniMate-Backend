@@ -1,4 +1,4 @@
-namespace TrelloCopy.Common.Views;
+namespace Uni_Mate.Common.Views;
 
 public class UserInfo
 {
