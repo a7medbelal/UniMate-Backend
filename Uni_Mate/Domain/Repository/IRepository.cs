@@ -5,7 +5,7 @@ using Uni_Mate.Models;
 
 namespace Uni_Mate.Domain.Repository
 {
-    public interface IRepository<Entity> where Entity : BaseEntity
+    public interface IRepository<Entity> where Entity : BaseEntity 
     {
         Task<DbSet<Entity>> Query();
         Task Add(Entity entity);

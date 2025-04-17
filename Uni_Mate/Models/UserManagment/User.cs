@@ -12,10 +12,13 @@ namespace Uni_Mate.Models.UserManagment
       public string Fname { get; set; }
 
       public string Lname { get; set; }
+      //public string UserName { get; set; }
+        
+      public string address { get; set; }
 
       public string Address { get; set; }
       public string? Image { get; set; }
-      public Role Role { get; set; }
+      public Role role { get; set; }
       public Gender Gender { get; set; }
       public string? Governorate { get; set; }
       // make the user write a short description for himself

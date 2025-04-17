@@ -15,6 +15,7 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using TrelloCopy.Common.BaseEndpoints;
 using Uni_Mate.Common.BaseEndpoints;
 using Uni_Mate.Domain.Repository;
+using Uni_Mate.Common.BaseHandlers;
 
 
 namespace Uni_Mate.Configrution
@@ -100,6 +101,14 @@ namespace Uni_Mate.Configrution
             #region Repository Registration
             builder.RegisterGeneric(typeof(Repository<>)).As(typeof(IRepository<>)).InstancePerLifetimeScope();
             #endregion
+
+            builder.RegisterGeneric(typeof(BaseWithoutRepositoryRequestHandlerParameter<>))
+    .AsSelf()
+    .InstancePerLifetimeScope();
+
+            builder.RegisterType(typeof(BaseWithotRepositoryRequestHandlerParameters))
+                .AsSelf()
+                .InstancePerLifetimeScope();
 
 
         }

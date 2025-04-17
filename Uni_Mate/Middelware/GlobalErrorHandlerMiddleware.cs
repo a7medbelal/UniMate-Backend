@@ -7,12 +7,11 @@ namespace Uni_Mate.Middlewares;
 public class GlobalErrorHandlerMiddleware
 {
     RequestDelegate _nextAction;
-    ILogger<GlobalErrorHandlerMiddleware> _logger;
-    public GlobalErrorHandlerMiddleware(RequestDelegate nextAction, 
-        ILogger<GlobalErrorHandlerMiddleware> logger)
+
+    public GlobalErrorHandlerMiddleware(RequestDelegate nextAction)
     {
         _nextAction = nextAction;
-        _logger = logger;
+
     }
 
     public async Task InvokeAsync(HttpContext context)
@@ -23,9 +22,17 @@ public class GlobalErrorHandlerMiddleware
         }
         catch (Exception ex)
         {
+            if (!context.Response.HasStarted)
+            {
+                context.Response.StatusCode = StatusCodes.Status500InternalServerError;
+                context.Response.ContentType = "application/json"; // Return JSON response
+
+                var response = EndpointResponse<bool>.Failure(ErrorCode.ExpectionHappend, $"an error happen while processing the request");
+
+                await context.Response.WriteAsJsonAsync(response);
+            }
             File.WriteAllText(@"F:\\log.txt", $"error{ex.Message}");
-            var response = EndpointResponse<bool>.Failure(ErrorCode.UnknownError,"check the log file");
-            context.Response.WriteAsJsonAsync(response);
+
         }
 
         //return SprintItem.CompletedTask;

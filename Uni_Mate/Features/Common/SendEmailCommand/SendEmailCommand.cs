@@ -3,8 +3,6 @@ using MailKit.Security;
 using MediatR;
 using Microsoft.Extensions.Options;
 using MimeKit;
-using TrelloCopy.Common.BaseHandlers;
-using TrelloCopy.Common.Views;
 using Uni_Mate.Common.BaseHandlers;
 using Uni_Mate.Common.Views;
 using Uni_Mate.Models.UserManagment;
