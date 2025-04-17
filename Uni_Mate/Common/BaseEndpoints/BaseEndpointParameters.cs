@@ -1,6 +1,6 @@
 ﻿using FluentValidation;
 using MediatR;
-using TrelloCopy.Common.Views;
+
 using Uni_Mate.Common.Views;
 
 namespace Uni_Mate.Common.BaseEndpoints;

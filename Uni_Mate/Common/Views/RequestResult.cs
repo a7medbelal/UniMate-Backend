@@ -2,7 +2,7 @@ using System.Globalization;
 
 using Uni_Mate.Common.Data.Enums;
 
-namespace TrelloCopy.Common.Views;
+namespace Uni_Mate.Common.Views;
 
 public record RequestResult<T>(T data, bool isSuccess, string message, ErrorCode errorCode)
 {

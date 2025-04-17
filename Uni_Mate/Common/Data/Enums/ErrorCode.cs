@@ -11,4 +11,11 @@ public enum ErrorCode
     InternalServerError,
     ServiceUnavailable,
     UnknownError,
+    UserAlreadyExists,
+    UserCreationFailed,
+    EmailSendingFailed,
+    ExpectionHappend,
+    UserNotFound,
+    EmailNotConfirmed,
+    InvalidPassword,
 }

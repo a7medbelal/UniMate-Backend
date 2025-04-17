@@ -1,13 +1,12 @@
 ﻿using FluentValidation;
 using MediatR;
-using TrelloCopy.Common.Views;
 using Uni_Mate.Common;
 using Uni_Mate.Common.helper;
 using Uni_Mate.Common.Views;
 using Uni_Mate.Domain.Repository;
 using Uni_Mate.Models;
 
-namespace TrelloCopy.Common.BaseHandlers
+namespace Uni_Mate.Common.BaseHandlers
 {
     public class BaseWithoutRepositoryRequestHandlerParameter<TEntity> where TEntity : BaseEntity
     {

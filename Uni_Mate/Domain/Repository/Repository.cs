@@ -10,7 +10,7 @@ namespace Uni_Mate.Domain.Repository
     {
         protected Context _context;
         DbSet<Entity> _dbSet;
-        readonly string[] immutableProps = { nameof(BaseEntity.ID), nameof(BaseEntity.CreatedBy), nameof(BaseEntity.CreatedDate) };
+        readonly string[] immutableProps = { nameof(BaseEntity.Id), nameof(BaseEntity.CreatedBy), nameof(BaseEntity.CreatedDate) };
         public Repository(Context context)
         {
             _context = context;
@@ -31,7 +31,7 @@ namespace Uni_Mate.Domain.Repository
         {
             entity.CreatedDate = DateTime.Now;
             await _dbSet.AddAsync(entity);
-            return entity.ID;
+            return entity.Id;
         }
         //public async Task SaveInclude(Entity entity, params string[] properties)
         //{
@@ -65,7 +65,7 @@ namespace Uni_Mate.Domain.Repository
         {
             try
             {
-                var localEntity = _dbSet.Local.FirstOrDefault(e => e.ID == entity.ID);
+                var localEntity = _dbSet.Local.FirstOrDefault(e => e.Id == entity.Id);
                 EntityEntry entry;
 
                 if (localEntity is null)
@@ -137,7 +137,7 @@ namespace Uni_Mate.Domain.Repository
 
         public async Task<Entity> GetByIDAsync(int id)
         {
-            return await Get(x => x.ID == id).FirstOrDefaultAsync();
+            return await Get(x => x.Id == id).FirstOrDefaultAsync();
         }
 
         //public void SaveChanges()

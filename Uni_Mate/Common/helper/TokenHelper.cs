@@ -18,7 +18,7 @@ namespace Uni_Mate.Common.helper
             _jwtSettings = jwtSettings.Value; 
         }
 
-        public string GenerateToken(string userId)
+        public async Task<string> GenerateToken(string userId)
         {
             var tokenHandler = new JwtSecurityTokenHandler();
             var key = Encoding.ASCII.GetBytes(_jwtSettings.Key);

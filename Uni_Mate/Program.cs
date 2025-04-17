@@ -11,6 +11,8 @@ using Microsoft.IdentityModel.Tokens;
 using System.Text;
 using Uni_Mate.Common.helper;
 using Uni_Mate.Common.Views;
+using Uni_Mate.Middlewares;
+using TrelloCopy.Middlewares;
 
 namespace Uni_Mate
 {
@@ -44,7 +46,7 @@ namespace Uni_Mate
 
             #endregion
             #region JwtSettings
-
+            builder.Services.Configure<JwtSettings>(builder.Configuration.GetSection("JwtSettings"));
             builder.Services.AddAuthentication(options =>
             {
                 // Use JWT as the default authentication method
@@ -80,10 +82,11 @@ namespace Uni_Mate
                 app.UseSwagger();
                 app.UseSwaggerUI();
             }
-
+            app.UseMiddleware<GlobalErrorHandlerMiddleware>();
             app.UseHttpsRedirection();
             app.UseAuthentication();
             app.UseAuthorization();
+            app.UseMiddleware<TransactionMiddleware>();
 
             app.MapControllers();
 

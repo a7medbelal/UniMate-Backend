@@ -2,7 +2,7 @@ using FluentValidation;
 
 namespace Uni_Mate.Features.Authoraztion.RegisterUser;
 
-public record RegisterUserRequestViewModel(string Email, string Password, string Name, string PhoneNo, string Country);
+public record RegisterUserRequestViewModel(string UserName,string Email, string Password, string Name, string PhoneNo, string Country);
 
 public class RegisterUserRequestViewModelValidator : AbstractValidator<RegisterUserRequestViewModel>
 {
@@ -26,7 +26,7 @@ public class RegisterUserRequestViewModelValidator : AbstractValidator<RegisterU
         RuleFor(x => x.Name)
             .NotEmpty().WithMessage("Name is required.");
 
-        RuleFor(x => x.PhoneNo)
+        RuleFor(x => x.PhoneNo)  
             .NotEmpty().WithMessage("Phone number is required.")
             .Matches(@"^\+?\d{10,15}$").WithMessage("Please provide a valid phone number.");
 
