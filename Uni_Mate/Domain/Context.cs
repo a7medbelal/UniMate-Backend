@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using System.Diagnostics;
+using Uni_Mate.Models.ApartmentManagement;
 using Uni_Mate.Models.UserManagment;
 using Uni_Mate.Models.UserManagment.Enum;
 
@@ -19,9 +20,11 @@ namespace Uni_Mate.Domain
         public DbSet<User> Users { get; set; }
 
         public DbSet<RoleFeature> roleFeatures { get; set; }
-
-
-
+        public DbSet<Apartment> Apartments { get; set; }
+        public DbSet<Room> Rooms { get; set; }
+        public DbSet<Bed> Beds { get; set; }
+        public DbSet<Phone> Phones { get; set; }
+        public DbSet<SocialAccount> SocialAccounts { get; set;}
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
 
@@ -44,8 +47,8 @@ namespace Uni_Mate.Domain
 
             // store the enum as string in the database
             modelBuilder.Entity<User>()
-                  .Property(u => u.role)
-                  .HasConversion<string>();
+                  .Property(u => u.Role)
+                  .HasConversion<string>(); 
 
 
             // Seed admin 
@@ -58,14 +61,14 @@ namespace Uni_Mate.Domain
                 Fname = "ahmed",
                 Lname = "belal",
                 UserName = "admin",
-                address ="qena" ,
+                Address ="qena" ,
                 NormalizedUserName = "ADMIN",
                 Email = "legendahmed.122@gmail.com",
                 NormalizedEmail = "Legendahmed.122@gmail.com",
                 EmailConfirmed = true,
                 PhoneNumber = "01040363077",
                 PhoneNumberConfirmed = true,
-                role = Role.Admin
+                Role = Role.Admin
             };
             admin.PasswordHash = hasher.HashPassword(admin, "Admin123!");
 

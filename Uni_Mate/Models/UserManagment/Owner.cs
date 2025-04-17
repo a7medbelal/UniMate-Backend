@@ -1,4 +1,5 @@
-﻿namespace Uni_Mate.Models.UserManagment
+﻿using Uni_Mate.Models.ApartmentManagement;
+namespace Uni_Mate.Models.UserManagment
 {
     public class Owner : User
     {
@@ -8,6 +9,7 @@
 
         public DateTime? ApprovedDate { get; set; }
 
-        public User ApprovedByAdmin { get; set; }
+        public User? ApprovedByAdmin { get; set; }
+        public ICollection<Apartment>? Apartments { get; set; }
     }
 }
