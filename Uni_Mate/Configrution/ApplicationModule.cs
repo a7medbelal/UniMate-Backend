@@ -28,7 +28,7 @@ namespace Uni_Mate.Configrution
             builder.Register(con =>
             {
               var Config = con.Resolve<IConfiguration>();
-              var connectionString = Config.GetConnectionString("DefaultConnection");
+              var connectionString = Config.GetConnectionString("ZiadUnimate");
               var optionsBuilder = new DbContextOptionsBuilder<Context>().UseSqlServer(connectionString).Options;
                 return new Context(optionsBuilder);
             }).As<Context>().InstancePerLifetimeScope();
