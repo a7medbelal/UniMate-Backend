@@ -30,7 +30,7 @@ public class TransactionMiddleware
         }
         catch (Exception ex)
         {
-            await transaction.RollbackAsync();
+            await transaction?.RollbackAsync();
 
             //if (!context.Response.HasStarted)
             //{

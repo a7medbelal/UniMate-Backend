@@ -1,8 +1,10 @@
 ﻿
 using Autofac;
+using Uni_Mate.Common.BaseHandlers;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
+using Pomelo.EntityFrameworkCore.MySql.Infrastructure;
 using System.Text;
 using Uni_Mate.Common.helper;
 using Uni_Mate.Common.Views;
@@ -28,9 +30,10 @@ namespace Uni_Mate.Configrution
             // Register your Database connection
             builder.Register(con =>
             {
-              var Config = con.Resolve<IConfiguration>();
-              var connectionString = Config.GetConnectionString("ZiadUnimate");
-              var optionsBuilder = new DbContextOptionsBuilder<Context>().UseSqlServer(connectionString).Options;
+              var optionsBuilder = new DbContextOptionsBuilder<Context>().UseMySql(
+                  "Server=localhost;Database=Uni_mate;User=root;Password=;",
+                new MySqlServerVersion(new Version(8, 0, 31))
+              ).Options;
                 return new Context(optionsBuilder);
             }).As<Context>().InstancePerLifetimeScope();
 
@@ -102,11 +105,11 @@ namespace Uni_Mate.Configrution
             builder.RegisterGeneric(typeof(Repository<>)).As(typeof(IRepository<>)).InstancePerLifetimeScope();
             #endregion
 
-            builder.RegisterGeneric(typeof(BaseWithoutRepositoryRequestHandlerParameter<>))
+            builder.RegisterGeneric(typeof(BaseRequestHandlerParameter<>))
     .AsSelf()
     .InstancePerLifetimeScope();
 
-            builder.RegisterType(typeof(BaseWithotRepositoryRequestHandlerParameters))
+            builder.RegisterType(typeof(BaseWithoutRepositoryRequestHandlerParameters))
                 .AsSelf()
                 .InstancePerLifetimeScope();
 

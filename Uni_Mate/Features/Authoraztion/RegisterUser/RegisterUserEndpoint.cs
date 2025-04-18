@@ -24,7 +24,7 @@ namespace Uni_Mate.Features.Authoraztion.RegisterUser
 
             var command = new RegisterUserCommand(request.UserName,request.Email, request.Password, request.Name, request.PhoneNo, request.Country);
             var result = await _mediator.Send(command);
-            if (result.isSuccess)
+            if (!result.isSuccess)
                 return EndpointResponse<bool>.Failure(result.errorCode ,result.message); 
             
             return EndpointResponse<bool>.Success(result.data, result.message);

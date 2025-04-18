@@ -8,7 +8,7 @@ using Uni_Mate.Models;
 
 namespace Uni_Mate.Common.BaseHandlers
 {
-    public class BaseWithoutRepositoryRequestHandlerParameter<TEntity> where TEntity : BaseEntity
+    public class BaseRequestHandlerParameter<TEntity> where TEntity : BaseEntity
     {
         private readonly IMediator _mediator;
         private readonly IRepository<TEntity> _repository;
@@ -22,7 +22,7 @@ namespace Uni_Mate.Common.BaseHandlers
 
 
         // Constructor accepts the generic repository type for flexibility
-        public BaseWithoutRepositoryRequestHandlerParameter(IMediator mediator, IRepository<TEntity> repository, UserInfoProvider userInfoProvider, TokenHelper tokenHelper)
+        public BaseRequestHandlerParameter(IMediator mediator, IRepository<TEntity> repository, UserInfoProvider userInfoProvider, TokenHelper tokenHelper)
         {
             _mediator = mediator;
             _repository = repository;

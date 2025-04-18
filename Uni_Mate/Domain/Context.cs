@@ -47,7 +47,7 @@ namespace Uni_Mate.Domain
 
             // store the enum as string in the database
             modelBuilder.Entity<User>()
-                  .Property(u => u.Role)
+                  .Property(u => u.role)
                   .HasConversion<string>(); 
 
 
@@ -68,7 +68,7 @@ namespace Uni_Mate.Domain
                 EmailConfirmed = true,
                 PhoneNumber = "01040363077",
                 PhoneNumberConfirmed = true,
-                Role = Role.Admin
+                role = Role.Admin
             };
             admin.PasswordHash = hasher.HashPassword(admin, "Admin123!");
 

@@ -13,7 +13,7 @@ namespace Uni_Mate.Features.Authoraztion.LoginUser.Commands
 
     public class LoginUserCommandHandler : BaseWithoutRepositoryRequestHandler<LoginUserCommand, RequestResult<TokenDTO>>
     {
-        public LoginUserCommandHandler(BaseWithotRepositoryRequestHandlerParameters parameters) : base(parameters)
+        public LoginUserCommandHandler(BaseWithoutRepositoryRequestHandlerParameters parameters) : base(parameters)
         {
         }
 

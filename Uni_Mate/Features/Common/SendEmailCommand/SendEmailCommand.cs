@@ -9,18 +9,18 @@ using Uni_Mate.Models.UserManagment;
 
 namespace Uni_Mate.Features.Common.SendEmailCommand
 {
-    public record SendEamilQuary(string email, string name, string confirmationLink) : IRequest<RequestResult<bool>>;
+    public record SendEmailQuery(string email, string name, string confirmationLink) : IRequest<RequestResult<bool>>;
 
-    public class SendEmailQuaryHandler : BaseWithoutRepositoryRequestHandler<SendEamilQuary, RequestResult<bool>>
+    public class SendEmailQueryHandler : BaseWithoutRepositoryRequestHandler<SendEmailQuery, RequestResult<bool>>
     {
 
         readonly MailSettings mailSettings;
-        public SendEmailQuaryHandler(BaseWithotRepositoryRequestHandlerParameters parameters, IOptions<MailSettings> _mailSettings) : base(parameters)
+        public SendEmailQueryHandler(BaseWithoutRepositoryRequestHandlerParameters parameters, IOptions<MailSettings> _mailSettings) : base(parameters)
         {
             mailSettings = _mailSettings.Value;
         }
 
-        public override async Task<RequestResult<bool>> Handle(SendEamilQuary request, CancellationToken cancellationToken)
+        public override async Task<RequestResult<bool>> Handle(SendEmailQuery request, CancellationToken cancellationToken)
         {
 
             var Email = new MimeMessage
@@ -32,21 +32,21 @@ namespace Uni_Mate.Features.Common.SendEmailCommand
             Email.To.Add(MailboxAddress.Parse(request.email));
 
 
-            var Builder = new BodyBuilder();
+            var builder = new BodyBuilder();
 
-            Builder.HtmlBody = request.confirmationLink;
-            Email.Body = Builder.ToMessageBody();
+            builder.HtmlBody = request.confirmationLink;
+            Email.Body = builder.ToMessageBody();
             Email.From.Add(new MailboxAddress(mailSettings.DisplayNAme, mailSettings.Email));
 
 
-            using var Smtp = new SmtpClient();
-            Smtp.Timeout = 10000;
-            Smtp.Connect(mailSettings.Host, mailSettings.Port, SecureSocketOptions.StartTls);
-            Smtp.Authenticate(mailSettings.Email, mailSettings.Password);
+            using var smtp = new SmtpClient();
+            smtp.Timeout = 10000;
+            smtp.Connect(mailSettings.Host, mailSettings.Port, SecureSocketOptions.StartTls);
+            smtp.Authenticate(mailSettings.Email, mailSettings.Password);
 
-            await Smtp.SendAsync(Email);
+            await smtp.SendAsync(Email);
 
-            Smtp.Disconnect(true);
+            smtp.Disconnect(true);
 
             return RequestResult<bool>.Success(true);
         }
