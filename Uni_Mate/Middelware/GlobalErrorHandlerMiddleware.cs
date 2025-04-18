@@ -31,7 +31,7 @@ public class GlobalErrorHandlerMiddleware
 
                 await context.Response.WriteAsJsonAsync(response);
             }
-            File.WriteAllText(@"F:\\log.txt", $"error{ex.Message}");
+            File.WriteAllText(@"/home/hossam/dotnet/errors.txt", $"error{ex.Message}");
 
         }
 

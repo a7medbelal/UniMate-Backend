@@ -32,7 +32,10 @@ namespace Uni_Mate
          
             
             #region Identity Configration
-            builder.Services.AddIdentity<User, IdentityRole>()
+            builder.Services.AddIdentity<User, IdentityRole>(options =>
+                {
+                    options.SignIn.RequireConfirmedEmail = true;
+                })
                 .AddEntityFrameworkStores<Context>()
                 .AddDefaultTokenProviders();
             #endregion

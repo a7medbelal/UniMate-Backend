@@ -16,7 +16,7 @@ namespace Uni_Mate.Common.BaseHandlers
         protected readonly TokenHelper _tokenHelper;
         protected readonly UserInfo _userInfo;
         
-        public BaseRequestHandler(BaseWithoutRepositoryRequestHandlerParameter<TEntity> parameters)
+        public BaseRequestHandler(BaseRequestHandlerParameter<TEntity> parameters)
         {
             _mediator = parameters.Mediator;
             _repository = parameters.Repository;

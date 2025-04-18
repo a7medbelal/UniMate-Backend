@@ -13,7 +13,7 @@ namespace Uni_Mate.Common.BaseHandlers
         protected readonly TokenHelper _tokenHelper;
         protected readonly UserInfo _userInfo;
         protected readonly UserManager<User> _userManager;
-        public BaseWithoutRepositoryRequestHandler(BaseWithotRepositoryRequestHandlerParameters parameters)
+        public BaseWithoutRepositoryRequestHandler(BaseWithoutRepositoryRequestHandlerParameters parameters)
         {
             _mediator = parameters.Mediator;
             _userInfo = parameters.UserInfo;

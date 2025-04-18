@@ -13,7 +13,7 @@ namespace Uni_Mate.Features.Authoraztion.RegisterUser.Commands
 
     public class RegisterUserCommandHandler : BaseWithoutRepositoryRequestHandler<RegisterUserCommand,RequestResult<bool>>
     {
-        public RegisterUserCommandHandler(BaseWithotRepositoryRequestHandlerParameters parameters) : base(parameters)
+        public RegisterUserCommandHandler(BaseWithoutRepositoryRequestHandlerParameters parameters) : base(parameters)
         {
         }
 
@@ -35,7 +35,7 @@ namespace Uni_Mate.Features.Authoraztion.RegisterUser.Commands
                 Fname = request.name,
                 Lname = request.name,
                 role = Role.Student,
-                address = request.country
+                Address = request.country
             };
             var result = _userManager.CreateAsync(user, request.password); 
 
@@ -51,9 +51,9 @@ namespace Uni_Mate.Features.Authoraztion.RegisterUser.Commands
             // Generate email confirmation token
             var token = await _userManager.GenerateEmailConfirmationTokenAsync(user);
             // we shoud have an endpoint that URl Goes to that endpoint to put the OTP and confirm the email
-            var confirmationLink = $"http://localhost:5187/api/ConfirmEmail?userId={user.Email}&token={token}";
+            var confirmationLink = $"http://localhost:5187/api/ConfirmEmail?userEmail={user.Email}&token={token}";
             // Send confirmation email with the link
-           var sendEmail =  await _mediator.Send(new SendEamilQuary(user.Email, "Confirm your email", confirmationLink));
+           var sendEmail =  await _mediator.Send(new SendEmailQuery(user.Email, "Confirm your email", confirmationLink));
 
             if(!sendEmail.isSuccess)
                 return RequestResult<bool>.Failure(ErrorCode.EmailSendingFailed, "Email sending failed");
