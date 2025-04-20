@@ -51,14 +51,14 @@ namespace Uni_Mate.Features.Authoraztion.RegisterUser.Commands
             // Generate email confirmation token
             var token = await _userManager.GenerateEmailConfirmationTokenAsync(user);
             // we shoud have an endpoint that URl Goes to that endpoint to put the OTP and confirm the email
-            var confirmationLink = $"http://localhost:5187/api/ConfirmEmail?userEmail={user.Email}&token={token}";
+            var confirmationLink = $"http://localhost:5187/ConfirmEmailEndpoint/ConfirmEmail?Email={user.Email}&Token={token}";
             // Send confirmation email with the link
            var sendEmail =  await _mediator.Send(new SendEmailQuery(user.Email, "Confirm your email", confirmationLink));
 
             if(!sendEmail.isSuccess)
                 return RequestResult<bool>.Failure(ErrorCode.EmailSendingFailed, "Email sending failed");
 
-            return RequestResult<bool>.Success(true, "ples check your email");
+            return RequestResult<bool>.Success(true, "please check your email");
         }
     }
 
