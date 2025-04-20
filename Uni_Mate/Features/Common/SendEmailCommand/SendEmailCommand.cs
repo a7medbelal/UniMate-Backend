@@ -36,7 +36,7 @@ namespace Uni_Mate.Features.Common.SendEmailCommand
 
             builder.HtmlBody = request.confirmationLink;
             Email.Body = builder.ToMessageBody();
-            Email.From.Add(new MailboxAddress(mailSettings.DisplayNAme, mailSettings.Email));
+            Email.From.Add(new MailboxAddress(mailSettings.DisplayName, mailSettings.Email));
 
 
             using var smtp = new SmtpClient();
