@@ -1,7 +1,28 @@
 {
   "Version": 1,
-  "WorkspaceRootPath": "F:\\Uni_Mate\\Uni_Mate\\",
-  "Documents": [],
+  "WorkspaceRootPath": "C:\\Users\\munta\\OneDrive\\Desktop\\uniback\\UniMate-Backend\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{078F1CCE-8939-41FE-AD3F-FE99E8A57F94}|Uni_Mate\\Uni_Mate.csproj|c:\\users\\munta\\onedrive\\desktop\\uniback\\unimate-backend\\uni_mate\\features\\authoraztion\\registeruser\\registerstudent\\registerstudentrequestviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{078F1CCE-8939-41FE-AD3F-FE99E8A57F94}|Uni_Mate\\Uni_Mate.csproj|solutionrelative:uni_mate\\features\\authoraztion\\registeruser\\registerstudent\\registerstudentrequestviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{078F1CCE-8939-41FE-AD3F-FE99E8A57F94}|Uni_Mate\\Uni_Mate.csproj|c:\\users\\munta\\onedrive\\desktop\\uniback\\unimate-backend\\uni_mate\\features\\authoraztion\\registeruser\\registerowner\\registerownerendpoint.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{078F1CCE-8939-41FE-AD3F-FE99E8A57F94}|Uni_Mate\\Uni_Mate.csproj|solutionrelative:uni_mate\\features\\authoraztion\\registeruser\\registerowner\\registerownerendpoint.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{078F1CCE-8939-41FE-AD3F-FE99E8A57F94}|Uni_Mate\\Uni_Mate.csproj|c:\\users\\munta\\onedrive\\desktop\\uniback\\unimate-backend\\uni_mate\\features\\authoraztion\\registeruser\\commands\\registerusercommand.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{078F1CCE-8939-41FE-AD3F-FE99E8A57F94}|Uni_Mate\\Uni_Mate.csproj|solutionrelative:uni_mate\\features\\authoraztion\\registeruser\\commands\\registerusercommand.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{078F1CCE-8939-41FE-AD3F-FE99E8A57F94}|Uni_Mate\\Uni_Mate.csproj|c:\\users\\munta\\onedrive\\desktop\\uniback\\unimate-backend\\uni_mate\\features\\authoraztion\\registeruser\\registerstudent\\registerstudentendpoint.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{078F1CCE-8939-41FE-AD3F-FE99E8A57F94}|Uni_Mate\\Uni_Mate.csproj|solutionrelative:uni_mate\\features\\authoraztion\\registeruser\\registerstudent\\registerstudentendpoint.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{078F1CCE-8939-41FE-AD3F-FE99E8A57F94}|Uni_Mate\\Uni_Mate.csproj|c:\\users\\munta\\onedrive\\desktop\\uniback\\unimate-backend\\uni_mate\\features\\authoraztion\\registeruser\\registerowner\\registerownerrequestviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{078F1CCE-8939-41FE-AD3F-FE99E8A57F94}|Uni_Mate\\Uni_Mate.csproj|solutionrelative:uni_mate\\features\\authoraztion\\registeruser\\registerowner\\registerownerrequestviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
   "DocumentGroupContainers": [
     {
       "Orientation": 1,
@@ -9,63 +30,72 @@
       "DocumentGroups": [
         {
           "DockedHeight": 554,
-          "SelectedChildIndex": -1,
+          "SelectedChildIndex": 4,
           "Children": [
             {
-              "$type": "Bookmark",
-              "Name": "ST:0:0:{3ae79031-e1bc-11d0-8f78-00a0c9110057}"
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "RegisterOwnerRequestViewModel.cs",
+              "DocumentMoniker": "C:\\Users\\munta\\OneDrive\\Desktop\\uniback\\UniMate-Backend\\Uni_Mate\\Features\\Authoraztion\\RegisterUser\\RegisterOwner\\RegisterOwnerRequestViewModel.cs",
+              "RelativeDocumentMoniker": "Uni_Mate\\Features\\Authoraztion\\RegisterUser\\RegisterOwner\\RegisterOwnerRequestViewModel.cs",
+              "ToolTip": "C:\\Users\\munta\\OneDrive\\Desktop\\uniback\\UniMate-Backend\\Uni_Mate\\Features\\Authoraztion\\RegisterUser\\RegisterOwner\\RegisterOwnerRequestViewModel.cs",
+              "RelativeToolTip": "Uni_Mate\\Features\\Authoraztion\\RegisterUser\\RegisterOwner\\RegisterOwnerRequestViewModel.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAQAAAB2AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-22T16:49:38.665Z",
+              "EditorCaption": ""
             },
             {
-              "$type": "Bookmark",
-              "Name": "ST:130:0:{75188d03-9892-4ae2-abf1-207126247ce5}"
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "RegisterOwnerEndpoint.cs",
+              "DocumentMoniker": "C:\\Users\\munta\\OneDrive\\Desktop\\uniback\\UniMate-Backend\\Uni_Mate\\Features\\Authoraztion\\RegisterUser\\RegisterOwner\\RegisterOwnerEndpoint.cs",
+              "RelativeDocumentMoniker": "Uni_Mate\\Features\\Authoraztion\\RegisterUser\\RegisterOwner\\RegisterOwnerEndpoint.cs",
+              "ToolTip": "C:\\Users\\munta\\OneDrive\\Desktop\\uniback\\UniMate-Backend\\Uni_Mate\\Features\\Authoraztion\\RegisterUser\\RegisterOwner\\RegisterOwnerEndpoint.cs",
+              "RelativeToolTip": "Uni_Mate\\Features\\Authoraztion\\RegisterUser\\RegisterOwner\\RegisterOwnerEndpoint.cs",
+              "ViewState": "AgIAACAAAAAAAAAAAAAAAA8AAABrAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-22T16:47:15.894Z",
+              "EditorCaption": ""
             },
             {
-              "$type": "Bookmark",
-              "Name": "ST:129:0:{1fc202d4-d401-403c-9834-5b218574bb67}"
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "RegisterStudentEndpoint.cs",
+              "DocumentMoniker": "C:\\Users\\munta\\OneDrive\\Desktop\\uniback\\UniMate-Backend\\Uni_Mate\\Features\\Authoraztion\\RegisterUser\\RegisterStudent\\RegisterStudentEndpoint.cs",
+              "RelativeDocumentMoniker": "Uni_Mate\\Features\\Authoraztion\\RegisterUser\\RegisterStudent\\RegisterStudentEndpoint.cs",
+              "ToolTip": "C:\\Users\\munta\\OneDrive\\Desktop\\uniback\\UniMate-Backend\\Uni_Mate\\Features\\Authoraztion\\RegisterUser\\RegisterStudent\\RegisterStudentEndpoint.cs",
+              "RelativeToolTip": "Uni_Mate\\Features\\Authoraztion\\RegisterUser\\RegisterStudent\\RegisterStudentEndpoint.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABYAAABEAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-21T23:05:20.622Z",
+              "EditorCaption": ""
             },
             {
-              "$type": "Bookmark",
-              "Name": "ST:128:0:{116d2292-e37d-41cd-a077-ebacac4c8cc4}"
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "RegisterUserCommand.cs",
+              "DocumentMoniker": "C:\\Users\\munta\\OneDrive\\Desktop\\uniback\\UniMate-Backend\\Uni_Mate\\Features\\Authoraztion\\RegisterUser\\Commands\\RegisterUserCommand.cs",
+              "RelativeDocumentMoniker": "Uni_Mate\\Features\\Authoraztion\\RegisterUser\\Commands\\RegisterUserCommand.cs",
+              "ToolTip": "C:\\Users\\munta\\OneDrive\\Desktop\\uniback\\UniMate-Backend\\Uni_Mate\\Features\\Authoraztion\\RegisterUser\\Commands\\RegisterUserCommand.cs",
+              "RelativeToolTip": "Uni_Mate\\Features\\Authoraztion\\RegisterUser\\Commands\\RegisterUserCommand.cs",
+              "ViewState": "AgIAABYAAAAAAAAAAAAAACgAAAAEAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-20T11:28:48.729Z",
+              "EditorCaption": ""
             },
             {
-              "$type": "Bookmark",
-              "Name": "ST:2:0:{d212f56b-c48a-434c-a121-1c5d80b59b9f}"
-            },
-            {
-              "$type": "Bookmark",
-              "Name": "ST:0:0:{e1b7d1f8-9b3c-49b1-8f4f-bfc63a88835d}"
-            },
-            {
-              "$type": "Bookmark",
-              "Name": "ST:0:0:{e5c86464-96be-4d7c-9a8b-abcb3bbf5f92}"
-            }
-          ]
-        },
-        {
-          "DockedHeight": 36,
-          "SelectedChildIndex": -1,
-          "Children": [
-            {
-              "$type": "Bookmark",
-              "Name": "ST:0:0:{0ad07096-bba9-4900-a651-0598d26f6d24}"
-            },
-            {
-              "$type": "Bookmark",
-              "Name": "ST:0:0:{34e76e81-ee4a-11d0-ae2e-00a0c90fffc3}"
-            },
-            {
-              "$type": "Bookmark",
-              "Name": "ST:0:0:{40ea2e6b-2121-4bb8-a43e-c83c04b51041}"
-            }
-          ]
-        },
-        {
-          "DockedHeight": 119,
-          "SelectedChildIndex": -1,
-          "Children": [
-            {
-              "$type": "Bookmark",
-              "Name": "ST:0:0:{d78612c7-9962-4b83-95d9-268046dad23a}"
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "RegisterStudentRequestViewModel.cs",
+              "DocumentMoniker": "C:\\Users\\munta\\OneDrive\\Desktop\\uniback\\UniMate-Backend\\Uni_Mate\\Features\\Authoraztion\\RegisterUser\\RegisterStudent\\RegisterStudentRequestViewModel.cs",
+              "RelativeDocumentMoniker": "Uni_Mate\\Features\\Authoraztion\\RegisterUser\\RegisterStudent\\RegisterStudentRequestViewModel.cs",
+              "ToolTip": "C:\\Users\\munta\\OneDrive\\Desktop\\uniback\\UniMate-Backend\\Uni_Mate\\Features\\Authoraztion\\RegisterUser\\RegisterStudent\\RegisterStudentRequestViewModel.cs",
+              "RelativeToolTip": "Uni_Mate\\Features\\Authoraztion\\RegisterUser\\RegisterStudent\\RegisterStudentRequestViewModel.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAoAAAAgAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-16T14:23:36.542Z",
+              "EditorCaption": ""
             }
           ]
         }

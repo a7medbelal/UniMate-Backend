@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "F:\\Uni_Mate\\Uni_Mate\\Uni_Mate\\Uni_Mate.csproj": {}
+    "C:\\Users\\munta\\OneDrive\\Desktop\\uniback\\UniMate-Backend\\Uni_Mate\\Uni_Mate.csproj": {}
   },
   "projects": {
-    "F:\\Uni_Mate\\Uni_Mate\\Uni_Mate\\Uni_Mate.csproj": {
+    "C:\\Users\\munta\\OneDrive\\Desktop\\uniback\\UniMate-Backend\\Uni_Mate\\Uni_Mate.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "F:\\Uni_Mate\\Uni_Mate\\Uni_Mate\\Uni_Mate.csproj",
+        "projectUniqueName": "C:\\Users\\munta\\OneDrive\\Desktop\\uniback\\UniMate-Backend\\Uni_Mate\\Uni_Mate.csproj",
         "projectName": "Uni_Mate",
-        "projectPath": "F:\\Uni_Mate\\Uni_Mate\\Uni_Mate\\Uni_Mate.csproj",
-        "packagesPath": "C:\\Users\\Ahmed Balal\\.nuget\\packages\\",
-        "outputPath": "F:\\Uni_Mate\\Uni_Mate\\Uni_Mate\\obj\\",
+        "projectPath": "C:\\Users\\munta\\OneDrive\\Desktop\\uniback\\UniMate-Backend\\Uni_Mate\\Uni_Mate.csproj",
+        "packagesPath": "C:\\Users\\munta\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\munta\\OneDrive\\Desktop\\uniback\\UniMate-Backend\\Uni_Mate\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\Ahmed Balal\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\munta\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -46,9 +46,69 @@
         "net8.0": {
           "targetAlias": "net8.0",
           "dependencies": {
+            "Autofac": {
+              "target": "Package",
+              "version": "[8.2.0, )"
+            },
+            "Autofac.Extensions.DependencyInjection": {
+              "target": "Package",
+              "version": "[10.0.0, )"
+            },
+            "FluentValidation": {
+              "target": "Package",
+              "version": "[11.9.0, )"
+            },
+            "FluentValidation.AspNetCore": {
+              "target": "Package",
+              "version": "[11.2.0, )"
+            },
+            "MailKit": {
+              "target": "Package",
+              "version": "[4.11.0, )"
+            },
+            "MediatR": {
+              "target": "Package",
+              "version": "[12.1.1, )"
+            },
+            "Microsoft.AspNetCore.Authentication.JwtBearer": {
+              "target": "Package",
+              "version": "[8.0.2, )"
+            },
+            "Microsoft.AspNetCore.Identity.EntityFrameworkCore": {
+              "target": "Package",
+              "version": "[8.0.11, )"
+            },
+            "Microsoft.EntityFrameworkCore": {
+              "target": "Package",
+              "version": "[8.0.11, )"
+            },
+            "Microsoft.EntityFrameworkCore.Design": {
+              "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[8.0.11, )"
+            },
+            "Microsoft.EntityFrameworkCore.SqlServer": {
+              "target": "Package",
+              "version": "[8.0.11, )"
+            },
+            "Microsoft.EntityFrameworkCore.Tools": {
+              "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[8.0.11, )"
+            },
+            "MimeKit": {
+              "target": "Package",
+              "version": "[4.11.0, )"
+            },
             "Swashbuckle.AspNetCore": {
               "target": "Package",
               "version": "[6.4.0, )"
+            },
+            "System.IdentityModel.Tokens.Jwt": {
+              "target": "Package",
+              "version": "[8.2.0, )"
             }
           },
           "imports": [
@@ -70,7 +130,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.400/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.403/PortableRuntimeIdentifierGraph.json"
         }
       }
     }
