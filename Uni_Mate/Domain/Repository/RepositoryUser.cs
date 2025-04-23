@@ -1,21 +1,30 @@
 using System.Linq.Expressions;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using Org.BouncyCastle.Asn1;
 using Uni_Mate.Models.UserManagment;
 namespace Uni_Mate.Domain.Repository;
 
-public class RepositoryUser : IRepositoryIdentity<User>
+public class RepositoryUser<Entity> : IRepositoryIdentity<Entity> where Entity : User
 {
-    public Task<DbSet<User>> Query()
+    private readonly Context _context;
+    private readonly DbSet<Entity> _dbSet;
+    public RepositoryUser(Context context)
+    {
+        _context = context;
+        _dbSet = _context.Set<Entity>();
+    }
+    public Task<DbSet<Entity>> Query()
     {
         throw new NotImplementedException();
     }
 
-    public Task<bool> SaveIncludeAsync(User entity, params string[] properties)
+    public Task<bool> SaveIncludeAsync(Entity entity, params string[] properties)
     {
         throw new NotImplementedException();
     }
 
-    public Task Delete(User entity)
+    public Task Delete(Entity entity)
     {
         throw new NotImplementedException();
     }
@@ -25,42 +34,21 @@ public class RepositoryUser : IRepositoryIdentity<User>
         throw new NotImplementedException();
     }
 
-    public IQueryable<User> GetAll()
+    public IQueryable<Entity> GetAll()
+    {
+        return  _dbSet.Where(x => !x.IsActive);
+    }
+
+    public IQueryable<Entity> GetAllWithDeleted()
     {
         throw new NotImplementedException();
     }
 
-    public IQueryable<User> GetAllWithDeleted()
+    public IQueryable<Entity> Get(Expression<Func<Entity, bool>> predicate)
     {
-        throw new NotImplementedException();
+        return  GetAll().Where(predicate);
     }
-
-    public IQueryable<User> Get(Expression<Func<User, bool>> predicate)
-    {
-        throw new NotImplementedException();
-    }
-
-    public Task<bool> AnyAsync(Expression<Func<User, bool>> predicate)
-    {
-        throw new NotImplementedException();
-    }
-
-    public Task<User> GetByIDAsync(int id)
-    {
-        throw new NotImplementedException();
-    }
-
-    public Task<int> AddAsync(User entity)
-    {
-        throw new NotImplementedException();
-    }
-
-    public Task AddRangeAsync(IEnumerable<User> entities)
-    {
-        throw new NotImplementedException();
-    }
-
-    public Task DeleteRangeAsync(ICollection<User> entities)
+    public Task<Entity> GetByIDAsync(string id)
     {
         throw new NotImplementedException();
     }
@@ -68,5 +56,10 @@ public class RepositoryUser : IRepositoryIdentity<User>
     public Task SaveChangesAsync()
     {
         throw new NotImplementedException();
+    }
+
+    public async Task<bool> AnyAsync(Expression<Func<Entity, bool>> predicate)
+    {
+        return await Get(predicate).AnyAsync();
     }
 }

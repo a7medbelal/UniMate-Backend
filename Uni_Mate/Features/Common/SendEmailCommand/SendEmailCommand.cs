@@ -27,8 +27,8 @@ namespace Uni_Mate.Features.Common.SendEmailCommand
             {
                 Sender = MailboxAddress.Parse(mailSettings.Email),
                 Subject = request.name
-
             };
+
             Email.To.Add(MailboxAddress.Parse(request.email));
 
 
@@ -44,10 +44,9 @@ namespace Uni_Mate.Features.Common.SendEmailCommand
             smtp.Connect(mailSettings.Host, mailSettings.Port, SecureSocketOptions.StartTls);
             smtp.Authenticate(mailSettings.Email, mailSettings.Password);
 
+
             await smtp.SendAsync(Email);
-
             smtp.Disconnect(true);
-
             return RequestResult<bool>.Success(true);
         }
     }

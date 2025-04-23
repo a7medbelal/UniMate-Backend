@@ -22,7 +22,7 @@ namespace Uni_Mate.Features.Authoraztion.RegisterUser
            
 
 
-            var command = new RegisterUserCommand(request.UserName,request.Email, request.Password, request.Name, request.PhoneNo, request.Country);
+            var command = new RegisterUserCommand(request.UserName,request.Email, request.Password, request.Fname, request.Lname,  request.PhoneNo, request.NationalId);
             var result = await _mediator.Send(command);
             if (!result.isSuccess)
                 return EndpointResponse<bool>.Failure(result.errorCode ,result.message); 
