@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Identity;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Security;
 using Uni_Mate.Models.Comment_Review;
@@ -19,7 +20,12 @@ namespace Uni_Mate.Models.UserManagment
 
       public bool IsActive { get; set; } = false;
 
-      public Role role { get; set; }
+
+        [StringLength(6)]
+        public string? ResetPassword { get; set; }
+        public DateTime? ResetPasswowrdConfirnation { get; set; }
+
+        public Role role { get; set; }
 
         //this for review the two relationship with same entity as EF core doesnot understand this so you need make it explicity 
       [InverseProperty(nameof(Review.Reviewer))]
