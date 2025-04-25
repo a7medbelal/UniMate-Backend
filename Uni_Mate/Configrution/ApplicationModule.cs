@@ -4,7 +4,7 @@ using Uni_Mate.Common.BaseHandlers;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
-using Pomelo.EntityFrameworkCore.MySql.Infrastructure;
+//using Pomelo.EntityFrameworkCore.MySql.Infrastructure;
 using System.Text;
 using Uni_Mate.Common.helper;
 using Uni_Mate.Common.Views;
@@ -27,14 +27,15 @@ namespace Uni_Mate.Configrution
 
         protected override void Load(ContainerBuilder builder)
         {
-            // Register your Database connection
-            builder.Register(con =>
+            builder.Register(context =>
             {
-              var optionsBuilder = new DbContextOptionsBuilder<Context>().UseMySql(
-                  "Server=localhost;Database=Uni_mate;User=root;Password=;",
-                new MySqlServerVersion(new Version(8, 0, 31))
-              ).Options;
-                return new Context(optionsBuilder);
+                var config = context.Resolve<IConfiguration>();
+                var connectionString = config.GetConnectionString("DefaultConnection");
+                var options = new DbContextOptionsBuilder<Context>()
+                    .UseSqlServer(connectionString)
+                    .Options;
+
+                return new Context(options);
             }).As<Context>().InstancePerLifetimeScope();
 
             //#region JWT Authentication Registration
@@ -103,15 +104,18 @@ namespace Uni_Mate.Configrution
 
             #region Repository Registration
             builder.RegisterGeneric(typeof(Repository<>)).As(typeof(IRepository<>)).InstancePerLifetimeScope();
+            builder.RegisterGeneric(typeof(RepositoryUser<>)).As(typeof(IRepositoryIdentity<>)).InstancePerLifetimeScope();
             #endregion
 
             builder.RegisterGeneric(typeof(BaseRequestHandlerParameter<>))
-    .AsSelf()
-    .InstancePerLifetimeScope();
+                 .AsSelf()
+                 .InstancePerLifetimeScope();
 
-            builder.RegisterType(typeof(BaseWithoutRepositoryRequestHandlerParameters))
+            builder.RegisterGeneric(typeof(BaseWithoutRepositoryRequestHandlerParameters<>))
                 .AsSelf()
                 .InstancePerLifetimeScope();
+
+            builder.RegisterType<HttpContextAccessor>().As<IHttpContextAccessor>().SingleInstance();
 
 
         }

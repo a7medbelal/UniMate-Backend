@@ -9,9 +9,9 @@ namespace Uni_Mate.Features.Authoraztion.ConfirmRegistration.Commands;
 
 public record ConfirmEmailCommand(string Email, string Token) : IRequest<RequestResult<bool>>;
 
-public class ConfirmRegistrationCommandHandler : BaseWithoutRepositoryRequestHandler<ConfirmEmailCommand, RequestResult<bool>>
+public class ConfirmRegistrationCommandHandler : BaseWithoutRepositoryRequestHandler<ConfirmEmailCommand, RequestResult<bool>, User>
 {
-    public ConfirmRegistrationCommandHandler(BaseWithoutRepositoryRequestHandlerParameters parameters) : base(parameters)
+    public ConfirmRegistrationCommandHandler(BaseWithoutRepositoryRequestHandlerParameters<User> parameters) : base(parameters)
     {
     }
 

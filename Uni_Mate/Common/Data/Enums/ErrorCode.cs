@@ -18,4 +18,7 @@ public enum ErrorCode
     UserNotFound,
     EmailNotConfirmed,
     InvalidPassword,
+	MissingUserName,
+	MissingNationalID,
+    InvalidNationalId
 }

@@ -1,13 +1,14 @@
 using FluentValidation;
+using Uni_Mate.Common.Data.Enums;
 using Uni_Mate.Common.Views;
 
 namespace Uni_Mate.Features.Authoraztion.RegisterUser;
 
-public record RegisterUserRequestViewModel(string UserName,string Email, string Password, string Fname , string Lname ,  string PhoneNo, string NationalId );
+public record RegisterStudentRequestViewModel(string Fname, string Lname, string UserName, string Email, string Password, string ConfrimPassword, string NationalId);
 
-public class RegisterUserRequestViewModelValidator : AbstractValidator<RegisterUserRequestViewModel>
+public class RegisterStudentRequestViewModelValidator : AbstractValidator<RegisterStudentRequestViewModel>
 {
-    public RegisterUserRequestViewModelValidator()
+    public RegisterStudentRequestViewModelValidator()
     {
         RuleFor(x => x.Email)
             .NotEmpty().WithMessage("Email is required.")
@@ -22,25 +23,35 @@ public class RegisterUserRequestViewModelValidator : AbstractValidator<RegisterU
             .Matches(@"[a-z]").WithMessage("Password must contain at least one lowercase letter.")
             .Matches(@"\d").WithMessage("Password must contain at least one number.")
             .Matches(@"[\W_]").WithMessage("Password must contain at least one special character (!@#$%^&* etc.).")
-            .Must(email => !email.Contains("gamil.com")).WithMessage("Did you mean 'gmail.com'? Please check your email."); 
+            .Must(email => !email.Contains("gamil.com")).WithMessage("Did you mean 'gmail.com'? Please check your email.");
 
         RuleFor(x => x.Fname)
             .NotEmpty().WithMessage("Name is required.");
         RuleFor(x => x.Lname)
             .NotEmpty().WithMessage("Country is required.");
 
-        RuleFor(x => x.PhoneNo)  
-            .NotEmpty().WithMessage("Phone number is required.")
-            .Matches(@"^\+?\d{10,15}$").WithMessage("Please provide a valid phone number.");
+        RuleFor(x => x.ConfrimPassword)
+            .NotEmpty().WithMessage("Confrim Password is required.")
+            .Equal(x => x.Password).WithMessage("Password and Confirm Password must match.");
+
 
         RuleFor(x => x.NationalId)
             .NotEmpty().WithMessage("National ID is required")
             .Length(14).WithMessage("National ID must be exactly 14 digits")
             .Matches(@"^\d{14}$").WithMessage("National ID must contain only digits")
-            .Must(BeValidEgyptionId).WithMessage("National ID must Conatain only digidts ");
+            .Custom((nationalId, context) =>
+            {
+                var result = BeValidEgyptianId(nationalId);
+                if (!result.isSuccess)
+                {
+                    context.AddFailure(result.message); // your custom error
+                }
+            });
+
     }
 
-    private bool BeValidEgyptionId (string Naltional_ID)
+
+    private RequestResult<bool> BeValidEgyptianId(string Naltional_ID)
     {
         int century = int.Parse(Naltional_ID[0].ToString());
         int year = int.Parse(Naltional_ID.Substring(1, 2));
@@ -56,11 +67,11 @@ public class RegisterUserRequestViewModelValidator : AbstractValidator<RegisterU
             _ => -1
         };
 
-        if (fullYear == -1) return false;
+        if (fullYear == -1) return RequestResult<bool>.Failure(ErrorCode.InvalidNationalId, "Invalid century in National ID");
 
         // Validate date
         var dob = new DateTime(fullYear, month, day);
-        if (dob > DateTime.Now) return false;
+        if (dob > DateTime.Now) return RequestResult<bool>.Failure(ErrorCode.InvalidNationalId, "Date of birth cannot be in the future");
 
         // Validate governorate code
         var validGovCodes = new HashSet<int>
@@ -70,10 +81,10 @@ public class RegisterUserRequestViewModelValidator : AbstractValidator<RegisterU
             };
 
         if (!validGovCodes.Contains(govCode))
-            return false;
+            return RequestResult<bool>.Failure(ErrorCode.InvalidNationalId, "Invalid governorate code in National ID");
 
 
-        return true; 
+        return RequestResult<bool>.Success(true, "Valid National ID");
 
     }
 

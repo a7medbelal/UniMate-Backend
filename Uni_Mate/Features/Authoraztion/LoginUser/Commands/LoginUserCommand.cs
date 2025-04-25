@@ -11,9 +11,9 @@ namespace Uni_Mate.Features.Authoraztion.LoginUser.Commands
 {
     public record  LoginUserCommand(string email, string password) : IRequest<RequestResult<TokenDTO>>;
 
-    public class LoginUserCommandHandler : BaseWithoutRepositoryRequestHandler<LoginUserCommand, RequestResult<TokenDTO>>
+    public class LoginUserCommandHandler : BaseWithoutRepositoryRequestHandler<LoginUserCommand, RequestResult<TokenDTO>, User>
     {
-        public LoginUserCommandHandler(BaseWithoutRepositoryRequestHandlerParameters parameters) : base(parameters)
+        public LoginUserCommandHandler(BaseWithoutRepositoryRequestHandlerParameters<User> parameters) : base(parameters)
         {
         }
 

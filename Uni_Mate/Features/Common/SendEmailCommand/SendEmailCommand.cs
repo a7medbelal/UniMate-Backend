@@ -11,11 +11,11 @@ namespace Uni_Mate.Features.Common.SendEmailCommand
 {
     public record SendEmailQuery(string email, string name, string confirmationLink) : IRequest<RequestResult<bool>>;
 
-    public class SendEmailQueryHandler : BaseWithoutRepositoryRequestHandler<SendEmailQuery, RequestResult<bool>>
+    public class SendEmailQueryHandler : BaseWithoutRepositoryRequestHandler<SendEmailQuery, RequestResult<bool>, User>
     {
 
         readonly MailSettings mailSettings;
-        public SendEmailQueryHandler(BaseWithoutRepositoryRequestHandlerParameters parameters, IOptions<MailSettings> _mailSettings) : base(parameters)
+        public SendEmailQueryHandler(BaseWithoutRepositoryRequestHandlerParameters<User> parameters, IOptions<MailSettings> _mailSettings) : base(parameters)
         {
             mailSettings = _mailSettings.Value;
         }
@@ -36,7 +36,7 @@ namespace Uni_Mate.Features.Common.SendEmailCommand
 
             builder.HtmlBody = request.confirmationLink;
             Email.Body = builder.ToMessageBody();
-            Email.From.Add(new MailboxAddress(mailSettings.DisplayNAme, mailSettings.Email));
+            Email.From.Add(new MailboxAddress(mailSettings.DisplayName, mailSettings.Email));
 
 
             using var smtp = new SmtpClient();
