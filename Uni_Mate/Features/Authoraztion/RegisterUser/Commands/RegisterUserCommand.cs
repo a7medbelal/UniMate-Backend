@@ -37,14 +37,14 @@ namespace Uni_Mate.Features.Authoraztion.RegisterUser.Commands
                 role = Role.Student,
             };
 
-            var result = _userManager.CreateAsync(user, request.password); 
+            var result = await _userManager.CreateAsync(user, request.password); 
 
 		
 
             // Check if the user was created successfully
-            if (!result.Result.Succeeded)
+            if (!result.Succeeded)
             {
-                var errors = string.Join(", ", result.Result.Errors.Select(e => e.Description));
+                var errors = string.Join(", ", result.Errors.Select(e => e.Description));
 
                 return RequestResult<bool>.Failure(ErrorCode.UserCreationFailed,errors);
             }

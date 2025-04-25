@@ -68,7 +68,9 @@ namespace Uni_Mate.Domain
                 EmailConfirmed = true,
                 PhoneNumber = "01040363077",
                 PhoneNumberConfirmed = true,
-                role = Role.Admin
+                role = Role.Admin,
+                National_Id = "1",
+                
             };
             admin.PasswordHash = hasher.HashPassword(admin, "Admin123!");
 

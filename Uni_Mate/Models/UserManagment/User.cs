@@ -7,8 +7,10 @@ using Uni_Mate.Models.UserManagment.Enum;
 
 namespace Uni_Mate.Models.UserManagment
 {
-    public class User : IdentityUser
+    public  class User : IdentityUser
     {
+      public string National_Id { get; set; }
+
       public string Fname { get; set; }
 
       public string Lname { get; set; }

@@ -4,8 +4,6 @@ namespace Uni_Mate.Models.UserManagment
 {
     public class Student : User
     {
-        public string National_Id{ get; set; }
-        
         public int YearOfStudy { get; set; }
 
         public string? University { get; set; }

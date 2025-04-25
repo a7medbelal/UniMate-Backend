@@ -37,9 +37,16 @@ namespace Uni_Mate
                     options.SignIn.RequireConfirmedEmail = true;
                     options.Tokens.EmailConfirmationTokenProvider = TokenOptions.DefaultEmailProvider;
                     options.Tokens.PasswordResetTokenProvider = TokenOptions.DefaultEmailProvider;
+                  
+
                 })
                 .AddEntityFrameworkStores<Context>()
                 .AddDefaultTokenProviders();
+
+            builder.Services.Configure<DataProtectionTokenProviderOptions>(options =>
+            {
+                options.TokenLifespan = TimeSpan.FromHours(3);
+            });
             #endregion
             #region configure AutoFac
 
@@ -90,7 +97,7 @@ namespace Uni_Mate
             app.UseHttpsRedirection();
             app.UseAuthentication();
             app.UseAuthorization();
-          //  app.UseMiddleware<GlobalErrorHandlerMiddleware>();
+           app.UseMiddleware<GlobalErrorHandlerMiddleware>();
             app.UseMiddleware<TransactionMiddleware>();
 
             app.MapControllers();

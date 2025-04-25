@@ -1,6 +1,7 @@
 using System.Linq.Expressions;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.ChangeTracking;
 using Org.BouncyCastle.Asn1;
 using Uni_Mate.Models.UserManagment;
 namespace Uni_Mate.Domain.Repository;
@@ -19,9 +20,46 @@ public class RepositoryUser<Entity> : IRepositoryIdentity<Entity> where Entity :
         throw new NotImplementedException();
     }
 
-    public Task<bool> SaveIncludeAsync(Entity entity, params string[] properties)
+    public async Task<bool> SaveIncludeAsync(Entity entity, params string[] properties)
     {
-        throw new NotImplementedException();
+
+        try
+        {
+            var localEntity = _dbSet.Local.FirstOrDefault(e => e.Id == entity.Id);
+            EntityEntry entry;
+
+            if (localEntity is null)
+            {
+                _dbSet.Attach(entity);
+                entry = _context.Entry(entity);
+            }
+            else
+            {
+                entry = _context.Entry(localEntity);
+            }
+
+            if (entry == null)
+            {
+                return false;
+            }
+
+
+            foreach (var property in entry.Properties)
+            {
+                if (properties.Contains(property.Metadata.Name))
+                {
+                    property.CurrentValue = entity.GetType().GetProperty(property.Metadata.Name)?.GetValue(entity);
+                    property.IsModified = true;
+                }
+            }
+
+
+            return true;
+        }
+        catch (Exception ex)
+        {
+            return false;
+        }
     }
 
     public Task Delete(Entity entity)
@@ -53,9 +91,9 @@ public class RepositoryUser<Entity> : IRepositoryIdentity<Entity> where Entity :
         throw new NotImplementedException();
     }
 
-    public Task SaveChangesAsync()
+    public  async Task SaveChangesAsync()
     {
-        throw new NotImplementedException();
+        await _context.SaveChangesAsync();
     }
 
     public async Task<bool> AnyAsync(Expression<Func<Entity, bool>> predicate)
