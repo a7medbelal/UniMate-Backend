@@ -20,7 +20,7 @@ namespace Uni_Mate.Features.Authoraztion.RegisterUser.RegisterStudent
             if (!validationResponse.isSuccess)
                 return validationResponse;
 
-            var command = new RegisterUserCommand(request.UserName, request.Email, request.Password, request.FName, request.LName, request.PhoneNo, request.nationalID);
+            var command = new RegisterStudentCommand(request.UserName, request.Email, request.Password, request.FName, request.LName, request.PhoneNo, request.nationalID);
 
             var result = await _mediator.Send(command);
             if (!result.isSuccess)
