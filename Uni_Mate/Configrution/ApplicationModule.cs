@@ -30,7 +30,7 @@ namespace Uni_Mate.Configrution
             builder.Register(context =>
             {
                 var config = context.Resolve<IConfiguration>();
-                var connectionString = config.GetConnectionString("ZiadConnection");
+                var connectionString = config.GetConnectionString("DefaultConnection");
                 var options = new DbContextOptionsBuilder<Context>()
                     .UseSqlServer(connectionString)
                     .Options;
@@ -104,15 +104,18 @@ namespace Uni_Mate.Configrution
 
             #region Repository Registration
             builder.RegisterGeneric(typeof(Repository<>)).As(typeof(IRepository<>)).InstancePerLifetimeScope();
+            builder.RegisterGeneric(typeof(RepositoryUser<>)).As(typeof(IRepositoryIdentity<>)).InstancePerLifetimeScope();
             #endregion
 
             builder.RegisterGeneric(typeof(BaseRequestHandlerParameter<>))
-    .AsSelf()
-    .InstancePerLifetimeScope();
+                 .AsSelf()
+                 .InstancePerLifetimeScope();
 
-            builder.RegisterType(typeof(BaseWithoutRepositoryRequestHandlerParameters))
+            builder.RegisterGeneric(typeof(BaseWithoutRepositoryRequestHandlerParameters<>))
                 .AsSelf()
                 .InstancePerLifetimeScope();
+
+            builder.RegisterType<HttpContextAccessor>().As<IHttpContextAccessor>().SingleInstance();
 
 
         }

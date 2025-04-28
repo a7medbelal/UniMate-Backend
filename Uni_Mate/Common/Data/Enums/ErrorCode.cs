@@ -19,5 +19,7 @@ public enum ErrorCode
     EmailNotConfirmed,
     InvalidPassword,
 	MissingUserName,
-	MissingNationalID
+	MissingNationalID,
+    InvalidNationalId,
+    InvalidOTP
 }

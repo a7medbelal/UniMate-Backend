@@ -2,10 +2,10 @@
 
 namespace Uni_Mate.Features.Authoraztion.ResetPassword
 {
-    public record ResetPasswordEndpointViewModel(string Email, string Token, string Password, string ConfirmPassword );
-    public class ResetPasswordEndpointViewModelValidator : AbstractValidator<ResetPasswordEndpointViewModel>
+    public record ResetPasswordWithOutIdentityViewModel(string Email, string Token, string Password, string ConfirmPassword );
+    public class ResetPasswordWithOutIdentityViewModelValidator : AbstractValidator<ResetPasswordWithOutIdentityViewModel>
     {
-        public ResetPasswordEndpointViewModelValidator()
+        public ResetPasswordWithOutIdentityViewModelValidator()
         {
             RuleFor(x => x.Password)
             .NotEmpty().WithMessage("Password is required.")

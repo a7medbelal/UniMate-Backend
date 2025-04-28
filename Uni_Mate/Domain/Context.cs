@@ -61,14 +61,16 @@ namespace Uni_Mate.Domain
                 Fname = "ahmed",
                 Lname = "belal",
                 UserName = "admin",
-                Address ="qena" ,
+                //Address ="qena" ,
                 NormalizedUserName = "ADMIN",
                 Email = "legendahmed.122@gmail.com",
                 NormalizedEmail = "Legendahmed.122@gmail.com",
                 EmailConfirmed = true,
                 PhoneNumber = "01040363077",
                 PhoneNumberConfirmed = true,
-                role = Role.Admin
+                role = Role.Admin,
+                National_Id = "1",
+                
             };
             admin.PasswordHash = hasher.HashPassword(admin, "Admin123!");
 

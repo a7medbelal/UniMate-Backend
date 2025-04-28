@@ -9,23 +9,23 @@ namespace Uni_Mate.Features.Authoraztion.ConfirmRegistration;
 
 public class ConfirmEmailEndpoint : BaseEndpoint<ConfirmEmailViewModel, bool>
 {
-    ConfirmEmailEndpoint(BaseEndpointParameters<ConfirmEmailViewModel> parameters) : base(parameters)
-    {
-    }
+     public ConfirmEmailEndpoint(BaseEndpointParameters<ConfirmEmailViewModel> parameters) : base(parameters)
+        {
+        }
 
-    [HttpPost]
-    public async Task<EndpointResponse<bool>> ConfirmEmail(ConfirmEmailViewModel viewmodel)
+    [HttpGet]
+    public async Task<EndpointResponse<bool>> ConfirmEmail([FromQuery]ConfirmEmailViewModel viewmodel)
     {
         var validationResult = ValidateRequest(viewmodel);
         if (!validationResult.isSuccess)
             return validationResult;
-        var confirmationCommand = new ConfirmEmailCommand(viewmodel.Email, viewmodel.Token);
+        var confirmationCommand = new ConfirmEmailCommand(viewmodel.Email, viewmodel.OTP);
         
         var result = await _mediator.Send(confirmationCommand);
         if (!result.isSuccess)
         {
             return EndpointResponse<bool>.Failure(result.errorCode, result.message);
         }
-        return EndpointResponse<bool>.Success(result.isSuccess);
+        return EndpointResponse<bool>.Success(result.isSuccess , "email confrimed sucessfuly you can regiester will ");
     }
 }
