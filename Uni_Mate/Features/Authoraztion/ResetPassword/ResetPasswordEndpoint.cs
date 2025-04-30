@@ -1,5 +1,4 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using System.ComponentModel.DataAnnotations;
 using Uni_Mate.Common.BaseEndpoints;
 using Uni_Mate.Common.Views;
 using Uni_Mate.Features.Authoraztion.ResetPassword.Commands;
@@ -19,7 +18,7 @@ namespace Uni_Mate.Features.Authoraztion.ResetPassword
             if (!validationResult.isSuccess)
                 return validationResult;
 
-            var resetPasswordCommand = new ResetPasswordCommand(viewModel.Token,viewModel.Password,viewModel.ConfirmPassword);
+            var resetPasswordCommand = new ResetPasswordCommand(viewModel.Email,viewModel.Token,viewModel.Password,viewModel.ConfirmPassword);
             var result = _mediator.Send(resetPasswordCommand).Result;
             if (!result.isSuccess)
             {

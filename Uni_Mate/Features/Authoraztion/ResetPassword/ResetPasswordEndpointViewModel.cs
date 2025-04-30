@@ -2,7 +2,7 @@
 
 namespace Uni_Mate.Features.Authoraztion.ResetPassword
 {
-    public record ResetPasswordEndpointViewModel(string Password, string ConfirmPassword ,string Token);
+    public record ResetPasswordEndpointViewModel(string Email,string Password, string ConfirmPassword, string Token);
     public class ResetPasswordEndpointViewModelValidator : AbstractValidator<ResetPasswordEndpointViewModel>
     {
         public ResetPasswordEndpointViewModelValidator()
@@ -22,11 +22,11 @@ namespace Uni_Mate.Features.Authoraztion.ResetPassword
                 .Equal(x => x.Password)
                 .WithMessage("Passwords do not match.");
 
-            //RuleFor(x => x.Email)
-            //    .NotEmpty()
-            //    .WithMessage("Email is required.")
-            //    .EmailAddress()
-            //    .WithMessage("Invalid email format.");
+            RuleFor(x => x.Email)
+             .NotEmpty()
+            .WithMessage("Email is required.")
+           .EmailAddress()
+            .WithMessage("Invalid email format.");
 
             RuleFor(x => x.Token)
                 .NotEmpty()

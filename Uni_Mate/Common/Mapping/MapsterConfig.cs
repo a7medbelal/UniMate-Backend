@@ -1,6 +1,8 @@
 ﻿using Uni_Mate.Features.StudentManager.GetStudent.Quarry;
 using Uni_Mate.Models.UserManagment;
 using Mapster;
+using Uni_Mate.Features.StudentManager.UpdateProfileDisplay.Quarry;
+using Uni_Mate.Features.StudentManager.UpdateProfileSave;
 namespace Uni_Mate.Common.Mapping
 {
     public static class MapsterConfig
@@ -11,6 +13,7 @@ namespace Uni_Mate.Common.Mapping
             var config = new TypeAdapterConfig();
 
             // Add mapping configuration for Student to GetStudentDTO
+            #region mapping from Student to GetStudentDTO
             config.NewConfig<Student, GetStudentDTO>()
                 .Map(dest => dest.FullName, src => src.Fname + " " + src.Lname)
                 .Map(dest => dest.Email, src => src.Email)
@@ -20,7 +23,25 @@ namespace Uni_Mate.Common.Mapping
                 .Map(dest => dest.Image, src => src.Image)
                 .Map(dest => dest.National_Id, src => src.National_Id)
                 .Map(dest => dest.Phones, src => src.Phones.Select(phone => phone.PhoneNumber).ToList());
+            #endregion
 
+            #region mapping from Student to UpdateProfileDisplayDTO
+            config.NewConfig<Student, UpdateProfileDisplayDTO>()
+                .Map(dest => dest.FirstName, src => src.Fname)
+                .Map(dest => dest.LastName, src => src.Lname)
+                .Map(dest => dest.Governorate, src => src.Governorate)
+                .Map(dest => dest.Address, src => src.Address)
+                .Map(dest => dest.BriefOverView, src => src.BriefOverView);
+            #endregion
+
+            #region mapping From UpdateProfileSaveVM to Student
+            config.NewConfig<UpdateProfileSaveVM, Student>()
+                .Map(dest => dest.Fname, src => src.FirstName)
+                .Map(dest => dest.Lname, src => src.LastName)
+                .Map(dest => dest.Governorate, src => src.Governorate)
+                .Map(dest => dest.Address, src => src.Address)
+                .Map(dest => dest.BriefOverView, src => src.BriefOverView);
+            #endregion
             return config;
         }
     }
