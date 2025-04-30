@@ -2,7 +2,6 @@
 using Autofac.Extensions.DependencyInjection;
 using Autofac;
 using Uni_Mate.Configrution;
-using Microsoft.Extensions.DependencyInjection;
 using Microsoft.AspNetCore.Identity;
 using Uni_Mate.Models.UserManagment;
 using Uni_Mate.Domain;
@@ -27,10 +26,15 @@ namespace Uni_Mate
             builder.Services.AddControllers();
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 
+            builder.Services.AddHttpContextAccessor();
+
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
-         
-            
+
+           // builder.Services.AddDbContext<Context>(options =>
+       //options.UseSqlServer(builder.Configuration.GetConnectionString("ZiadConnection")));
+
+
             #region Identity Configration
             builder.Services.AddIdentity<User, IdentityRole>(options =>
                 {
@@ -86,6 +90,7 @@ namespace Uni_Mate
            
             builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssemblyContaining<Program>());
             builder.Services.Configure<MailSettings>(builder.Configuration.GetSection("MailSettings"));
+
 
             var app = builder.Build();
             // Configure the HTTP request pipeline.
