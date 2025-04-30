@@ -11,9 +11,9 @@ namespace Uni_Mate.Features.Authoraztion.RegisterUser.Commands
 {
 	public record RegisterOwnerCommand(string Email, string Password, string FName, string LName, string PhoneNo) : IRequest<RequestResult<bool>>;
 
-	public class RegisterOwnerCommandHandler : BaseWithoutRepositoryRequestHandler<RegisterOwnerCommand, RequestResult<bool>>
+	public class RegisterOwnerCommandHandler : BaseWithoutRepositoryRequestHandler<RegisterOwnerCommand, RequestResult<bool> , Owner>
 	{
-		public RegisterOwnerCommandHandler(BaseWithoutRepositoryRequestHandlerParameters parameters) : base(parameters) { }
+		public RegisterOwnerCommandHandler(BaseWithoutRepositoryRequestHandlerParameters<Owner> parameters) : base(parameters) { }
 
 		public async override Task<RequestResult<bool>> Handle(RegisterOwnerCommand request, CancellationToken cancellationToken)
 		{
@@ -21,15 +21,15 @@ namespace Uni_Mate.Features.Authoraztion.RegisterUser.Commands
 			if (userExist != null)
 				return RequestResult<bool>.Failure(ErrorCode.UserAlreadyExists, "User Email already exists");
 
-			var user = new User
+			var user = new Owner
 			{
 				Email = request.Email,
 				PhoneNumber = request.PhoneNo,
 				Fname = request.FName,
+				UserName = request.Email,
 				Lname = request.LName,
 				role = Role.Owner,
-				ID = null,
-				UserName = null
+				
 			};
 
 			var result = await _userManager.CreateAsync(user, request.Password);

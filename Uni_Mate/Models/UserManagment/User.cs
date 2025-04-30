@@ -10,7 +10,9 @@ namespace Uni_Mate.Models.UserManagment
 {
     public  class User : IdentityUser
     {
-      public string National_Id { get; set; }
+
+      // this for student not the id the id generate randomly  
+      public string ?  National_Id { get; set; }
 
       public string Fname { get; set; }
 
@@ -20,12 +22,14 @@ namespace Uni_Mate.Models.UserManagment
 
       public bool IsActive { get; set; } = false;
 
+        /// <summary>
+        /// this for reset password 
+        /// </summary>
+      [StringLength(6)]
+      public string? ResetPassword { get; set; }
+      public DateTime? ResetPasswowrdConfirnation { get; set; }
 
-        [StringLength(6)]
-        public string? ResetPassword { get; set; }
-        public DateTime? ResetPasswowrdConfirnation { get; set; }
-
-        public Role role { get; set; }
+      public Role role { get; set; }
 
         //this for review the two relationship with same entity as EF core doesnot understand this so you need make it explicity 
       [InverseProperty(nameof(Review.Reviewer))]
