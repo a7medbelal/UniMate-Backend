@@ -2,7 +2,7 @@
 
 namespace Uni_Mate.Features.Authoraztion.RegisterUser.RegisterOwner
 {
-	public record RegisterOwnerRequestViewModel(string Email, string Password, string FName, string LName, string PhoneNo, string Role = "Owner"); // Given through an input from the frontend
+	public record RegisterOwnerRequestViewModel(string Email, string Password, string FName, string LName, string PhoneNo); // Given through an input from the frontend
 
 	public class RegisterOwnerRequestViewModelValidator : AbstractValidator<RegisterOwnerRequestViewModel>
 	{

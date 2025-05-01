@@ -7,21 +7,20 @@ using Uni_Mate.Features.Authoraztion.ResetPassword.Commands;
 
 namespace Uni_Mate.Features.Authoraztion.ResetPassword
 {
-    public class ResetPasswordEndpoint : BaseEndpoint<ResetPasswordEndpointViewModel, bool>
+    public class ResetPasswordWithOutIdentityEndpoint : BaseEndpoint<ResetPasswordWithOutIdentityViewModel, bool>
     {
-        public ResetPasswordEndpoint(BaseEndpointParameters<ResetPasswordEndpointViewModel> parameters):base(parameters)
+        public ResetPasswordWithOutIdentityEndpoint(BaseEndpointParameters<ResetPasswordWithOutIdentityViewModel> parameters):base(parameters)
         {
         }
 
         [HttpPost]
-        public async Task<EndpointResponse<bool>> ResetPassword([FromBody] ResetPasswordEndpointViewModel viewModel)
+        public async Task<EndpointResponse<bool>> ResetPassword([FromBody] ResetPasswordWithOutIdentityViewModel viewModel)
         {
             var validationResult = ValidateRequest(viewModel);
             if (!validationResult.isSuccess)
                 return validationResult;
 
-            var resetPasswordCommand = new ResetPasswordCommand(viewModel.Email,viewModel.Token,viewModel.Password,viewModel.ConfirmPassword);
-            var result = _mediator.Send(resetPasswordCommand).Result;
+            var resetPasswordCommand = new ResetPasswordWithOutIdentity(viewModel.Email,viewModel.Token,viewModel.Password,viewModel.ConfirmPassword);
             var result = await _mediator.Send(resetPasswordCommand);
             if (!result.isSuccess)
             {

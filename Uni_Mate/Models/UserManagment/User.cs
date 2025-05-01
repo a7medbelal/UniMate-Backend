@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Identity;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using Uni_Mate.Models.Comment_Review;
 using Uni_Mate.Models.UserManagment.Enum;
@@ -7,7 +8,9 @@ namespace Uni_Mate.Models.UserManagment
 {
     public  class User : IdentityUser
     {
-      public string National_Id { get; set; }
+
+      // this for student not the id the id generate randomly  
+      public string ?  National_Id { get; set; }
 
       public string Fname { get; set; }
 
@@ -17,6 +20,13 @@ namespace Uni_Mate.Models.UserManagment
 
       public bool IsActive { get; set; } = false;
       public string? Address { get; set; }
+
+        /// <summary>
+        /// this for reset password 
+        /// </summary>
+      [StringLength(6)]
+      public string? ResetPassword { get; set; }
+      public DateTime? ResetPasswowrdConfirnation { get; set; }
 
       public Role role { get; set; }
 

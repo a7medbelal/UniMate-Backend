@@ -26,12 +26,14 @@ public class GlobalErrorHandlerMiddleware
             {
                 context.Response.StatusCode = StatusCodes.Status500InternalServerError;
                 context.Response.ContentType = "application/json"; // Return JSON response
+                File.WriteAllText(@"F:\\log.txt", $"error{ex.InnerException}");
 
                 var response = EndpointResponse<bool>.Failure(ErrorCode.ExpectionHappend, $"an error happen while processing the request");
 
                 await context.Response.WriteAsJsonAsync(response);
             }
             File.WriteAllText(@"C:\MainUniMateBackEnd\UniMate-Backend.Errors.txt", $"error{ex.Message}");
+           // File.WriteAllText(@"/home/hossam/dotnet/errors.txt", $"error{ex.Message}");
 
         }
 

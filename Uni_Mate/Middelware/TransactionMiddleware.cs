@@ -6,40 +6,29 @@ namespace TrelloCopy.Middlewares;
 public class TransactionMiddleware
 {
     RequestDelegate _nextAction;
-
-
-    public TransactionMiddleware(RequestDelegate nextAction)
+    Context _context;
+    public TransactionMiddleware(RequestDelegate nextAction, Context context)
     {
         _nextAction = nextAction;
-
+        _context = context;
     }
 
-    public async Task InvokeAsync(HttpContext context, Context _context)
+    public async Task InvokeAsync(HttpContext context)
     {
         IDbContextTransaction transaction = default;
 
         try
         {
-            transaction = await _context.Database.BeginTransactionAsync();
+            transaction = _context.Database.BeginTransaction();
 
             await _nextAction(context);
 
-            await _context.SaveChangesAsync();
-
-            await transaction.CommitAsync();
+            transaction.Commit();
         }
         catch (Exception ex)
         {
-            await transaction?.RollbackAsync();
+            transaction?.Rollback();
 
-            //if (!context.Response.HasStarted)
-            //{
-            //    context.Response.StatusCode = StatusCodes.Status500InternalServerError;
-            //    context.Response.ContentType = "application/json"; // Return JSON response
-
-            //    var errorResponse = new { message = "An error occurred while processing the request.", details = ex.Message };
-            //    await context.Response.WriteAsJsonAsync(errorResponse);
-            //}
             throw;
         }
     }
