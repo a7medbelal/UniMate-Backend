@@ -3,6 +3,7 @@ using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
+using Uni_Mate.Models.UserManagment.Enum;
 
 namespace Uni_Mate.Common.helper
 {
@@ -18,7 +19,7 @@ namespace Uni_Mate.Common.helper
             _jwtSettings = jwtSettings.Value; 
         }
 
-        public async Task<string> GenerateToken(string userId)
+        public async Task<string> GenerateToken(string userId , Role role)
         {
             var tokenHandler = new JwtSecurityTokenHandler();
             var key = Encoding.ASCII.GetBytes(_jwtSettings.Key);
@@ -28,7 +29,8 @@ namespace Uni_Mate.Common.helper
             {
                 Subject = new ClaimsIdentity(new Claim[]
                 {
-                    new Claim(ClaimTypes.NameIdentifier, userId)
+                    new Claim(ClaimTypes.NameIdentifier, userId),
+                    new Claim("roleType" , ((int)role).ToString()),
                 }),
                 Expires = DateTime.UtcNow.AddDays(7),
                 Issuer = issuer,

@@ -4,8 +4,9 @@ using System.Threading.Tasks;
 using Uni_Mate.Common.BaseEndpoints;
 using Uni_Mate.Common.Views;
 using Uni_Mate.Features.Authoraztion.ResetPassword.Commands;
+using Uni_Mate.Features.Authoraztion.ResetPasswordWithOutIdentity.Commands;
 
-namespace Uni_Mate.Features.Authoraztion.ResetPassword
+namespace Uni_Mate.Features.Authoraztion.ResetPasswordWithOutIdentity
 {
     public class ResetPasswordWithOutIdentityEndpoint : BaseEndpoint<ResetPasswordWithOutIdentityViewModel, bool>
     {
@@ -20,7 +21,7 @@ namespace Uni_Mate.Features.Authoraztion.ResetPassword
             if (!validationResult.isSuccess)
                 return validationResult;
 
-            var resetPasswordCommand = new ResetPasswordWithOutIdentity(viewModel.Email,viewModel.Token,viewModel.Password,viewModel.ConfirmPassword);
+            var resetPasswordCommand = new ResetPasswordWithOutIdentityCommand(viewModel.Email,viewModel.Token,viewModel.Password,viewModel.ConfirmPassword);
             var result = await _mediator.Send(resetPasswordCommand);
             if (!result.isSuccess)
             {

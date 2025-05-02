@@ -1,6 +1,6 @@
 ﻿using FluentValidation;
 
-namespace Uni_Mate.Features.StudentManager.ChangePassword
+namespace Uni_Mate.Features.Authoraztion.ChangePassword
 {
     public record ChangePasswordViewModel(string OldPassword, string NewPassword,string ConfirmPassword);
 

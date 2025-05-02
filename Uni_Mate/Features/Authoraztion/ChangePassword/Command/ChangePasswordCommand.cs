@@ -5,15 +5,15 @@ using Uni_Mate.Common.Views;
 using Uni_Mate.Models.UserManagment;
 //using MediatR.Extensions.Microsoft.DependencyInjection;
 using System.Security.Claims;
-namespace Uni_Mate.Features.StudentManager.ChangePassword.Command
+namespace Uni_Mate.Features.Authoraztion.ChangePassword.Command
 {
     public record ChangePasswordCommand(string OldPassword, string NewPassword): IRequest<RequestResult<bool>>;
 
-    public class ChangePasswordCommandHandler : BaseWithoutRepositoryRequestHandler<ChangePasswordCommand, RequestResult<bool>, Student>
+    public class ChangePasswordCommandHandler : BaseWithoutRepositoryRequestHandler<ChangePasswordCommand, RequestResult<bool>, User>
     {
         private readonly IHttpContextAccessor _httpContextAccessor;
 
-        public ChangePasswordCommandHandler(BaseWithoutRepositoryRequestHandlerParameters<Student> parameters, IHttpContextAccessor httpContextAccessor)
+        public ChangePasswordCommandHandler(BaseWithoutRepositoryRequestHandlerParameters<User> parameters, IHttpContextAccessor httpContextAccessor)
             : base(parameters)
         {
             _httpContextAccessor = httpContextAccessor;
@@ -25,11 +25,9 @@ namespace Uni_Mate.Features.StudentManager.ChangePassword.Command
             if (httpContext == null)
                 return RequestResult<bool>.Failure(ErrorCode.Unauthorized, "HttpContext is null");
 
-            var hasAuthorizationHeader = httpContext.Request.Headers.TryGetValue("Authorization", out var token);
-
             var userId = httpContext.User?.FindFirst(ClaimTypes.NameIdentifier)?.Value;
             if (string.IsNullOrEmpty(userId))
-                return RequestResult<bool>.Failure(ErrorCode.Unauthorized, "User ID not found in claims");
+                return RequestResult<bool>.Failure(ErrorCode.Unauthorized, "User Unauthrized to change pass");
 
             var user = _userManager.FindByIdAsync(userId).Result;
             if (user == null)

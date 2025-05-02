@@ -1,6 +1,6 @@
 ﻿using FluentValidation;
 
-namespace Uni_Mate.Features.Authoraztion.ResetPassword
+namespace Uni_Mate.Features.Authoraztion.ResetPasswordWithOutIdentity
 {
     public record ResetPasswordWithOutIdentityViewModel(string Email, string Token, string Password, string ConfirmPassword );
     public class ResetPasswordWithOutIdentityViewModelValidator : AbstractValidator<ResetPasswordWithOutIdentityViewModel>

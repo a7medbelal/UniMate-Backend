@@ -43,7 +43,7 @@ namespace Uni_Mate.Features.Authoraztion.LoginUser.Commands
                 return RequestResult<TokenDTO>.Failure(ErrorCode.InvalidPassword, "Invalid password");
 
 
-            var token = await  _tokenHelper.GenerateToken(UserExist.Id.ToString());
+            var token = await  _tokenHelper.GenerateToken(UserExist.Id.ToString() ,UserExist.role);
 
             return RequestResult<TokenDTO>.Success(new TokenDTO(Token : token) );
         }
