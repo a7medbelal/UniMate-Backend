@@ -2,5 +2,6 @@
 {
     public enum Feature
     {
+        ChangePassword=1
     }
 }

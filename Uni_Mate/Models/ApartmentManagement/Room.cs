@@ -14,6 +14,7 @@ namespace Uni_Mate.Models.ApartmentManagement
         [ForeignKey(nameof(Apartment))]
         public int ApartmentId { get; set; }
         public Apartment? Apartment { get; set; }
+
         public ICollection<Bed>? Beds { get; set; }
         public ICollection<Image>? Images { get; set; }
     }

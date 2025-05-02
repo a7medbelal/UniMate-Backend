@@ -9,18 +9,18 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.AspNetCore.Identity;
 
-namespace Uni_Mate.Features.Authoraztion.ResetPassword.Commands
+namespace Uni_Mate.Features.Authoraztion.ResetPasswordWithOutIdentity.Commands
 {
-    public record ResetPasswordWithOutIdentity(string email, string OTP,  string Password, string ConfirmPassword ): IRequest<RequestResult<bool>>;
+    public record ResetPasswordWithOutIdentityCommand(string email, string OTP,  string Password, string ConfirmPassword ): IRequest<RequestResult<bool>>;
 
-    public class ResetPasswordWithOutIdentityHandler : BaseWithoutRepositoryRequestHandler<ResetPasswordWithOutIdentity, RequestResult<bool>, User>
+    public class ResetPasswordWithOutIdentityHandler : BaseWithoutRepositoryRequestHandler<ResetPasswordWithOutIdentityCommand, RequestResult<bool>, User>
     {
 
         public ResetPasswordWithOutIdentityHandler(BaseWithoutRepositoryRequestHandlerParameters<User> parameters , IHttpContextAccessor httpContextAccessor) : base(parameters)
         {
     
         }
-        public override async Task<RequestResult<bool>> Handle(ResetPasswordWithOutIdentity resetPasswordCommand, CancellationToken cancellationToken)
+        public override async Task<RequestResult<bool>> Handle(ResetPasswordWithOutIdentityCommand resetPasswordCommand, CancellationToken cancellationToken)
         {
             var userExist = await _repositoryIdentity.Get(u => u.Email == resetPasswordCommand.email).FirstOrDefaultAsync();
 

@@ -21,6 +21,10 @@ public enum ErrorCode
 	MissingUserName,
 	MissingNationalID,
     InvalidNationalId,
+    PasswordChangeFailed,
+    InvalidOTP,
+
+    InvalidOTP,
     PasswordChangeFailed
-    InvalidOTP
+
 }

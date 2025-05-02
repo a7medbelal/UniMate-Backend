@@ -15,6 +15,9 @@ namespace Uni_Mate.Models.ApartmentManagement
         public string? OwnerID { get; set; }
         public Owner? Owner { get; set; }
         public ICollection<Room>? Rooms { get; set; }
+
         public ICollection<Image>? Images { get; set; }
+        public ICollection<ApartmentFacility> ApartmentFacilities { get; set; } = new List<ApartmentFacility>();
+
     }
 }
