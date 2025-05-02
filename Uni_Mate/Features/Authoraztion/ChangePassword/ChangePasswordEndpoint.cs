@@ -16,7 +16,6 @@ namespace Uni_Mate.Features.Authoraztion.ChangePassword
         }
 
         [HttpPost]
-
         public async Task<EndpointResponse<bool>> ChangePassword([FromBody] ChangePasswordViewModel viewmodel)
         {
             var validationResult = ValidateRequest(viewmodel);

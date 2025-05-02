@@ -48,8 +48,7 @@ namespace Uni_Mate.Domain
             // store the enum as string in the database
             modelBuilder.Entity<User>()
                   .Property(u => u.role)
-                  .HasConversion<string>(); 
-
+                  .HasConversion<string>();
 
             // Seed admin 
             var hasher = new PasswordHasher<User>();

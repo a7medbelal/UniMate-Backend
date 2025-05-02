@@ -29,11 +29,11 @@ namespace Uni_Mate.Features.Authoraztion.ChangePassword.Command
             if (string.IsNullOrEmpty(userId))
                 return RequestResult<bool>.Failure(ErrorCode.Unauthorized, "User Unauthrized to change pass");
 
-            var user = _userManager.FindByIdAsync(userId).Result;
+            var user = await _userManager.FindByIdAsync(userId);
             if (user == null)
                 return RequestResult<bool>.Failure(ErrorCode.UserNotFound, "User not found");
 
-            var result = _userManager.ChangePasswordAsync(user, request.OldPassword, request.NewPassword).Result;
+            var result = await _userManager.ChangePasswordAsync(user, request.OldPassword, request.NewPassword);
             if (result.Succeeded)
                 return RequestResult<bool>.Success(true, "Password changed successfully");
 
