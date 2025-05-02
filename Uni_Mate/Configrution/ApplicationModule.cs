@@ -1,8 +1,11 @@
 ﻿
 using Autofac;
 using Uni_Mate.Common.BaseHandlers;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.IdentityModel.Tokens;
 //using Pomelo.EntityFrameworkCore.MySql.Infrastructure;
+using System.Text;
 using Uni_Mate.Common.helper;
 using Uni_Mate.Common.Views;
 using Uni_Mate.Common;
@@ -10,9 +13,11 @@ using Uni_Mate.Domain;
 using MediatR;
 using System.Reflection;
 using FluentValidation;
+using Microsoft.AspNetCore.Mvc.RazorPages;
 using TrelloCopy.Common.BaseEndpoints;
 using Uni_Mate.Common.BaseEndpoints;
 using Uni_Mate.Domain.Repository;
+using Uni_Mate.Common.BaseHandlers;
 
 
 namespace Uni_Mate.Configrution
@@ -22,16 +27,16 @@ namespace Uni_Mate.Configrution
 
         protected override void Load(ContainerBuilder builder)
         {
-
             builder.Register(context =>
             {
                 var config = context.Resolve<IConfiguration>();
-                var connectionString = config.GetConnectionString("ZiadConnection");
-                var options = new DbContextOptionsBuilder<Context>()
-                    .UseSqlServer(connectionString)
-                    .Options;
+                var connectionString = config.GetConnectionString("HossamConnection");
+                var optionsBuilder = new DbContextOptionsBuilder<Context>().UseMySql(
+                    connectionString,
+                    ServerVersion.AutoDetect(connectionString)
+                ).Options;
 
-                return new Context(options);
+                return new Context(optionsBuilder);
             }).As<Context>().InstancePerLifetimeScope();
 
             //#region JWT Authentication Registration
