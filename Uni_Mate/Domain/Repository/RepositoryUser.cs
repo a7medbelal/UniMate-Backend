@@ -1,8 +1,6 @@
 using System.Linq.Expressions;
-using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.ChangeTracking;
-using Org.BouncyCastle.Asn1;
 using Uni_Mate.Models.UserManagment;
 namespace Uni_Mate.Domain.Repository;
 
@@ -99,5 +97,21 @@ public class RepositoryUser<Entity> : IRepositoryIdentity<Entity> where Entity :
     public async Task<bool> AnyAsync(Expression<Func<Entity, bool>> predicate)
     {
         return await Get(predicate).AnyAsync();
+    }
+    public Entity GetInclude(Expression<Func<Entity, bool>> predicate, params string[] properties)
+    {
+        var query = _dbSet.Where(predicate);
+
+        foreach (var property in properties)
+        {
+            query = query.Include(property);
+        }
+
+        return query.FirstOrDefault();
+    }
+
+    Task IRepositoryIdentity<Entity>.GetByIDAsync(string userId)
+    {
+        return GetByIDAsync(userId);
     }
 }

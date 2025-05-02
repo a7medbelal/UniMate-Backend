@@ -1,8 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
-using System.Transactions;
 using Uni_Mate.Models.GeneralEnum;
 using Uni_Mate.Models.UserManagment;
-using Uni_Mate.Models.UserManagment.Enum;
 namespace Uni_Mate.Models.ApartmentManagement
 {
     public class Apartment : BaseEntity
@@ -17,6 +15,9 @@ namespace Uni_Mate.Models.ApartmentManagement
         public string? OwnerID { get; set; }
         public Owner? Owner { get; set; }
         public ICollection<Room>? Rooms { get; set; }
+
+        public ICollection<Image>? Images { get; set; }
         public ICollection<ApartmentFacility> ApartmentFacilities { get; set; } = new List<ApartmentFacility>();
+
     }
 }

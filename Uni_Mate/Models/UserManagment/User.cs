@@ -1,9 +1,7 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Security;
 using Uni_Mate.Models.Comment_Review;
-using Uni_Mate.Models.GeneralEnum;
 using Uni_Mate.Models.UserManagment.Enum;
 
 namespace Uni_Mate.Models.UserManagment
@@ -21,6 +19,7 @@ namespace Uni_Mate.Models.UserManagment
       public string? Image { get; set; }
 
       public bool IsActive { get; set; } = false;
+      public string? Address { get; set; }
 
         /// <summary>
         /// this for reset password 

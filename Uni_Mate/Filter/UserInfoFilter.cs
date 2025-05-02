@@ -1,4 +1,3 @@
-using System.Security.Claims;
 using Microsoft.AspNetCore.Mvc.Filters;
 
 using Uni_Mate.Common;
@@ -18,7 +17,8 @@ public class UserInfoFilter : IActionFilter
         var user = context.HttpContext.User;
         if (user.Identity.IsAuthenticated)
         {
-            var userId = int.TryParse(user.FindFirst("ID")?.Value, out var id) ? id : -1;
+            //var userId = int.TryParse(user.FindFirst("ID")?.Value, out var id) ? id : -1;
+            var userId = user.FindFirst("ID")?.Value;
             _userInfoProvider.UserInfo = new UserInfo { ID = userId };
         }
     }
@@ -26,4 +26,4 @@ public class UserInfoFilter : IActionFilter
     public void OnActionExecuted(ActionExecutedContext context)
     {
     }
-}
+}   
