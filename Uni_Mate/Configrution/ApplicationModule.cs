@@ -30,7 +30,7 @@ namespace Uni_Mate.Configrution
             builder.Register(context =>
             {
                 var config = context.Resolve<IConfiguration>();
-                var connectionString = config.GetConnectionString("DefaultConnection");
+                var connectionString = config.GetConnectionString("HostConnection");
                 var options = new DbContextOptionsBuilder<Context>()
                     .UseSqlServer(connectionString)
                     .Options;
