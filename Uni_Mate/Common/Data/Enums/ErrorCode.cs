@@ -21,10 +21,8 @@ public enum ErrorCode
 	MissingUserName,
 	MissingNationalID,
     InvalidNationalId,
+    InvalidOTP,
     PasswordChangeFailed,
-    InvalidOTP,
-
-    InvalidOTP,
-    PasswordChangeFailed
+    RoomCreationFailed,
 
 }
