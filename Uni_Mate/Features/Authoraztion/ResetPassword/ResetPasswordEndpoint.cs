@@ -1,6 +1,4 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using System.ComponentModel.DataAnnotations;
-using System.Threading.Tasks;
 using Uni_Mate.Common.BaseEndpoints;
 using Uni_Mate.Common.Views;
 using Uni_Mate.Features.Authoraztion.ResetPassword.Commands;
