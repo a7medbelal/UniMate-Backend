@@ -24,7 +24,4 @@ public enum ErrorCode
     PasswordChangeFailed,
     InvalidOTP,
 
-    InvalidOTP,
-    PasswordChangeFailed
-
 }
