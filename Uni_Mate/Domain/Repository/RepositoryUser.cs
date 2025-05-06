@@ -1,8 +1,6 @@
 using System.Linq.Expressions;
-using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.ChangeTracking;
-using Org.BouncyCastle.Asn1;
 using Uni_Mate.Models.UserManagment;
 namespace Uni_Mate.Domain.Repository;
 
@@ -86,9 +84,10 @@ public class RepositoryUser<Entity> : IRepositoryIdentity<Entity> where Entity :
     {
         return  GetAll().Where(predicate);
     }
+
     public Task<Entity> GetByIDAsync(string id)
     {
-        throw new NotImplementedException();
+        return _dbSet.FirstOrDefaultAsync(x => x.Id == id);
     }
 
     public  async Task SaveChangesAsync()
@@ -99,5 +98,37 @@ public class RepositoryUser<Entity> : IRepositoryIdentity<Entity> where Entity :
     public async Task<bool> AnyAsync(Expression<Func<Entity, bool>> predicate)
     {
         return await Get(predicate).AnyAsync();
+    }
+    public Entity GetInclude(Expression<Func<Entity, bool>> predicate, params string[] properties)
+    {
+        var query = _dbSet.Where(predicate);
+
+        foreach (var property in properties)
+        {
+            query = query.Include(property);
+        }
+
+        return query.FirstOrDefault();
+    }
+
+   
+    public async Task<bool> UpdateAsync(Entity entity)
+    {
+        try
+        {
+            var existingEntity = await _dbSet.FindAsync(entity.Id);
+            if (existingEntity == null)
+            {
+                return false;
+            }
+
+            _dbSet.Update(entity);
+            await SaveChangesAsync();
+            return true;
+        }
+        catch (Exception)
+        {
+            return false;
+        }
     }
 }

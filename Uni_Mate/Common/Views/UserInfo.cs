@@ -2,7 +2,8 @@ namespace Uni_Mate.Common.Views;
 
 public class UserInfo
 {
-    public int ID { get; set; }
+    // Been Modified From Int 
+    public string ID { get; set; }
 
     public string Name { get; set; }
 

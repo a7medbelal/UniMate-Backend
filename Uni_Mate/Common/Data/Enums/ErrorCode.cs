@@ -21,5 +21,9 @@ public enum ErrorCode
 	MissingUserName,
 	MissingNationalID,
     InvalidNationalId,
-    InvalidOTP
+    PasswordChangeFailed,
+    InvalidOTP,
+    OwnerNotAuthried,
+    ApartmentAlreadyExist,
+    ApartmentNotFound,
 }

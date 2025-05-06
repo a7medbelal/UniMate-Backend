@@ -48,8 +48,26 @@ namespace Uni_Mate.Domain
             // store the enum as string in the database
             modelBuilder.Entity<User>()
                   .Property(u => u.role)
-                  .HasConversion<string>(); 
+                  .HasConversion<string>();
 
+            // Store The Enum ImageType As String In The Database
+            modelBuilder.Entity<Image>()
+                .Property(i => i.ImageType)
+                .HasConversion<string>();
+
+
+            // Configure The Image Entity To Avoid Cyclical References
+            modelBuilder.Entity<Image>()
+                .HasOne(i => i.Apartment)
+                .WithMany(a => a.Images)
+                .HasForeignKey(i => i.ApartmentId)
+                .OnDelete(DeleteBehavior.Restrict);
+
+            modelBuilder.Entity<Image>()
+                .HasOne(i => i.Room)
+                .WithMany(r => r.Images)
+                .HasForeignKey(i => i.RoomId)
+                .OnDelete(DeleteBehavior.Restrict); 
 
             // Seed admin 
             var hasher = new PasswordHasher<User>();

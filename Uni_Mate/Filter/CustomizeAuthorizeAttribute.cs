@@ -1,5 +1,7 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Mvc.Filters;
+using System.Security.Claims;
+using Uni_Mate.Features.Authoraztion.RoleAcess.Querys;
 using Uni_Mate.Models.UserManagment.Enum;
 
 
@@ -20,23 +22,23 @@ namespace Uni_Mate.Filters
         public override async void OnActionExecuting(ActionExecutingContext context)
         {
             var claims = context.HttpContext.User;
-             
-            var userID = claims.FindFirst("ID");
 
-            if (userID is null || string.IsNullOrEmpty(userID.Value))
+            var RoleID = claims.FindFirst("roleType");
+
+            if (RoleID == null || string.IsNullOrEmpty(RoleID.Value))
             {
+
                 throw new UnauthorizedAccessException();
             }
 
-            var user = userID ;
+            var role = (Role)int.Parse(RoleID.Value);
 
+            var hasAccess = await _mediator.Send(new HasAccessQuery(role,_feature));
 
-            //var hasAccess = await _mediator.Send(new HasAccessQuery(user, _feature));
-
-            //if (!hasAccess)
-            //{
-            //    throw new UnauthorizedAccessException();
-            //}
+            if (!hasAccess.isSuccess)
+            {
+                throw new UnauthorizedAccessException();
+            }
 
             base.OnActionExecuting(context);
         }

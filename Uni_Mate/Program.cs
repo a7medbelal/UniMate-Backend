@@ -2,7 +2,6 @@
 using Autofac.Extensions.DependencyInjection;
 using Autofac;
 using Uni_Mate.Configrution;
-using Microsoft.Extensions.DependencyInjection;
 using Microsoft.AspNetCore.Identity;
 using Uni_Mate.Models.UserManagment;
 using Uni_Mate.Domain;
@@ -27,10 +26,15 @@ namespace Uni_Mate
             builder.Services.AddControllers();
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 
+            builder.Services.AddHttpContextAccessor();
+
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
-         
-            
+
+           // builder.Services.AddDbContext<Context>(options =>
+       //options.UseSqlServer(builder.Configuration.GetConnectionString("ZiadConnection")));
+
+
             #region Identity Configration
             builder.Services.AddIdentity<User, IdentityRole>(options =>
                 {
@@ -48,6 +52,7 @@ namespace Uni_Mate
                 options.TokenLifespan = TimeSpan.FromHours(3);
             });
             #endregion
+
             #region configure AutoFac
 
             builder.Host.UseServiceProviderFactory(new AutofacServiceProviderFactory());
@@ -57,6 +62,7 @@ namespace Uni_Mate
             });
 
             #endregion
+
             #region JwtSettings
             builder.Services.Configure<JwtSettings>(builder.Configuration.GetSection("JwtSettings"));
             builder.Services.AddAuthentication(options =>
@@ -86,6 +92,8 @@ namespace Uni_Mate
            
             builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssemblyContaining<Program>());
             builder.Services.Configure<MailSettings>(builder.Configuration.GetSection("MailSettings"));
+            builder.Services.AddControllersWithViews(opt => opt.Filters.Add<UserInfoFilter>());
+
 
             var app = builder.Build();
             // Configure the HTTP request pipeline.
@@ -94,10 +102,16 @@ namespace Uni_Mate
                 app.UseSwagger();
                 app.UseSwaggerUI();
             }
+            app.UseCors(builder =>
+            {
+                builder.AllowAnyOrigin()
+                       .AllowAnyMethod()
+                       .AllowAnyHeader();
+            });
             app.UseHttpsRedirection();
             app.UseAuthentication();
             app.UseAuthorization();
-           app.UseMiddleware<GlobalErrorHandlerMiddleware>();
+            app.UseMiddleware<GlobalErrorHandlerMiddleware>();
             app.UseMiddleware<TransactionMiddleware>();
 
             app.MapControllers();

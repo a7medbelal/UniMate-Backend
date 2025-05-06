@@ -6,7 +6,7 @@ namespace Uni_Mate.Middlewares;
 
 public class GlobalErrorHandlerMiddleware
 {
-    RequestDelegate _nextAction;
+    private readonly RequestDelegate _nextAction;
 
     public GlobalErrorHandlerMiddleware(RequestDelegate nextAction)
     {
@@ -32,7 +32,7 @@ public class GlobalErrorHandlerMiddleware
 
                 await context.Response.WriteAsJsonAsync(response);
             }
-           // File.WriteAllText(@"/home/hossam/dotnet/errors.txt", $"error{ex.Message}");
+            File.WriteAllText(@"C:\MainUniMateBackEnd\UniMate-Backend.Errors.txt", $"error{ex.Message}");
 
         }
 
