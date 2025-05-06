@@ -25,4 +25,5 @@ public enum ErrorCode
     InvalidOTP,
     OwnerNotAuthried,
     ApartmentAlreadyExist,
+    ApartmentNotFound,
 }

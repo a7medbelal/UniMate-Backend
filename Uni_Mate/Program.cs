@@ -111,7 +111,7 @@ namespace Uni_Mate
             app.UseHttpsRedirection();
             app.UseAuthentication();
             app.UseAuthorization();
-           // app.UseMiddleware<GlobalErrorHandlerMiddleware>();
+            app.UseMiddleware<GlobalErrorHandlerMiddleware>();
             app.UseMiddleware<TransactionMiddleware>();
 
             app.MapControllers();
