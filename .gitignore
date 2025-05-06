@@ -1,0 +1,31 @@
+﻿# Ignore build output
+bin/
+obj/
+[Bb]uild/
+[Bb]ld/
+
+# Ignore Visual Studio settings
+.vs/
+*.user
+*.suo
+*.cache
+*.db
+/Uni_Mate/obj/
+
+# Ignore temporary & log files
+*.log
+*.tmp
+
+# Ignore Rider / JetBrains settings
+.idea/
+
+# Ignore Node and package files if using JS tools
+node_modules/
+
+# Ignore backup and system files
+*.bak
+*.DS_Store
+Thumbs.db
+
+# Ignore specific files
+/Uni_Mate/Features/Authoraztion/RegisterUser/RegisterStudent/RegisterUserRequestViewModel.cs
