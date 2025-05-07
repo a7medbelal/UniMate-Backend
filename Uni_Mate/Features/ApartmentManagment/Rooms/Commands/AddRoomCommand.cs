@@ -1,3 +1,5 @@
+using ApartmentManagment.Features.ApartmentManagment.Rooms;
+using Mapster;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 using Uni_Mate.Common.BaseHandlers;
@@ -7,7 +9,7 @@ using Uni_Mate.Models.ApartmentManagement;
 
 namespace Uni_Mate.Features.ApartmentManagment.Rooms.Commands;
 
-public record AddRoomCommand(int ApartmentId, string? Description, int NoBeds, int Price, string? Image) : IRequest<RequestResult<bool>>;
+public record AddRoomCommand(IList<RoomBedViewModel> RoomBedViewModels, int ApartmentId = 1) : IRequest<RequestResult<bool>>;
 
 public class AddRoomCommandHandler : BaseRequestHandler<AddRoomCommand, RequestResult<bool>, Room>
 {
@@ -18,25 +20,12 @@ public class AddRoomCommandHandler : BaseRequestHandler<AddRoomCommand, RequestR
 
     public override async Task<RequestResult<bool>> Handle(AddRoomCommand request, CancellationToken cancellationToken)
     {
-        var room = new Room
+        var rooms = request.RoomBedViewModels.Adapt<List<Room>>();
+        foreach (var room in rooms)
         {
-            Description = request.Description,
-            Price = request.Price,
-            Image = request.Image,
-            ApartmentId = request.ApartmentId,
-        };
-        var Beds = new List<Bed>();
-        for (int i = 0; i < request.NoBeds; i++)
-        {
-            Beds.Add(new Bed
-            {
-                RoomId = room.Id,
-                Price = request.Price,
-                IsAvailable = true
-            });
+            room.ApartmentId = request.ApartmentId;
         }
-        room.Beds = Beds;
-        var result = _repository.AddAsync(room);
+        var result = _repository.AddRangeAsync(rooms);
         if(!result.IsCompletedSuccessfully)
         {
             return RequestResult<bool>.Failure(ErrorCode.RoomCreationFailed, "Failed to create room");

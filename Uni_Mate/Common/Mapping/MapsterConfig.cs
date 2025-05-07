@@ -1,6 +1,8 @@
 ﻿using Uni_Mate.Features.StudentManager.GetStudent.Quarry;
 using Uni_Mate.Models.UserManagment;
 using Mapster;
+using Uni_Mate.Models.ApartmentManagement;
+using ApartmentManagment.Features.ApartmentManagment.Rooms;
 namespace Uni_Mate.Common.Mapping
 {
     public static class MapsterConfig
@@ -21,6 +23,10 @@ namespace Uni_Mate.Common.Mapping
                 .Map(dest => dest.National_Id, src => src.National_Id)
                 .Map(dest => dest.Phones, src => src.Phones.Select(phone => phone.PhoneNumber).ToList());
 
+            config.NewConfig<RoomBedViewModel, Room>()
+                .Map(dest => dest.Beds, src => src.Beds);
+
+            config.NewConfig<BedViewModel, Bed>();
             return config;
         }
     }

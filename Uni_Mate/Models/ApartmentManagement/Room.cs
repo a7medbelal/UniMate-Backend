@@ -15,7 +15,7 @@ namespace Uni_Mate.Models.ApartmentManagement
         public int ApartmentId { get; set; }
         public Apartment? Apartment { get; set; }
 
-        public ICollection<Bed>? Beds { get; set; }
+        public ICollection<Bed>? Beds { get; set; } = new List<Bed>();
         public ICollection<Image>? Images { get; set; }
     }
 }

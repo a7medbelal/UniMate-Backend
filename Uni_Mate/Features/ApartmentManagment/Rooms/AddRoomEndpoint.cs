@@ -1,3 +1,4 @@
+using ApartmentManagment.Features.ApartmentManagment.Rooms;
 using Microsoft.AspNetCore.Mvc;
 using Uni_Mate.Common.BaseEndpoints;
 using Uni_Mate.Common.Data.Enums;
@@ -6,18 +7,18 @@ using Uni_Mate.Features.ApartmentManagment.Rooms.Commands;
 
 namespace Uni_Mate.Features.ApartmentManagment.Rooms;
 
-public class AddRoomEndpoint : BaseEndpoint<AddRoomViewModel, bool>
+public class AddRoomEndpoint : BaseEndpoint<List<RoomBedViewModel>, bool>
 {
-    public AddRoomEndpoint(BaseEndpointParameters<AddRoomViewModel> parameters) : base(parameters)
+    public AddRoomEndpoint(BaseEndpointParameters<List<RoomBedViewModel>> parameters) : base(parameters)
     {
     }
     [HttpPost]
-    public async Task<EndpointResponse<bool>> AddRoom([FromBody] AddRoomViewModel viewmodel)
+    public async Task<EndpointResponse<bool>> AddRoom([FromBody] List<RoomBedViewModel> viewmodel)
     {
         var validationResult = ValidateRequest(viewmodel);
         if (!validationResult.isSuccess)
             return validationResult;
-        var addRoomCommand = new AddRoomCommand(viewmodel.ApartmentId, viewmodel.Description, viewmodel.NumberOfBeds, viewmodel.Price, viewmodel.ImageUrl);
+        var addRoomCommand = new AddRoomCommand(viewmodel);
         var result = await _mediator.Send(addRoomCommand);
         if (!result.isSuccess)
         {
