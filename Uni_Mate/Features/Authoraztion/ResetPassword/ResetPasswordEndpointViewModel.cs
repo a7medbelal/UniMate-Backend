@@ -26,13 +26,7 @@ namespace Uni_Mate.Features.Authoraztion.ResetPassword
             RuleFor(x => x.Email)
              .NotEmpty()
             .WithMessage("Email is required.")
-           .EmailAddress()
-
-            .WithMessage("Invalid email format.")
-                .NotEmpty()
-                .WithMessage("Email is required.")
-                .EmailAddress()
-                .WithMessage("Invalid email format.");
+           .EmailAddress();
           
 
             RuleFor(x => x.Token)
