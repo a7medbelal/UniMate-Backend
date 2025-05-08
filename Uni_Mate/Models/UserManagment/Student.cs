@@ -10,7 +10,8 @@ namespace Uni_Mate.Models.UserManagment
         public string? University { get; set; }
 
         public string? Faculty { get; set; }
-
+        public string? Department { get; set; }
+        public string? AcademicYear { get; set; }
         public Gender Gender { get; set; }
         public string? Governorate { get; set; }
         // make the user write a short description for himself
