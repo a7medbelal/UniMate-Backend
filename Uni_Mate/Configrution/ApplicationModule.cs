@@ -30,13 +30,13 @@ namespace Uni_Mate.Configrution
             builder.Register(context =>
             {
                 var config = context.Resolve<IConfiguration>();
-                var connectionString = config.GetConnectionString("HossamConnection");
-                var optionsBuilder = new DbContextOptionsBuilder<Context>().UseMySql(
-                    connectionString,
-                    ServerVersion.AutoDetect(connectionString)
-                ).Options;
+                var connectionString = config.GetConnectionString("HostConnection");
 
-                return new Context(optionsBuilder);
+                var options = new DbContextOptionsBuilder<Context>()
+                    .UseSqlServer(connectionString)
+                    .Options;
+
+                return new Context(options);
             }).As<Context>().InstancePerLifetimeScope();
 
             //#region JWT Authentication Registration

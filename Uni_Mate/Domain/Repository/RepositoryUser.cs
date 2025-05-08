@@ -84,9 +84,10 @@ public class RepositoryUser<Entity> : IRepositoryIdentity<Entity> where Entity :
     {
         return  GetAll().Where(predicate);
     }
+
     public Task<Entity> GetByIDAsync(string id)
     {
-        throw new NotImplementedException();
+        return _dbSet.FirstOrDefaultAsync(x => x.Id == id);
     }
 
     public  async Task SaveChangesAsync()
@@ -110,8 +111,24 @@ public class RepositoryUser<Entity> : IRepositoryIdentity<Entity> where Entity :
         return query.FirstOrDefault();
     }
 
-    Task IRepositoryIdentity<Entity>.GetByIDAsync(string userId)
+   
+    public async Task<bool> UpdateAsync(Entity entity)
     {
-        return GetByIDAsync(userId);
+        try
+        {
+            var existingEntity = await _dbSet.FindAsync(entity.Id);
+            if (existingEntity == null)
+            {
+                return false;
+            }
+
+            _dbSet.Update(entity);
+            await SaveChangesAsync();
+            return true;
+        }
+        catch (Exception)
+        {
+            return false;
+        }
     }
 }

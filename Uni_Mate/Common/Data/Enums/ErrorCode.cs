@@ -23,6 +23,8 @@ public enum ErrorCode
     InvalidNationalId,
     InvalidOTP,
     PasswordChangeFailed,
+    OwnerNotAuthried,
+    ApartmentAlreadyExist,
+    ApartmentNotFound,
     RoomCreationFailed,
-
 }

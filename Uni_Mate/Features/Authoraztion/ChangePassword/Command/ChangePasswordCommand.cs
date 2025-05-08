@@ -11,7 +11,7 @@ namespace Uni_Mate.Features.Authoraztion.ChangePassword.Command
 
     public class ChangePasswordCommandHandler : BaseWithoutRepositoryRequestHandler<ChangePasswordCommand, RequestResult<bool>, User>
     {
-        private readonly IHttpContextAccessor _httpContextAccessor;
+        private readonly IHttpContextAccessor _httpContextAccessor;  
 
         public ChangePasswordCommandHandler(BaseWithoutRepositoryRequestHandlerParameters<User> parameters, IHttpContextAccessor httpContextAccessor)
             : base(parameters)

@@ -1,7 +1,8 @@
 using Microsoft.AspNetCore.Mvc.Filters;
-
+using System.Security.Claims;
 using Uni_Mate.Common;
 using Uni_Mate.Common.Views;
+using Uni_Mate.Models.UserManagment;
 
 public class UserInfoFilter : IActionFilter
 {
@@ -15,10 +16,10 @@ public class UserInfoFilter : IActionFilter
     public void OnActionExecuting(ActionExecutingContext context)
     {
         var user = context.HttpContext.User;
-        if (user.Identity.IsAuthenticated)
+        if (user.Identity is ClaimsIdentity identity && identity.IsAuthenticated)
         {
-            //var userId = int.TryParse(user.FindFirst("ID")?.Value, out var id) ? id : -1;
             var userId = user.FindFirst("ID")?.Value;
+            if(userId == null) userId = "-1";   
             _userInfoProvider.UserInfo = new UserInfo { ID = userId };
         }
     }

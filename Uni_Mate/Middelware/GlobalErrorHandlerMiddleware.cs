@@ -33,7 +33,6 @@ public class GlobalErrorHandlerMiddleware
                 await context.Response.WriteAsJsonAsync(response);
             }
             File.WriteAllText(@"C:\MainUniMateBackEnd\UniMate-Backend.Errors.txt", $"error{ex.Message}");
-           // File.WriteAllText(@"/home/hossam/dotnet/errors.txt", $"error{ex.Message}");
 
         }
 
