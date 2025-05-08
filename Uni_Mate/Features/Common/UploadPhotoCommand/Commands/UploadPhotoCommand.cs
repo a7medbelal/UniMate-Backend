@@ -11,9 +11,9 @@ using ImageUploadResult = CloudinaryDotNet.Actions.ImageUploadResult;
 
 namespace Uni_Mate.Features.Common.UploadPhotoCommand;
 
-public record UploadPhotoCommand(IFormFile File) : IRequest<RequestResult<ImageUploadResult>>;
+public record UploadPhotoCommand(IFormFile File) : IRequest<RequestResult<string>>;
 
-public class UploadPhotoCommandHandler : BaseRequestHandler<UploadPhotoCommand, RequestResult<ImageUploadResult>, Image>
+public class UploadPhotoCommandHandler : BaseRequestHandler<UploadPhotoCommand, RequestResult<string>, Image>
 {
     private readonly Cloudinary _cloudinary;
 
@@ -50,11 +50,11 @@ public class UploadPhotoCommandHandler : BaseRequestHandler<UploadPhotoCommand, 
     //     var result = await _cloudinary.DestroyAsync(deletionParams);
     //     return result;
     // }
-    public override async Task<RequestResult<ImageUploadResult>> Handle(UploadPhotoCommand request, CancellationToken cancellationToken)
+    public override async Task<RequestResult<string>> Handle(UploadPhotoCommand request, CancellationToken cancellationToken)
     {
         if (request.File.Length <= 0)
         {
-            return RequestResult<ImageUploadResult>.Failure(ErrorCode.NotFound, "Couldn't find image");
+            return RequestResult<string>.Failure(ErrorCode.NotFound, "Couldn't find image");
         }
         using var stream = request.File.OpenReadStream();
         var uploadParams = new ImageUploadParams
@@ -65,16 +65,11 @@ public class UploadPhotoCommandHandler : BaseRequestHandler<UploadPhotoCommand, 
         };
         var uploadResult = await _cloudinary.UploadAsync(uploadParams);
         string url = _cloudinary.Api.UrlImgUp.BuildUrl();
-        _repository.Add(new Image
-        {
-            ImageUrl = url,
-        });
-        _repository.SaveChangesAsync();
 
         if (uploadResult.Error != null)
         {
-            return RequestResult<ImageUploadResult>.Failure(ErrorCode.NotFound, "Couldn't upload image");
+            return RequestResult<string>.Failure(ErrorCode.NotFound, "Couldn't upload image");
         }
-        return RequestResult<ImageUploadResult>.Success(uploadResult, "Image uploaded successfully");
+        return RequestResult<string>.Success(url, "Image uploaded successfully");
     }
 }
