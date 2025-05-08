@@ -1,6 +1,6 @@
 ﻿namespace Uni_Mate.Models.ApartmentManagement
 {
-    public class ApartmentFacility
+    public class ApartmentFacility : BaseEntity
     {
         public int Id { get; set; }
         public int ApartmentId { get; set; }

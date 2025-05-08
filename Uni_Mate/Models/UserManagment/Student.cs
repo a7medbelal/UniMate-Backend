@@ -1,5 +1,4 @@
-﻿using Uni_Mate.Models.ApartmentManagement;
-using Uni_Mate.Models.GeneralEnum;
+﻿using Uni_Mate.Models.GeneralEnum;
 
 namespace Uni_Mate.Models.UserManagment
 {
@@ -17,7 +16,6 @@ namespace Uni_Mate.Models.UserManagment
         // make the user write a short description for himself
         public string? BriefOverView { get; set; }
         // Add any additional properties or methods specific to students here
-        public ICollection<Image>? Images { get; set; }
     }
    
     

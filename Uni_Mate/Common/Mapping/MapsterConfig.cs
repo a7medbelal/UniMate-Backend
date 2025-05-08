@@ -3,6 +3,8 @@ using Uni_Mate.Models.UserManagment;
 using Mapster;
 using Uni_Mate.Features.StudentManager.UpdateProfileDisplay.Quarry;
 using Uni_Mate.Features.StudentManager.UpdateProfileSave;
+using Uni_Mate.Features.ApartmentManagment.Facilites.CategoryWithFacilty;
+using Uni_Mate.Models.ApartmentManagement;
 namespace Uni_Mate.Common.Mapping
 {
     public static class MapsterConfig
@@ -25,6 +27,7 @@ namespace Uni_Mate.Common.Mapping
                 .Map(dest => dest.Phones, src => src.Phones.Select(phone => phone.PhoneNumber).ToList());
             #endregion
 
+
             #region mapping from Student to UpdateProfileDisplayDTO
             config.NewConfig<Student, UpdateProfileDisplayDTO>()
                 .Map(dest => dest.FirstName, src => src.Fname)
@@ -42,6 +45,18 @@ namespace Uni_Mate.Common.Mapping
                 .Map(dest => dest.Address, src => src.Address)
                 .Map(dest => dest.BriefOverView, src => src.BriefOverView);
             #endregion
+
+
+            config.NewConfig<List<CategoryFacilityViewModel>, List<ApartmentFacility>>()
+                 .MapWith((categories) => categories.
+                    SelectMany(c => c.facilities).
+                    Where(c => c.IsSelected == true).
+                    Select(c => new ApartmentFacility { FacilityId = c.FacilityId }).ToList());
+
+            config.NewConfig<RoomBedViewModel, Room>()
+                .Map(dest => dest.Beds, src => src.Beds);
+
+            config.NewConfig<BedViewModel, Bed>();
             return config;
         }
     }

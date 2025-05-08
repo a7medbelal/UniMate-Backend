@@ -12,6 +12,7 @@ using Uni_Mate.Common.helper;
 using Uni_Mate.Common.Views;
 using Uni_Mate.Middlewares;
 using TrelloCopy.Middlewares;
+using Uni_Mate.Features.Common.UploadPhotoCommand;
 
 namespace Uni_Mate
 {
@@ -52,6 +53,7 @@ namespace Uni_Mate
                 options.TokenLifespan = TimeSpan.FromHours(3);
             });
             #endregion
+
             #region configure AutoFac
 
             builder.Host.UseServiceProviderFactory(new AutofacServiceProviderFactory());
@@ -61,6 +63,7 @@ namespace Uni_Mate
             });
 
             #endregion
+
             #region JwtSettings
             builder.Services.Configure<JwtSettings>(builder.Configuration.GetSection("JwtSettings"));
             builder.Services.AddAuthentication(options =>
@@ -88,8 +91,10 @@ namespace Uni_Mate
           });
             #endregion
            
+            builder.Services.Configure<CloudinarySettings>(builder.Configuration.GetSection("CloudinarySettings"));
             builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssemblyContaining<Program>());
             builder.Services.Configure<MailSettings>(builder.Configuration.GetSection("MailSettings"));
+            builder.Services.AddControllersWithViews(opt => opt.Filters.Add<UserInfoFilter>());
 
 
             var app = builder.Build();
@@ -99,10 +104,16 @@ namespace Uni_Mate
                 app.UseSwagger();
                 app.UseSwaggerUI();
             }
+            app.UseCors(builder =>
+            {
+                builder.AllowAnyOrigin()
+                       .AllowAnyMethod()
+                       .AllowAnyHeader();
+            });
             app.UseHttpsRedirection();
             app.UseAuthentication();
             app.UseAuthorization();
-           app.UseMiddleware<GlobalErrorHandlerMiddleware>();
+            app.UseMiddleware<GlobalErrorHandlerMiddleware>();
             app.UseMiddleware<TransactionMiddleware>();
 
             app.MapControllers();

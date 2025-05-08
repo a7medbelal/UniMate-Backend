@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace Uni_Mate.Migrations
 {
     /// <inheritdoc />
-    public partial class init : Migration
+    public partial class init3 : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -30,12 +30,14 @@ namespace Uni_Mate.Migrations
                 columns: table => new
                 {
                     Id = table.Column<string>(type: "nvarchar(450)", nullable: false),
-                    National_Id = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    National_Id = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Fname = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Lname = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Image = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     IsActive = table.Column<bool>(type: "bit", nullable: false),
                     Address = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    ResetPassword = table.Column<string>(type: "nvarchar(6)", maxLength: 6, nullable: true),
+                    ResetPasswowrdConfirnation = table.Column<DateTime>(type: "datetime2", nullable: true),
                     role = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     UserName = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
                     NormalizedUserName = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
@@ -55,6 +57,24 @@ namespace Uni_Mate.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_AspNetUsers", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Category",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Deleted = table.Column<bool>(type: "bit", nullable: false),
+                    CreatedBy = table.Column<int>(type: "int", nullable: false),
+                    CreatedDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    UpdatedBy = table.Column<int>(type: "int", nullable: false),
+                    UpdatedDate = table.Column<DateTime>(type: "datetime2", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Category", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -310,17 +330,44 @@ namespace Uni_Mate.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Facility",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    FacilityCategoryId = table.Column<int>(type: "int", nullable: false),
+                    Deleted = table.Column<bool>(type: "bit", nullable: false),
+                    CreatedBy = table.Column<int>(type: "int", nullable: false),
+                    CreatedDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    UpdatedBy = table.Column<int>(type: "int", nullable: false),
+                    UpdatedDate = table.Column<DateTime>(type: "datetime2", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Facility", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Facility_Category_FacilityCategoryId",
+                        column: x => x.FacilityCategoryId,
+                        principalTable: "Category",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Apartments",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Title = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Location = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Num = table.Column<int>(type: "int", nullable: false),
+                    Description = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Location = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    DescripeLocation = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Gender = table.Column<int>(type: "int", nullable: false),
                     Floor = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Price = table.Column<double>(type: "float", nullable: false),
                     IsAvailable = table.Column<bool>(type: "bit", nullable: false),
+                    DurationType = table.Column<int>(type: "int", nullable: false),
                     OwnerID = table.Column<string>(type: "nvarchar(450)", nullable: true),
                     Deleted = table.Column<bool>(type: "bit", nullable: false),
                     CreatedBy = table.Column<int>(type: "int", nullable: false),
@@ -336,6 +383,38 @@ namespace Uni_Mate.Migrations
                         column: x => x.OwnerID,
                         principalTable: "Owners",
                         principalColumn: "Id");
+                });
+
+            migrationBuilder.CreateTable(
+                name: "ApartmentFacility",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    ApartmentId = table.Column<int>(type: "int", nullable: false),
+                    FacilityId = table.Column<int>(type: "int", nullable: false),
+                    IsAvailable = table.Column<bool>(type: "bit", nullable: false),
+                    Deleted = table.Column<bool>(type: "bit", nullable: false),
+                    CreatedBy = table.Column<int>(type: "int", nullable: false),
+                    CreatedDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    UpdatedBy = table.Column<int>(type: "int", nullable: false),
+                    UpdatedDate = table.Column<DateTime>(type: "datetime2", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_ApartmentFacility", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_ApartmentFacility_Apartments_ApartmentId",
+                        column: x => x.ApartmentId,
+                        principalTable: "Apartments",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_ApartmentFacility_Facility_FacilityId",
+                        column: x => x.FacilityId,
+                        principalTable: "Facility",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -427,8 +506,18 @@ namespace Uni_Mate.Migrations
 
             migrationBuilder.InsertData(
                 table: "AspNetUsers",
-                columns: new[] { "Id", "AccessFailedCount", "Address", "ConcurrencyStamp", "Email", "EmailConfirmed", "Fname", "Image", "IsActive", "Lname", "LockoutEnabled", "LockoutEnd", "National_Id", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "TwoFactorEnabled", "UserName", "role" },
-                values: new object[] { "1", 0, null, "2e67a937-f241-4336-8d97-6d38363baded", "legendahmed.122@gmail.com", true, "ahmed", null, false, "belal", false, null, "1", "Legendahmed.122@gmail.com", "ADMIN", "AQAAAAIAAYagAAAAEP5A2GqBSSdpOy1eEZzsQ2EDqr5x1rx8mf2cueC20CfQbLVPtMbYqLHvyOaJJzG68g==", "01040363077", true, "95bea583-7297-478c-a89a-c8f2886beb30", false, "admin", "Admin" });
+                columns: new[] { "Id", "AccessFailedCount", "Address", "ConcurrencyStamp", "Email", "EmailConfirmed", "Fname", "Image", "IsActive", "Lname", "LockoutEnabled", "LockoutEnd", "National_Id", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "ResetPassword", "ResetPasswowrdConfirnation", "SecurityStamp", "TwoFactorEnabled", "UserName", "role" },
+                values: new object[] { "1", 0, null, "3ca16141-c8a0-4331-8825-8b4ebbf8a509", "legendahmed.122@gmail.com", true, "ahmed", null, false, "belal", false, null, "1", "Legendahmed.122@gmail.com", "ADMIN", "AQAAAAIAAYagAAAAELxXSEzBVB+MLctwDFjalYRaeYe9z+pU+c/HgFa32WSu+M5wo1mSg9taW4QMW1HHfg==", "01040363077", true, null, null, "b3eea0dc-9449-4a34-a858-af4b8d3adbd4", false, "admin", "Admin" });
+
+            migrationBuilder.CreateIndex(
+                name: "IX_ApartmentFacility_ApartmentId",
+                table: "ApartmentFacility",
+                column: "ApartmentId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_ApartmentFacility_FacilityId",
+                table: "ApartmentFacility",
+                column: "FacilityId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Apartments_OwnerID",
@@ -480,6 +569,11 @@ namespace Uni_Mate.Migrations
                 column: "RoomId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_Facility_FacilityCategoryId",
+                table: "Facility",
+                column: "FacilityCategoryId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Image_ApartmentId",
                 table: "Image",
                 column: "ApartmentId");
@@ -524,6 +618,9 @@ namespace Uni_Mate.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
+                name: "ApartmentFacility");
+
+            migrationBuilder.DropTable(
                 name: "AspNetRoleClaims");
 
             migrationBuilder.DropTable(
@@ -560,10 +657,16 @@ namespace Uni_Mate.Migrations
                 name: "Students");
 
             migrationBuilder.DropTable(
+                name: "Facility");
+
+            migrationBuilder.DropTable(
                 name: "AspNetRoles");
 
             migrationBuilder.DropTable(
                 name: "Rooms");
+
+            migrationBuilder.DropTable(
+                name: "Category");
 
             migrationBuilder.DropTable(
                 name: "Apartments");
