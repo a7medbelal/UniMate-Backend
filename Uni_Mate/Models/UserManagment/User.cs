@@ -15,7 +15,9 @@ namespace Uni_Mate.Models.UserManagment
       public string Fname { get; set; }
 
       public string Lname { get; set; }
-
+        /// <summary>
+        /// الصوره الشخصيه لليوزر
+        /// </summary>
       public string? Image { get; set; }
 
       public bool IsActive { get; set; } = false;

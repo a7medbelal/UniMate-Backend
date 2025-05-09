@@ -1,6 +1,6 @@
 using CloudinaryDotNet.Actions;
 using Microsoft.AspNetCore.Mvc;
-using Uni_Mate.Common.BaseEndpoints;
+using TrelloCopy.Common.BaseEndpoints;
 using Uni_Mate.Common.BaseEndpoints;
 using Uni_Mate.Common.Data.Enums;
 using Uni_Mate.Common.Views;
@@ -22,6 +22,6 @@ public class UploadPhotoEndpoint : BaseWithoutTRequestEndpoint<ImageUploadResult
         {
             return EndpointResponse<string>.Failure(ErrorCode.InvalidData, "Invalid data");
         }
-        return EndpointResponse<string>.Success(result.data, "Photo Uploaded Successfully");
+        return EndpointResponse<ImageUploadResult>.Success(result.data, "Photo Uploaded Successfully");
     }
 }

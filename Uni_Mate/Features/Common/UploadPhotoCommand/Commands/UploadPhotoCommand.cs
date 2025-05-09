@@ -7,7 +7,6 @@ using Uni_Mate.Common.Data.Enums;
 using Uni_Mate.Common.helper;
 using Uni_Mate.Common.Views;
 using Uni_Mate.Models.ApartmentManagement;
-using ImageUploadResult = CloudinaryDotNet.Actions.ImageUploadResult;
 
 namespace Uni_Mate.Features.Common.UploadPhotoCommand;
 
@@ -64,7 +63,7 @@ public class UploadPhotoCommandHandler : BaseRequestHandler<UploadPhotoCommand, 
                 .Height(500).Width(500).Crop("fill").Gravity("face")
         };
         var uploadResult = await _cloudinary.UploadAsync(uploadParams);
-        string url = _cloudinary.Api.UrlImgUp.BuildUrl();
+        string url = uploadResult.SecureUri.ToString();
 
         if (uploadResult.Error != null)
         {

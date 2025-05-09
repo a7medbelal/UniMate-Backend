@@ -24,6 +24,7 @@ public enum ErrorCode
     InvalidNationalId,
     InvalidOTP,
     PasswordChangeFailed,
+    UpdateFailed,
     OwnerNotAuthried,
     ApartmentAlreadyExist,
     ApartmentNotFound,
