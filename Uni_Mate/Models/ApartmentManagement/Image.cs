@@ -10,8 +10,5 @@ namespace Uni_Mate.Models.ApartmentManagement
         [ForeignKey("Apartment")]
         public int ApartmentId { get; set; }
         public Apartment? Apartment { get; set; }
-        [ForeignKey("Room")]
-        public int RoomId { get; set; }
-        public Room? Room { get; set; }
     }
 }
