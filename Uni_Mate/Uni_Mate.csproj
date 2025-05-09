@@ -65,6 +65,8 @@
   <ItemGroup>
     <Folder Include="Features\ApartmentManagment\Facilites\AddFacilty\command\" />
     <Folder Include="Features\Authoraztion\RoleAcess\Commands\" />
+    <Folder Include="Features\OwnerManager\UpdataPropertyInfoSave\" />
+    <Folder Include="Features\OwnerManager\UpdatePropertyInfoDisplay\" />
     <Folder Include="Features\StudentManager\" />
   </ItemGroup>
 
