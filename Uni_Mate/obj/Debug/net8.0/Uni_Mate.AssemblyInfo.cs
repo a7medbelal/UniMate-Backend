@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("Uni_Mate")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+6136d8e1a989b0f5ac03e137e216aaccb917481b")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+f025c0a473b3166770d02b14a13e6372f51dd3ec")]
 [assembly: System.Reflection.AssemblyProductAttribute("Uni_Mate")]
 [assembly: System.Reflection.AssemblyTitleAttribute("Uni_Mate")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

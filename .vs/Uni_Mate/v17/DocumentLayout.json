@@ -3,28 +3,147 @@
   "WorkspaceRootPath": "C:\\Users\\munta\\OneDrive\\Desktop\\uniback\\UniMate-Backend\\",
   "Documents": [
     {
+      "AbsoluteMoniker": "D:0:0:{078F1CCE-8939-41FE-AD3F-FE99E8A57F94}|Uni_Mate\\Uni_Mate.csproj|c:\\users\\munta\\onedrive\\desktop\\uniback\\unimate-backend\\uni_mate\\features\\apartmentmanagment\\updateapartment\\updatepropertyinfodisplay\\queries\\updatepropertyinfodisplaydto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{078F1CCE-8939-41FE-AD3F-FE99E8A57F94}|Uni_Mate\\Uni_Mate.csproj|solutionrelative:uni_mate\\features\\apartmentmanagment\\updateapartment\\updatepropertyinfodisplay\\queries\\updatepropertyinfodisplaydto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{078F1CCE-8939-41FE-AD3F-FE99E8A57F94}|Uni_Mate\\Uni_Mate.csproj|c:\\users\\munta\\onedrive\\desktop\\uniback\\unimate-backend\\uni_mate\\features\\apartmentmanagment\\facilites\\addfacilty\\addfaciltyendpoint.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{078F1CCE-8939-41FE-AD3F-FE99E8A57F94}|Uni_Mate\\Uni_Mate.csproj|solutionrelative:uni_mate\\features\\apartmentmanagment\\facilites\\addfacilty\\addfaciltyendpoint.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{078F1CCE-8939-41FE-AD3F-FE99E8A57F94}|Uni_Mate\\Uni_Mate.csproj|c:\\users\\munta\\onedrive\\desktop\\uniback\\unimate-backend\\uni_mate\\features\\apartmentmanagment\\createapartment\\command\\createapartmentcommand.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{078F1CCE-8939-41FE-AD3F-FE99E8A57F94}|Uni_Mate\\Uni_Mate.csproj|solutionrelative:uni_mate\\features\\apartmentmanagment\\createapartment\\command\\createapartmentcommand.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{078F1CCE-8939-41FE-AD3F-FE99E8A57F94}|Uni_Mate\\Uni_Mate.csproj|c:\\users\\munta\\onedrive\\desktop\\uniback\\unimate-backend\\uni_mate\\features\\apartmentmanagment\\updateapartment\\updatepropertyinfodisplay\\queries\\updatepropertyinfodisplayquery.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{078F1CCE-8939-41FE-AD3F-FE99E8A57F94}|Uni_Mate\\Uni_Mate.csproj|solutionrelative:uni_mate\\features\\apartmentmanagment\\updateapartment\\updatepropertyinfodisplay\\queries\\updatepropertyinfodisplayquery.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{078F1CCE-8939-41FE-AD3F-FE99E8A57F94}|Uni_Mate\\Uni_Mate.csproj|c:\\users\\munta\\onedrive\\desktop\\uniback\\unimate-backend\\uni_mate\\models\\apartmentmanagement\\apartmentfacility.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{078F1CCE-8939-41FE-AD3F-FE99E8A57F94}|Uni_Mate\\Uni_Mate.csproj|solutionrelative:uni_mate\\models\\apartmentmanagement\\apartmentfacility.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{078F1CCE-8939-41FE-AD3F-FE99E8A57F94}|Uni_Mate\\Uni_Mate.csproj|c:\\users\\munta\\onedrive\\desktop\\uniback\\unimate-backend\\uni_mate\\models\\apartmentmanagement\\apartment.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{078F1CCE-8939-41FE-AD3F-FE99E8A57F94}|Uni_Mate\\Uni_Mate.csproj|solutionrelative:uni_mate\\models\\apartmentmanagement\\apartment.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{078F1CCE-8939-41FE-AD3F-FE99E8A57F94}|Uni_Mate\\Uni_Mate.csproj|c:\\users\\munta\\onedrive\\desktop\\uniback\\unimate-backend\\uni_mate\\models\\apartmentmanagement\\enum\\type.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{078F1CCE-8939-41FE-AD3F-FE99E8A57F94}|Uni_Mate\\Uni_Mate.csproj|solutionrelative:uni_mate\\models\\apartmentmanagement\\enum\\type.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{078F1CCE-8939-41FE-AD3F-FE99E8A57F94}|Uni_Mate\\Uni_Mate.csproj|c:\\users\\munta\\onedrive\\desktop\\uniback\\unimate-backend\\uni_mate\\common\\mapping\\mapsterconfig.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{078F1CCE-8939-41FE-AD3F-FE99E8A57F94}|Uni_Mate\\Uni_Mate.csproj|solutionrelative:uni_mate\\common\\mapping\\mapsterconfig.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
     {
-      "Orientation": 1,
+      "Orientation": 0,
       "VerticalTabListWidth": 256,
       "DocumentGroups": [
         {
-          "DockedHeight": 554,
-          "SelectedChildIndex": 0,
+          "DockedWidth": 202,
+          "SelectedChildIndex": 1,
           "Children": [
             {
               "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "AddFaciltyEndpoint.cs",
+              "DocumentMoniker": "C:\\Users\\munta\\OneDrive\\Desktop\\uniback\\UniMate-Backend\\Uni_Mate\\Features\\ApartmentManagment\\Facilites\\AddFacilty\\AddFaciltyEndpoint.cs",
+              "RelativeDocumentMoniker": "Uni_Mate\\Features\\ApartmentManagment\\Facilites\\AddFacilty\\AddFaciltyEndpoint.cs",
+              "ToolTip": "C:\\Users\\munta\\OneDrive\\Desktop\\uniback\\UniMate-Backend\\Uni_Mate\\Features\\ApartmentManagment\\Facilites\\AddFacilty\\AddFaciltyEndpoint.cs",
+              "RelativeToolTip": "Uni_Mate\\Features\\ApartmentManagment\\Facilites\\AddFacilty\\AddFaciltyEndpoint.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-10T11:37:35.349Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
               "DocumentIndex": 0,
+              "Title": "UpdatePropertyInfoDisplayDTO.cs",
+              "DocumentMoniker": "C:\\Users\\munta\\OneDrive\\Desktop\\uniback\\UniMate-Backend\\Uni_Mate\\Features\\ApartmentManagment\\UpdateApartment\\UpdatePropertyInfoDisplay\\Queries\\UpdatePropertyInfoDisplayDTO.cs",
+              "RelativeDocumentMoniker": "Uni_Mate\\Features\\ApartmentManagment\\UpdateApartment\\UpdatePropertyInfoDisplay\\Queries\\UpdatePropertyInfoDisplayDTO.cs",
+              "ToolTip": "C:\\Users\\munta\\OneDrive\\Desktop\\uniback\\UniMate-Backend\\Uni_Mate\\Features\\ApartmentManagment\\UpdateApartment\\UpdatePropertyInfoDisplay\\Queries\\UpdatePropertyInfoDisplayDTO.cs",
+              "RelativeToolTip": "Uni_Mate\\Features\\ApartmentManagment\\UpdateApartment\\UpdatePropertyInfoDisplay\\Queries\\UpdatePropertyInfoDisplayDTO.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA0AAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-10T09:40:31.228Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "UpdatePropertyInfoDisplayQuery.cs",
+              "DocumentMoniker": "C:\\Users\\munta\\OneDrive\\Desktop\\uniback\\UniMate-Backend\\Uni_Mate\\Features\\ApartmentManagment\\UpdateApartment\\UpdatePropertyInfoDisplay\\Queries\\UpdatePropertyInfoDisplayQuery.cs",
+              "RelativeDocumentMoniker": "Uni_Mate\\Features\\ApartmentManagment\\UpdateApartment\\UpdatePropertyInfoDisplay\\Queries\\UpdatePropertyInfoDisplayQuery.cs",
+              "ToolTip": "C:\\Users\\munta\\OneDrive\\Desktop\\uniback\\UniMate-Backend\\Uni_Mate\\Features\\ApartmentManagment\\UpdateApartment\\UpdatePropertyInfoDisplay\\Queries\\UpdatePropertyInfoDisplayQuery.cs",
+              "RelativeToolTip": "Uni_Mate\\Features\\ApartmentManagment\\UpdateApartment\\UpdatePropertyInfoDisplay\\Queries\\UpdatePropertyInfoDisplayQuery.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAYAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-10T09:37:44.358Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "CreateApartmentCommand.cs",
+              "DocumentMoniker": "C:\\Users\\munta\\OneDrive\\Desktop\\uniback\\UniMate-Backend\\Uni_Mate\\Features\\ApartmentManagment\\CreateApartment\\Command\\CreateApartmentCommand.cs",
+              "RelativeDocumentMoniker": "Uni_Mate\\Features\\ApartmentManagment\\CreateApartment\\Command\\CreateApartmentCommand.cs",
+              "ToolTip": "C:\\Users\\munta\\OneDrive\\Desktop\\uniback\\UniMate-Backend\\Uni_Mate\\Features\\ApartmentManagment\\CreateApartment\\Command\\CreateApartmentCommand.cs",
+              "RelativeToolTip": "Uni_Mate\\Features\\ApartmentManagment\\CreateApartment\\Command\\CreateApartmentCommand.cs",
+              "ViewState": "AgIAAAkAAAAAAAAAAAAAABEAAAAlAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-10T09:26:50.431Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "ApartmentFacility.cs",
+              "DocumentMoniker": "C:\\Users\\munta\\OneDrive\\Desktop\\uniback\\UniMate-Backend\\Uni_Mate\\Models\\ApartmentManagement\\ApartmentFacility.cs",
+              "RelativeDocumentMoniker": "Uni_Mate\\Models\\ApartmentManagement\\ApartmentFacility.cs",
+              "ToolTip": "C:\\Users\\munta\\OneDrive\\Desktop\\uniback\\UniMate-Backend\\Uni_Mate\\Models\\ApartmentManagement\\ApartmentFacility.cs",
+              "RelativeToolTip": "Uni_Mate\\Models\\ApartmentManagement\\ApartmentFacility.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA0AAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-10T08:11:19.745Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "Apartment.cs",
+              "DocumentMoniker": "C:\\Users\\munta\\OneDrive\\Desktop\\uniback\\UniMate-Backend\\Uni_Mate\\Models\\ApartmentManagement\\Apartment.cs",
+              "RelativeDocumentMoniker": "Uni_Mate\\Models\\ApartmentManagement\\Apartment.cs",
+              "ToolTip": "C:\\Users\\munta\\OneDrive\\Desktop\\uniback\\UniMate-Backend\\Uni_Mate\\Models\\ApartmentManagement\\Apartment.cs",
+              "RelativeToolTip": "Uni_Mate\\Models\\ApartmentManagement\\Apartment.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAsAAAAqAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-10T08:10:03.261Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "Type.cs",
+              "DocumentMoniker": "C:\\Users\\munta\\OneDrive\\Desktop\\uniback\\UniMate-Backend\\Uni_Mate\\Models\\ApartmentManagement\\Enum\\Type.cs",
+              "RelativeDocumentMoniker": "Uni_Mate\\Models\\ApartmentManagement\\Enum\\Type.cs",
+              "ToolTip": "C:\\Users\\munta\\OneDrive\\Desktop\\uniback\\UniMate-Backend\\Uni_Mate\\Models\\ApartmentManagement\\Enum\\Type.cs",
+              "RelativeToolTip": "Uni_Mate\\Models\\ApartmentManagement\\Enum\\Type.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-10T08:08:53.29Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
               "Title": "MapsterConfig.cs",
               "DocumentMoniker": "C:\\Users\\munta\\OneDrive\\Desktop\\uniback\\UniMate-Backend\\Uni_Mate\\Common\\Mapping\\MapsterConfig.cs",
               "RelativeDocumentMoniker": "Uni_Mate\\Common\\Mapping\\MapsterConfig.cs",
               "ToolTip": "C:\\Users\\munta\\OneDrive\\Desktop\\uniback\\UniMate-Backend\\Uni_Mate\\Common\\Mapping\\MapsterConfig.cs",
               "RelativeToolTip": "Uni_Mate\\Common\\Mapping\\MapsterConfig.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAEAAAAA7AAAAAAAAAA==",
+              "ViewState": "AgIAAAkAAAAAAAAAAAAAAEAAAAA7AAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-05-09T16:30:05.955Z",
               "EditorCaption": ""
