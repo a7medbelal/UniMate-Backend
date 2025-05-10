@@ -1,0 +1,8 @@
+C:\Users\munta\OneDrive\Desktop\uniback\UniMate-Backend\Uni_Mate\obj\Debug\net8.0\Uni_Mate.csproj.AssemblyReference.cache
+C:\Users\munta\OneDrive\Desktop\uniback\UniMate-Backend\Uni_Mate\obj\Debug\net8.0\Uni_Mate.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\munta\OneDrive\Desktop\uniback\UniMate-Backend\Uni_Mate\obj\Debug\net8.0\Uni_Mate.AssemblyInfoInputs.cache
+C:\Users\munta\OneDrive\Desktop\uniback\UniMate-Backend\Uni_Mate\obj\Debug\net8.0\Uni_Mate.AssemblyInfo.cs
+C:\Users\munta\OneDrive\Desktop\uniback\UniMate-Backend\Uni_Mate\obj\Debug\net8.0\Uni_Mate.csproj.CoreCompileInputs.cache
+C:\Users\munta\OneDrive\Desktop\uniback\UniMate-Backend\Uni_Mate\obj\Debug\net8.0\Uni_Mate.MvcApplicationPartsAssemblyInfo.cs
+C:\Users\munta\OneDrive\Desktop\uniback\UniMate-Backend\Uni_Mate\obj\Debug\net8.0\Uni_Mate.MvcApplicationPartsAssemblyInfo.cache
+C:\Users\munta\OneDrive\Desktop\uniback\UniMate-Backend\Uni_Mate\obj\Debug\net8.0\Uni_Mate.sourcelink.json
