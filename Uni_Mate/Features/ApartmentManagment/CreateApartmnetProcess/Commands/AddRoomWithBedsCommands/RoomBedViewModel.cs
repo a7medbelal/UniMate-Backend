@@ -1,18 +1,9 @@
 using FluentValidation;
 
-namespace ApartmentManagment.Features.ApartmentManagment.Rooms;
+namespace Uni_Mate.Features.ApartmentManagment.CreateApartmnetProcess.Commands.AddRoomWithBedsCommands;
 
 public record BedViewModel(bool IsAvailable, double Price);
 public record RoomBedViewModel(string Description, int Price, string Image, List<BedViewModel> Beds);
-public class RoomBedViewModelValidator : AbstractValidator<List<RoomBedViewModel>>
-{
-    public RoomBedViewModelValidator()
-    {
-        RuleForEach(x => x)
-            .SetValidator(new RoomBedViewModeleValidator());
-    }
-}
-
 public class RoomBedViewModeleValidator : AbstractValidator<RoomBedViewModel>
 {
     public RoomBedViewModeleValidator()

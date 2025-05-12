@@ -1,6 +1,6 @@
 ﻿using FluentValidation;
 
-namespace Uni_Mate.Features.ApartmentManagment.Facilites.CategoryWithFacilty
+namespace Uni_Mate.Features.ApartmentManagment.CreateApartmnetProcess.Commands.CategoryWithFaciltyCommand
 {
     public class CategoryFacilityViewModel
     {

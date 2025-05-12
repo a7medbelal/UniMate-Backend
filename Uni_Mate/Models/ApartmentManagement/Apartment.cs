@@ -9,6 +9,8 @@ namespace Uni_Mate.Models.ApartmentManagement
         public string? Description { get; set; }
         public string Location { get; set; }
         public string ? DescripeLocation{ get; set; }
+        public int NumberOfRooms { get; set; }
+        public int Capecity { get; set; }
         public Gender Gender { get; set; }
         public string? Floor { get; set; }
         public bool IsAvailable { get; set; }

@@ -5,13 +5,15 @@ using Uni_Mate.Common.Views;
 using Uni_Mate.Models.ApartmentManagement;
 using Uni_Mate.Models.GeneralEnum;
 
-namespace Uni_Mate.Features.ApartmentManagment.CreateApartment.Command
+namespace Uni_Mate.Features.ApartmentManagment.CreateApartmnetProcess.Commands.CreateApartmentInfoCommand
 {
-    public record CreateApartmentCommand(
+    public record CreateApartmentCommand(string OwnerID,
         int Num,
         string Location,
         string Description,
-        string DescripeLocation,
+        int Capecity,
+        int NumberOfRooms,
+        string? DescripeLocation,
         string Floor,
         Gender GenderAcceptance,
         ApartmentDurationType DurationType
@@ -23,15 +25,6 @@ namespace Uni_Mate.Features.ApartmentManagment.CreateApartment.Command
 
         public override async Task<RequestResult<int>> Handle(CreateApartmentCommand request, CancellationToken cancellationToken)
         {
-            var ownerID = _userInfo.ID;
-            if (string.IsNullOrEmpty(ownerID))
-                return RequestResult<int>.Failure(ErrorCode.OwnerNotAuthried, "Owner Not Authrized");
-
-            var apartmentExist = await _repository.AnyAsync(x => x.Num == request.Num && x.OwnerID == ownerID);
-            if (apartmentExist)
-                return RequestResult<int>.Failure(ErrorCode.ApartmentAlreadyExist, "Apartment already exist");
-
-
             var apartment = new Apartment
             {
                 Num = request.Num,
@@ -41,7 +34,9 @@ namespace Uni_Mate.Features.ApartmentManagment.CreateApartment.Command
                 Gender = request.GenderAcceptance,
                 Floor = request.Floor,
                 DurationType = request.DurationType,
-                OwnerID = ownerID,
+                OwnerID = request.OwnerID,
+                Capecity = request.Capecity,
+                NumberOfRooms = request.NumberOfRooms,
             };
 
             await _repository.AddAsync(apartment);

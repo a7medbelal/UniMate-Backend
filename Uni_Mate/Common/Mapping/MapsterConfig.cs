@@ -3,8 +3,9 @@ using Uni_Mate.Models.UserManagment;
 using Mapster;
 using Uni_Mate.Features.StudentManager.UpdateProfileDisplay.Quarry;
 using Uni_Mate.Features.StudentManager.UpdateProfileSave;
-using Uni_Mate.Features.ApartmentManagment.Facilites.CategoryWithFacilty;
 using Uni_Mate.Models.ApartmentManagement;
+using Uni_Mate.Features.ApartmentManagment.CreateApartmnetProcess.Commands.CategoryWithFaciltyCommand;
+using Uni_Mate.Features.ApartmentManagment.CreateApartmnetProcess.Commands.AddRoomWithBedsCommands;
 namespace Uni_Mate.Common.Mapping
 {
     public static class MapsterConfig

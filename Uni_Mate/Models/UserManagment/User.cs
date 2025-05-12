@@ -8,7 +8,6 @@ namespace Uni_Mate.Models.UserManagment
 {
     public  class User : IdentityUser
     {
-
       // this for student not the id the id generate randomly  
       public string ?  National_Id { get; set; }
 
