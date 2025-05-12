@@ -3,7 +3,8 @@ namespace Uni_Mate.Models.UserManagment
 {
     public class Owner : User
     {
-        public bool? IsApproved { get; set; }
+		public string? BriefOverView { get; set; }
+		public bool? IsApproved { get; set; }
 
         public string? ApprovedByAdminId { get; set; }
 

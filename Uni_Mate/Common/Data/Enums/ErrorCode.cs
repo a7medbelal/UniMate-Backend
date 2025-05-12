@@ -11,6 +11,7 @@ public enum ErrorCode
     InternalServerError,
     ServiceUnavailable,
     UnknownError,
+    UploadFailed,
     UserAlreadyExists,
     UserCreationFailed,
     EmailSendingFailed,
@@ -29,4 +30,6 @@ public enum ErrorCode
     ApartmentNotFound,
     RoomCreationFailed,
     OwnerNotAuthorized,
+    LogoutFailed,
+
 }

@@ -15,6 +15,7 @@ namespace Uni_Mate.Common.BaseHandlers
         protected readonly TokenHelper _tokenHelper;
         protected readonly UserInfo _userInfo;
         protected readonly UserManager<User> _userManager;
+        protected readonly SignInManager<User> _signInManager;
         protected readonly IRepositoryIdentity<Entity> _repositoryIdentity;
         public BaseWithoutRepositoryRequestHandler(BaseWithoutRepositoryRequestHandlerParameters<Entity> parameters)
         {

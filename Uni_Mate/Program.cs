@@ -11,7 +11,7 @@ using System.Text;
 using Uni_Mate.Common.helper;
 using Uni_Mate.Common.Views;
 using Uni_Mate.Middlewares;
-using TrelloCopy.Middlewares;
+using Uni_Mate.Middlewares;
 using Uni_Mate.Features.Common.UploadPhotoCommand;
 
 namespace Uni_Mate
