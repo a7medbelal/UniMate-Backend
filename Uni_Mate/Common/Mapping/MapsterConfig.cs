@@ -64,10 +64,6 @@ namespace Uni_Mate.Common.Mapping
                     Where(c => c.IsSelected == true).
                     Select(c => new ApartmentFacility { FacilityId = c.FacilityId }).ToList());
 
-            config.NewConfig<RoomBedViewModel, Room>()
-                .Map(dest => dest.Beds, src => src.Beds);
-
-            config.NewConfig<BedViewModel, Bed>();
             return config;
         }
     }

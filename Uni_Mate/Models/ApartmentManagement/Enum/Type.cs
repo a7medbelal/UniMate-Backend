@@ -21,6 +21,8 @@
         LivingRoomImage,
         BalconyImage,
         BedroomImage,
+        OutsideImage,
+        Additional
 
     }
 }
