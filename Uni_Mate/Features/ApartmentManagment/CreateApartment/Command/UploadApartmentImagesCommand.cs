@@ -8,7 +8,7 @@ using Uni_Mate.Common.Data.Enums;
 using Uni_Mate.Models.ApartmentManagement.Enum;
 
 namespace Uni_Mate.Features.ApartmentManagment.CreateApartment.Command;
-public record UploadApartmentImagesCommand(List<IFormFile> Kitchen, List<IFormFile> Bathroom, 
+public record UploadApartmentImagesCommand(int ApartmentId, List<IFormFile> Kitchen, List<IFormFile> Bathroom, 
     List<IFormFile> Outside, List<IFormFile> LivingRoom, List<IFormFile>? Additional) : IRequest<RequestResult<List<Image>>>;
 
 public class UploadApartmentImagesCommandHandler : BaseRequestHandler<UploadApartmentImagesCommand, RequestResult<List<Image>>, Image>
@@ -41,7 +41,7 @@ public class UploadApartmentImagesCommandHandler : BaseRequestHandler<UploadApar
                 Image image = new Image
                 {
                     ImageUrl = obj,
-                    ApartmentId = 0,
+                    ApartmentId = request.ApartmentId,
                     ImageType = category.Key switch
                     {
                         "kitchen" => ImageType.KitchenImage,

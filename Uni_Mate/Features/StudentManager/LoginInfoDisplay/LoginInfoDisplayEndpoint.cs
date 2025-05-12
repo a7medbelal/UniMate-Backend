@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using TrelloCopy.Common.BaseEndpoints;
+using Uni_Mate.Common.BaseEndpoints;
 using Uni_Mate.Common.Views;
 using Uni_Mate.Features.StudentManager.LoginInfoDisplay.Quarry;
 namespace Uni_Mate.Features.StudentManager.LoginInfoDisplay

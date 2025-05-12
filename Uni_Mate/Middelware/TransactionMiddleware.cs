@@ -1,7 +1,7 @@
 using Microsoft.EntityFrameworkCore.Storage;
 using Uni_Mate.Domain;
 
-namespace TrelloCopy.Middlewares;
+namespace Uni_Mate.Middlewares;
 
 public class TransactionMiddleware
 {

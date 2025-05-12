@@ -18,6 +18,7 @@ public class UploadApartmentImagesEndpoint : BaseWithoutTRequestEndpoint<List<Im
     public async Task<EndpointResponse<List<Image>>> Handle([FromForm] UploadApartmentImagesViewModel viewmodel, CancellationToken cancellationToken)
     {
         var result = await _mediator.Send(new UploadApartmentImagesCommand(
+            viewmodel.ApartmentId,
             viewmodel.Kitchen,
             viewmodel.Bathroom,
             viewmodel.Outside,
