@@ -3,6 +3,17 @@
     public enum ImageType
     {
         None,
+        ProfileImage,
+        // in arabic ^_^
+        KarnihImage,
+        /// <summary>
+        /// الصوره الاماميه للبطاقه
+        /// </summary>
+        FPersonalCardImage,
+        /// <summary>
+        /// الصوره الخلفيه للبطاقه 
+        /// </summary>
+        BPersonalCardImage,
         ApartmentImage,
         RoomImage,
         KitchenImage,
@@ -10,6 +21,8 @@
         LivingRoomImage,
         BalconyImage,
         BedroomImage,
+        OutsideImage,
+        Additional
 
     }
 }

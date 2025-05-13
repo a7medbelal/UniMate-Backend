@@ -63,12 +63,6 @@ namespace Uni_Mate.Domain
                 .HasForeignKey(i => i.ApartmentId)
                 .OnDelete(DeleteBehavior.Restrict);
 
-            modelBuilder.Entity<Image>()
-                .HasOne(i => i.Room)
-                .WithMany(r => r.Images)
-                .HasForeignKey(i => i.RoomId)
-                .OnDelete(DeleteBehavior.Restrict); 
-
             // Seed admin 
             var hasher = new PasswordHasher<User>();
 

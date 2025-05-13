@@ -11,7 +11,8 @@ using System.Text;
 using Uni_Mate.Common.helper;
 using Uni_Mate.Common.Views;
 using Uni_Mate.Middlewares;
-using TrelloCopy.Middlewares;
+using Uni_Mate.Middlewares;
+using Uni_Mate.Features.Common.UploadPhotoCommand;
 
 namespace Uni_Mate
 {
@@ -90,6 +91,7 @@ namespace Uni_Mate
           });
             #endregion
            
+            builder.Services.Configure<CloudinarySettings>(builder.Configuration.GetSection("CloudinarySettings"));
             builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssemblyContaining<Program>());
             builder.Services.Configure<MailSettings>(builder.Configuration.GetSection("MailSettings"));
             builder.Services.AddControllersWithViews(opt => opt.Filters.Add<UserInfoFilter>());

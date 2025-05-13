@@ -19,7 +19,9 @@ namespace Uni_Mate.Features.Authoraztion.ResetPassword
                 return validationResult;
 
             var resetPasswordCommand = new ResetPasswordCommand(viewModel.Email,viewModel.Token,viewModel.Password,viewModel.ConfirmPassword);
-              var result = await _mediator.Send(resetPasswordCommand);
+            var result = await _mediator.Send(resetPasswordCommand);
+
+
             if (!result.isSuccess)
             {
                 return EndpointResponse<bool>.Failure(result.errorCode, result.message);

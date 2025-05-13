@@ -19,7 +19,7 @@ namespace Uni_Mate.Features.StudentManager.UpdateProfileSave.Command
         public override async Task<RequestResult<bool>> Handle(UpdateProfileSaveCommand request, CancellationToken cancellationToken)
         {
             var userId = _httpContextAccessor.HttpContext?.User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
-            if(userId == null)
+            if (userId == null)
             {
                 return RequestResult<bool>.Failure(ErrorCode.NotFound, "User not found");
             }

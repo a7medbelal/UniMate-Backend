@@ -1,4 +1,4 @@
-﻿# Ignore build output
+# Ignore build output
 bin/
 obj/
 [Bb]uild/
@@ -29,3 +29,9 @@ Thumbs.db
 
 # Ignore specific files
 /Uni_Mate/Features/Authoraztion/RegisterUser/RegisterStudent/RegisterUserRequestViewModel.cs
+=======
+################################################################################
+# This .gitignore file was automatically created by Microsoft(R) Visual Studio.
+################################################################################
+
+/Uni_Mate/Uni_Mate.csproj
