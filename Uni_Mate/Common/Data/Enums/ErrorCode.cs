@@ -3,7 +3,6 @@
 public enum ErrorCode
 {
     None,
-	UploadFailed,
 	InvalidRequest,
     InvalidData,
     NotFound,
