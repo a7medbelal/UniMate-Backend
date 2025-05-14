@@ -4,7 +4,7 @@ using Uni_Mate.Common.Data.Enums;
 using Uni_Mate.Common.Views;
 using Uni_Mate.Features.Common.UploadPhotoCommand.Commands;
 
-namespace Uni_Mate.Features.Common.UploadPhotoCommand;
+namespace Uni_Mate.Features.Common.DeletePhotoCommand;
 
 public record DeletePhotoViewModel(string ImageUrl);
 public class DeletePhotoEndpoint : BaseWithoutTRequestEndpoint<bool>
