@@ -45,7 +45,9 @@ namespace Uni_Mate.Features.Authoraztion.RegisterUser.Commands
                 Fname = request.Fname,
                 Lname = request.Lname,
                 National_Id = request.NationalId,
-                role = Role.Student,
+				FrontPersonalImage = frontImageUrl.data,
+				BackPersonalImage = backImageUrl.data,
+				role = Role.Student,
             };
 
             var result = await _userManager.CreateAsync(user, request.Password); 
