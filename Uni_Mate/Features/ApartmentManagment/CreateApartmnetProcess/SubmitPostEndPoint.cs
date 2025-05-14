@@ -25,6 +25,7 @@ namespace Uni_Mate.Features.ApartmentManagment.CreateApartmnetProcess
                 viewmodel.DurationType,
                 viewmodel.Rooms,
                 viewmodel.CategoryFacilities
+                , viewmodel.Photos
             ));
             if (!result.isSuccess)
             {

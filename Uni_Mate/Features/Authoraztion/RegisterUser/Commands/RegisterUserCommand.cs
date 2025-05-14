@@ -57,7 +57,7 @@ namespace Uni_Mate.Features.Authoraztion.RegisterUser.Commands
 
             var confirmationLink = $"Dear {user.UserName},<br/><br/>" +
                             "Thank you for registering. Please confirm your email address by clicking the link below:<br/><br/>" +
-                            $"<a href='http://darkteam.runasp.net/ConfirmEmailEndpoint/ConfirmEmail?email={user.Email}&OTP={token}'>Click here to confirm your email</a><br/><br/>" +
+                            $"<a href='https://uni-mate-web.vercel.app/confirmemail?email={user.Email}&OTP={token}'>Click here to confirm your email</a><br/><br/>" +
                             "If you did not request this, please ignore this message.<br/><br/>" +
                             "Best regards,<br/>";
 

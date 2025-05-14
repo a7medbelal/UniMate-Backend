@@ -4,17 +4,17 @@ namespace Uni_Mate.Features.ApartmentManagment.CreateApartmnetProcess.Commands.C
 {
     public class CategoryFacilityViewModel
     {
-        public string CategoryName { get; set; }
-        public List<FacilityApartmentViewModel> facilities{ get; set; }
+        public string Name { get; set; }
+        public List<FacilityApartmentViewModel> Facilities { get; set; }
     }
     public class CategoryFacilityViewModelValidator : AbstractValidator<CategoryFacilityViewModel>
     {
         public CategoryFacilityViewModelValidator()
         {
-            RuleFor(x => x.CategoryName)
+            RuleFor(x => x.Name)
                 .NotEmpty().WithMessage("Category name is required.");
 
-            RuleFor(x => x.facilities)
+            RuleFor(x => x.Facilities)
                 .NotNull().WithMessage("Facilities list is required.")
                 .ForEach(f => f.SetValidator(new FacilityApartmentViewModelValidator()));
         }
@@ -43,7 +43,7 @@ namespace Uni_Mate.Features.ApartmentManagment.CreateApartmnetProcess.Commands.C
             RuleForEach(x => x).SetValidator(new CategoryFacilityViewModelValidator());
 
             RuleFor(x => x)
-                .Must(list => list.Any(cat => cat.facilities.Any(f => f.IsSelected)))
+                .Must(list => list.Any(cat => cat.Facilities.Any(f => f.IsSelected)))
                 .WithMessage("At least one facility must be selected across all categories.");
         }
     }

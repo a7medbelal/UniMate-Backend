@@ -1,6 +1,7 @@
 ﻿using FluentValidation;
 using Uni_Mate.Features.ApartmentManagment.CreateApartmnetProcess.Commands.AddRoomWithBedsCommands;
 using Uni_Mate.Features.ApartmentManagment.CreateApartmnetProcess.Commands.CategoryWithFaciltyCommand;
+using Uni_Mate.Features.ApartmentManagment.CreateApartmnetProcess.Commands.UploadApartmentCommand;
 using Uni_Mate.Models.ApartmentManagement;
 using Uni_Mate.Models.GeneralEnum;
 
@@ -16,7 +17,9 @@ namespace Uni_Mate.Features.ApartmentManagment.CreateApartmnetProcess
             Gender GenderAcceptance,
             ApartmentDurationType DurationType,
             List<RoomBedViewModel> Rooms,
-            List<CategoryFacilityViewModel> CategoryFacilities);
+            List<CategoryFacilityViewModel> CategoryFacilities,
+            UploadPhotosViewModel Photos
+            );
 
     public class SubmitPostViewModleValidator : AbstractValidator<SubmitPostViewModel>
     {

@@ -10,7 +10,7 @@ namespace Uni_Mate.Features.ApartmentManagment.CreateApartmnetProcess.Commands.C
     public record CreateApartmentCommand(string OwnerID,
         int Num,
         string Location,
-        string Description,
+        string? Description,
         int Capecity,
         int NumberOfRooms,
         string? DescripeLocation,

@@ -6,6 +6,7 @@ using Uni_Mate.Features.ApartmentManagment.CreateApartmnetProcess.Commands.AddRo
 using Uni_Mate.Features.ApartmentManagment.CreateApartmnetProcess.Commands.CategoryWithFaciltyCommand;
 using Uni_Mate.Features.ApartmentManagment.CreateApartmnetProcess.Commands.CategoryWithFaciltyCommands;
 using Uni_Mate.Features.ApartmentManagment.CreateApartmnetProcess.Commands.CreateApartmentInfoCommand;
+using Uni_Mate.Features.ApartmentManagment.CreateApartmnetProcess.Commands.UploadApartmentCommand;
 using Uni_Mate.Models.ApartmentManagement;
 using Uni_Mate.Models.GeneralEnum;
 
@@ -22,8 +23,9 @@ namespace Uni_Mate.Features.ApartmentManagment.CreateApartmnetProcess.Commands.C
         Gender GenderAcceptance,
         ApartmentDurationType DurationType,
         List<RoomBedViewModel> Rooms,
-        List<CategoryFacilityViewModel> CategoryFacilities
-    ) : IRequest<RequestResult<bool>>;
+        List<CategoryFacilityViewModel> CategoryFacilities,
+        UploadPhotosViewModel Photos    
+        ) : IRequest<RequestResult<bool>>;
 
     public class SubmitPostCommandHandler : BaseRequestHandler<SubmitPostCommand, RequestResult<bool>, Apartment>
     {
@@ -64,6 +66,10 @@ namespace Uni_Mate.Features.ApartmentManagment.CreateApartmnetProcess.Commands.C
             var addFacilities = await _mediator.Send(new CategoryWithFaciltiesCommand(request.CategoryFacilities, newApartment.data));
             if (!addFacilities.isSuccess)
                 return RequestResult<bool>.Failure(addFacilities.errorCode, addFacilities.message);
+
+            var uploadPhotos = await _mediator.Send(new UploadApartmentImagesCommand(newApartment.data , request.Photos));
+            if (!uploadPhotos.isSuccess)
+                return RequestResult<bool>.Failure(uploadPhotos.errorCode, uploadPhotos.message);
 
             return RequestResult<bool>.Success(true);
         }
