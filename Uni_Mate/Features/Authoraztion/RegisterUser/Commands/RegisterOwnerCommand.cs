@@ -11,7 +11,7 @@ namespace Uni_Mate.Features.Authoraztion.RegisterUser.Commands
 {
 	public record RegisterOwnerCommand(string Email, string Password, string FName, string LName, string PhoneNo) : IRequest<RequestResult<bool>>;
 
-	public class RegisterOwnerCommandHandler : BaseWithoutRepositoryRequestHandler<RegisterOwnerCommand, RequestResult<bool> , Owner>
+	public class RegisterOwnerCommandHandler : BaseWithoutRepositoryRequestHandler<RegisterOwnerCommand, RequestResult<bool>, Owner>
 	{
 		public RegisterOwnerCommandHandler(BaseWithoutRepositoryRequestHandlerParameters<Owner> parameters) : base(parameters) { }
 
@@ -29,7 +29,6 @@ namespace Uni_Mate.Features.Authoraztion.RegisterUser.Commands
 				UserName = request.Email,
 				Lname = request.LName,
 				role = Role.Owner,
-				
 			};
 
 			var result = await _userManager.CreateAsync(user, request.Password);
