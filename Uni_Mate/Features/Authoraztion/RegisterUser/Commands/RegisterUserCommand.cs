@@ -11,7 +11,7 @@ using Uni_Mate.Models.UserManagment.Enum;
 namespace Uni_Mate.Features.Authoraztion.RegisterUser.Commands
 {
 
-    public record RegisterUserCommand(string Fname,string Lname, string UserName, string Email, string Password , string NationalId, IFormFile FrontPersonalImage, IFormFile BackPersonalImage) : IRequest<RequestResult<bool>>;
+    public record RegisterUserCommand(string Fname,string Lname, string UserName, string Email, string Password, string NationalId, IFormFile FrontPersonalImage, IFormFile BackPersonalImage) : IRequest<RequestResult<bool>>;
 
     public class RegisterUserCommandHandler : BaseWithoutRepositoryRequestHandler<RegisterUserCommand,RequestResult<bool> , Student>
     {
