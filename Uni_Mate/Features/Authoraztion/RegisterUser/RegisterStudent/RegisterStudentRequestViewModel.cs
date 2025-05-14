@@ -48,7 +48,16 @@ public class RegisterStudentRequestViewModelValidator : AbstractValidator<Regist
                 }
             });
 
-    }
+        RuleFor(x => x.FrontPersonalImage)
+			.NotEmpty().WithMessage("Front Personal Image is required.")
+			.Must(x => x.Length > 0).WithMessage("Front Personal Image is required.")
+			.Must(x => x.ContentType == "image/jpeg" || x.ContentType == "image/png").WithMessage("Front Personal Image must be a JPEG or PNG file.");
+		RuleFor(x => x.BackPersonalImage)
+			.NotEmpty().WithMessage("Back Personal Image is required.")
+			.Must(x => x.Length > 0).WithMessage("Back Personal Image is required.")
+			.Must(x => x.ContentType == "image/jpeg" || x.ContentType == "image/png").WithMessage("Back Personal Image must be a JPEG or PNG file.");
+
+	}
 
 
     private RequestResult<bool> BeValidEgyptianId(string Naltional_ID)
