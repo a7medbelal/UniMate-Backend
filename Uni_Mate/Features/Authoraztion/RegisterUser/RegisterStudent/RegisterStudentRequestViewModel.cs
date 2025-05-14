@@ -4,7 +4,7 @@ using Uni_Mate.Common.Views;
 
 namespace Uni_Mate.Features.Authoraztion.RegisterUser.RegisterStudent;
 
-public record RegisterStudentRequestViewModel(string Fname, string Lname, string UserName, string Email, string Password, string ConfrimPassword, string NationalId);
+public record RegisterStudentRequestViewModel(string Fname, string Lname, string UserName, string Email, string Password, string ConfrimPassword, string NationalId, IFormFile FrontPersonalImage, IFormFile BackPersonalImage);
 
 public class RegisterStudentRequestViewModelValidator : AbstractValidator<RegisterStudentRequestViewModel>
 {
