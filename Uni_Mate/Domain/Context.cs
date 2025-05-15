@@ -25,6 +25,7 @@ namespace Uni_Mate.Domain
         public DbSet<Bed> Beds { get; set; }
         public DbSet<Phone> Phones { get; set; }
         public DbSet<SocialAccount> SocialAccounts { get; set;}
+        public DbSet<FavoriteApartment> FavoriteApartments { get; set; }
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
 

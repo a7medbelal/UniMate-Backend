@@ -1,5 +1,4 @@
-﻿using System.ComponentModel.DataAnnotations.Schema;
-using Uni_Mate.Models.GeneralEnum;
+﻿using Uni_Mate.Models.GeneralEnum;
 using Uni_Mate.Models.UserManagment;
 namespace Uni_Mate.Models.ApartmentManagement
 {
@@ -22,6 +21,8 @@ namespace Uni_Mate.Models.ApartmentManagement
         public ICollection<Image>? Images { get; set; }
 
         public ICollection<ApartmentFacility> ApartmentFacilities { get; set; } = new List<ApartmentFacility>();
+
+        public ICollection<FavoriteApartment>? FavoriteStudent { get; set; }
 
     }
 }
