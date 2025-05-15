@@ -1,4 +1,5 @@
 ﻿
+using Microsoft.EntityFrameworkCore;
 using System.Collections;
 using System.Collections.ObjectModel;
 
@@ -24,13 +25,14 @@ namespace Uni_Mate.Common.Helper
             AddRange(Items);  
         }
 
-        //public static async Task<Pagination<T>>  ToPagedList(IQueryable<T> source, int PageNumber, int pageSize) { 
-        //var Count = await  source.CountAsync(); 
-        //var Items = await  source.Skip((PageNumber-1) * pageSize).Take(pageSize).ToListAsync();
+        public static async Task<Pagination<T>> ToPagedList(IQueryable<T> source, int PageNumber, int pageSize)
+        {
+            var Count = await source.CountAsync();
+            var Items = await source.Skip((PageNumber - 1) * pageSize).Take(pageSize).ToListAsync();
 
-        //    return  new Pagination<T>(Items, Count, PageNumber, pageSize);      
-        //}
+            return new Pagination<T>(Items, Count, PageNumber, pageSize);
+        }
 
-     
+
     }
 }

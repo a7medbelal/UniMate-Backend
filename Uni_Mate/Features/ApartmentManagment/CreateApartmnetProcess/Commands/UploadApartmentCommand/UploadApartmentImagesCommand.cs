@@ -4,12 +4,10 @@ using Uni_Mate.Common.Data.Enums;
 using Uni_Mate.Models.ApartmentManagement;
 using MediatR;
 using Uni_Mate.Features.Common.UploadPhotoCommand.Commands;
-using Uni_Mate.Common.Data.Enums;
 using Uni_Mate.Models.ApartmentManagement.Enum;
 
-namespace Uni_Mate.Features.ApartmentManagment.CreateApartment.Command;
-public record UploadApartmentImagesCommand(int ApartmentId, List<IFormFile> Kitchen, List<IFormFile> Bathroom, 
-    List<IFormFile> Outside, List<IFormFile> LivingRoom, List<IFormFile>? Additional) : IRequest<RequestResult<List<Image>>>;
+namespace Uni_Mate.Features.ApartmentManagment.CreateApartmnetProcess.Commands.UploadApartmentCommand;
+public record UploadApartmentImagesCommand(int ApartmentId, UploadPhotosViewModel Photos) : IRequest<RequestResult<List<Image>>>;
 
 public class UploadApartmentImagesCommandHandler : BaseRequestHandler<UploadApartmentImagesCommand, RequestResult<List<Image>>, Image>
 {
@@ -22,15 +20,15 @@ public class UploadApartmentImagesCommandHandler : BaseRequestHandler<UploadApar
         var result = new List<Image>();
         var imageCategories = new Dictionary<string, List<IFormFile>>
         {
-            { "kitchen", request.Kitchen },
-            { "bathroom", request.Bathroom },
-            { "outside", request.Outside },
-            { "living room", request.LivingRoom }
+            { "kitchen", request.Photos.Kitchen },
+            { "bathroom", request.Photos.Bathroom },
+            { "outside", request.Photos.Outside },
+            { "living room", request.Photos.LivingRoom }
         };
 
-        if (request.Additional != null)
+        if (request.Photos.Additional != null)
         {
-            imageCategories.Add("additional", request.Additional);
+            imageCategories.Add("additional", request.Photos.Additional);
         }
 
         foreach (var category in imageCategories)

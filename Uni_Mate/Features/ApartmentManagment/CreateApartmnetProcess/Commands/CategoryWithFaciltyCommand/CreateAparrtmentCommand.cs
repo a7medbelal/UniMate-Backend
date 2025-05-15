@@ -5,21 +5,22 @@ using Uni_Mate.Common.BaseHandlers;
 using Uni_Mate.Common.Data.Enums;
 using Uni_Mate.Common.Mapping;
 using Uni_Mate.Common.Views;
+using Uni_Mate.Features.ApartmentManagment.CreateApartmnetProcess.Commands.CategoryWithFaciltyCommand;
 using Uni_Mate.Models.ApartmentManagement;
 using Uni_Mate.Models.GeneralEnum;
 
-namespace Uni_Mate.Features.ApartmentManagment.Facilites.CategoryWithFacilty.Command
+namespace Uni_Mate.Features.ApartmentManagment.CreateApartmnetProcess.Commands.CategoryWithFaciltyCommands
 {
 
 
-    public record CategoryWithFaciltyCommand( List<CategoryFacilityViewModel> Categories , int ApartmentID = 4) : IRequest<RequestResult<bool>>;
+    public record CategoryWithFaciltiesCommand( List<CategoryFacilityViewModel> Categories , int ApartmentID) : IRequest<RequestResult<bool>>;
 
-    public class CategoryWithFaciltyCommandHandler : BaseRequestHandler<CategoryWithFaciltyCommand, RequestResult<bool>, ApartmentFacility>
+    public class CategoryWithFaciltyCommandHandler : BaseRequestHandler<CategoryWithFaciltiesCommand, RequestResult<bool>, ApartmentFacility>
     {
 
         public CategoryWithFaciltyCommandHandler(BaseRequestHandlerParameter<ApartmentFacility> parameters) : base(parameters) { }
 
-        public override async Task<RequestResult<bool>> Handle(CategoryWithFaciltyCommand request, CancellationToken cancellationToken)
+        public override async Task<RequestResult<bool>> Handle(CategoryWithFaciltiesCommand request, CancellationToken cancellationToken)
         {
             if (request.ApartmentID < 0)
                 return RequestResult<bool>.Failure(ErrorCode.ApartmentNotFound, "Apartment not found");

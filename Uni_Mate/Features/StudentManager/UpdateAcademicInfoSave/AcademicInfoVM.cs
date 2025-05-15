@@ -7,7 +7,8 @@ namespace Uni_Mate.Features.StudentManager.UpdateAcademicInfoSave
     string? Faculty,
     string? AcademicYear,
     string Department,
-    IFormFile? KarnihImage
+    //IFormFile? KarnihImage  
+    String? KarnihImage
 );
 
     public class Validator : AbstractValidator<AcademicInfoVM>
