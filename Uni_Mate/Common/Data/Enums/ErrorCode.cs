@@ -28,6 +28,7 @@ public enum ErrorCode
     OwnerNotAuthried,
     ApartmentAlreadyExist,
     ApartmentNotFound,
+    ApartmnetFetchFailed,
     RoomCreationFailed,
     LogoutFailed,
 }

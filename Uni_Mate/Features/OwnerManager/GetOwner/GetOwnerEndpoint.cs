@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using TrelloCopy.Common.BaseEndpoints;
+using Uni_Mate.Common.BaseEndpoints;
 using Uni_Mate.Common.Data.Enums;
 using Uni_Mate.Common.Views;
 using Uni_Mate.Features.OwnerManager.GetOwner.Queries;
