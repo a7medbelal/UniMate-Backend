@@ -30,5 +30,7 @@ public enum ErrorCode
     ApartmentNotFound,
     ApartmnetFetchFailed,
     RoomCreationFailed,
+    OwnerNotAuthorized,
     LogoutFailed,
+
 }

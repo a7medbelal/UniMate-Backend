@@ -12,15 +12,16 @@ namespace Uni_Mate.Features.StudentManager.UpdateAcademicInfoSave
         {
         }
         [HttpPost]
-        public async Task<EndpointResponse<bool>> UpdateAcademicInfo([FromForm] AcademicInfoVM command)
+        public async Task<EndpointResponse<bool>> UpdateAcademicInfo([FromBody] AcademicInfoVM command)
         {
-            var linkImage = await _mediator.Send(new UploadPhotoCommand(command.KarnihImage));
+            //var linkImage = await _mediator.Send(new UploadPhotoCommand(command.KarnihImage));
             var result = await _mediator.Send(new AcademicInfoSaveCommand(
                 command.University,
                 command.Faculty,
                 command.AcademicYear,
                 command.Department,
-                linkImage.data
+                command.KarnihImage
+                //linkImage.data
             ));
 
 

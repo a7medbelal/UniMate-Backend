@@ -1,4 +1,3 @@
-using ApartmentManagment.Features.ApartmentManagment.Rooms;
 using Mapster;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
@@ -7,9 +6,9 @@ using Uni_Mate.Common.Data.Enums;
 using Uni_Mate.Common.Views;
 using Uni_Mate.Models.ApartmentManagement;
 
-namespace Uni_Mate.Features.ApartmentManagment.Rooms.Commands;
+namespace Uni_Mate.Features.ApartmentManagment.CreateApartmnetProcess.Commands.AddRoomWithBedsCommands;
 
-public record AddRoomCommand(IList<RoomBedViewModel> RoomBedViewModels, int ApartmentId = 1) : IRequest<RequestResult<bool>>;
+public record AddRoomCommand(IList<RoomBedViewModel> RoomBedViewModels, int ApartmentId) : IRequest<RequestResult<bool>>;
 
 public class AddRoomCommandHandler : BaseRequestHandler<AddRoomCommand, RequestResult<bool>, Room>
 {
@@ -25,11 +24,7 @@ public class AddRoomCommandHandler : BaseRequestHandler<AddRoomCommand, RequestR
         {
             room.ApartmentId = request.ApartmentId;
         }
-        var result = _repository.AddRangeAsync(rooms);
-        if(!result.IsCompletedSuccessfully)
-        {
-            return RequestResult<bool>.Failure(ErrorCode.RoomCreationFailed, "Failed to create room");
-        }
+        await _repository.AddRangeAsync(rooms);
         await _repository.SaveChangesAsync();
         return RequestResult<bool>.Success(true, "Room created successfully");
     }

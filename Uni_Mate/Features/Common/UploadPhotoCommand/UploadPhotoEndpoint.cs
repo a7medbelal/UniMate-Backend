@@ -1,7 +1,7 @@
 using CloudinaryDotNet.Actions;
 using Microsoft.AspNetCore.Mvc;
 using Uni_Mate.Common.BaseEndpoints;
-using Uni_Mate.Common.BaseEndpoints;
+
 using Uni_Mate.Common.Data.Enums;
 using Uni_Mate.Common.Views;
 
