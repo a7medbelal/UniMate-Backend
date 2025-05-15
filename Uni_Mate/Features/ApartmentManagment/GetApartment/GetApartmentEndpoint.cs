@@ -30,6 +30,8 @@ public class GetApartmentEndpoint : BaseEndpoint<GetApartmentViewModel, GetApart
         {
             Apartments = apartments.data.Select(x => new GetApartmentDTO
             {
+                Images = x.Images,
+                DetailedAddress = x.DetailedAddress,
                 Address = x.Address,
                 Gender = x.Gender,
                 Floor = x.Floor,

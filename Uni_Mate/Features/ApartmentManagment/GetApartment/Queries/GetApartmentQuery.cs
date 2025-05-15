@@ -14,17 +14,22 @@ public class GetApartmentQueryHandler : BaseRequestHandler<GetApartmentQuery, Re
     }
     public override async Task<RequestResult<Pagination<GetApartmentDTO>>> Handle(GetApartmentQuery request, CancellationToken cancellationToken)
     {
-        var test = _repository.GetAll().ToList();
+        /**
+         * TO DO:
+         * add favourite in the future once implemented
+         */
         var query = _repository.GetAll()
             .Select(x => new GetApartmentDTO
-             {
-                 Address = x.Location,
-                 Gender = x.Gender.ToString(),
-                 Floor = x.Floor,
-                 OwnerName = (x.Owner != null ? x.Owner.Fname + " " + x.Owner.Lname : string.Empty),
-                 NumberOfRooms = x.Rooms != null ? x.Rooms.Count() : 0,
-                 Price = x.Rooms != null && x.Rooms.Any() ? x.Rooms.FirstOrDefault().Price : 0
-             });
+            {
+                Images = (List<string>)x.Images.Select(i => i.ImageUrl),
+                Address = x.Location,
+                Gender = x.Gender.ToString(),
+                Floor = x.Floor,
+                OwnerName = (x.Owner != null ? x.Owner.Fname + " " + x.Owner.Lname : string.Empty),
+                NumberOfRooms = x.Rooms != null ? x.Rooms.Count() : 0,
+                Facilities = x.ApartmentFacilities.Select(f => f.Facility.Name).ToList(),
+                Price = x.Rooms != null && x.Rooms.Any() ? x.Rooms.FirstOrDefault().Price : 0
+            });
         var paginatedResult = await Pagination<GetApartmentDTO>.ToPagedList(query, request.PageNumber, request.PageSize);
 
         return RequestResult<Pagination<GetApartmentDTO>>.Success(paginatedResult, "Pagination Worked");
