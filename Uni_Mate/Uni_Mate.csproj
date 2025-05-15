@@ -40,6 +40,7 @@
   <ItemGroup>
     <PackageReference Include="Autofac" Version="8.2.0" />
     <PackageReference Include="Autofac.Extensions.DependencyInjection" Version="10.0.0" />
+    <PackageReference Include="CloudinaryDotNet" Version="1.27.5" />
     <PackageReference Include="FluentValidation" Version="11.9.0" />
     <PackageReference Include="FluentValidation.AspNetCore" Version="11.2.0" />
     <PackageReference Include="MailKit" Version="4.11.0" />
@@ -65,7 +66,6 @@
   <ItemGroup>
     <Folder Include="Features\ApartmentManagment\Facilites\AddFacilty\command\" />
     <Folder Include="Features\Authoraztion\RoleAcess\Commands\" />
-    <Folder Include="Features\ApartmentManagment\UpdateApartment\UpdataPropertyInfoSave\" />
     <Folder Include="Features\StudentManager\" />
   </ItemGroup>
 

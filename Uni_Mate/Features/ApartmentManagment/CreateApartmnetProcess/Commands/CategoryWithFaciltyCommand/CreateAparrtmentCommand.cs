@@ -18,7 +18,7 @@ namespace Uni_Mate.Features.ApartmentManagment.CreateApartmnetProcess.Commands.C
     public class CategoryWithFaciltyCommandHandler : BaseRequestHandler<CategoryWithFaciltiesCommand, RequestResult<bool>, ApartmentFacility>
     {
 
-        public CategoryWithFaciltyCommandHandler(BaseRequestHandlerParameter<ApartmentFacility> parameters) : base(parameters) { }
+//        public CategoryWithFaciltyCommandHandler(BaseRequestHandlerParameter<ApartmentFacility> parameters) : base(parameters) { }
 
         public override async Task<RequestResult<bool>> Handle(CategoryWithFaciltiesCommand request, CancellationToken cancellationToken)
         {
@@ -26,15 +26,15 @@ namespace Uni_Mate.Features.ApartmentManagment.CreateApartmnetProcess.Commands.C
                 return RequestResult<bool>.Failure(ErrorCode.ApartmentNotFound, "Apartment not found");
             // Check if the categories are valid
 
-            var facilites = request.Categories.Adapt<List<ApartmentFacility>>(MapsterConfig.Configure());
-            facilites.ForEach(f => f.ApartmentId = request.ApartmentID);
+//            var facilites = request.Categories.Adapt<List<ApartmentFacility>>(MapsterConfig.Configure());
+//            facilites.ForEach(f => f.ApartmentId = request.ApartmentID);
 
-            await _repository.AddRangeAsync(facilites);
-            await _repository.SaveChangesAsync();
+//            await _repository.AddRangeAsync(facilites);
+//            await _repository.SaveChangesAsync();
 
-            return RequestResult<bool>.Success(true, "Categories added successfully");
-        }
-    }
+//            return RequestResult<bool>.Success(true, "Categories added successfully");
+//        }
+//    }
 
 
-}
+//}

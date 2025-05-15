@@ -1,9 +1,9 @@
-﻿using MediatR;
-using Uni_Mate.Common.BaseHandlers;
-using Uni_Mate.Common.Data.Enums;
-using Uni_Mate.Common.Views;
-using Uni_Mate.Models.ApartmentManagement;
-using Uni_Mate.Models.GeneralEnum;
+﻿//using MediatR;
+//using Uni_Mate.Common.BaseHandlers;
+//using Uni_Mate.Common.Data.Enums;
+//using Uni_Mate.Common.Views;
+//using Uni_Mate.Models.ApartmentManagement;
+//using Uni_Mate.Models.GeneralEnum;
 
 namespace Uni_Mate.Features.ApartmentManagment.CreateApartmnetProcess.Commands.CreateApartmentInfoCommand
 {
@@ -19,9 +19,9 @@ namespace Uni_Mate.Features.ApartmentManagment.CreateApartmnetProcess.Commands.C
         ApartmentDurationType DurationType
     ) : IRequest<RequestResult<int>>;
 
-    public class CreateApartmentCommandHandler : BaseRequestHandler<CreateApartmentCommand, RequestResult<int>, Apartment>
-    {
-        public CreateApartmentCommandHandler(BaseRequestHandlerParameter<Apartment> parameters) : base(parameters) { }
+//    public class CreateApartmentCommandHandler : BaseRequestHandler<CreateApartmentCommand, RequestResult<int>, Apartment>
+//    {
+//        public CreateApartmentCommandHandler(BaseRequestHandlerParameter<Apartment> parameters) : base(parameters) { }
 
         public override async Task<RequestResult<int>> Handle(CreateApartmentCommand request, CancellationToken cancellationToken)
         {
@@ -39,9 +39,9 @@ namespace Uni_Mate.Features.ApartmentManagment.CreateApartmnetProcess.Commands.C
                 NumberOfRooms = request.NumberOfRooms,
             };
 
-            await _repository.AddAsync(apartment);
-            await _repository.SaveChangesAsync();
-            return RequestResult<int>.Success(apartment.Id, "Apartment created successfully");
-        }
-    }
-}
+//            await _repository.AddAsync(apartment);
+//            await _repository.SaveChangesAsync();
+//            return RequestResult<int>.Success(apartment.Id, "Apartment created successfully");
+//        }
+//    }
+//}

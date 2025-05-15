@@ -2,7 +2,6 @@ using Microsoft.AspNetCore.Mvc.Filters;
 using System.Security.Claims;
 using Uni_Mate.Common;
 using Uni_Mate.Common.Views;
-using Uni_Mate.Models.UserManagment;
 
 public class UserInfoFilter : IActionFilter
 {

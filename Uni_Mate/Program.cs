@@ -11,8 +11,8 @@ using System.Text;
 using Uni_Mate.Common.helper;
 using Uni_Mate.Common.Views;
 using Uni_Mate.Middlewares;
-using Uni_Mate.Middlewares;
-using Uni_Mate.Features.Common.UploadPhotoCommand;
+using TrelloCopy.Middlewares;
+using Microsoft.EntityFrameworkCore;
 
 namespace Uni_Mate
 {
@@ -32,8 +32,8 @@ namespace Uni_Mate
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
 
-            // builder.Services.AddDbContext<Context>(options =>
-            //options.UseSqlServer(builder.Configuration.GetConnectionString("ZiadConnection")));
+            builder.Services.AddDbContext<Context>(options =>
+       options.UseSqlServer(builder.Configuration.GetConnectionString("ZiadConnection")));
 
 
             #region Identity Configration
@@ -97,6 +97,7 @@ namespace Uni_Mate
             builder.Services.AddControllersWithViews(opt => opt.Filters.Add<UserInfoFilter>());
 
 
+            builder.Services.AddScoped<IHttpContextAccessor, HttpContextAccessor>();
             var app = builder.Build();
             // Configure the HTTP request pipeline.
             if (app.Environment.IsDevelopment())
