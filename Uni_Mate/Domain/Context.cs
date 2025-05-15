@@ -17,7 +17,7 @@ namespace Uni_Mate.Domain
 
         // here i added the DbSet for the user and the other models
 
-        public DbSet<User> Users { get; set; }
+        //public DbSet<User> Users { get; set; }
 
         public DbSet<RoleFeature> roleFeatures { get; set; }
         public DbSet<Apartment> Apartments { get; set; }

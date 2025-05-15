@@ -4,7 +4,7 @@ using Uni_Mate.Common.Views;
 
 namespace Uni_Mate.Features.Authoraztion.RegisterUser.RegisterStudent;
 
-public record RegisterStudentRequestViewModel(string Fname, string Lname, string UserName, string Email, string Password, string ConfrimPassword, string NationalId);
+public record RegisterStudentRequestViewModel(string Fname, string Lname, string UserName, string Email, string Password, string ConfrimPassword, string NationalId, IFormFile FrontPersonalImage, IFormFile BackPersonalImage);
 
 public class RegisterStudentRequestViewModelValidator : AbstractValidator<RegisterStudentRequestViewModel>
 {
@@ -48,7 +48,16 @@ public class RegisterStudentRequestViewModelValidator : AbstractValidator<Regist
                 }
             });
 
-    }
+        RuleFor(x => x.FrontPersonalImage)
+			.NotEmpty().WithMessage("Front Personal Image is required.")
+			.Must(x => x.Length > 0).WithMessage("Front Personal Image is required.")
+			.Must(x => x.ContentType == "image/jpeg" || x.ContentType == "image/png").WithMessage("Front Personal Image must be a JPEG or PNG file.");
+		RuleFor(x => x.BackPersonalImage)
+			.NotEmpty().WithMessage("Back Personal Image is required.")
+			.Must(x => x.Length > 0).WithMessage("Back Personal Image is required.")
+			.Must(x => x.ContentType == "image/jpeg" || x.ContentType == "image/png").WithMessage("Back Personal Image must be a JPEG or PNG file.");
+
+	}
 
 
     private RequestResult<bool> BeValidEgyptianId(string Naltional_ID)

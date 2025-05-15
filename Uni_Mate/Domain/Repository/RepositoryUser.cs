@@ -105,7 +105,7 @@ public class RepositoryUser<Entity> : IRepositoryIdentity<Entity> where Entity :
 
         foreach (var property in properties)
         {
-            query = query.Include(property);
+            query = query.Include(property); 
         }
 
         return query.FirstOrDefault();

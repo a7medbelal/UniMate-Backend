@@ -13,14 +13,14 @@ namespace Uni_Mate.Features.Authoraztion.RegisterUser.RegisterStudent
         }
 
         [HttpPost]
-        public async Task<EndpointResponse<bool>> RegisterStudent([FromBody] RegisterStudentRequestViewModel request)
+        public async Task<EndpointResponse<bool>> RegisterStudent([FromForm] RegisterStudentRequestViewModel request)
         {
             // Validate the inputs 
             var validationResponse = ValidateRequest(request);
             if (!validationResponse.isSuccess)
                 return validationResponse;
 
-            var command = new RegisterUserCommand(request.Fname, request.Lname, request.UserName, request.Email, request.Password, request.NationalId);
+            var command = new RegisterUserCommand(request.Fname, request.Lname, request.UserName, request.Email, request.Password, request.NationalId, request.FrontPersonalImage, request.BackPersonalImage);
 
             var result = await _mediator.Send(command);
             if (!result.isSuccess)

@@ -2,7 +2,7 @@
 using Uni_Mate.Common;
 using Uni_Mate.Common.Views;
 
-namespace TrelloCopy.Common.BaseEndpoints;
+namespace Uni_Mate.Common.BaseEndpoints;
 public class BaseWithoutTRequestEndpointParameters
 {
     readonly IMediator _mediator;

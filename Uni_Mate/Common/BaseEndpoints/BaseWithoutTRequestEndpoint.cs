@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using Uni_Mate.Common.Views;
 
 
-namespace TrelloCopy.Common.BaseEndpoints;
+namespace Uni_Mate.Common.BaseEndpoints;
 
 [ApiController]
 [Route("[controller]/[action]")]

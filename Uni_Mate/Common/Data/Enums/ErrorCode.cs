@@ -3,7 +3,7 @@
 public enum ErrorCode
 {
     None,
-    InvalidRequest,
+	InvalidRequest,
     InvalidData,
     NotFound,
     Unauthorized,
@@ -11,6 +11,7 @@ public enum ErrorCode
     InternalServerError,
     ServiceUnavailable,
     UnknownError,
+    UploadFailed,
     UserAlreadyExists,
     UserCreationFailed,
     EmailSendingFailed,
@@ -27,5 +28,9 @@ public enum ErrorCode
     OwnerNotAuthried,
     ApartmentAlreadyExist,
     ApartmentNotFound,
+    ApartmnetFetchFailed,
     RoomCreationFailed,
+    OwnerNotAuthorized,
+    LogoutFailed,
+
 }

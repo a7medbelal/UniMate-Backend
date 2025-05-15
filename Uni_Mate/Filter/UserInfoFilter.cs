@@ -18,7 +18,7 @@ public class UserInfoFilter : IActionFilter
         var user = context.HttpContext.User;
         if (user.Identity is ClaimsIdentity identity && identity.IsAuthenticated)
         {
-            var userId = user.FindFirst("ID")?.Value;
+            var userId = user.FindFirst(ClaimTypes.NameIdentifier)?.Value;
             if(userId == null) userId = "-1";   
             _userInfoProvider.UserInfo = new UserInfo { ID = userId };
         }
