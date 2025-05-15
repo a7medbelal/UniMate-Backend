@@ -11,8 +11,8 @@ namespace Uni_Mate.Domain.Repository
         Task Add(Entity entity);
         Task<bool> SaveIncludeAsync(Entity entity, params string[] properties);
         //Task SaveInclude(Entity entity, params string[] properties);
-        Task Delete(Entity entity);
-        Task HardDelete(Entity entity);
+        Task DeleteAsync(Entity entity);
+        Task HardDeleteAsync(Entity entity);
         IQueryable<Entity> GetAll();
         IQueryable<Entity> GetAllWithDeleted();
         IQueryable<Entity> Get(Expression<Func<Entity, bool>> predicate);

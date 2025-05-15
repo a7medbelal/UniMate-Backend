@@ -103,13 +103,13 @@ namespace Uni_Mate.Domain.Repository
                 return false;
             }
         }
-        public async Task Delete(Entity entity)
+        public async Task DeleteAsync(Entity entity)
         {
             entity.Deleted = true;
             await SaveIncludeAsync(entity, nameof(BaseEntity.Deleted));
         }
 
-        public async Task HardDelete(Entity entity)
+        public async Task HardDeleteAsync(Entity entity)
         {
             _dbSet.Remove(entity);
         }
