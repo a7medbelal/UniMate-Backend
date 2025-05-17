@@ -8,7 +8,7 @@ namespace Uni_Mate.Models.ApartmentManagement
         // remember to update 
         public string? Image { get; set; }
         public bool  IsAvailable { get; set; }
-        public int Price { get; set; }
+        public decimal Price { get; set; }
 
         //Navigational properties
         [ForeignKey(nameof(Apartment))]
