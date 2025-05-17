@@ -6,6 +6,7 @@ namespace Uni_Mate.Features.ApartmentManagment.SearchForApartment
 {
     public class ApartmentParames :QueryStringParamater   
     {
+      
       public  string? Keyword    {get ;set ;}
       public  decimal? FromPrice {get ;set ;}
       public  decimal? ToPrice   {get ;set ;}
