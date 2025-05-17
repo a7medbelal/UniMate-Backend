@@ -8,7 +8,7 @@ using Uni_Mate.Common.helper;
 using Uni_Mate.Common.Views;
 using Uni_Mate.Models.ApartmentManagement;
 
-namespace Uni_Mate.Features.Common.DeletePhotoCommand.Commands
+namespace Uni_Mate.Features.Common.DeletePhoto.Commands
 {
     public record DeletePhotoCommand(string ImageUrl) : IRequest<RequestResult<bool>>;
 

@@ -3,6 +3,7 @@
 public enum ErrorCode
 {
     None,
+    DeletionFailed,
 	InvalidRequest,
     InvalidData,
     NotFound,
@@ -28,6 +29,7 @@ public enum ErrorCode
     OwnerNotAuthried,
     ApartmentAlreadyExist,
     ApartmentNotFound,
+    ApartmnetFetchFailed,
     RoomCreationFailed,
     OwnerNotAuthorized,
     LogoutFailed,
