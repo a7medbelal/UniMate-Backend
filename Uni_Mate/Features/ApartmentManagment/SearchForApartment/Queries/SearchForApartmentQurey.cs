@@ -1,4 +1,5 @@
-﻿using LinqKit;
+﻿
+using LinqKit;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 using System.Buffers;

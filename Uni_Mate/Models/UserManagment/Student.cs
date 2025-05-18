@@ -1,4 +1,5 @@
-﻿using Uni_Mate.Models.GeneralEnum;
+﻿using Uni_Mate.Models.ApartmentManagement;
+using Uni_Mate.Models.GeneralEnum;
 
 namespace Uni_Mate.Models.UserManagment
 {
@@ -29,6 +30,7 @@ namespace Uni_Mate.Models.UserManagment
         /// صورة البطاقة الشخصية الخلفيه
         /// </summary>
         public string? BackPersonalImage { get; set; }
+        public ICollection<FavoriteApartment>? FavoriteApartments { get; set; }
     }
    
     
