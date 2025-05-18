@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore.Metadata.Conventions;
 using Uni_Mate.Common.BaseEndpoints;
 using Uni_Mate.Common.Data.Enums;
 using Uni_Mate.Common.Helper;
@@ -17,15 +18,12 @@ public class GetApartmentEndpoint : BaseEndpoint<GetApartmentViewModel, GetApart
     {
         var validationResult = ValidateRequest(viewmodel);
         if (!validationResult.isSuccess)
-        {
-            return EndpointResponse<GetApartmentResponseViewModel>.Failure(ErrorCode.ApartmnetFetchFailed, "");
-        }
+            return validationResult;
 
         var apartments = await _mediator.Send(new GetApartmentQuery(viewmodel.PageNumber, viewmodel.PageSize));
         if (!apartments.isSuccess)
-        {
-            return EndpointResponse<GetApartmentResponseViewModel>.Failure(ErrorCode.ApartmnetFetchFailed, "");
-        }
+            return EndpointResponse<GetApartmentResponseViewModel>.Failure(apartments.errorCode, apartments.message);
+        
         var response = new GetApartmentResponseViewModel
         {
             Apartments = apartments.data.Select(x => new GetApartmentDTO
@@ -39,9 +37,10 @@ public class GetApartmentEndpoint : BaseEndpoint<GetApartmentViewModel, GetApart
                 NumberOfRooms = x.NumberOfRooms,
                 Price = x.Price
             }).ToList(),
-            TotalPages = apartments.data.TotalPages,
+            TotalCount = apartments.data.TotalCount,
+            PageNumber = apartments.data.CurrentPage,
             PageSize = apartments.data.pageSize,
-            CurrentPage = apartments.data.CurrentPage,
+            TotalPages = apartments.data.TotalPages,
         };
         return EndpointResponse<GetApartmentResponseViewModel>.Success(response, "Got Apartments Successfully");
     }

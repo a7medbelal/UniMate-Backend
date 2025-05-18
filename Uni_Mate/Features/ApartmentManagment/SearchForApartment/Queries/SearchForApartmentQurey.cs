@@ -19,7 +19,7 @@ using Uni_Mate.Models.GeneralEnum;
 
 namespace Uni_Mate.Features.ApartmentManagment.SearchForApartment.Queries
 {
-    public record SearchForApartmentQurey(string? Keyword ,  decimal? FromPrice ,decimal? ToPrice , int? Capacity, string? Location , Gender? Gender , int PageNumber,int PageSize ,    SortOption? SortBy = SortOption.None) : IRequest<RequestResult<Pagination<GetAparmtmentFilterDTO>>>;
+    public record SearchForApartmentQurey(string? Keyword ,  decimal? FromPrice ,decimal? ToPrice , int? Capacity, string? Location , Gender? Gender , int PageSize,int PageNumber, SortOption? SortBy = SortOption.None) : IRequest<RequestResult<Pagination<GetAparmtmentFilterDTO>>>;
 
     public class SearchForApartmentQureyHandler : BaseRequestHandler<SearchForApartmentQurey, RequestResult<Pagination<GetAparmtmentFilterDTO>>, Apartment>
     {
@@ -54,8 +54,11 @@ namespace Uni_Mate.Features.ApartmentManagment.SearchForApartment.Queries
                 OwnerName = c.Owner != null ? (c.Owner.Fname + " " + c.Owner.Lname) : "Unknown",
                 NumberOfRooms = c.NumberOfRooms,
                 Capecity = c.Capecity,
-                Price =c.Rooms.ToList().Sum(c => c.Price)  
-            });
+                Price =c.Rooms.Sum(c => c.Price),
+                Images = c.Images != null
+               ? c.Images.Select(i => i.ImageUrl).ToList()
+                : new List<string>()
+             });
 
 
             // if the data is empty return that is empty not return false 
