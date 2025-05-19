@@ -11,7 +11,7 @@ namespace Uni_Mate.Features.FavoriteManagment.DelFavoriteApartment
     {
         public DelFavoriteApartEndpoint(BaseEndpointParameters<DelFavoriteApartVM> parameters) : base(parameters) { }
 
-        [HttpPost]
+        [HttpDelete]
         public async Task<EndpointResponse<bool>> DelFavoriteApartment(DelFavoriteApartVM request)
         {
             var validationResponse = ValidateRequest(request);

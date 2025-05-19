@@ -30,7 +30,7 @@ namespace Uni_Mate.Features.ApartmentManagment.CreateApartmnetProcess.Commands.C
             facilites.ForEach(f => f.ApartmentId = request.ApartmentID);
 
             await _repository.AddRangeAsync(facilites);
-            await _repository.SaveChangesAsync();
+       
 
             return RequestResult<bool>.Success(true, "Categories added successfully");
         }

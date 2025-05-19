@@ -181,7 +181,7 @@ namespace Uni_Mate.Domain.Repository
 
             return await query.FirstOrDefaultAsync(x => x.Id == id);
         }
-
+         
         //Task IRepository<Entity>.HardDelete(Entity entity)
         //{
         //    throw new NotImplementedException();
