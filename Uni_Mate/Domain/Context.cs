@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using System.Diagnostics;
 using Uni_Mate.Models.ApartmentManagement;
+using Uni_Mate.Models.BookingManagement;
 using Uni_Mate.Models.UserManagment;
 using Uni_Mate.Models.UserManagment.Enum;
 
@@ -26,6 +27,7 @@ namespace Uni_Mate.Domain
         public DbSet<Phone> Phones { get; set; }
         public DbSet<SocialAccount> SocialAccounts { get; set;}
         public DbSet<FavoriteApartment> FavoriteApartments { get; set; }
+        public DbSet<Booking> Bookings { get; set; }
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
 
@@ -44,6 +46,11 @@ namespace Uni_Mate.Domain
             // appley the TPT inhertance for the User
             modelBuilder.Entity<Student>().ToTable("Students");
             modelBuilder.Entity<Owner>().ToTable("Owners");
+
+
+            modelBuilder.Entity<BookRoom>().ToTable("BookRooms");
+            modelBuilder.Entity<BookBed>().ToTable("BookBeds");
+            modelBuilder.Entity<BookApartment>().ToTable("BookApartments");
 
             // store the enum as string in the database
             modelBuilder.Entity<User>()
