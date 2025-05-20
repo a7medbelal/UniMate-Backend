@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using Uni_Mate.Common.BaseHandlers;
 using Uni_Mate.Common.Data.Enums;
 using Uni_Mate.Common.Views;
-using Uni_Mate.Features.Common.DeletePhoto.Commands;
+using Uni_Mate.Features.Common.DeleteImage.Commands;
 using Uni_Mate.Models.ApartmentManagement;
 
 namespace Uni_Mate.Features.ApartmentManagment.DeleteApartment.Commands;
@@ -16,7 +16,9 @@ public class DeleteApartmentImagesCommandHandler : BaseRequestHandler<DeleteApar
     }
     public override async Task<RequestResult<List<Image>>> Handle(DeleteApartmentImagesCommand request, CancellationToken cancellationToken)
     {
-        List<Image> images = await _repository.Get(i => i.ApartmentId == request.ApartmentId).ToListAsync();
+        List<Image> images = await _repository.GetAll()
+            .Where(i => i.ApartmentId == request.ApartmentId)
+            .ToListAsync();
 
         if (images == null)
         {
@@ -25,13 +27,19 @@ public class DeleteApartmentImagesCommandHandler : BaseRequestHandler<DeleteApar
         
         foreach (var image in images)
         {
-            var deletePhotoCommand = new DeletePhotoCommand(image.ImageUrl);
-            var result = await _mediator.Send(deletePhotoCommand, cancellationToken);
+            var deleteImageCommand = new DeleteImageCommand(image.ImageUrl);
+            var result = await _mediator.Send(deleteImageCommand, cancellationToken);
             if (!result.isSuccess)
             {
-                return RequestResult<List<Image>>.Failure(ErrorCode.DeletionFailed, "Failed to delete an image");
+                return RequestResult<List<Image>>.Failure(ErrorCode.DeletionFailed, "Failed to delete apartment image");
             }
-            await _repository.DeleteAsync(image);
+            await _repository.HardDeleteAsync(image);
+        }
+        var deleteRoomImagesCommand = new DeleteRoomsImagesCommand(request.ApartmentId);
+        var roomResult = await _mediator.Send(deleteRoomImagesCommand, cancellationToken);
+        if (!roomResult.isSuccess)
+        {
+            return RequestResult<List<Image>>.Failure(ErrorCode.DeletionFailed, "Failed to delete room images");
         }
         await _repository.SaveChangesAsync();
 

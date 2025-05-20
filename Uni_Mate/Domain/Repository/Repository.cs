@@ -109,9 +109,10 @@ namespace Uni_Mate.Domain.Repository
             await SaveIncludeAsync(entity, nameof(BaseEntity.Deleted));
         }
 
-        public async Task HardDeleteAsync(Entity entity)
+        public async Task HardDelete(Entity entity)
         {
             _dbSet.Remove(entity);
+            await _context.SaveChangesAsync();
         }
 
 
@@ -168,9 +169,16 @@ namespace Uni_Mate.Domain.Repository
             }
         }
 
-        //Task IRepository<Entity>.HardDelete(Entity entity)
-        //{
-        //    throw new NotImplementedException();
-        //}
+        public async Task HardDeleteAsync(Entity entity)
+        {
+            _dbSet.Remove(entity);
+            await _context.SaveChangesAsync();
+        }
+
+        public async Task HardDeleteRangeAsync(ICollection<Entity> entities)
+        {
+            _dbSet.RemoveRange(entities);
+            await _context.SaveChangesAsync();
+        }
     }
 }

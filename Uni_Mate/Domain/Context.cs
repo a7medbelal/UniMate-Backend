@@ -44,7 +44,6 @@ namespace Uni_Mate.Domain
             modelBuilder.Entity<Student>().ToTable("Students");
             modelBuilder.Entity<Owner>().ToTable("Owners");
 
-
             // store the enum as string in the database
             modelBuilder.Entity<User>()
                   .Property(u => u.role)
@@ -55,13 +54,35 @@ namespace Uni_Mate.Domain
                 .Property(i => i.ImageType)
                 .HasConversion<string>();
 
-
             // Configure The Image Entity To Avoid Cyclical References
             modelBuilder.Entity<Image>()
                 .HasOne(i => i.Apartment)
                 .WithMany(a => a.Images)
                 .HasForeignKey(i => i.ApartmentId)
                 .OnDelete(DeleteBehavior.Restrict);
+
+            // Add cascade delete for Apartment -> Room
+            modelBuilder.Entity<Room>()
+                .HasOne(r => r.Apartment)
+                .WithMany(a => a.Rooms)
+                .HasForeignKey(r => r.ApartmentId)
+                .OnDelete(DeleteBehavior.Cascade);
+
+            // Add cascade delete for Apartment -> ApartmentFacility
+            modelBuilder.Entity<ApartmentFacility>()
+                .HasOne(af => af.Apartment)
+                .WithMany(a => a.ApartmentFacilities)
+                .HasForeignKey(af => af.ApartmentId)
+                .OnDelete(DeleteBehavior.Cascade);
+
+            modelBuilder.Entity<Bed>()
+                .HasOne(b => b.Room)
+                .WithMany(r => r.Beds)
+                .HasForeignKey(b => b.RoomId)
+                .OnDelete(DeleteBehavior.Cascade);
+
+            // Add cascade delete for Apartment -> Bed (through Room)
+            // (Handled by Room -> Bed relationship, not directly Apartment -> Bed)
 
             // Seed admin 
             var hasher = new PasswordHasher<User>();
@@ -82,7 +103,6 @@ namespace Uni_Mate.Domain
                 PhoneNumberConfirmed = true,
                 role = Role.Admin,
                 National_Id = "1",
-                
             };
             admin.PasswordHash = hasher.HashPassword(admin, "Admin123!");
 
