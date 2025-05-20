@@ -25,7 +25,7 @@ public class DeleteApartmentCommandHandler : BaseRequestHandler<DeleteApartmentC
         {
             return RequestResult<bool>.Failure(ErrorCode.DeletionFailed, "Failed to delete apartment");
         }
-        await _repository.DeleteAsync(apartment);
+        await _repository.HardDeleteAsync(apartment);
         await _repository.SaveChangesAsync();
 
         return RequestResult<bool>.Success(true, "Apartment deleted successfully");
