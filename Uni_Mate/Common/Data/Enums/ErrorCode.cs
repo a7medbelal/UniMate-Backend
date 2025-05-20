@@ -4,7 +4,7 @@ public enum ErrorCode
 {
     None,
     DeletionFailed,
-	InvalidRequest,
+    InvalidRequest,
     InvalidData,
     NotFound,
     Unauthorized,
@@ -20,8 +20,8 @@ public enum ErrorCode
     UserNotFound,
     EmailNotConfirmed,
     InvalidPassword,
-	MissingUserName,
-	MissingNationalID,
+    MissingUserName,
+    MissingNationalID,
     InvalidNationalId,
     InvalidOTP,
     PasswordChangeFailed,
@@ -33,5 +33,6 @@ public enum ErrorCode
     RoomCreationFailed,
     OwnerNotAuthorized,
     LogoutFailed,
+    NotValide
 
 }
