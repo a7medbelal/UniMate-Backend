@@ -43,7 +43,7 @@ public class UploadPhotoCommandHandler : BaseRequestHandler<UploadPhotoCommand, 
     //     return uploadResult;
     // }
 
-    // public async Task<DeletionResult> DeletePhoto(string photoId)
+    // public async Task<DeletionResult> DeleteImage(string photoId)
     // {
     //     var deletionParams = new DeletionParams(photoId);
     //     var result = await _cloudinary.DestroyAsync(deletionParams);

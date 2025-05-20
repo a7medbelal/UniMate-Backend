@@ -23,8 +23,8 @@ public class GetApartmentValidator : AbstractValidator<GetApartmentViewModel>
 public class GetApartmentResponseViewModel
 {
     public List<GetApartmentDTO> Apartments { get; set; } = new List<GetApartmentDTO>();
+    public int PageNumber { get; set; }
+    public int PageSize { get; set; }
     public int TotalCount { get; set; }
     public int TotalPages { get; set; }
-    public int PageSize { get; set; }
-    public int CurrentPage { get; set; }
 }

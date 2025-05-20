@@ -28,9 +28,9 @@ namespace Uni_Mate.Features.ApartmentManagment.CreateApartmnetProcess.Commands.C
 
 //            var facilites = request.Categories.Adapt<List<ApartmentFacility>>(MapsterConfig.Configure());
 //            facilites.ForEach(f => f.ApartmentId = request.ApartmentID);
-
-//            await _repository.AddRangeAsync(facilites);
-//            await _repository.SaveChangesAsync();
+            await _repository.AddRangeAsync(facilites);
+        }
+    }
 
 //            return RequestResult<bool>.Success(true, "Categories added successfully");
 //        }

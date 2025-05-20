@@ -7,7 +7,7 @@
         public string? Location { get; set; }
         public string? DescripeLocation { get; set; }
         public string? Floor { get; set; }
-        public int Price { get; set; }
+        public decimal Price { get; set; }
         public string? DurationType { get; set; }
         public bool IsAvailable { get; set; }
         /// <summary>

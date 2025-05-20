@@ -5,8 +5,9 @@ namespace Uni_Mate.Middlewares;
 
 public class TransactionMiddleware
 {
-    RequestDelegate _nextAction;
-    Context _context;
+    private readonly RequestDelegate _nextAction;
+    private readonly Context _context;
+
     public TransactionMiddleware(RequestDelegate nextAction, Context context)
     {
         _nextAction = nextAction;
@@ -19,15 +20,16 @@ public class TransactionMiddleware
 
         try
         {
-            transaction = _context.Database.BeginTransaction();
+            transaction = await _context.Database.BeginTransactionAsync();
 
-            await _nextAction(context);
+            await _nextAction(context); // Process request (including SubmitPostCommand)
 
-            transaction.Commit();
+            await transaction.CommitAsync(); // Commit at the end
         }
-        catch (Exception ex)
+        catch (Exception)
         {
-            transaction?.Rollback();
+            if (transaction != null)
+             await transaction.RollbackAsync();
 
             throw;
         }

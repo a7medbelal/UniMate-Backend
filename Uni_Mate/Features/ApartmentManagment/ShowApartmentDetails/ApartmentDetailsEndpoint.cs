@@ -11,7 +11,7 @@ namespace Uni_Mate.Features.ApartmentManagment.ShowApartmentDetails
         { }
 
         [HttpGet]
-        public async Task<EndpointResponse<ApartmentDetailsDTO>> ApartmentDetails([FromBody]ApartmentDetailsVM request)
+        public async Task<EndpointResponse<ApartmentDetailsDTO>> ApartmentDetails([FromQuery]ApartmentDetailsVM request)
         {
             var result = ValidateRequest(request);
             if(result.isSuccess == false)

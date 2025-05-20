@@ -108,7 +108,6 @@ namespace Uni_Mate
             app.UseCors(builder =>
             {
                 builder.AllowAnyOrigin()
-                       .AllowAnyMethod()
                        .AllowAnyHeader();
             });
             app.UseHttpsRedirection();

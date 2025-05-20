@@ -58,7 +58,7 @@ public class UploadApartmentImagesCommandHandler : BaseRequestHandler<UploadApar
             }
         }
         await _repository.AddRangeAsync(result);
-        await _repository.SaveChangesAsync();
+   
 
         return RequestResult<List<Image>>.Success(result, "Apartment images sent successfully");
     }

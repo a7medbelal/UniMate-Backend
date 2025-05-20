@@ -25,7 +25,7 @@ public class AddRoomCommandHandler : BaseRequestHandler<AddRoomCommand, RequestR
             room.ApartmentId = request.ApartmentId;
         }
         await _repository.AddRangeAsync(rooms);
-        await _repository.SaveChangesAsync();
+     
         return RequestResult<bool>.Success(true, "Room created successfully");
     }
 }

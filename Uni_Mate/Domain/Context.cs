@@ -45,7 +45,6 @@ namespace Uni_Mate.Domain
             modelBuilder.Entity<Student>().ToTable("Students");
             modelBuilder.Entity<Owner>().ToTable("Owners");
 
-
             // store the enum as string in the database
             modelBuilder.Entity<User>()
                   .Property(u => u.role)
@@ -56,13 +55,35 @@ namespace Uni_Mate.Domain
                 .Property(i => i.ImageType)
                 .HasConversion<string>();
 
-
             // Configure The Image Entity To Avoid Cyclical References
             modelBuilder.Entity<Image>()
                 .HasOne(i => i.Apartment)
                 .WithMany(a => a.Images)
                 .HasForeignKey(i => i.ApartmentId)
                 .OnDelete(DeleteBehavior.Restrict);
+
+            // Add cascade delete for Apartment -> Room
+            modelBuilder.Entity<Room>()
+                .HasOne(r => r.Apartment)
+                .WithMany(a => a.Rooms)
+                .HasForeignKey(r => r.ApartmentId)
+                .OnDelete(DeleteBehavior.Cascade);
+
+            // Add cascade delete for Apartment -> ApartmentFacility
+            modelBuilder.Entity<ApartmentFacility>()
+                .HasOne(af => af.Apartment)
+                .WithMany(a => a.ApartmentFacilities)
+                .HasForeignKey(af => af.ApartmentId)
+                .OnDelete(DeleteBehavior.Cascade);
+
+            modelBuilder.Entity<Bed>()
+                .HasOne(b => b.Room)
+                .WithMany(r => r.Beds)
+                .HasForeignKey(b => b.RoomId)
+                .OnDelete(DeleteBehavior.Cascade);
+
+            // Add cascade delete for Apartment -> Bed (through Room)
+            // (Handled by Room -> Bed relationship, not directly Apartment -> Bed)
 
             // Seed admin 
             var hasher = new PasswordHasher<User>();
@@ -83,39 +104,47 @@ namespace Uni_Mate.Domain
                 PhoneNumberConfirmed = true,
                 role = Role.Admin,
                 National_Id = "1",
-                
             };
             admin.PasswordHash = hasher.HashPassword(admin, "Admin123!");
 
             modelBuilder.Entity<User>().HasData(admin);
 
+
+
+
+            //Create the indexes for better performance 
+            modelBuilder.Entity<User>()
+                .HasIndex(u => u.Email)
+                .IsUnique();
+
+            modelBuilder.Entity<User>()
+                .HasIndex(u => u.UserName)
+                .IsUnique();    
+
+            // Create the indexes for Search for apartments
+            modelBuilder.Entity<Apartment>()
+                .HasIndex(a => a.Location);
+
+            modelBuilder.Entity<Apartment>()
+               .HasIndex(a => a.Gender);
+
+            modelBuilder.Entity<Apartment>()
+                .HasIndex(a => a.Capecity); 
+
+            modelBuilder.Entity<Apartment>()
+                .HasIndex(a => a.CreatedDate);
+
+            modelBuilder.Entity<Apartment>()
+                .HasIndex(a => new { a.Location, a.Gender, a.Capecity });
+
+            modelBuilder.Entity<Room>()
+                .HasIndex(r => new { r.ApartmentId ,r.Price});
+
+
             base.OnModelCreating(modelBuilder);
         }
 
 
-         public void SeedData(ModelBuilder modelBuilder)
-        {
-            //// Seed admin 
-            //var hasher = new PasswordHasher<User>();
-
-            //// Seed admin user
-            //var admin = new User
-            //{
-            //    Id = "1", // Use string if using Identity default keys
-            //    Fname ="ahmed",
-            //    Lname="belal",
-            //    UserName = "admin",
-            //    NormalizedUserName = "ADMIN",
-            //    Email = "legendahmed.122@gmail.com",
-            //    NormalizedEmail = "Legendahmed.122@gmail.com",
-            //    EmailConfirmed = true,
-            //    PhoneNumber = "01040363077",
-            //    PhoneNumberConfirmed = true,
-            //    role = Role.Admin 
-            //};
-            //admin.PasswordHash = hasher.HashPassword(admin, "Admin123!");
-
-            //modelBuilder.Entity<User>().HasData(admin);
-        }
+      
     }
 }

@@ -103,7 +103,7 @@ namespace Uni_Mate.Domain.Repository
                 return false;
             }
         }
-        public async Task Delete(Entity entity)
+        public async Task DeleteAsync(Entity entity)
         {
             entity.Deleted = true;
             await SaveIncludeAsync(entity, nameof(BaseEntity.Deleted));
@@ -180,6 +180,17 @@ namespace Uni_Mate.Domain.Repository
             }
 
             return await query.FirstOrDefaultAsync(x => x.Id == id);
+        }
+
+        public async Task HardDeleteAsync(Entity entity)
+        {
+            _dbSet.Remove(entity);
+            await SaveChangesAsync();
+        }
+        public async Task HardDeleteRangeAsync(ICollection<Entity> entities)
+        {
+            _dbSet.RemoveRange(entities);
+            await _context.SaveChangesAsync();
         }
 
         //Task IRepository<Entity>.HardDelete(Entity entity)

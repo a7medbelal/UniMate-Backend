@@ -2,21 +2,21 @@
 using Uni_Mate.Common.BaseEndpoints;
 using Uni_Mate.Common.Data.Enums;
 using Uni_Mate.Common.Views;
-using Uni_Mate.Features.Common.DeletePhoto.Commands;
+using Uni_Mate.Features.Common.DeleteImage.Commands;
 using Uni_Mate.Features.Common.UploadPhotoCommand.Commands;
 
-namespace Uni_Mate.Features.Common.DeletePhoto;
+namespace Uni_Mate.Features.Common.DeleteImage;
 
-//public record DeletePhotoViewModel(string ImageUrl);
-//public class DeletePhotoEndpoint : BaseWithoutTRequestEndpoint<bool>
+//public record DeleteImageViewModel(string ImageUrl);
+//public class DeleteImageEndpoint : BaseWithoutTRequestEndpoint<bool>
 //{
-//    public DeletePhotoEndpoint(BaseWithoutTRequestEndpointParameters parameters) : base(parameters)
+//    public DeleteImageEndpoint(BaseWithoutTRequestEndpointParameters parameters) : base(parameters)
 //    {
 //    }
 //    [HttpDelete]
-//    public async Task<EndpointResponse<bool>> DeletePhoto([FromBody] DeletePhotoViewModel viewmodel, CancellationToken cancellationToken)
+//    public async Task<EndpointResponse<bool>> DeleteImage([FromBody] DeleteImageViewModel viewmodel, CancellationToken cancellationToken)
 //    {
-//        var deletePhotoCommand = new DeletePhotoCommand(viewmodel.ImageUrl);
+//        var deletePhotoCommand = new DeleteImageCommand(viewmodel.ImageUrl);
 //        var result = await _mediator.Send(deletePhotoCommand, cancellationToken);
 //        if (!result.isSuccess)
 //        {

@@ -8,15 +8,15 @@ using Uni_Mate.Common.helper;
 using Uni_Mate.Common.Views;
 using Uni_Mate.Models.ApartmentManagement;
 
-namespace Uni_Mate.Features.Common.DeletePhoto.Commands
+namespace Uni_Mate.Features.Common.DeleteImage.Commands
 {
-    public record DeletePhotoCommand(string ImageUrl) : IRequest<RequestResult<bool>>;
+    public record DeleteImageCommand(string ImageUrl) : IRequest<RequestResult<bool>>;
 
-    public class DeletePhotoCommandHandler : BaseRequestHandler<DeletePhotoCommand, RequestResult<bool>, Image>
+    public class DeleteImageCommandHandler : BaseRequestHandler<DeleteImageCommand, RequestResult<bool>, Image>
     {
         private readonly Cloudinary _cloudinary;
 
-        public DeletePhotoCommandHandler(BaseRequestHandlerParameter<Image> parameters, IOptions<CloudinarySettings> config) : base(parameters)
+        public DeleteImageCommandHandler(BaseRequestHandlerParameter<Image> parameters, IOptions<CloudinarySettings> config) : base(parameters)
         {
             var acc = new Account(
                 config.Value.CloudName,
@@ -50,7 +50,7 @@ namespace Uni_Mate.Features.Common.DeletePhoto.Commands
             return publicId;
         }
 
-        public async override Task<RequestResult<bool>> Handle(DeletePhotoCommand request, CancellationToken cancellationToken)
+        public async override Task<RequestResult<bool>> Handle(DeleteImageCommand request, CancellationToken cancellationToken)
         {
             string publicId = ExtractPublicIdFromUrl(request.ImageUrl);
 

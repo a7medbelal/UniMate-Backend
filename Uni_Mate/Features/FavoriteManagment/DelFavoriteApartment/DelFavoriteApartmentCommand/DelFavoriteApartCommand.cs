@@ -42,7 +42,7 @@ namespace Uni_Mate.Features.FavoriteManagment.DelFavoriteApartment.DelFavoriteAp
                 return RequestResult<bool>.Failure(ErrorCode.NotFound, "The Apartment Not Found In Table Favorite");
             }
 
-            await _repository.HardDelete(isFavoriteExist);
+            await _repository.DeleteAsync(isFavoriteExist);
 
             return RequestResult<bool>.Success(true, "The Apartment Deleted From Favorite");
         }

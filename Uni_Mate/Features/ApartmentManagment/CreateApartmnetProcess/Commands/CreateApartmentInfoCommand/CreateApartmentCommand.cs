@@ -39,9 +39,9 @@ namespace Uni_Mate.Features.ApartmentManagment.CreateApartmnetProcess.Commands.C
                 NumberOfRooms = request.NumberOfRooms,
             };
 
-//            await _repository.AddAsync(apartment);
-//            await _repository.SaveChangesAsync();
-//            return RequestResult<int>.Success(apartment.Id, "Apartment created successfully");
-//        }
-//    }
-//}
+
+            await _repository.AddAsync(apartment);
+
+            return RequestResult<int>.Success(apartment.Id, "Apartment created successfully");
+        }
+    }

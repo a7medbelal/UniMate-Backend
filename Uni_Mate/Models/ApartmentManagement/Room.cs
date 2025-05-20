@@ -1,4 +1,6 @@
-﻿using System.ComponentModel.DataAnnotations.Schema;
+﻿using Microsoft.EntityFrameworkCore;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Uni_Mate.Models.ApartmentManagement
 {
@@ -8,7 +10,8 @@ namespace Uni_Mate.Models.ApartmentManagement
         // remember to update 
         public string? Image { get; set; }
         public bool  IsAvailable { get; set; }
-        public int Price { get; set; }
+        [Precision(18, 2)]
+        public decimal Price { get; set; }
 
         //Navigational properties
         [ForeignKey(nameof(Apartment))]

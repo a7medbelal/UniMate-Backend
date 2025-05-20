@@ -12,7 +12,6 @@ using System.Reflection;
 using FluentValidation;
 using TrelloCopy.Common.BaseEndpoints;
 using Uni_Mate.Common.BaseEndpoints;
-using Uni_Mate.Common.BaseEndpoints;
 using Uni_Mate.Domain.Repository;
 
 
