@@ -24,7 +24,7 @@ public class GetApartmentQueryHandler : BaseRequestHandler<GetApartmentQuery, Re
                 Images = (List<string>)x.Images.Select(i => i.ImageUrl),
                 Address = x.Location,
                 Gender = x.Gender.ToString(),
-                Floor = x.Floor,
+                Floor = x.Floor?? "unknown",
                 OwnerName = (x.Owner != null ? x.Owner.Fname + " " + x.Owner.Lname : string.Empty),
                 NumberOfRooms = x.Rooms != null ? x.Rooms.Count() : 0,
                 Facilities = x.ApartmentFacilities.Select(f => f.Facility.Name).ToList(),

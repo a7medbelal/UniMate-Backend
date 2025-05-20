@@ -15,10 +15,10 @@ namespace Uni_Mate.Common.Helper
 
         public int TotalCount { get; set; }
 
-        public Pagination(List<T> Items, int Count, int PageNumber, int PageSize) {
+        public Pagination(List<T> Items, int Count, int currentPage, int PageSize) {
 
             TotalCount = Count;
-            TotalPages = PageNumber;
+            CurrentPage = CurrentPage;
             pageSize = PageSize;
             TotalPages = (int)Math.Ceiling(Count / (double)pageSize);
 

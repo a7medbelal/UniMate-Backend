@@ -1,5 +1,4 @@
-﻿using Microsoft.AspNetCore.Mvc.RazorPages;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using System.Linq.Expressions;
 using Uni_Mate.Models;
 
@@ -27,6 +26,12 @@ namespace Uni_Mate.Domain.Repository
         Task HardDeleteAsync(Entity entity);
         Task HardDeleteRangeAsync(ICollection<Entity> entity);
         Task SaveChangesAsync();
-
+        /// <summary>
+        /// Get Specific Entity With Include The Relation Like Get Apartment With it's Rooms
+        /// </summary>
+        /// <param name="id"> The Id </param>
+        /// <param name="include">The ICollection Like ["Images","Rooms"]</param>
+        /// <returns></returns>
+        Task<Entity> GetWithIncludeAsync(int id , params string[] include);
     }
 }

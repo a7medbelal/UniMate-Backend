@@ -25,6 +25,7 @@ namespace Uni_Mate.Domain
         public DbSet<Bed> Beds { get; set; }
         public DbSet<Phone> Phones { get; set; }
         public DbSet<SocialAccount> SocialAccounts { get; set;}
+        public DbSet<FavoriteApartment> FavoriteApartments { get; set; }
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
 
@@ -108,33 +109,42 @@ namespace Uni_Mate.Domain
 
             modelBuilder.Entity<User>().HasData(admin);
 
+
+
+
+            //Create the indexes for better performance 
+            modelBuilder.Entity<User>()
+                .HasIndex(u => u.Email)
+                .IsUnique();
+
+            modelBuilder.Entity<User>()
+                .HasIndex(u => u.UserName)
+                .IsUnique();    
+
+            // Create the indexes for Search for apartments
+            modelBuilder.Entity<Apartment>()
+                .HasIndex(a => a.Location);
+
+            modelBuilder.Entity<Apartment>()
+               .HasIndex(a => a.Gender);
+
+            modelBuilder.Entity<Apartment>()
+                .HasIndex(a => a.Capecity); 
+
+            modelBuilder.Entity<Apartment>()
+                .HasIndex(a => a.CreatedDate);
+
+            modelBuilder.Entity<Apartment>()
+                .HasIndex(a => new { a.Location, a.Gender, a.Capecity });
+
+            modelBuilder.Entity<Room>()
+                .HasIndex(r => new { r.ApartmentId ,r.Price});
+
+
             base.OnModelCreating(modelBuilder);
         }
 
 
-         public void SeedData(ModelBuilder modelBuilder)
-        {
-            //// Seed admin 
-            //var hasher = new PasswordHasher<User>();
-
-            //// Seed admin user
-            //var admin = new User
-            //{
-            //    Id = "1", // Use string if using Identity default keys
-            //    Fname ="ahmed",
-            //    Lname="belal",
-            //    UserName = "admin",
-            //    NormalizedUserName = "ADMIN",
-            //    Email = "legendahmed.122@gmail.com",
-            //    NormalizedEmail = "Legendahmed.122@gmail.com",
-            //    EmailConfirmed = true,
-            //    PhoneNumber = "01040363077",
-            //    PhoneNumberConfirmed = true,
-            //    role = Role.Admin 
-            //};
-            //admin.PasswordHash = hasher.HashPassword(admin, "Admin123!");
-
-            //modelBuilder.Entity<User>().HasData(admin);
-        }
+      
     }
 }

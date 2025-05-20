@@ -40,7 +40,7 @@ namespace Uni_Mate.Features.ApartmentManagment.CreateApartmnetProcess.Commands.C
             };
 
             await _repository.AddAsync(apartment);
-            await _repository.SaveChangesAsync();
+
             return RequestResult<int>.Success(apartment.Id, "Apartment created successfully");
         }
     }

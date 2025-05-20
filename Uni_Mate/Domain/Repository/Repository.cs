@@ -1,5 +1,4 @@
-﻿using Microsoft.AspNetCore.Mvc.RazorPages;
-using Microsoft.EntityFrameworkCore.ChangeTracking;
+﻿using Microsoft.EntityFrameworkCore.ChangeTracking;
 using Microsoft.EntityFrameworkCore;
 using System.Linq.Expressions;
 using Uni_Mate.Models;
@@ -9,8 +8,8 @@ namespace Uni_Mate.Domain.Repository
     public class Repository<Entity> : IRepository<Entity> where Entity : BaseEntity
     {
         protected Context _context;
-        DbSet<Entity> _dbSet;
-        readonly string[] immutableProps = { nameof(BaseEntity.Id), nameof(BaseEntity.CreatedBy), nameof(BaseEntity.CreatedDate) };
+        private readonly DbSet<Entity> _dbSet;
+        private readonly string[] immutableProps = { nameof(BaseEntity.Id), nameof(BaseEntity.CreatedBy), nameof(BaseEntity.CreatedDate) };
         public Repository(Context context)
         {
             _context = context;
@@ -31,6 +30,7 @@ namespace Uni_Mate.Domain.Repository
         {
             entity.CreatedDate = DateTime.Now;
             await _dbSet.AddAsync(entity);
+            await SaveChangesAsync();
             return entity.Id;
         }
         //public async Task SaveInclude(Entity entity, params string[] properties)
@@ -112,7 +112,7 @@ namespace Uni_Mate.Domain.Repository
         public async Task HardDelete(Entity entity)
         {
             _dbSet.Remove(entity);
-            await _context.SaveChangesAsync();
+            await SaveChangesAsync();
         }
 
 
@@ -169,16 +169,22 @@ namespace Uni_Mate.Domain.Repository
             }
         }
 
-        public async Task HardDeleteAsync(Entity entity)
+        
+        public async Task<Entity> GetWithIncludeAsync(int id, params string[] include)
         {
-            _dbSet.Remove(entity);
-            await _context.SaveChangesAsync();
-        }
+            IQueryable<Entity> query = _dbSet;
 
-        public async Task HardDeleteRangeAsync(ICollection<Entity> entities)
-        {
-            _dbSet.RemoveRange(entities);
-            await _context.SaveChangesAsync();
+            foreach (var parm in include)
+            {
+                query = query.Include(parm);
+            }
+
+            return await query.FirstOrDefaultAsync(x => x.Id == id);
         }
+         
+        //Task IRepository<Entity>.HardDelete(Entity entity)
+        //{
+        //    throw new NotImplementedException();
+        //}
     }
 }

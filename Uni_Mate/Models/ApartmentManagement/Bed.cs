@@ -1,10 +1,12 @@
-﻿using System.ComponentModel.DataAnnotations.Schema;
+﻿using Microsoft.EntityFrameworkCore;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Uni_Mate.Models.ApartmentManagement
 {
     public class Bed : BaseEntity
     {
-        public double Price { get; set; }
+        [Precision(18, 2)]
+        public decimal Price { get; set; }
         // to know if there is an empty bed in the room
         public bool IsAvailable { get; set; }
         [ForeignKey(nameof(Room))]

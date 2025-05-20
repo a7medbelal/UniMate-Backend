@@ -7,6 +7,9 @@ using Uni_Mate.Models.ApartmentManagement;
 using Uni_Mate.Features.ApartmentManagment.CreateApartmnetProcess.Commands.CategoryWithFaciltyCommand;
 using Uni_Mate.Features.OwnerManager.GetOwner.Queries;
 using Uni_Mate.Features.ApartmentManagment.CreateApartmnetProcess.Commands.AddRoomWithBedsCommands;
+using Uni_Mate.Common.Helper;
+using Uni_Mate.Features.ApartmentManagment.SearchForApartment.Queries;
+using Uni_Mate.Features.ApartmentManagment.SearchForApartment;
 namespace Uni_Mate.Common.Mapping
 {
     public static class MapsterConfig
@@ -66,6 +69,8 @@ namespace Uni_Mate.Common.Mapping
                     SelectMany(c => c.Facilities).
                     Where(c => c.IsSelected == true).
                     Select(c => new ApartmentFacility { FacilityId = c.FacilityId }).ToList());
+
+            config.NewConfig<Pagination<GetAparmtmentFilterDTO>, Pagination<ResponseViewModelForFilter>>();
 
             return config;
         }
