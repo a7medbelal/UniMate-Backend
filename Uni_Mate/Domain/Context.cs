@@ -88,6 +88,18 @@ namespace Uni_Mate.Domain
                 .HasForeignKey(b => b.RoomId)
                 .OnDelete(DeleteBehavior.Cascade);
 
+            modelBuilder.Entity<BookBed>()
+                .HasOne(bb => bb.Booking)
+                .WithMany(b => b.Beds)
+                .HasForeignKey(b => b.BedId)
+                .OnDelete(DeleteBehavior.Restrict);
+
+            modelBuilder.Entity<BookRoom>()
+                .HasOne(bb => bb.Booking)
+                .WithMany(b => b.Rooms)
+                .HasForeignKey(b => b.RoomId)
+                .OnDelete(DeleteBehavior.Restrict);
+
             // Add cascade delete for Apartment -> Bed (through Room)
             // (Handled by Room -> Bed relationship, not directly Apartment -> Bed)
 

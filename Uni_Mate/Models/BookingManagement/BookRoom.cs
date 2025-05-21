@@ -5,9 +5,9 @@ namespace Uni_Mate.Models.BookingManagement
 {
     public class BookRoom : Booking
     {
-        [ForeignKey(nameof(Booking))]
+        [ForeignKey(nameof(BookingManagement.Booking))]
         public int BookingId { get; set; }
-        public Booking booking { get; set; }
+        public Booking? Booking { get; set; }
         [ForeignKey(nameof(Room))]
         public int? RoomId { get; set; }
         public Room? Room { get; set; }
