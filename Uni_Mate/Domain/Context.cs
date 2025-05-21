@@ -50,7 +50,6 @@ namespace Uni_Mate.Domain
 
             modelBuilder.Entity<BookRoom>().ToTable("BookRooms");
             modelBuilder.Entity<BookBed>().ToTable("BookBeds");
-            modelBuilder.Entity<BookApartment>().ToTable("BookApartments");
 
             // store the enum as string in the database
             modelBuilder.Entity<User>()
