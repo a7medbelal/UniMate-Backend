@@ -24,7 +24,7 @@ namespace Uni_Mate.Features.Authoraztion.ForgotPassword
             var result = await _mediator.Send(forgotPasswordCommand);
 
             if (!result.isSuccess)
-            {
+            { 
                 return EndpointResponse<bool>.Failure(result.errorCode, result.message);
             }
             return EndpointResponse<bool>.Success(result.isSuccess, result.message);

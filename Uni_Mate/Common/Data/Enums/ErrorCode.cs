@@ -3,6 +3,7 @@
 public enum ErrorCode
 {
     None,
+    DeletionFailed,
     InvalidRequest,
     InvalidData,
     NotFound,
@@ -19,8 +20,8 @@ public enum ErrorCode
     UserNotFound,
     EmailNotConfirmed,
     InvalidPassword,
-	MissingUserName,
-	MissingNationalID,
+    MissingUserName,
+    MissingNationalID,
     InvalidNationalId,
     InvalidOTP,
     PasswordChangeFailed,
@@ -28,6 +29,10 @@ public enum ErrorCode
     OwnerNotAuthried,
     ApartmentAlreadyExist,
     ApartmentNotFound,
+    ApartmnetFetchFailed,
     RoomCreationFailed,
+    OwnerNotAuthorized,
     LogoutFailed,
+    NotValide
+
 }

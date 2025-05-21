@@ -15,9 +15,7 @@ using System.Reflection;
 using FluentValidation;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Uni_Mate.Common.BaseEndpoints;
-using Uni_Mate.Common.BaseEndpoints;
 using Uni_Mate.Domain.Repository;
-using Uni_Mate.Common.BaseHandlers;
 
 
 namespace Uni_Mate.Configrution
@@ -30,8 +28,8 @@ namespace Uni_Mate.Configrution
             builder.Register(context =>
             {
                 var config = context.Resolve<IConfiguration>();
-                var connectionString = config.GetConnectionString("HossamConnection");
-                //var connectionString = config.GetConnectionString("HostConnection");
+             //   var connectionString = config.GetConnectionString("HossamConnection");
+                var connectionString = config.GetConnectionString("HostConnection");
 
 
                 var options = new DbContextOptionsBuilder<Context>()

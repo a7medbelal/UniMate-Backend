@@ -11,7 +11,7 @@ using System.Text;
 using Uni_Mate.Common.helper;
 using Uni_Mate.Common.Views;
 using Uni_Mate.Middlewares;
-using Uni_Mate.Middlewares;
+
 using Uni_Mate.Features.Common.UploadPhotoCommand;
 
 namespace Uni_Mate
@@ -32,8 +32,8 @@ namespace Uni_Mate
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
 
-           // builder.Services.AddDbContext<Context>(options =>
-       //options.UseSqlServer(builder.Configuration.GetConnectionString("ZiadConnection")));
+            // builder.Services.AddDbContext<Context>(options =>
+            //options.UseSqlServer(builder.Configuration.GetConnectionString("ZiadConnection")));
 
 
             #region Identity Configration
@@ -107,7 +107,6 @@ namespace Uni_Mate
             app.UseCors(builder =>
             {
                 builder.AllowAnyOrigin()
-                       .AllowAnyMethod()
                        .AllowAnyHeader();
             });
             app.UseHttpsRedirection();

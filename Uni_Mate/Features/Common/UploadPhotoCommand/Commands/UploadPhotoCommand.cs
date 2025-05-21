@@ -65,6 +65,28 @@ public class UploadPhotoCommandHandler : BaseRequestHandler<UploadPhotoCommand, 
 		var uploadResult = await _cloudinary.UploadAsync(uploadParams);
 		string url = uploadResult.SecureUri.ToString();
 
+	// public async Task<DeletionResult> DeleteImage(string photoId)
+	// {
+	//     var deletionParams = new DeletionParams(photoId);
+	//     var result = await _cloudinary.DestroyAsync(deletionParams);
+	//     return result;
+	// }
+	public override async Task<RequestResult<string>> Handle(UploadPhotoCommand request, CancellationToken cancellationToken)
+	{
+		if (request.File.Length <= 0)
+		{
+			return RequestResult<string>.Failure(ErrorCode.NotFound, "Couldn't find image");
+		}
+		using var stream = request.File.OpenReadStream();
+		var uploadParams = new ImageUploadParams
+		{
+			File = new FileDescription(request.File.FileName, stream),
+			Transformation = new Transformation()
+				.Height(500).Width(500).Crop("fill").Gravity("face")
+		};
+		var uploadResult = await _cloudinary.UploadAsync(uploadParams);
+		string url = uploadResult.SecureUri.ToString();
+
 		if (uploadResult.Error != null)
 		{
 			return RequestResult<string>.Failure(ErrorCode.NotFound, "Couldn't upload image");

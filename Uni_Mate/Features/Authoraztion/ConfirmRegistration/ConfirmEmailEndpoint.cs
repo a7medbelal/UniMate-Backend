@@ -13,8 +13,8 @@ public class ConfirmEmailEndpoint : BaseEndpoint<ConfirmEmailViewModel, bool>
         {
         }
 
-    [HttpGet]
-    public async Task<EndpointResponse<bool>> ConfirmEmail([FromQuery]ConfirmEmailViewModel viewmodel)
+    [HttpPost]
+    public async Task<EndpointResponse<bool>> ConfirmEmail([FromBody]ConfirmEmailViewModel viewmodel)
     {
         var validationResult = ValidateRequest(viewmodel);
         if (!validationResult.isSuccess)
