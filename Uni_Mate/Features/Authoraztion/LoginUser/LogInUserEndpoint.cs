@@ -24,6 +24,6 @@ public class LogInUserEndpoint : BaseEndpoint<RequestLoginViewModel, LoginRespon
       if (!logInToken.isSuccess)
          return EndpointResponse<LoginResponeViewModel>.Failure(logInToken.errorCode, logInToken.message);
       
-      return EndpointResponse<LoginResponeViewModel>.Success(new LoginResponeViewModel(Token: logInToken.data.Token));
+      return EndpointResponse<LoginResponeViewModel>.Success(new LoginResponeViewModel(Token: logInToken.data.Token , Role : logInToken.data.Role));
    }
 }

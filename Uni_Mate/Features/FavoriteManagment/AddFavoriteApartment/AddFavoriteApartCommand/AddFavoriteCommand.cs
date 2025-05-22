@@ -34,15 +34,15 @@ namespace Uni_Mate.Features.FavoriteManagment.AddFavoriteApartment.AddFavoriteAp
 
             var favoriteApartment = new FavoriteApartment()
             {
-                StudentId = userId,
+                UserId = userId,
                 ApartmentId = request.id,
             };
 
             // Maybe The Favorite Was Added Before 
-            var isFavoriteExist =await _repository.AnyAsync(f => f.StudentId == userId && f.ApartmentId == request.id);
+            var isFavoriteExist =await _repository.AnyAsync(f => f.UserId == userId && f.ApartmentId == request.id);
             if (isFavoriteExist)
             {
-            return RequestResult<bool>.Success(true, "Favorite Was Added Before");
+            return RequestResult<bool>.Failure(ErrorCode.FavWasAdded, "Favorite Was Added Before");
             }
             await _repository.AddAsync(favoriteApartment);
 

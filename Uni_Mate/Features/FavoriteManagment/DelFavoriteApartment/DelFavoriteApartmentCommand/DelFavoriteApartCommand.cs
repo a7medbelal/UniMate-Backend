@@ -36,7 +36,7 @@ namespace Uni_Mate.Features.FavoriteManagment.DelFavoriteApartment.DelFavoriteAp
             }
 
             // Maybe The Favorite Was Added Before 
-            var isFavoriteExist = await _repository.Get(f => f.StudentId == userId && f.ApartmentId == request.id).FirstOrDefaultAsync();
+            var isFavoriteExist = await _repository.Get(f => f.UserId == userId && f.ApartmentId == request.id).FirstOrDefaultAsync();
             if (isFavoriteExist == null)
             {
                 return RequestResult<bool>.Failure(ErrorCode.NotFound, "The Apartment Not Found In Table Favorite");

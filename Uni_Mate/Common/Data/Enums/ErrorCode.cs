@@ -6,12 +6,13 @@ public enum ErrorCode
     DeletionFailed,
     InvalidRequest,
     InvalidData,
-    NotFound,
+    NotFound  ,
     Unauthorized,
     Forbidden,
     InternalServerError,
     ServiceUnavailable,
     UnknownError,
+    // 
     UploadFailed,
     UserAlreadyExists,
     UserCreationFailed,
@@ -33,6 +34,6 @@ public enum ErrorCode
     RoomCreationFailed,
     OwnerNotAuthorized,
     LogoutFailed,
-    NotValide
-
+    NotValide,
+    FavWasAdded
 }
