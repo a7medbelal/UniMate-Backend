@@ -50,7 +50,6 @@ namespace Uni_Mate.Domain
 
             modelBuilder.Entity<BookRoom>().ToTable("BookRooms");
             modelBuilder.Entity<BookBed>().ToTable("BookBeds");
-            modelBuilder.Entity<BookApartment>().ToTable("BookApartments");
 
             // store the enum as string in the database
             modelBuilder.Entity<User>()
@@ -88,6 +87,18 @@ namespace Uni_Mate.Domain
                 .WithMany(r => r.Beds)
                 .HasForeignKey(b => b.RoomId)
                 .OnDelete(DeleteBehavior.Cascade);
+
+            modelBuilder.Entity<BookBed>()
+                .HasOne(bb => bb.Booking)
+                .WithMany(b => b.Beds)
+                .HasForeignKey(b => b.BedId)
+                .OnDelete(DeleteBehavior.Restrict);
+
+            modelBuilder.Entity<BookRoom>()
+                .HasOne(bb => bb.Booking)
+                .WithMany(b => b.Rooms)
+                .HasForeignKey(b => b.RoomId)
+                .OnDelete(DeleteBehavior.Restrict);
 
             // Add cascade delete for Apartment -> Bed (through Room)
             // (Handled by Room -> Bed relationship, not directly Apartment -> Bed)

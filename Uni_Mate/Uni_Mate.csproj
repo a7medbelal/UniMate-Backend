@@ -1,0 +1,235 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="Features\ApartmentManagment\apartment\**" />
+    <Compile Remove="Features\ApartmentManagment\Beds\**" />
+    <Compile Remove="Features\ApartmentManagment\Rooms\**" />
+    <Compile Remove="Features\BookingManagment\**" />
+    <Compile Remove="Features\ReviewManagment\**" />
+    <Compile Remove="Models\ApartmentManagment\**" />
+    <Compile Remove="Models\BookingManagment\**" />
+    <Content Remove="Features\ApartmentManagment\apartment\**" />
+    <Content Remove="Features\ApartmentManagment\Beds\**" />
+    <Content Remove="Features\ApartmentManagment\Rooms\**" />
+    <Content Remove="Features\BookingManagment\**" />
+    <Content Remove="Features\ReviewManagment\**" />
+    <Content Remove="Models\ApartmentManagment\**" />
+    <Content Remove="Models\BookingManagment\**" />
+    <EmbeddedResource Remove="Features\ApartmentManagment\apartment\**" />
+    <EmbeddedResource Remove="Features\ApartmentManagment\Beds\**" />
+    <EmbeddedResource Remove="Features\ApartmentManagment\Rooms\**" />
+    <EmbeddedResource Remove="Features\BookingManagment\**" />
+    <EmbeddedResource Remove="Features\ReviewManagment\**" />
+    <EmbeddedResource Remove="Models\ApartmentManagment\**" />
+    <EmbeddedResource Remove="Models\BookingManagment\**" />
+    <None Remove="Features\ApartmentManagment\apartment\**" />
+    <None Remove="Features\ApartmentManagment\Beds\**" />
+    <None Remove="Features\ApartmentManagment\Rooms\**" />
+    <None Remove="Features\BookingManagment\**" />
+    <None Remove="Features\ReviewManagment\**" />
+    <None Remove="Models\ApartmentManagment\**" />
+    <None Remove="Models\BookingManagment\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Remove="Models\ApartmentManagement\BookingManagement\Booking.cs" />
+    <Compile Remove="Models\ApartmentManagement\BookingManagement\BookingStatus.cs" />
+    <Compile Remove="Models\ApartmentManagement\BookingManagement\BookingType.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="bin\Debug\net8.0\appsettings.Development.json" />
+    <Content Include="bin\Debug\net8.0\appsettings.json" />
+    <Content Include="bin\Debug\net8.0\Uni_Mate.deps.json" />
+    <Content Include="bin\Debug\net8.0\Uni_Mate.runtimeconfig.json" />
+    <Content Include="bin\Debug\net8.0\Uni_Mate.staticwebassets.endpoints.json" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Autofac" Version="8.2.0" />
+    <PackageReference Include="Autofac.Extensions.DependencyInjection" Version="10.0.0" />
+    <PackageReference Include="CloudinaryDotNet" Version="1.27.5" />
+    <PackageReference Include="FluentValidation" Version="11.9.0" />
+    <PackageReference Include="FluentValidation.AspNetCore" Version="11.2.0" />
+    <PackageReference Include="LinqKit" Version="1.3.8" />
+    <PackageReference Include="MailKit" Version="4.11.0" />
+    <PackageReference Include="Mapster" Version="7.4.0" />
+    <PackageReference Include="MediatR" Version="12.1.1" />
+    <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="8.0.2" />
+    <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="8.0.11" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="8.0.11" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="8.0.11">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="8.0.11" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="8.0.11">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="MimeKit" Version="4.11.0" />
+    <PackageReference Include="Swashbuckle.AspNetCore" Version="6.4.0" />
+    <PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="8.2.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Features\ApartmentManagment\Facilites\AddFacilty\command\" />
+    <Folder Include="Features\Authoraztion\RoleAcess\Commands\" />
+    <Folder Include="Features\ApartmentManagment\UpdateApartment\UpdataPropertyInfoSave\" />
+    <Folder Include="Features\StudentManager\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="bin\Debug\net8.0\Autofac.dll" />
+    <None Include="bin\Debug\net8.0\Autofac.Extensions.DependencyInjection.dll" />
+    <None Include="bin\Debug\net8.0\Azure.Core.dll" />
+    <None Include="bin\Debug\net8.0\Azure.Identity.dll" />
+    <None Include="bin\Debug\net8.0\BouncyCastle.Cryptography.dll" />
+    <None Include="bin\Debug\net8.0\CloudinaryDotNet.dll" />
+    <None Include="bin\Debug\net8.0\cs\Microsoft.CodeAnalysis.CSharp.resources.dll" />
+    <None Include="bin\Debug\net8.0\cs\Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll" />
+    <None Include="bin\Debug\net8.0\cs\Microsoft.CodeAnalysis.resources.dll" />
+    <None Include="bin\Debug\net8.0\cs\Microsoft.CodeAnalysis.Workspaces.resources.dll" />
+    <None Include="bin\Debug\net8.0\de\Microsoft.CodeAnalysis.CSharp.resources.dll" />
+    <None Include="bin\Debug\net8.0\de\Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll" />
+    <None Include="bin\Debug\net8.0\de\Microsoft.CodeAnalysis.resources.dll" />
+    <None Include="bin\Debug\net8.0\de\Microsoft.CodeAnalysis.Workspaces.resources.dll" />
+    <None Include="bin\Debug\net8.0\es\Microsoft.CodeAnalysis.CSharp.resources.dll" />
+    <None Include="bin\Debug\net8.0\es\Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll" />
+    <None Include="bin\Debug\net8.0\es\Microsoft.CodeAnalysis.resources.dll" />
+    <None Include="bin\Debug\net8.0\es\Microsoft.CodeAnalysis.Workspaces.resources.dll" />
+    <None Include="bin\Debug\net8.0\FluentValidation.AspNetCore.dll" />
+    <None Include="bin\Debug\net8.0\FluentValidation.DependencyInjectionExtensions.dll" />
+    <None Include="bin\Debug\net8.0\FluentValidation.dll" />
+    <None Include="bin\Debug\net8.0\fr\Microsoft.CodeAnalysis.CSharp.resources.dll" />
+    <None Include="bin\Debug\net8.0\fr\Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll" />
+    <None Include="bin\Debug\net8.0\fr\Microsoft.CodeAnalysis.resources.dll" />
+    <None Include="bin\Debug\net8.0\fr\Microsoft.CodeAnalysis.Workspaces.resources.dll" />
+    <None Include="bin\Debug\net8.0\Humanizer.dll" />
+    <None Include="bin\Debug\net8.0\it\Microsoft.CodeAnalysis.CSharp.resources.dll" />
+    <None Include="bin\Debug\net8.0\it\Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll" />
+    <None Include="bin\Debug\net8.0\it\Microsoft.CodeAnalysis.resources.dll" />
+    <None Include="bin\Debug\net8.0\it\Microsoft.CodeAnalysis.Workspaces.resources.dll" />
+    <None Include="bin\Debug\net8.0\ja\Microsoft.CodeAnalysis.CSharp.resources.dll" />
+    <None Include="bin\Debug\net8.0\ja\Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll" />
+    <None Include="bin\Debug\net8.0\ja\Microsoft.CodeAnalysis.resources.dll" />
+    <None Include="bin\Debug\net8.0\ja\Microsoft.CodeAnalysis.Workspaces.resources.dll" />
+    <None Include="bin\Debug\net8.0\ko\Microsoft.CodeAnalysis.CSharp.resources.dll" />
+    <None Include="bin\Debug\net8.0\ko\Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll" />
+    <None Include="bin\Debug\net8.0\ko\Microsoft.CodeAnalysis.resources.dll" />
+    <None Include="bin\Debug\net8.0\ko\Microsoft.CodeAnalysis.Workspaces.resources.dll" />
+    <None Include="bin\Debug\net8.0\MailKit.dll" />
+    <None Include="bin\Debug\net8.0\Mapster.Core.dll" />
+    <None Include="bin\Debug\net8.0\Mapster.dll" />
+    <None Include="bin\Debug\net8.0\MediatR.Contracts.dll" />
+    <None Include="bin\Debug\net8.0\MediatR.dll" />
+    <None Include="bin\Debug\net8.0\Microsoft.AspNetCore.Authentication.JwtBearer.dll" />
+    <None Include="bin\Debug\net8.0\Microsoft.AspNetCore.Cryptography.Internal.dll" />
+    <None Include="bin\Debug\net8.0\Microsoft.AspNetCore.Cryptography.KeyDerivation.dll" />
+    <None Include="bin\Debug\net8.0\Microsoft.AspNetCore.Identity.EntityFrameworkCore.dll" />
+    <None Include="bin\Debug\net8.0\Microsoft.Bcl.AsyncInterfaces.dll" />
+    <None Include="bin\Debug\net8.0\Microsoft.Bcl.TimeProvider.dll" />
+    <None Include="bin\Debug\net8.0\Microsoft.CodeAnalysis.CSharp.dll" />
+    <None Include="bin\Debug\net8.0\Microsoft.CodeAnalysis.CSharp.Workspaces.dll" />
+    <None Include="bin\Debug\net8.0\Microsoft.CodeAnalysis.dll" />
+    <None Include="bin\Debug\net8.0\Microsoft.CodeAnalysis.Workspaces.dll" />
+    <None Include="bin\Debug\net8.0\Microsoft.Data.SqlClient.dll" />
+    <None Include="bin\Debug\net8.0\Microsoft.EntityFrameworkCore.Abstractions.dll" />
+    <None Include="bin\Debug\net8.0\Microsoft.EntityFrameworkCore.Design.dll" />
+    <None Include="bin\Debug\net8.0\Microsoft.EntityFrameworkCore.dll" />
+    <None Include="bin\Debug\net8.0\Microsoft.EntityFrameworkCore.Relational.dll" />
+    <None Include="bin\Debug\net8.0\Microsoft.EntityFrameworkCore.SqlServer.dll" />
+    <None Include="bin\Debug\net8.0\Microsoft.Extensions.Caching.Memory.dll" />
+    <None Include="bin\Debug\net8.0\Microsoft.Extensions.DependencyInjection.Abstractions.dll" />
+    <None Include="bin\Debug\net8.0\Microsoft.Extensions.DependencyInjection.dll" />
+    <None Include="bin\Debug\net8.0\Microsoft.Extensions.DependencyModel.dll" />
+    <None Include="bin\Debug\net8.0\Microsoft.Extensions.Identity.Core.dll" />
+    <None Include="bin\Debug\net8.0\Microsoft.Extensions.Identity.Stores.dll" />
+    <None Include="bin\Debug\net8.0\Microsoft.Extensions.Logging.Abstractions.dll" />
+    <None Include="bin\Debug\net8.0\Microsoft.Extensions.Logging.dll" />
+    <None Include="bin\Debug\net8.0\Microsoft.Extensions.Options.dll" />
+    <None Include="bin\Debug\net8.0\Microsoft.Identity.Client.dll" />
+    <None Include="bin\Debug\net8.0\Microsoft.Identity.Client.Extensions.Msal.dll" />
+    <None Include="bin\Debug\net8.0\Microsoft.IdentityModel.Abstractions.dll" />
+    <None Include="bin\Debug\net8.0\Microsoft.IdentityModel.JsonWebTokens.dll" />
+    <None Include="bin\Debug\net8.0\Microsoft.IdentityModel.Logging.dll" />
+    <None Include="bin\Debug\net8.0\Microsoft.IdentityModel.Protocols.dll" />
+    <None Include="bin\Debug\net8.0\Microsoft.IdentityModel.Protocols.OpenIdConnect.dll" />
+    <None Include="bin\Debug\net8.0\Microsoft.IdentityModel.Tokens.dll" />
+    <None Include="bin\Debug\net8.0\Microsoft.OpenApi.dll" />
+    <None Include="bin\Debug\net8.0\Microsoft.SqlServer.Server.dll" />
+    <None Include="bin\Debug\net8.0\Microsoft.Win32.SystemEvents.dll" />
+    <None Include="bin\Debug\net8.0\MimeKit.dll" />
+    <None Include="bin\Debug\net8.0\Mono.TextTemplating.dll" />
+    <None Include="bin\Debug\net8.0\Newtonsoft.Json.dll" />
+    <None Include="bin\Debug\net8.0\pl\Microsoft.CodeAnalysis.CSharp.resources.dll" />
+    <None Include="bin\Debug\net8.0\pl\Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll" />
+    <None Include="bin\Debug\net8.0\pl\Microsoft.CodeAnalysis.resources.dll" />
+    <None Include="bin\Debug\net8.0\pl\Microsoft.CodeAnalysis.Workspaces.resources.dll" />
+    <None Include="bin\Debug\net8.0\pt-BR\Microsoft.CodeAnalysis.CSharp.resources.dll" />
+    <None Include="bin\Debug\net8.0\pt-BR\Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll" />
+    <None Include="bin\Debug\net8.0\pt-BR\Microsoft.CodeAnalysis.resources.dll" />
+    <None Include="bin\Debug\net8.0\pt-BR\Microsoft.CodeAnalysis.Workspaces.resources.dll" />
+    <None Include="bin\Debug\net8.0\runtimes\unix\lib\net6.0\Microsoft.Data.SqlClient.dll" />
+    <None Include="bin\Debug\net8.0\runtimes\unix\lib\net6.0\System.Drawing.Common.dll" />
+    <None Include="bin\Debug\net8.0\runtimes\win-arm64\native\Microsoft.Data.SqlClient.SNI.dll" />
+    <None Include="bin\Debug\net8.0\runtimes\win-arm\native\Microsoft.Data.SqlClient.SNI.dll" />
+    <None Include="bin\Debug\net8.0\runtimes\win-x64\native\Microsoft.Data.SqlClient.SNI.dll" />
+    <None Include="bin\Debug\net8.0\runtimes\win-x86\native\Microsoft.Data.SqlClient.SNI.dll" />
+    <None Include="bin\Debug\net8.0\runtimes\win\lib\net6.0\Microsoft.Data.SqlClient.dll" />
+    <None Include="bin\Debug\net8.0\runtimes\win\lib\net6.0\Microsoft.Win32.SystemEvents.dll" />
+    <None Include="bin\Debug\net8.0\runtimes\win\lib\net6.0\System.Drawing.Common.dll" />
+    <None Include="bin\Debug\net8.0\runtimes\win\lib\net6.0\System.Runtime.Caching.dll" />
+    <None Include="bin\Debug\net8.0\runtimes\win\lib\net6.0\System.Security.Cryptography.ProtectedData.dll" />
+    <None Include="bin\Debug\net8.0\runtimes\win\lib\net6.0\System.Windows.Extensions.dll" />
+    <None Include="bin\Debug\net8.0\runtimes\win\lib\net8.0\System.Security.Cryptography.Pkcs.dll" />
+    <None Include="bin\Debug\net8.0\ru\Microsoft.CodeAnalysis.CSharp.resources.dll" />
+    <None Include="bin\Debug\net8.0\ru\Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll" />
+    <None Include="bin\Debug\net8.0\ru\Microsoft.CodeAnalysis.resources.dll" />
+    <None Include="bin\Debug\net8.0\ru\Microsoft.CodeAnalysis.Workspaces.resources.dll" />
+    <None Include="bin\Debug\net8.0\Swashbuckle.AspNetCore.Swagger.dll" />
+    <None Include="bin\Debug\net8.0\Swashbuckle.AspNetCore.SwaggerGen.dll" />
+    <None Include="bin\Debug\net8.0\Swashbuckle.AspNetCore.SwaggerUI.dll" />
+    <None Include="bin\Debug\net8.0\System.ClientModel.dll" />
+    <None Include="bin\Debug\net8.0\System.CodeDom.dll" />
+    <None Include="bin\Debug\net8.0\System.Composition.AttributedModel.dll" />
+    <None Include="bin\Debug\net8.0\System.Composition.Convention.dll" />
+    <None Include="bin\Debug\net8.0\System.Composition.Hosting.dll" />
+    <None Include="bin\Debug\net8.0\System.Composition.Runtime.dll" />
+    <None Include="bin\Debug\net8.0\System.Composition.TypedParts.dll" />
+    <None Include="bin\Debug\net8.0\System.Configuration.ConfigurationManager.dll" />
+    <None Include="bin\Debug\net8.0\System.Drawing.Common.dll" />
+    <None Include="bin\Debug\net8.0\System.IdentityModel.Tokens.Jwt.dll" />
+    <None Include="bin\Debug\net8.0\System.Memory.Data.dll" />
+    <None Include="bin\Debug\net8.0\System.Runtime.Caching.dll" />
+    <None Include="bin\Debug\net8.0\System.Security.Cryptography.Pkcs.dll" />
+    <None Include="bin\Debug\net8.0\System.Security.Cryptography.ProtectedData.dll" />
+    <None Include="bin\Debug\net8.0\System.Security.Permissions.dll" />
+    <None Include="bin\Debug\net8.0\System.Windows.Extensions.dll" />
+    <None Include="bin\Debug\net8.0\tr\Microsoft.CodeAnalysis.CSharp.resources.dll" />
+    <None Include="bin\Debug\net8.0\tr\Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll" />
+    <None Include="bin\Debug\net8.0\tr\Microsoft.CodeAnalysis.resources.dll" />
+    <None Include="bin\Debug\net8.0\tr\Microsoft.CodeAnalysis.Workspaces.resources.dll" />
+    <None Include="bin\Debug\net8.0\Uni_Mate.dll" />
+    <None Include="bin\Debug\net8.0\Uni_Mate.exe" />
+    <None Include="bin\Debug\net8.0\Uni_Mate.pdb" />
+    <None Include="bin\Debug\net8.0\zh-Hans\Microsoft.CodeAnalysis.CSharp.resources.dll" />
+    <None Include="bin\Debug\net8.0\zh-Hans\Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll" />
+    <None Include="bin\Debug\net8.0\zh-Hans\Microsoft.CodeAnalysis.resources.dll" />
+    <None Include="bin\Debug\net8.0\zh-Hans\Microsoft.CodeAnalysis.Workspaces.resources.dll" />
+    <None Include="bin\Debug\net8.0\zh-Hant\Microsoft.CodeAnalysis.CSharp.resources.dll" />
+    <None Include="bin\Debug\net8.0\zh-Hant\Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll" />
+    <None Include="bin\Debug\net8.0\zh-Hant\Microsoft.CodeAnalysis.resources.dll" />
+    <None Include="bin\Debug\net8.0\zh-Hant\Microsoft.CodeAnalysis.Workspaces.resources.dll" />
+    <None Include="Models\ApartmentManagement\BookingManagement\Booking.cs" />
+    <None Include="Models\ApartmentManagement\BookingManagement\BookingStatus.cs" />
+    <None Include="Models\ApartmentManagement\BookingManagement\BookingType.cs" />
+  </ItemGroup>
+
+</Project>
