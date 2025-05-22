@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
+using Uni_Mate.Models.ApartmentManagement;
 using Uni_Mate.Models.UserManagment;
 
 namespace Uni_Mate.Models.BookingManagement
@@ -8,11 +9,8 @@ namespace Uni_Mate.Models.BookingManagement
         [ForeignKey(nameof(Student))]
         public string? StudentId { get; set; }
         public Student? Student { get; set; }
-
-        [ForeignKey(nameof(Owner))]
-        public string? OwnerId { get; set; }
-        public Owner? Owner { get; set; }
-
+        public int ApartmentId { get; set; }
+        public Apartment? Apartment { get; set; }
         public DateTime StartDate { get; set; }
         public DateTime EndDate { get; set; }
 
