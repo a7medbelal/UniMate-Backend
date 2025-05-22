@@ -15,7 +15,5 @@ namespace Uni_Mate.Models.BookingManagement
         public DateTime EndDate { get; set; }
 
         public BookingStatus Status { get; set; } = BookingStatus.Pending;
-        public ICollection<BookRoom> Rooms { get; set; } = new List<BookRoom>(); 
-        public ICollection<BookBed> Beds { get; set; } = new List<BookBed>();
     }
 }
