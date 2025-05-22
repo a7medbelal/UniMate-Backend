@@ -1,16 +1,16 @@
-
+using Uni_Mate.Common.Views;
 using Microsoft.AspNetCore.Mvc;
 using Uni_Mate.Common.BaseEndpoints;
-using Uni_Mate.Common.Views;
+using Uni_Mate.Features.BookingManagement.BedViewModel;
 using Uni_Mate.Features.BookingManagement.Beds.Commands;
 
-public record BookBedViewModel(int BedId, int ApartmentId, int RoomId);
 public class BookBedEndpoint : BaseEndpoint<BookBedViewModel, bool>
 {
     public BookBedEndpoint(BaseEndpointParameters<BookBedViewModel> parameters) : base(parameters)
     {
     }
     [HttpPost]
+    [ValidateAntiForgeryToken]
     public async Task<EndpointResponse<bool>> BookBed([FromBody] BookBedViewModel viewmodel,CancellationToken cancellationToken)
     {
         var validationResult = ValidateRequest(viewmodel);
