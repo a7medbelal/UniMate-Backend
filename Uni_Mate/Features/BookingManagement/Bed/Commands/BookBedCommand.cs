@@ -20,7 +20,7 @@ public class BookBedCommandHandler : BaseRequestHandler<BookBedCommand, RequestR
 
     public async override Task<RequestResult<bool>> Handle(BookBedCommand request, CancellationToken cancellationToken)
     {
-        var BookBeforeQuery = new BookBeforeQuery("2", request.ApartmentId);
+        var BookBeforeQuery = new BookBeforeQuery(_userInfo.ID, request.ApartmentId);
         var result = await _mediator.Send(BookBeforeQuery, cancellationToken);
         if (!result.isSuccess)
         {
@@ -30,7 +30,7 @@ public class BookBedCommandHandler : BaseRequestHandler<BookBedCommand, RequestR
         BookBed bookBed = new()
         {
             ApartmentId = request.ApartmentId,
-            StudentId = "2",
+            StudentId = _userInfo.ID,
             BedId = request.BedId,
             Status = BookingStatus.Pending,
             StartDate = DateTime.UtcNow,
