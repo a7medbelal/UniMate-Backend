@@ -16,7 +16,7 @@ public class BookBeforeQueryHandler : BaseRequestHandler<BookBeforeQuery, Reques
     public async override Task<RequestResult<bool>> Handle(BookBeforeQuery request, CancellationToken cancellationToken)
     {
         var booking = await _repository.AnyAsync(b => b.ApartmentId == request.ApartmentId && b.StudentId == request.StudentId);
-        if (!booking)
+        if (booking)
         {
             return RequestResult<bool>.Failure(ErrorCode.AlreadyExists, "User is already booked");
         }
