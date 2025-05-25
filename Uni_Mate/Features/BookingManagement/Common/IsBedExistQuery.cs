@@ -24,7 +24,7 @@ public class IsBedExistQueryHandler : BaseRequestHandler<IsBedExistQuery, Reques
 
         if (!bed.IsAvailable)
         {
-            return RequestResult<bool>.Failure(ErrorCode.NotValide, "Bed is not valide");
+            return RequestResult<bool>.Failure(ErrorCode.NotValide, "Bed is not  Valide ");
         }
         return RequestResult<bool>.Success(true, "Bed exists");
     }
