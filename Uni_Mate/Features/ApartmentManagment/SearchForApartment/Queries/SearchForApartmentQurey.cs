@@ -13,7 +13,7 @@ using Uni_Mate.Features.ApartmentManagment.CreateApartmnetProcess.Commands.Categ
 using Uni_Mate.Features.ApartmentManagment.CreateApartmnetProcess.Commands.CategoryWithFaciltyCommands;
 using Uni_Mate.Features.ApartmentManagment.CreateApartmnetProcess.Commands.CreateApartmentInfoCommand;
 using Uni_Mate.Features.ApartmentManagment.CreateApartmnetProcess.Commands.CreateFullApartmentOrcasterartor;
-using Uni_Mate.Features.ApartmentManagment.CreateApartmnetProcess.Commands.UploadApartmentCommand;
+//using Uni_Mate.Features.ApartmentManagment.CreateApartmnetProcess.Commands.UploadApartmentCommand;
 using Uni_Mate.Models;
 using Uni_Mate.Models.ApartmentManagement;
 using Uni_Mate.Models.GeneralEnum;

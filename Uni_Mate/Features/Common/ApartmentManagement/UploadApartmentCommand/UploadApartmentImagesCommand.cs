@@ -3,11 +3,11 @@ using Uni_Mate.Common.Views;
 using Uni_Mate.Common.Data.Enums;
 using Uni_Mate.Models.ApartmentManagement;
 using MediatR;
-using Uni_Mate.Features.Common.UploadPhotoCommand.Commands;
+using Uni_Mate.Features.Common.UploadImageCommand.Commands;
 using Uni_Mate.Models.ApartmentManagement.Enum;
 
-namespace Uni_Mate.Features.ApartmentManagment.CreateApartmnetProcess.Commands.UploadApartmentCommand;
-public record UploadApartmentImagesCommand(int ApartmentId, UploadPhotosViewModel Photos) : IRequest<RequestResult<List<Image>>>;
+namespace Uni_Mate.Features.Common.ApartmentManagement.UploadApartmentCommand;
+public record UploadApartmentImagesCommand(int ApartmentId, UploadImagesViewModel Images) : IRequest<RequestResult<List<Image>>>;
 
 public class UploadApartmentImagesCommandHandler : BaseRequestHandler<UploadApartmentImagesCommand, RequestResult<List<Image>>, Image>
 {
@@ -20,20 +20,20 @@ public class UploadApartmentImagesCommandHandler : BaseRequestHandler<UploadApar
         var result = new List<Image>();
         var imageCategories = new Dictionary<string, List<IFormFile>>
         {
-            { "kitchen", request.Photos.Kitchen },
-            { "bathroom", request.Photos.Bathroom },
-            { "outside", request.Photos.Outside },
-            { "living room", request.Photos.LivingRoom }
+            { "kitchen", request.Images.Kitchen },
+            { "bathroom", request.Images.Bathroom },
+            { "outside", request.Images.Outside },
+            { "living room", request.Images.LivingRoom }
         };
 
-        if (request.Photos.Additional != null)
+        if (request.Images.Additional != null)
         {
-            imageCategories.Add("additional", request.Photos.Additional);
+            imageCategories.Add("additional", request.Images.Additional);
         }
 
         foreach (var category in imageCategories)
         {
-            var temp = await _mediator.Send(new MultiUploadPhotoCommand(category.Value));
+            var temp = await _mediator.Send(new MultiUploadImageCommand(category.Value));
             foreach (var obj in temp.data)
             {
                 Image image = new Image
