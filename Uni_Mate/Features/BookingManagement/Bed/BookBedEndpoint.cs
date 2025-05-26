@@ -10,7 +10,6 @@ public class BookBedEndpoint : BaseEndpoint<BookBedViewModel, bool>
     {
     }
     [HttpPost]
-    [ValidateAntiForgeryToken]
     public async Task<EndpointResponse<bool>> BookBed([FromBody] BookBedViewModel viewmodel,CancellationToken cancellationToken)
     {
         var validationResult = ValidateRequest(viewmodel);
@@ -18,7 +17,7 @@ public class BookBedEndpoint : BaseEndpoint<BookBedViewModel, bool>
         {
             return validationResult;
         }
-        var result = await _mediator.Send(new BookBedCommand(viewmodel.BedId, viewmodel.ApartmentId), cancellationToken);
+        var result = await _mediator.Send(new BookBedCommand(viewmodel.RoomId, viewmodel.ApartmentId), cancellationToken);
         if (!result.isSuccess)
         {
             return EndpointResponse<bool>.Failure(result.errorCode, result.message);

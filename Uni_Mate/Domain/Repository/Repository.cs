@@ -95,7 +95,7 @@ namespace Uni_Mate.Domain.Repository
 
                 entity.UpdatedDate = DateTime.UtcNow;
                 entry.Property(nameof(entity.UpdatedBy)).IsModified = true;
-
+                
                 return true;
             }
             catch (Exception ex)
@@ -107,6 +107,7 @@ namespace Uni_Mate.Domain.Repository
         {
             entity.Deleted = true;
             await SaveIncludeAsync(entity, nameof(BaseEntity.Deleted));
+            await SaveChangesAsync();
         }
 
         public async Task HardDelete(Entity entity)
