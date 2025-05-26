@@ -10,6 +10,7 @@
     <Compile Remove="Features\ApartmentManagment\apartment\**" />
     <Compile Remove="Features\ApartmentManagment\Beds\**" />
     <Compile Remove="Features\ApartmentManagment\Rooms\**" />
+    <Compile Remove="Features\ApartmentManagment\UpdateApartment\UpdataPropertyInfoSave\**" />
     <Compile Remove="Features\BookingManagment\**" />
     <Compile Remove="Features\ReviewManagment\**" />
     <Compile Remove="Models\ApartmentManagment\**" />
@@ -17,6 +18,7 @@
     <Content Remove="Features\ApartmentManagment\apartment\**" />
     <Content Remove="Features\ApartmentManagment\Beds\**" />
     <Content Remove="Features\ApartmentManagment\Rooms\**" />
+    <Content Remove="Features\ApartmentManagment\UpdateApartment\UpdataPropertyInfoSave\**" />
     <Content Remove="Features\BookingManagment\**" />
     <Content Remove="Features\ReviewManagment\**" />
     <Content Remove="Models\ApartmentManagment\**" />
@@ -24,6 +26,7 @@
     <EmbeddedResource Remove="Features\ApartmentManagment\apartment\**" />
     <EmbeddedResource Remove="Features\ApartmentManagment\Beds\**" />
     <EmbeddedResource Remove="Features\ApartmentManagment\Rooms\**" />
+    <EmbeddedResource Remove="Features\ApartmentManagment\UpdateApartment\UpdataPropertyInfoSave\**" />
     <EmbeddedResource Remove="Features\BookingManagment\**" />
     <EmbeddedResource Remove="Features\ReviewManagment\**" />
     <EmbeddedResource Remove="Models\ApartmentManagment\**" />
@@ -31,6 +34,7 @@
     <None Remove="Features\ApartmentManagment\apartment\**" />
     <None Remove="Features\ApartmentManagment\Beds\**" />
     <None Remove="Features\ApartmentManagment\Rooms\**" />
+    <None Remove="Features\ApartmentManagment\UpdateApartment\UpdataPropertyInfoSave\**" />
     <None Remove="Features\BookingManagment\**" />
     <None Remove="Features\ReviewManagment\**" />
     <None Remove="Models\ApartmentManagment\**" />
@@ -81,7 +85,6 @@
   <ItemGroup>
     <Folder Include="Features\ApartmentManagment\Facilites\AddFacilty\command\" />
     <Folder Include="Features\Authoraztion\RoleAcess\Commands\" />
-    <Folder Include="Features\ApartmentManagment\UpdateApartment\UpdataPropertyInfoSave\" />
     <Folder Include="Features\StudentManager\" />
   </ItemGroup>
 
