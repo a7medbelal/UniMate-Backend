@@ -14,7 +14,7 @@ public record UploadImageCommand(IFormFile File) : IRequest<RequestResult<string
 
 public class UploadImageCommandHandler : BaseRequestHandler<UploadImageCommand, RequestResult<string>, Image>
 {
-    private readonly Cloudinary _cloudinary;
+	private readonly Cloudinary _cloudinary;
 
     public UploadImageCommandHandler(BaseRequestHandlerParameter<Image> parameters, IOptions<CloudinarySettings> config) : base(parameters)
     {
@@ -26,7 +26,7 @@ public class UploadImageCommandHandler : BaseRequestHandler<UploadImageCommand, 
         _cloudinary = new Cloudinary(acc);
     }
 
-    // public async Task<ImageUploadResult> UploadImage(IFormFile file)
+    // public async Task<ImageUploadResult> UploadPhoto(IFormFile file)
     // {
     //     var uploadResult = new ImageUploadResult();
     //     if (file.Length > 0)
@@ -65,10 +65,10 @@ public class UploadImageCommandHandler : BaseRequestHandler<UploadImageCommand, 
         var uploadResult = await _cloudinary.UploadAsync(uploadParams);
         string url = uploadResult.SecureUri.ToString();
 
-        if (uploadResult.Error != null)
-        {
-            return RequestResult<string>.Failure(ErrorCode.NotFound, "Couldn't upload image");
-        }
-        return RequestResult<string>.Success(url, "Image uploaded successfully");
-    }
+		if (uploadResult.Error != null)
+		{
+			return RequestResult<string>.Failure(ErrorCode.NotFound, "Couldn't upload image");
+		}
+		return RequestResult<string>.Success(url, "Image uploaded successfully");
+	}
 }

@@ -2,12 +2,13 @@
 using Uni_Mate.Common.BaseHandlers;
 using Uni_Mate.Common.Data.Enums;
 using Uni_Mate.Common.Views;
+using Uni_Mate.Features.ApartmentManagment.DeleteApartment.Commands;
 using Uni_Mate.Features.Common.ApartmentManagement.UploadApartmentCommand;
 using Uni_Mate.Features.Common.DeleteImage.Commands;
 using Uni_Mate.Models.ApartmentManagement;
 
 namespace Uni_Mate.Features.ApartmentManagment.UpdateApartment.UpdatePropertyImages.Commands;
-public record UpdateApartmentImagesCommand(List<Image> DeleteImages, UploadImagesViewModel UploadedImages) : IRequest<RequestResult<bool>>;
+public record UpdateApartmentImagesCommand(int ApartmentId, List<Image> DeleteImages, UploadImagesViewModel? UploadedImages) : IRequest<RequestResult<bool>>;
 
 public class UpdateApartmentImagesCommandHandler : BaseRequestHandler<UpdateApartmentImagesCommand, RequestResult<bool>, Image>
 {
@@ -20,6 +21,14 @@ public class UpdateApartmentImagesCommandHandler : BaseRequestHandler<UpdateApar
         {
             return RequestResult<bool>.Failure(ErrorCode.InvalidData, "No images provided for update");
         }
+        var uploadImages = new UploadApartmentImagesCommand(request.ApartmentId, request.UploadedImages);
+        var uploadImagesResult = await _mediator.Send(uploadImages, cancellationToken);
+            
+        if(!uploadImagesResult.isSuccess)
+        {
+            return RequestResult<bool>.Failure(ErrorCode.UploadFailed, "Failed to upload new apartment images");
+        }
+
         foreach (var image in request.DeleteImages)
         {
             var deleteImageCommand = new DeleteImageCommand(image.ImageUrl);

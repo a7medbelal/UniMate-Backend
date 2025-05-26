@@ -50,6 +50,7 @@ namespace Uni_Mate.Domain
 
             modelBuilder.Entity<BookRoom>().ToTable("BookRooms");
             modelBuilder.Entity<BookBed>().ToTable("BookBeds");
+            modelBuilder.Entity<BookApartment>().ToTable("BookApartments");
 
             // store the enum as string in the database
             modelBuilder.Entity<User>()
@@ -114,6 +115,27 @@ namespace Uni_Mate.Domain
             admin.PasswordHash = hasher.HashPassword(admin, "Admin123!");
 
             modelBuilder.Entity<User>().HasData(admin);
+
+
+            var student = new User
+            {
+                Id = "lkdjslkdfslkd", // Use string if using Identity default keys
+                Fname = "Ziad",
+                Lname = "Atta",
+                UserName = "ZiadAtta",
+                //Address ="qena" ,
+                NormalizedUserName = "Student",
+                Email = "ziadatta723@gmail.com",
+                NormalizedEmail = "ziadatta723@gmail.com",
+                EmailConfirmed = true,
+                PhoneNumber = "01040363077",
+                PhoneNumberConfirmed = true,
+                role = Role.Student,
+                National_Id = "30401252703615",
+            };
+            student.PasswordHash = hasher.HashPassword(admin, "Ziad23@ndmcdr");
+
+            modelBuilder.Entity<User>().HasData(student);
 
 
 

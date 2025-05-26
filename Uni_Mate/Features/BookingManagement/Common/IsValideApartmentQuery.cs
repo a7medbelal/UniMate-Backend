@@ -2,16 +2,14 @@ using MediatR;
 using Uni_Mate.Common.BaseHandlers;
 using Uni_Mate.Common.Data.Enums;
 using Uni_Mate.Common.Views;
-using Uni_Mate.Models.ApartmentManagement;
-using Uni_Mate.Models.UserManagment;
 
 namespace Uni_Mate.Features.BookingManagement.Common;
 
 public record IsValideApartmentQuery(int ApartmentId) : IRequest<RequestResult<bool>>;
 
-public class IsValideApartmentQueryHandler : BaseRequestHandler<IsValideApartmentQuery, RequestResult<bool>, Apartment>
+public class IsValideApartmentQueryHandler : BaseRequestHandler<IsValideApartmentQuery, RequestResult<bool>, Uni_Mate.Models.ApartmentManagement.Apartment>
 {
-    public IsValideApartmentQueryHandler(BaseRequestHandlerParameter<Apartment> parameters) : base(parameters)
+    public IsValideApartmentQueryHandler(BaseRequestHandlerParameter<Models.ApartmentManagement.Apartment> parameters) : base(parameters)
     {
     }
 
@@ -26,7 +24,7 @@ public class IsValideApartmentQueryHandler : BaseRequestHandler<IsValideApartmen
 
         if (apart.IsAvailable == false)
         {
-            return RequestResult<bool>.Failure(ErrorCode.NotValide, "The Apartment is not valide .");
+            return RequestResult<bool>.Failure(ErrorCode.NotValide, "The Apartment is not Available .");
         }
 
         return RequestResult<bool>.Success(true, "Apartment exists");

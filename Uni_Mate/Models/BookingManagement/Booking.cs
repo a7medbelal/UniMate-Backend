@@ -1,5 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
 using Uni_Mate.Models.ApartmentManagement;
+using Uni_Mate.Models.BookingManagment;
 using Uni_Mate.Models.UserManagment;
 
 namespace Uni_Mate.Models.BookingManagement
@@ -15,5 +16,6 @@ namespace Uni_Mate.Models.BookingManagement
         public DateTime EndDate { get; set; }
 
         public BookingStatus Status { get; set; } = BookingStatus.Pending;
+        public BookingType Type { get; set; }
     }
 }

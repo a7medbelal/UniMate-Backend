@@ -34,6 +34,9 @@ public enum ErrorCode
     RoomCreationFailed,
     OwnerNotAuthorized,
     LogoutFailed,
-    NotValide
-
+    NotValide,
+    BedNotFound,
+    BookingFailed,
+    Booked,
+    ServerError
 }
