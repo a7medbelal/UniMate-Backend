@@ -33,7 +33,12 @@ namespace Uni_Mate.Models.UserManagment
         public string? BackPersonalImage { get; set; }
         public ICollection<FavoriteApartment>? FavoriteApartments { get; set; }
         public ICollection<Booking>? Bookings { get; set; } = new List<Booking>();
-    }
+
+        // Extra Data To Student in the next step i will delete table phone and table social Account
+        public string? AnotherPhoneNum { get; set; }
+        public string? FaceBookLink { get; set; }
+        public string? WhatAppLink { get; set; }
+     }
    
     
 }
