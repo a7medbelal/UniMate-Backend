@@ -31,7 +31,8 @@ namespace Uni_Mate.Features.ApartmentManagment.UpdateApartment.UpdateApartmentRo
 
 			RuleFor(x => x.Description)
 				.NotEmpty().WithMessage("Description is required.")
-				.MaximumLength(500).WithMessage("Description can't be longer than 500 characters.");
+				.MaximumLength(500).WithMessage("Description can't be longer than 500 characters.")
+				.Matches(@"^[\p{L}\d\s.,\-_]+$").WithMessage("Description must contain letters, digits, spaces, and allowed punctuation only.");
 
 			RuleFor(x => x.BedCount)
 				.GreaterThan(0)
