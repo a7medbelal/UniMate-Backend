@@ -1,11 +1,11 @@
 ﻿using MediatR;
-using System.Security.Claims;
 using Uni_Mate.Common.BaseHandlers;
 using Uni_Mate.Common.Data.Enums;
 using Uni_Mate.Common.Views;
 using Uni_Mate.Models.UserManagment;
 using Mapster;
 using Uni_Mate.Common.Mapping;
+using System.Security.Claims;
 
 namespace Uni_Mate.Features.StudentManager.GetStudent.Quarry
 {
@@ -21,6 +21,7 @@ namespace Uni_Mate.Features.StudentManager.GetStudent.Quarry
 
         public override async Task<RequestResult<GetStudentDTO>> Handle(GetStudentQuarry request, CancellationToken cancellationToken)
         {
+
             var userId = _httpContextAccessor.HttpContext?.User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
             if (userId == null)
             {

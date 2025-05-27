@@ -1,7 +1,5 @@
 
-﻿using Microsoft.EntityFrameworkCore;
-using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
+using Microsoft.EntityFrameworkCore;
 using Uni_Mate.Models.BookingManagement;
 using Uni_Mate.Models.GeneralEnum;
 using Uni_Mate.Models.UserManagment;
@@ -19,7 +17,7 @@ namespace Uni_Mate.Models.ApartmentManagement
         public  decimal? Price { get; set; }
         public Gender Gender { get; set; }
         public string? Floor { get; set; }
-        public bool IsAvailable { get; set; }
+        public bool IsAvailable { get; set; } = true;
         public ApartmentDurationType DurationType { get; set; }
 
         public string? OwnerID { get; set; }

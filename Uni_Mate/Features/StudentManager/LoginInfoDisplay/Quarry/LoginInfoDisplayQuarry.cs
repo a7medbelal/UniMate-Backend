@@ -12,7 +12,7 @@ namespace Uni_Mate.Features.StudentManager.LoginInfoDisplay.Quarry
     public class LoginInfoDisplayQuarryHandler : BaseWithoutRepositoryRequestHandler<LoginInfoDisplayQuarry, RequestResult<LoginInfoDisplayDTO>, Student>
     {
         private readonly IHttpContextAccessor _httpContextAccessor;
-        public LoginInfoDisplayQuarryHandler(BaseWithoutRepositoryRequestHandlerParameters<Student> parameters,IHttpContextAccessor httpContextAccessor) : base(parameters)
+        public LoginInfoDisplayQuarryHandler(BaseWithoutRepositoryRequestHandlerParameters<Student>parameters,IHttpContextAccessor httpContextAccessor) : base(parameters)
         {
             _httpContextAccessor = httpContextAccessor;
         }

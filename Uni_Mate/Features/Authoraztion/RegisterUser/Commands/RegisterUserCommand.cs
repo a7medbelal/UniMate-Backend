@@ -1,10 +1,9 @@
 using MediatR;
-using Microsoft.AspNetCore.Identity;
 using Uni_Mate.Common.BaseHandlers;
 using Uni_Mate.Common.Data.Enums;
 using Uni_Mate.Common.Views;
 using Uni_Mate.Features.Common.SendEmailCommand;
-using Uni_Mate.Features.Common.UploadPhotoCommand;
+using Uni_Mate.Features.Common.UploadImageCommand;
 using Uni_Mate.Models.UserManagment;
 using Uni_Mate.Models.UserManagment.Enum;
 
@@ -27,9 +26,9 @@ namespace Uni_Mate.Features.Authoraztion.RegisterUser.Commands
             if (UserExist)
                 return RequestResult<bool>.Failure(ErrorCode.UserAlreadyExists, "Student already exists");
 
-			// Upload the front and back images of the student's national ID to Cloudinary using the UploadPhotoCommand, and retrieves the corresponding image URLs
-			var frontImageUrl = await _mediator.Send(new UploadPhotoCommand(request.FrontPersonalImage));
-			var backImageUrl = await _mediator.Send(new UploadPhotoCommand(request.BackPersonalImage));
+			// Upload the front and back images of the student's national ID to Cloudinary using the UploadImageCommand, and retrieves the corresponding image URLs
+			var frontImageUrl = await _mediator.Send(new UploadImageCommand(request.FrontPersonalImage));
+			var backImageUrl = await _mediator.Send(new UploadImageCommand(request.BackPersonalImage));
 
 			// Check if the image upload was successful before creating a new student
 			if (!frontImageUrl.isSuccess || !backImageUrl.isSuccess)
@@ -70,7 +69,7 @@ namespace Uni_Mate.Features.Authoraztion.RegisterUser.Commands
 
             var confirmationLink = $"Dear {user.UserName},<br/><br/>" +
                             "Thank you for registering. Please confirm your email address by clicking the link below:<br/><br/>" +
-                            $"<a href='https://uni-mate-web.vercel.app/confirmemail?email={user.Email}&OTP={token}'>Click here to confirm your email</a><br/><br/>" +
+                            $"<a href='https://localhost:7076/ConfirmEmailEndpoint/ConfirmEmail?email={user.Email}&OTP={token}'>Click here to confirm your email</a><br/><br/>" +
                             "If you did not request this, please ignore this message.<br/><br/>" +
                             "Best regards,<br/>";
 

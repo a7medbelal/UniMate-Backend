@@ -7,18 +7,18 @@ using Uni_Mate.Common.helper;
 using Uni_Mate.Common.Views;
 using Uni_Mate.Models.ApartmentManagement;
 
-namespace Uni_Mate.Features.Common.UploadPhotoCommand.Commands;
-public record MultiUploadPhotoCommand(List<IFormFile> Files) : IRequest<RequestResult<List<string>>>;
-public class MultiUploadPhotoCommandHandler : BaseRequestHandler<MultiUploadPhotoCommand, RequestResult<List<string>>, Image>
+namespace Uni_Mate.Features.Common.UploadImageCommand.Commands;
+public record MultiUploadImageCommand(List<IFormFile> Files) : IRequest<RequestResult<List<string>>>;
+public class MultiUploadImageCommandHandler : BaseRequestHandler<MultiUploadImageCommand, RequestResult<List<string>>, Image>
 {
     private readonly Cloudinary _cloudinary;
 
 
-    public MultiUploadPhotoCommandHandler(BaseRequestHandlerParameter<Image> parameters, IOptions<CloudinarySettings> config) : base(parameters)
+    public MultiUploadImageCommandHandler(BaseRequestHandlerParameter<Image> parameters, IOptions<CloudinarySettings> config) : base(parameters)
     {
         _cloudinary = new Cloudinary(new Account(config.Value.CloudName, config.Value.ApiKey, config.Value.ApiSecret));
     }
-    public override async Task<RequestResult<List<string>>> Handle(MultiUploadPhotoCommand request, CancellationToken cancellationToken)
+    public override async Task<RequestResult<List<string>>> Handle(MultiUploadImageCommand request, CancellationToken cancellationToken)
     {
         var result = new List<string>();
         foreach (var file in request.Files)

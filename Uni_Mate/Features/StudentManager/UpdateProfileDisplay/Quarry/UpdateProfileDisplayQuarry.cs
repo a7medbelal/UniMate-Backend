@@ -11,22 +11,22 @@ namespace Uni_Mate.Features.StudentManager.UpdateProfileDisplay.Quarry
 {
     public record UpdateProfileDisplayQuarry() : IRequest<RequestResult<UpdateProfileDisplayDTO>>;
 
-    public class UpdateProfileDisplayQuarryHandler : BaseWithoutRepositoryRequestHandler<UpdateProfileDisplayQuarry, RequestResult<UpdateProfileDisplayDTO>, Student>
+    public class UpdateProfileDisplayQuarryHandler : BaseWithoutRepositoryRequestHandler<UpdateProfileDisplayQuarry, RequestResult<UpdateProfileDisplayDTO>, User>
     {
         private readonly IHttpContextAccessor _httpContextAccessor;
-        public UpdateProfileDisplayQuarryHandler(BaseWithoutRepositoryRequestHandlerParameters<Student> parameters, IHttpContextAccessor httpContextAccessor) : base(parameters)
+        public UpdateProfileDisplayQuarryHandler(BaseWithoutRepositoryRequestHandlerParameters<User> parameters, IHttpContextAccessor httpContextAccessor) : base(parameters)
         {
             _httpContextAccessor = httpContextAccessor;
         }
 
-        public override async Task<RequestResult<UpdateProfileDisplayDTO>> Handle(UpdateProfileDisplayQuarry request, CancellationToken cancellationToken)
+        public override async Task<RequestResult<UpdateProfileDisplayDTO>> Handle(UpdateProfileDisplayQuarry request, CancellationToken cancellation)
         {
             var userId = _httpContextAccessor.HttpContext?.User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
             if (userId == null)
             {
                 return RequestResult<UpdateProfileDisplayDTO>.Failure(ErrorCode.NotFound, "User not found");
             }
-            Student student = await _repositoryIdentity.GetByIDAsync(userId);
+            var student = await _repositoryIdentity.GetByIDAsync(userId);
             if (student == null)
             {
                 return RequestResult<UpdateProfileDisplayDTO>.Failure(ErrorCode.NotFound, "Student not found");

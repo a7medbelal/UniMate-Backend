@@ -34,19 +34,19 @@ namespace Uni_Mate.Common.Mapping
 
 
             #region mapping from Student to UpdateProfileDisplayDTO
-            config.NewConfig<Student, UpdateProfileDisplayDTO>()
+            config.NewConfig<User, UpdateProfileDisplayDTO>()
                 .Map(dest => dest.FirstName, src => src.Fname)
                 .Map(dest => dest.LastName, src => src.Lname)
-                .Map(dest => dest.Governorate, src => src.Governorate)
+                .Map(dest => dest.Governorate, src => src.Governomet)
                 .Map(dest => dest.Address, src => src.Address)
                 .Map(dest => dest.BriefOverView, src => src.BriefOverView);
             #endregion
 
             #region mapping From UpdateProfileSaveVM to Student
-            config.NewConfig<UpdateProfileSaveVM, Student>()
+            config.NewConfig<UpdateProfileSaveVM, User>()
                 .Map(dest => dest.Fname, src => src.FirstName)
                 .Map(dest => dest.Lname, src => src.LastName)
-                .Map(dest => dest.Governorate, src => src.Governorate)
+                .Map(dest => dest.Governomet, src => src.Governorate)
                 .Map(dest => dest.Address, src => src.Address)
                 .Map(dest => dest.BriefOverView, src => src.BriefOverView);
 			#endregion

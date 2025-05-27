@@ -20,6 +20,6 @@ public class BookBeforeQueryHandler : BaseRequestHandler<BookBeforeQuery, Reques
         {
             return RequestResult<bool>.Failure(ErrorCode.AlreadyExists, "User is already booked");
         }
-        return RequestResult<bool>.Success(true, "User is booked in this apartment");
+        return RequestResult<bool>.Success(true, "User can book in this apartment");
     }
 }

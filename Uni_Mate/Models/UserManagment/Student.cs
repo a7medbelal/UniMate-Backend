@@ -14,9 +14,7 @@ namespace Uni_Mate.Models.UserManagment
         public string? Department { get; set; }
         public string? AcademicYear { get; set; }
         public Gender Gender { get; set; }
-        public string? Governorate { get; set; }
-        // make the user write a short description for himself
-        public string? BriefOverView { get; set; }
+
         // Add any additional properties or methods specific to students here
 
         /// <summary>
@@ -33,7 +31,10 @@ namespace Uni_Mate.Models.UserManagment
         public string? BackPersonalImage { get; set; }
         public ICollection<FavoriteApartment>? FavoriteApartments { get; set; }
         public ICollection<Booking>? Bookings { get; set; } = new List<Booking>();
-    }
+
+        // Extra Data To Student in the next step i will delete table phone and table social Account
+
+     }
    
     
 }

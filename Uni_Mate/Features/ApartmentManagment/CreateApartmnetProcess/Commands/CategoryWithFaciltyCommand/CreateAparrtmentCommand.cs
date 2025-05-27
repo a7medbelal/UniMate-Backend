@@ -24,17 +24,11 @@ namespace Uni_Mate.Features.ApartmentManagment.CreateApartmnetProcess.Commands.C
         {
             if (request.ApartmentID < 0)
                 return RequestResult<bool>.Failure(ErrorCode.ApartmentNotFound, "Apartment not found");
-            // Check if the categories are valid
 
-            var facilites = request.Categories.Adapt<List<ApartmentFacility>>(MapsterConfig.Configure());
-            facilites.ForEach(f => f.ApartmentId = request.ApartmentID);
-
+                        var facilites = request.Categories.Adapt<List<ApartmentFacility>>(MapsterConfig.Configure());
+                        facilites.ForEach(f => f.ApartmentId = request.ApartmentID);
             await _repository.AddRangeAsync(facilites);
-       
-
             return RequestResult<bool>.Success(true, "Categories added successfully");
         }
     }
-
-
 }

@@ -1,9 +1,12 @@
 ﻿using MediatR;
 using Uni_Mate.Common.BaseHandlers;
 using Uni_Mate.Common.Views;
+using Uni_Mate.Domain.Repository;
 using Uni_Mate.Features.ApartmentManagment.ShowApartmentDetails.ApartmentDTO;
 using Uni_Mate.Models.ApartmentManagement;
+using Uni_Mate.Models.BookingManagement;
 using Uni_Mate.Models.GeneralEnum;
+using Uni_Mate.Models.UserManagment;
 
 namespace Uni_Mate.Features.ApartmentManagment.ShowApartmentDetails.Quarry
 {
@@ -11,13 +14,32 @@ namespace Uni_Mate.Features.ApartmentManagment.ShowApartmentDetails.Quarry
 
     public class ApartmentDetailsHandler : BaseRequestHandler<ApartmentDetailsQuarry, RequestResult<ApartmentDetailsDTO>, Apartment>
     {
-
-        public ApartmentDetailsHandler(BaseRequestHandlerParameter<Apartment> parameters) : base(parameters)
+        private readonly IRepository<BookRoom> _bookRoomRepo;
+        private readonly IRepository<BookBed> _bookBedRepo;
+        private readonly IRepositoryIdentity<Student> _studentRepo;
+        public ApartmentDetailsHandler(
+            BaseRequestHandlerParameter<Apartment> parameters,
+            IRepositoryIdentity<Student> studentRepo,
+            IRepository<BookRoom> bookRoomRepo,
+            IRepository<BookBed> bookBedRepo
+            ) : base(parameters)
         {
+            _bookBedRepo = bookBedRepo;
+            _studentRepo = studentRepo;
+            _bookRoomRepo = bookRoomRepo;
         }
 
         public override async Task<RequestResult<ApartmentDetailsDTO>> Handle(ApartmentDetailsQuarry request, CancellationToken cancellationToken)
         {
+            /*
+             * 1- check on the apartment 
+             * 2- connect the apartment the images and the rooms 
+             * 3- the rooms must assign to the beds 
+             * 4- connect every room with its the user how booked 
+             * 5- connect the beds in the room with the roommates 
+             * 6- get the details for every student the details is (look to the ui , ux )
+             * 7- we got the ImageRoom from this i can check to this image 
+             */
             // To Improve In The Future ======>>>
             if (request.id <= 0)
             {
@@ -110,6 +132,57 @@ namespace Uni_Mate.Features.ApartmentManagment.ShowApartmentDetails.Quarry
     
                 );
 
+
+
+            #endregion
+
+            #region SleepPlaces here is extra bugs 
+
+            /*
+             * 1- make a list of sleep places 
+             * 2- make every details related to this sleep place to it 
+             * 3- elso map the student details and every student related to this sleep place to this 
+             * 4- check if the booking a room is available or booking a bed is available 
+             * 5- 
+             */
+
+            // make a list of sleep places
+            var sleepPlaces = apartment.Rooms?.Select(room =>
+            {
+                var beds = room.Beds ?? new List<Bed>();
+                var bookedBeds = beds.Where(b => !b.IsAvailable).ToList();
+                var numPeople = bookedBeds.Count;
+
+                var students = bookedBeds.Select(b =>
+                {
+                    var booking = _bookBedRepo.Get(bk => bk.BedId == b.Id).FirstOrDefault();
+                    var student = _studentRepo.GetByIDAsync(booking.StudentId).Result;
+
+                    return new StudentDTO
+                    {
+                        StudentId = student.Id,
+                        Name = $"{student.Fname} {student.Lname}",
+                        Image = student.Image,
+                        Collage = student.Faculty,
+                        Level = student.AcademicYear,
+                        Location = student.Governomet
+                    };
+                }).ToList();
+
+                return new SleepPlace
+                {
+                    RoomId = room.Id,
+                    ImageRoomUrl = room.Image,
+                    Price = room.Price,
+                    IsFull = beds.Count == numPeople,
+                    NumOfPeople = numPeople,
+                    BedRequestAvailable = beds.Any(b => b.IsAvailable),
+                    RoomRequestAvailable = !_bookRoomRepo.Get(bk => bk.RoomId == room.Id).Any(),
+                    StudentDTOs = students
+                };
+            }).ToList();
+
+            detailsApartment.SleepPlaces = sleepPlaces;
 
 
             #endregion

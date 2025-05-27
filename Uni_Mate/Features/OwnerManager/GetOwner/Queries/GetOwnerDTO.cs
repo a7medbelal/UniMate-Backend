@@ -7,5 +7,7 @@
 		public string ? Phones { get; set; }
 		public string? Email { get; set; }
 		public string? BriefOverView { get; set; }
-	}
+		public string ? Governomet { get; set; }	
+		public string? Address { get; set; }
+    }
 }

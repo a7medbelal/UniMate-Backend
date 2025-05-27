@@ -3,21 +3,21 @@ using Microsoft.AspNetCore.Mvc;
 using Uni_Mate.Common.BaseEndpoints;
 using Uni_Mate.Common.Data.Enums;
 using Uni_Mate.Common.Views;
-using Uni_Mate.Features.Common.UploadPhotoCommand.Commands;
-namespace Uni_Mate.Features.Common.UploadPhotoCommand;
+using Uni_Mate.Features.Common.UploadImageCommand.Commands;
+namespace Uni_Mate.Features.Common.UploadImageCommand;
 
-public record MultipleUploadPhotoViewModel(List<IFormFile> Files);
-public class MultiUploadPhotoEndpoint : BaseWithoutTRequestEndpoint<List<string>>
+public record MultipleUploadImageViewModel(List<IFormFile> Files);
+public class MultiUploadImageEndpoint : BaseWithoutTRequestEndpoint<List<string>>
 {
-    public MultiUploadPhotoEndpoint(BaseWithoutTRequestEndpointParameters parameters) : base(parameters)
+    public MultiUploadImageEndpoint(BaseWithoutTRequestEndpointParameters parameters) : base(parameters)
     {
     }
 
     [HttpPost]
-    public async Task<EndpointResponse<List<string>>> Handle([FromForm]MultipleUploadPhotoViewModel viewmodel, CancellationToken cancellationToken)
+    public async Task<EndpointResponse<List<string>>> Handle([FromForm]MultipleUploadImageViewModel viewmodel, CancellationToken cancellationToken)
     {
-        var multiUploadPhotoCommand = new MultiUploadPhotoCommand(viewmodel.Files);
-        var result = await _mediator.Send(multiUploadPhotoCommand, cancellationToken);
+        var multiUploadImageCommand = new MultiUploadImageCommand(viewmodel.Files);
+        var result = await _mediator.Send(multiUploadImageCommand, cancellationToken);
         if(!result.isSuccess)
         {
             return EndpointResponse<List<string>>.Failure(ErrorCode.InvalidData, "Failed to upload images.");

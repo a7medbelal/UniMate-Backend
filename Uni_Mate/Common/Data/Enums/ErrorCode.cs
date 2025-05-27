@@ -36,5 +36,10 @@ public enum ErrorCode
     OwnerNotAuthorized,
     LogoutFailed,
     NotValide,
-    FavWasAdded
+    FavWasAdded,
+    BedNotFound,
+    BookingFailed,
+    Booked,
+    ServerError
+
 }

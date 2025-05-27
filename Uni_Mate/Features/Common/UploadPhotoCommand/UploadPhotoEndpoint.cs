@@ -5,23 +5,23 @@ using Uni_Mate.Common.BaseEndpoints;
 using Uni_Mate.Common.Data.Enums;
 using Uni_Mate.Common.Views;
 
-namespace Uni_Mate.Features.Common.UploadPhotoCommand;
+namespace Uni_Mate.Features.Common.UploadImageCommand;
 
-public class UploadPhotoEndpoint : BaseWithoutTRequestEndpoint<ImageUploadResult>
+public class UploadImageEndpoint : BaseWithoutTRequestEndpoint<ImageUploadResult>
 {
-    public UploadPhotoEndpoint(BaseWithoutTRequestEndpointParameters parameters) : base(parameters)
+    public UploadImageEndpoint(BaseWithoutTRequestEndpointParameters parameters) : base(parameters)
     {
     }
 
     [HttpPost]
-    public async Task<EndpointResponse<string>> UploadPhoto([FromForm]UploadPhotoViewModel viewmodel, CancellationToken cancellationToken)
+    public async Task<EndpointResponse<string>> UploadImage([FromForm]UploadImageViewModel viewmodel, CancellationToken cancellationToken)
     {
-        var uploadPhotoCommand = new UploadPhotoCommand(viewmodel.File);
-        var result = await _mediator.Send(uploadPhotoCommand);
+        var uploadImageCommand = new UploadImageCommand(viewmodel.File);
+        var result = await _mediator.Send(uploadImageCommand);
         if (!result.isSuccess)
         {
             return EndpointResponse<string>.Failure(ErrorCode.InvalidData, "Invalid data");
         }
-        return EndpointResponse<string>.Success(result.data, "Photo Uploaded Successfully");
+        return EndpointResponse<string>.Success(result.data, "Image Uploaded Successfully");
     }
 }

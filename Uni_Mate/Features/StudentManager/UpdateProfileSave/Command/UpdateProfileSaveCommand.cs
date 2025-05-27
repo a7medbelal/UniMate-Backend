@@ -9,10 +9,10 @@ namespace Uni_Mate.Features.StudentManager.UpdateProfileSave.Command
 {
     public record UpdateProfileSaveCommand(string? FirstName, string? LastName, string? Governorate, string? Address, string? BriefOverView) : IRequest<RequestResult<bool>>;
 
-    public class UpdateProfileSaveCommandHandler : BaseWithoutRepositoryRequestHandler<UpdateProfileSaveCommand, RequestResult<bool>, Student>
+    public class UpdateProfileSaveCommandHandler : BaseWithoutRepositoryRequestHandler<UpdateProfileSaveCommand, RequestResult<bool>, User>
     {
         private readonly IHttpContextAccessor _httpContextAccessor;
-        public UpdateProfileSaveCommandHandler(BaseWithoutRepositoryRequestHandlerParameters<Student> parameters, IHttpContextAccessor httpContextAccessor) : base(parameters)
+        public UpdateProfileSaveCommandHandler(BaseWithoutRepositoryRequestHandlerParameters<User> parameters, IHttpContextAccessor httpContextAccessor) : base(parameters)
         {
             _httpContextAccessor = httpContextAccessor;
         }
@@ -23,7 +23,7 @@ namespace Uni_Mate.Features.StudentManager.UpdateProfileSave.Command
             {
                 return RequestResult<bool>.Failure(ErrorCode.NotFound, "User not found");
             }
-            Student student = await _repositoryIdentity.GetByIDAsync(userId);
+            var student = await _repositoryIdentity.GetByIDAsync(userId);
             if (student == null)
             {
                 return RequestResult<bool>.Failure(ErrorCode.NotFound, "Student not found");
@@ -35,7 +35,7 @@ namespace Uni_Mate.Features.StudentManager.UpdateProfileSave.Command
 
             student.Fname = request.FirstName;
             student.Lname = request.LastName;
-            student.Governorate = request.Governorate;
+            student.Governomet = request.Governorate;
             student.Address = request.Address;
             student.BriefOverView = request.BriefOverView;
 

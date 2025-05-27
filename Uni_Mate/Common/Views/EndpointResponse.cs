@@ -14,4 +14,5 @@ public record EndpointResponse<T>(T data, bool isSuccess, string message, ErrorC
     {
         return new EndpointResponse<T>(default, false, message, errorCode);
     }
+
 }

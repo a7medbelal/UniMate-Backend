@@ -1,4 +1,4 @@
-using System.Globalization;
+﻿using System.Globalization;
 
 using Uni_Mate.Common.Data.Enums;
 
@@ -12,8 +12,8 @@ public record RequestResult<T>(T data, bool isSuccess, string message, ErrorCode
         return new RequestResult<T>(data, true, message, ErrorCode.None);
     }
 
-  
-    public static RequestResult<T> Failure(ErrorCode errorCode, string message="")
+
+    public static RequestResult<T> Failure(ErrorCode errorCode, string message = "")
     {
         return new RequestResult<T>(default, false, message, errorCode);
     }

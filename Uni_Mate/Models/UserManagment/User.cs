@@ -24,6 +24,7 @@ namespace Uni_Mate.Models.UserManagment
       public string? Address { get; set; }
       public string? Governomet { get; set; }
 
+      public string? BriefOverView { get; set; }
         /// <summary>
         /// this for reset password 
         /// </summary>
@@ -33,8 +34,12 @@ namespace Uni_Mate.Models.UserManagment
 
       public Role role { get; set; }
 
+      public string? AnotherPhoneNum { get; set; }
+      public string? FaceBookLink { get; set; }
+      public string? WhatAppLink { get; set; }
+
         //this for review the two relationship with same entity as EF core doesnot understand this so you need make it explicity 
-      [InverseProperty(nameof(Review.Reviewer))]
+        [InverseProperty(nameof(Review.Reviewer))]
       public ICollection<Review>? ReviewsGiven { get; set; }
      
       [InverseProperty(nameof(Review.RevieweeUser))]
