@@ -7,12 +7,13 @@ public enum ErrorCode
     DeletionFailed,
     InvalidRequest,
     InvalidData,
-    NotFound,
+    NotFound  ,
     Unauthorized,
     Forbidden,
     InternalServerError,
     ServiceUnavailable,
     UnknownError,
+    // 
     UploadFailed,
     UserAlreadyExists,
     UserCreationFailed,
@@ -35,8 +36,10 @@ public enum ErrorCode
     OwnerNotAuthorized,
     LogoutFailed,
     NotValide,
+    FavWasAdded,
     BedNotFound,
     BookingFailed,
     Booked,
     ServerError
+
 }

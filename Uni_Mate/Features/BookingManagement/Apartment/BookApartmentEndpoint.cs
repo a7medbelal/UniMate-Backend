@@ -2,9 +2,9 @@
 using Microsoft.AspNetCore.Mvc;
 using Uni_Mate.Common.BaseEndpoints;
 using Uni_Mate.Common.Views;
-using Uni_Mate.Features.BookingManagement.Apartment.Command;
+using Uni_Mate.Features.BookingManagement.Apartments.Command;
 
-namespace Uni_Mate.Features.BookingManagement.Apartment
+namespace Uni_Mate.Features.BookingManagement.Apartments
 {
     [Authorize]
     public class BookApartmentEndpoint : BaseEndpoint<BookApartmentVM, bool>

@@ -6,7 +6,7 @@ using Uni_Mate.Domain.Repository;
 using Uni_Mate.Features.Common;
 using Uni_Mate.Models.BookingManagement;
 
-namespace Uni_Mate.Features.BookingManagement.Apartment.Command
+namespace Uni_Mate.Features.BookingManagement.Apartments.Command
 {
     public record BookApartmentCommand(int ApartmentId) : IRequest<RequestResult<bool>>;
 

@@ -24,11 +24,11 @@ namespace Uni_Mate.Features.Authoraztion.RegisterUser.RegisterOwner
 
 			RuleFor(x => x.FName)
 				.NotEmpty().WithMessage("First Name is required.")
-				.Matches(@"^[a-zA-Z]+$").WithMessage("First name must contain only letters.");
+				.Matches(@"^[\p{L}]+$").WithMessage("First name must contain only letters.");
 
 			RuleFor(x => x.LName)
 				.NotEmpty().WithMessage("Last Name is required.")
-				.Matches(@"^[a-zA-Z]+$").WithMessage("Last name must contain only letters.");
+				.Matches(@"^[\p{L}]+$").WithMessage("Last name must contain only letters.");
 
 			RuleFor(x => x.PhoneNo)
 				.NotEmpty().WithMessage("Phone number is required.")

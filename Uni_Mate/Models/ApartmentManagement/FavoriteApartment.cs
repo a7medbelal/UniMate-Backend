@@ -9,7 +9,7 @@ namespace Uni_Mate.Models.ApartmentManagement
         public int ApartmentId { get; set; }
         public Apartment? Apartment { get; set; }
         [ForeignKey(nameof(Student))]
-        public string? StudentId { get; set; }
-        public Student? Student { get; set; }
+        public string? UserId { get; set; }
+        public User? User { get; set; }
     }
 }

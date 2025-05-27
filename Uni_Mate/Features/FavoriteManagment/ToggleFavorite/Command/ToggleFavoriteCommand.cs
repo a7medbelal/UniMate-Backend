@@ -34,7 +34,7 @@ namespace Uni_Mate.Features.FavoriteManagment.ToggleFavorite.Command
             }
 
             // Check if the table favorite is exist 
-            var isFavoriteExist =  _repository.Get(f => f.StudentId == userId && f.ApartmentId == request.id).FirstOrDefault();
+            var isFavoriteExist =  _repository.Get(f => f.UserId == userId && f.ApartmentId == request.id).FirstOrDefault();
             if (isFavoriteExist != null)
             {
                 //chagne the status 
@@ -46,7 +46,7 @@ namespace Uni_Mate.Features.FavoriteManagment.ToggleFavorite.Command
             // if it is not found we just add it 
             var newFavorite = new FavoriteApartment
             {
-                StudentId = userId,
+                UserId = userId,
                 ApartmentId = request.id,
                 Deleted = false
             };

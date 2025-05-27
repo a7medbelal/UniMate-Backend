@@ -21,15 +21,7 @@ namespace Uni_Mate.Features.Authoraztion.LoginUser.Commands
         public async override Task<RequestResult<TokenDTO>>Handle(LoginUserCommand request, CancellationToken cancellationToken)
         {
            // var user = await _userManager.FindByEmailAsync(request.email);
-            var UserExist = await _repositoryIdentity.Get(c => c.Email == request.email || c.National_Id == request.email || c.UserName == request.email).Select(c=> new User { 
-                
-                Email=c.Email,
-                Id = c.Id,
-                EmailConfirmed = c.EmailConfirmed,
-                UserName = c.UserName,
-                National_Id = c.National_Id,
-                PasswordHash=c.PasswordHash
-            }).FirstOrDefaultAsync();
+            var UserExist = await _repositoryIdentity.Get(c => c.Email == request.email  || c.UserName == request.email).FirstOrDefaultAsync();
 
             if (UserExist == null)
                 return RequestResult<TokenDTO>.Failure(ErrorCode.UserNotFound, "User not found");
@@ -45,7 +37,7 @@ namespace Uni_Mate.Features.Authoraztion.LoginUser.Commands
 
             var token = await  _tokenHelper.GenerateToken(UserExist.Id.ToString() ,UserExist.role);
 
-            return RequestResult<TokenDTO>.Success(new TokenDTO(Token : token) );
+            return RequestResult<TokenDTO>.Success(new TokenDTO(Token : token , Role : UserExist.role));
         }
     }
 

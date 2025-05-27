@@ -1,6 +1,6 @@
 ﻿using FluentValidation;
 
-namespace Uni_Mate.Features.BookingManagement.Apartment
+namespace Uni_Mate.Features.BookingManagement.Apartments
 {
     public record BookApartmentVM(int ApartmentId);
 
