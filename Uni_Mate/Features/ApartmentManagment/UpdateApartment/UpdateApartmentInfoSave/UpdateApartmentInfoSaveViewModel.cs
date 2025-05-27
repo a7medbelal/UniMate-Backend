@@ -25,16 +25,20 @@ namespace Uni_Mate.Features.ApartmentManagment.UpdateApartment.UpdateApartmentIn
 				.GreaterThan(0).WithMessage("Apartment ID must be greater than zero.");
 
 			RuleFor(x => x.Location)
-				.NotEmpty().WithMessage("Apartment Location is required.")
-				.MaximumLength(100).WithMessage("Location can't be longer than 100 characters.");
+				.NotEmpty().WithMessage("Location is required.")
+				.MaximumLength(100).WithMessage("Location can't be longer than 100 characters.")
+				.Matches(@"^[\p{L}\d\s.,\-_]+$").WithMessage("Location must contain letters, digits, spaces, and allowed punctuation only.");
 
 			RuleFor(x => x.Description)
-				.NotEmpty().WithMessage("Apartment Description is required.")
-				.MaximumLength(500).WithMessage("Description can't be longer than 500 characters.");
+				.NotEmpty().WithMessage("Description is required.")
+				.MaximumLength(500).WithMessage("Description can't be longer than 500 characters.")
+				.Matches(@"^[\p{L}\d\s.,\-_]+$").WithMessage("Description must contain letters, digits, spaces, and allowed punctuation only.");
+
 
 			RuleFor(x => x.DescripeLocation)
 				.MaximumLength(300).WithMessage("Describe Location can't be longer than 300 characters.")
-				.When(x => !string.IsNullOrEmpty(x.DescripeLocation));
+				.When(x => !string.IsNullOrEmpty(x.DescripeLocation))
+				.Matches(@"^[\p{L}\d\s.,\-_]+$").WithMessage("Location Description must contain letters, digits, spaces, and allowed punctuation only.");
 
 			RuleFor(x => x.Floor)
 				.NotEmpty().WithMessage("Apartment Floor is required.")
@@ -49,7 +53,6 @@ namespace Uni_Mate.Features.ApartmentManagment.UpdateApartment.UpdateApartmentIn
 			RuleFor(x => x.Price)
 				.NotEmpty().WithMessage("Price is required.")
 				.Must(price => decimal.TryParse(price, out var result) && result > 0).WithMessage("Price must be a valid positive number.");
-
 		}
 	}
 }
