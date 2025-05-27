@@ -1,6 +1,7 @@
 
 using Microsoft.EntityFrameworkCore;
 using Uni_Mate.Models.BookingManagement;
+using Uni_Mate.Models.Comment_Review;
 using Uni_Mate.Models.GeneralEnum;
 using Uni_Mate.Models.UserManagment;
 namespace Uni_Mate.Models.ApartmentManagement
@@ -32,6 +33,7 @@ namespace Uni_Mate.Models.ApartmentManagement
         public ICollection<FavoriteApartment>? FavoriteStudent { get; set; }
 
         public ICollection<Booking>? Bookings { get; set; } = new List<Booking>();
+        public ICollection<Comment>? Comments { get; set; } = new List<Comment>();
 
     }
 }
