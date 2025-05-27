@@ -1,5 +1,6 @@
 ﻿using Uni_Mate.Models.ApartmentManagement;
 using Uni_Mate.Models.BookingManagement;
+using Uni_Mate.Models.Comment_Review;
 using Uni_Mate.Models.GeneralEnum;
 
 namespace Uni_Mate.Models.UserManagment
@@ -31,10 +32,8 @@ namespace Uni_Mate.Models.UserManagment
         public string? BackPersonalImage { get; set; }
         public ICollection<FavoriteApartment>? FavoriteApartments { get; set; }
         public ICollection<Booking>? Bookings { get; set; } = new List<Booking>();
-
-        // Extra Data To Student in the next step i will delete table phone and table social Account
-
-     }
+        public ICollection<Comment>? Comments { get; set; } = new List<Comment>();
+    }
    
     
 }
