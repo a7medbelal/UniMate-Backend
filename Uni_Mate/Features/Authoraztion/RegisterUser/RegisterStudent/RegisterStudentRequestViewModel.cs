@@ -25,12 +25,15 @@ public class RegisterStudentRequestViewModelValidator : AbstractValidator<Regist
             .Matches(@"[\W_]").WithMessage("Password must contain at least one special character (!@#$%^&* etc.).")
             .Must(email => !email.Contains("gamil.com")).WithMessage("Did you mean 'gmail.com'? Please check your email.");
 
-        RuleFor(x => x.Fname)
-            .NotEmpty().WithMessage("Name is required.");
-        RuleFor(x => x.Lname)
-            .NotEmpty().WithMessage("Country is required.");
+		RuleFor(x => x.Fname)
+				.NotEmpty().WithMessage("First Name is required.")
+				.Matches(@"^[\p{L}]+$").WithMessage("First name must contain only letters.");
 
-        RuleFor(x => x.ConfrimPassword)
+		RuleFor(x => x.Lname)
+			.NotEmpty().WithMessage("Last Name is required.")
+			.Matches(@"^[\p{L}]+$").WithMessage("Last name must contain only letters.");
+
+		RuleFor(x => x.ConfrimPassword)
             .NotEmpty().WithMessage("Confrim Password is required.")
             .Equal(x => x.Password).WithMessage("Password and Confirm Password must match.");
 
