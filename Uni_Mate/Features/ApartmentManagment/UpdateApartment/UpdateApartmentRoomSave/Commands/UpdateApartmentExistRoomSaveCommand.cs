@@ -4,7 +4,7 @@ using Uni_Mate.Common.Data.Enums;
 using Uni_Mate.Common.Views;
 using Uni_Mate.Domain.Repository;
 using Uni_Mate.Features.Common.DeleteImage.Commands;
-using Uni_Mate.Features.Common.UploadPhotoCommand;
+using Uni_Mate.Features.Common.UploadImageCommand;
 using Uni_Mate.Models.ApartmentManagement;
 
 namespace Uni_Mate.Features.ApartmentManagment.UpdateApartmentRoomSave.Commands
@@ -54,7 +54,7 @@ namespace Uni_Mate.Features.ApartmentManagment.UpdateApartmentRoomSave.Commands
 						return RequestResult<bool>.Failure(ErrorCode.InternalServerError, "Failed to delete the old image.");
 				}
 
-				var uploadResult = await _mediator.Send(new UploadPhotoCommand(request.RoomPhoto));
+				var uploadResult = await _mediator.Send(new UploadImageCommand(request.RoomPhoto));
 				if (!uploadResult.isSuccess)
 					return RequestResult<bool>.Failure(ErrorCode.UploadFailed, "Failed to upload the new image.");
 

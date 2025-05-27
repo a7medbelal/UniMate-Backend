@@ -2,7 +2,7 @@
 using Uni_Mate.Common.BaseHandlers;
 using Uni_Mate.Common.Data.Enums;
 using Uni_Mate.Common.Views;
-using Uni_Mate.Features.Common.UploadPhotoCommand;
+using Uni_Mate.Features.Common.UploadImageCommand;
 using Uni_Mate.Models.ApartmentManagement;
 
 public record UpdateApartmentAddRoomSaveCommand(
@@ -41,7 +41,7 @@ public class UpdateApartmentAddRoomSaveCommandHandler : BaseRequestHandler<Updat
 		// Handle photo upload if a photo is provided
 		if (request.RoomPhoto != null)
 		{
-			var uploadResult = await _mediator.Send(new UploadPhotoCommand(request.RoomPhoto));
+			var uploadResult = await _mediator.Send(new UploadImageCommand(request.RoomPhoto));
 			if (!uploadResult.isSuccess)
 				return RequestResult<bool>.Failure(ErrorCode.UploadFailed, "Failed to upload room photo.");
 			photoUrl = uploadResult.data;

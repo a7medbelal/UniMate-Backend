@@ -2,7 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Uni_Mate.Common.BaseEndpoints;
 using Uni_Mate.Common.Views;
-using Uni_Mate.Features.Common.UploadPhotoCommand;
+using Uni_Mate.Features.Common.UploadImageCommand;
 using Uni_Mate.Features.StudentManager.LoginInfoSave.Command;
 
 namespace Uni_Mate.Features.StudentManager.LoginInfoSave
@@ -27,7 +27,7 @@ namespace Uni_Mate.Features.StudentManager.LoginInfoSave
             string frontUrl = string.Empty;
             if (loginInfoSaveVM.FrontImage != null)
             {
-                var frontImage =await _mediator.Send(new UploadPhotoCommand(loginInfoSaveVM.FrontImage));
+                var frontImage =await _mediator.Send(new UploadImageCommand(loginInfoSaveVM.FrontImage));
                 if (frontImage.isSuccess == false)
                 {
                     return EndpointResponse<bool>.Failure(frontImage.errorCode, frontImage.message);
@@ -38,7 +38,7 @@ namespace Uni_Mate.Features.StudentManager.LoginInfoSave
             string backUrl = string.Empty;
             if (loginInfoSaveVM.BackImage != null)
             {
-                var backImage = await _mediator.Send(new UploadPhotoCommand(loginInfoSaveVM.BackImage));
+                var backImage = await _mediator.Send(new UploadImageCommand(loginInfoSaveVM.BackImage));
                 if (backImage.isSuccess == false)
                 {
                     return EndpointResponse<bool>.Failure(backImage.errorCode, backImage.message);

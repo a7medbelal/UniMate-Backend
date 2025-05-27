@@ -1,4 +1,6 @@
-﻿using Uni_Mate.Common.Data.Enums;
+﻿using System.Globalization;
+
+using Uni_Mate.Common.Data.Enums;
 
 namespace Uni_Mate.Common.Views;
 

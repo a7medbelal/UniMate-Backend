@@ -4,6 +4,7 @@ using Uni_Mate.Common.BaseEndpoints;
 using Uni_Mate.Common.Data.Enums;
 using Uni_Mate.Common.Views;
 using Uni_Mate.Features.ApartmentManagment.UpdateApartment.UpdateApartmentInfoSave.Commands;
+using Uni_Mate.Features.ApartmentManagment.UpdateApartment.UpdatePropertyImages.Commands;
 using Uni_Mate.Features.ApartmentManagment.UpdateApartmentRoomSave.Commands;
 namespace Uni_Mate.Features.ApartmentManagment.UpdateApartment
 {
@@ -83,6 +84,17 @@ namespace Uni_Mate.Features.ApartmentManagment.UpdateApartment
 			}
 
 			// Update Apartment Photos (add new or delete existing)
+			var updateImages = new UpdateApartmentImagesCommand(
+				request.ApartmentId,
+				request.ApartmentDeleteImages,
+				request.ApartmentNewImages
+			);
+			var updateImagesResult = await _mediator.Send(updateImages);
+
+			if (!updateImagesResult.isSuccess)
+			{
+				return EndpointResponse<int>.Failure(ErrorCode.UpdateFailed, $"Failed to update apartment images: {updateImagesResult.message}");
+			}
 
 			return EndpointResponse<int>.Success(request.ApartmentId, "Apartment and rooms updated successfully.");
 		}

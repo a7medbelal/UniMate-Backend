@@ -3,6 +3,7 @@ using Uni_Mate.Models.GeneralEnum;
 using System.Collections.Generic;
 using Uni_Mate.Features.ApartmentManagment.UpdateApartment.UpdateApartmentRoomSave;
 using FluentValidation;
+using Uni_Mate.Features.Common.ApartmentManagement.UploadApartmentCommand;
 
 namespace Uni_Mate.Features.ApartmentManagment.UpdateApartment
 {
@@ -15,7 +16,9 @@ namespace Uni_Mate.Features.ApartmentManagment.UpdateApartment
 		string Floor,
 		Gender GenderAcceptance,
 		ApartmentDurationType DurationType,
-		List<UpdateApartmentRoomSaveViewModel> Rooms
+		List<UpdateApartmentRoomSaveViewModel> Rooms,
+		UploadImagesViewModel ApartmentNewImages,
+		List<Image> ApartmentDeleteImages
 	);
 
 	public class UpdateApartmentFullViewModelValidator : AbstractValidator<UpdateApartmentFullViewModel>

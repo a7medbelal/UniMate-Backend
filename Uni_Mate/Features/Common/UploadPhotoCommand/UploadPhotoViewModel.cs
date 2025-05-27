@@ -1,3 +1,3 @@
-namespace Uni_Mate.Features.Common.UploadPhotoCommand;
+namespace Uni_Mate.Features.Common.UploadImageCommand;
 
-public record UploadPhotoViewModel(IFormFile File);
+public record UploadImageViewModel(IFormFile File);
