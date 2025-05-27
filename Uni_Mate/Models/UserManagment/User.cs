@@ -20,12 +20,14 @@ namespace Uni_Mate.Models.UserManagment
       public string? Image { get; set; }
 
       public bool IsActive { get; set; } = false;
+
       public string? Address { get; set; }
+      public string? Governomet { get; set; }
 
         /// <summary>
         /// this for reset password 
         /// </summary>
-      [StringLength(6)]
+        [StringLength(6)]
       public string? ResetPassword { get; set; }
       public DateTime? ResetPasswowrdConfirnation { get; set; }
 

@@ -29,7 +29,7 @@ namespace Uni_Mate.Common.Mapping
                 .Map(dest => dest.Faculty, src => src.Faculty)
                 .Map(dest => dest.Image, src => src.Image)
                 .Map(dest => dest.National_Id, src => src.National_Id)
-                .Map(dest => dest.Phones, src => src.Phones.Select(phone => phone.PhoneNumber).ToList());
+                .Map(dest => dest.Phones, src => src.PhoneNumber);
             #endregion
 
 
@@ -56,7 +56,7 @@ namespace Uni_Mate.Common.Mapping
 			config.NewConfig<Owner, GetOwnerDTO>()
 				.Map(dest => dest.Username, src => src.Fname + " " + src.Lname)
 				.Map(dest => dest.Image, src => src.Image)
-				.Map(dest => dest.Phones, src => src.Phones.Select(phone => phone.PhoneNumber).ToList())
+				.Map(dest => dest.Phones, src => src.WhatsappNumber)
 				.Map(dest => dest.Email, src => src.Email)
 				.Map(dest => dest.BriefOverView, src => src.BriefOverView);
             #endregion

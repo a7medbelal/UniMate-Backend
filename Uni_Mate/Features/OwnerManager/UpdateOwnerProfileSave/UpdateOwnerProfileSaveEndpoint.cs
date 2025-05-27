@@ -20,7 +20,10 @@ namespace Uni_Mate.Features.OwnerManager.UpdateOwnerProfileSave
 			var result = _validator.Validate(request);
 			if (result.IsValid)
 			{
-				var response = await _mediator.Send(new UpdateOwnerProfileSaveCommand(request.Fname, request.Lname, request.Email, request.Phones, request.BriefOverView));
+				var response = await _mediator.Send(new UpdateOwnerProfileSaveCommand(request.Fname, request.Lname, request.Adderse, request.BriefOverView, request.government , request.image)
+				{
+
+				});
 
 				return EndpointResponse<bool>.Success(response.data, response.message);
 			}

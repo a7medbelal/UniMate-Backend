@@ -3,11 +3,12 @@ using System.Security.Claims;
 using Uni_Mate.Common.BaseHandlers;
 using Uni_Mate.Common.Data.Enums;
 using Uni_Mate.Common.Views;
+using Uni_Mate.Features.Common.UploadPhotoCommand;
 using Uni_Mate.Models.UserManagment;
 
 namespace Uni_Mate.Features.OwnerManager.UpdateOwnerProfileSave.Command
 {
-	public record UpdateOwnerProfileSaveCommand(string? Fname, string? Lname, string? Email, ICollection<string>? Phones, string? BriefOverview) : IRequest<RequestResult<bool>>;
+	public record UpdateOwnerProfileSaveCommand(string? Fname, string? Lname, String?  adderess, string? BriefOverview , string?Governmnet, IFormFile ProfileImage ) : IRequest<RequestResult<bool>>;
 
 	public class UpdateOwnerProfileSaveCommandHandler : BaseWithoutRepositoryRequestHandler<UpdateOwnerProfileSaveCommand, RequestResult<bool>, Owner>
 	{
@@ -32,20 +33,26 @@ namespace Uni_Mate.Features.OwnerManager.UpdateOwnerProfileSave.Command
 				return RequestResult<bool>.Failure(ErrorCode.NotFound, "Owner not found");
 			}
 
-			owner.Fname = request.Fname;
-			owner.Lname = request.Lname;
-			owner.Email = request.Email;
-			owner.PhoneNumber = request.Phones != null ? string.Join(",", request.Phones) : null;
-			owner.BriefOverView = request.BriefOverview;
+		     RequestResult<string> frontImageUrl;	
+              string image = string.Empty;	
+            if (string.IsNullOrEmpty(owner.Image))
+			{
+				frontImageUrl = await _mediator.Send(new UploadPhotoCommand(request.ProfileImage));
+			    image = frontImageUrl.data; 
+			}
 
-			try
-			{
-				await _repositoryIdentity.UpdateAsync(owner);
-			}
-			catch (Exception ex)
-			{
-				return RequestResult<bool>.Failure(ErrorCode.InternalServerError, $"An error occurred while updating the owner: {ex.Message}");
-			}
+            owner.Fname = request.Fname;
+			owner.Lname = request.Lname;
+			owner.Address = request.adderess ;
+			owner.BriefOverView = request.BriefOverview;
+			owner.Governomet = request.Governmnet;
+			owner.Image = image;
+
+
+
+  		   await _repositoryIdentity.UpdateAsync(owner);
+
+	
 
 			return RequestResult<bool>.Success(true, "Owner profile updated successfully");
 		}

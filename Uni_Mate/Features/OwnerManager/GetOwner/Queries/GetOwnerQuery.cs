@@ -23,7 +23,7 @@ namespace Uni_Mate.Features.OwnerManager.GetOwner.Queries
 
 		public override async Task<RequestResult<GetOwnerDTO>> Handle(GetOwnerQuery request, CancellationToken cancellationToken)
 		{
-			var userId = _httpContextAccessor.HttpContext?.User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+			var userId =  _httpContextAccessor.HttpContext?.User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
 			if (userId == null)
 			{
 				return RequestResult<GetOwnerDTO>.Failure(ErrorCode.NotFound, "User not found");
@@ -32,7 +32,7 @@ namespace Uni_Mate.Features.OwnerManager.GetOwner.Queries
 			Owner owner;
 			try
 			{
-				owner = _repositoryIdentity.GetInclude(o => o.Id == userId, new string[] { "Phones" });
+				owner = await _repositoryIdentity.GetByIDAsync(userId);
 				if (owner == null)
 				{
 					return RequestResult<GetOwnerDTO>.Failure(ErrorCode.NotFound, "Owner not found");

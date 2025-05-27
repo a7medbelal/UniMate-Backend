@@ -21,7 +21,7 @@ namespace Uni_Mate.Features.Authoraztion.LoginUser.Commands
         public async override Task<RequestResult<TokenDTO>>Handle(LoginUserCommand request, CancellationToken cancellationToken)
         {
            // var user = await _userManager.FindByEmailAsync(request.email);
-            var UserExist = await _repositoryIdentity.Get(c => c.Email == request.email || c.National_Id == request.email || c.UserName == request.email).FirstOrDefaultAsync();
+            var UserExist = await _repositoryIdentity.Get(c => c.Email == request.email  || c.UserName == request.email).FirstOrDefaultAsync();
 
             if (UserExist == null)
                 return RequestResult<TokenDTO>.Failure(ErrorCode.UserNotFound, "User not found");
