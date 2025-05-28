@@ -31,13 +31,15 @@ namespace Uni_Mate.Features.ApartmentManagment.CreateApartmnetProcess
 
             RuleFor(x => x.Location)
                 .NotEmpty()
-                .WithMessage("Location is required.");
+                .WithMessage("Location is required.")
+				.Matches(@"^[\p{L}\d\s.,\-_]+$").WithMessage("Location must contain letters, digits, spaces, and allowed punctuation only.");
 
-            RuleFor(x => x.Description)
+			RuleFor(x => x.Description)
                 .NotEmpty()
-                .WithMessage("Description is required.");
+                .WithMessage("Description is required.")
+				.Matches(@"^[\p{L}\d\s.,\-_]+$").WithMessage("Description must contain letters, digits, spaces, and allowed punctuation only.");
 
-            RuleFor(x => x.Floor)
+			RuleFor(x => x.Floor)
                 .NotEmpty()
                 .WithMessage("Floor number is required.");
 

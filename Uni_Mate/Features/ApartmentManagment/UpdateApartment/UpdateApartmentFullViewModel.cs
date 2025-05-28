@@ -32,19 +32,21 @@ namespace Uni_Mate.Features.ApartmentManagment.UpdateApartment
 				.NotEmpty().WithMessage("Location is required.");
 
 			RuleFor(x => x.Description)
-				.NotEmpty().WithMessage("Description is required.");
+				.NotEmpty().WithMessage("Description is required.")
+				.Matches(@"^[\p{L}\d\s.,\-_]+$").WithMessage("Description must contain letters, digits, spaces, and allowed punctuation only.");
 
 			RuleFor(x => x.DescripeLocation)
-				.NotEmpty().WithMessage("Describe Location is required.");
+				.NotEmpty().WithMessage("Describe Location is required.")
+				.Matches(@"^[\p{L}\d\s.,\-_]+$").WithMessage("Describe Location must contain letters, digits, spaces, and allowed punctuation only.");
 
 			RuleFor(x => x.Floor)
 				.NotEmpty().WithMessage("Floor is required.");
 
 			RuleFor(x => x.GenderAcceptance)
-				.IsInEnum().WithMessage("Invalid GenderAcceptance.");
+				.IsInEnum().WithMessage("Invalid Gender.");
 
 			RuleFor(x => x.DurationType)
-				.IsInEnum().WithMessage("Invalid DurationType.");
+				.IsInEnum().WithMessage("Invalid Duration.");
 
 			RuleFor(x => x.Rooms)
 				.NotNull().WithMessage("Rooms list cannot be null.")

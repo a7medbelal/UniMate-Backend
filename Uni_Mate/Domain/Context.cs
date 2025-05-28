@@ -4,6 +4,7 @@ using Microsoft.EntityFrameworkCore;
 using System.Diagnostics;
 using Uni_Mate.Models.ApartmentManagement;
 using Uni_Mate.Models.BookingManagement;
+using Uni_Mate.Models.Comment_Review;
 using Uni_Mate.Models.UserManagment;
 using Uni_Mate.Models.UserManagment.Enum;
 
@@ -28,6 +29,7 @@ namespace Uni_Mate.Domain
         public DbSet<SocialAccount> SocialAccounts { get; set;}
         public DbSet<FavoriteApartment> FavoriteApartments { get; set; }
         public DbSet<Booking> Bookings { get; set; }
+        public DbSet<Comment> Comments { get; set; }
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
 
