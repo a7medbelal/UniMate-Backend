@@ -15,13 +15,15 @@ public class GetCommentsCommandHandler : BaseRequestHandler<GetCommentsCommand, 
     }
     public async override Task<RequestResult<List<GetCommentsDTO>>> Handle(GetCommentsCommand request, CancellationToken cancellationToken)
     {
-        var comments = await _repository.GetAll()
-            .Where(c => c.ApartmentId == request.ApartmentId)
+        var comments = await _repository.Get(c => c.ApartmentId == request.ApartmentId)
             .Select(x => new GetCommentsDTO
             {
+                Id = x.Id,
                 Message = x.Message,
-                StudentName = x.Student.Fname + " " + x.Student.Lname,
-                StudentImage = x.Student.Image,
+                StudentName = !string.IsNullOrEmpty(x.Student.Lname)
+                    ? $"{x.Student.Fname} {x.Student.Lname}"
+                    : x.Student.Fname,
+                StudentImage = x.Student.Image ?? "default-profile.png",
                 CreatedDate = x.CreatedDate
             }).ToListAsync();
         return RequestResult<List<GetCommentsDTO>>.Success(comments, "Comments retrieved successfully.");

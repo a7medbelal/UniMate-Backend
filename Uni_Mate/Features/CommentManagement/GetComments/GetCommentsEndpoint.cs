@@ -5,13 +5,13 @@ using Uni_Mate.Common.Views;
 using Uni_Mate.Features.CommentManagement.GetComments.Commands;
 
 namespace Uni_Mate.Features.CommentManagement.GetComments;
-public class GetCommentEndpoint : BaseEndpoint<GetCommentsViewModel, List<GetCommentsDTO>>
+public class GetCommentEndpoint : BaseEndpoint<GetCommentsViewMode, List<GetCommentsDTO>>
 {
-    public GetCommentEndpoint(BaseEndpointParameters<GetCommentsViewModel> parameters) : base(parameters)
+    public GetCommentEndpoint(BaseEndpointParameters<GetCommentsViewMode> parameters) : base(parameters)
     {
     }
     [HttpGet]
-    public async Task<EndpointResponse<List<GetCommentsDTO>>> GetComments([FromQuery] GetCommentsViewModel viewmodel)
+    public async Task<EndpointResponse<List<GetCommentsDTO>>> GetComments([FromBody] GetCommentsViewMode viewmodel)
     {
         var validationResult = ValidateRequest(viewmodel);
         if (!validationResult.isSuccess)
