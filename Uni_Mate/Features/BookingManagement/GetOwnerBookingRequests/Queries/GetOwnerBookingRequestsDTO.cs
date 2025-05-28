@@ -1,4 +1,6 @@
-﻿namespace Uni_Mate.Features.BookingManagement.GetOwnerBookingRequests.Queries
+﻿using Uni_Mate.Models.BookingManagment;
+
+namespace Uni_Mate.Features.BookingManagement.GetOwnerBookingRequests.Queries
 {
 	public class GetOwnerBookingRequestsDTO
 	{
@@ -7,5 +9,6 @@
 		public string StudentName { get; set; }
 		public DateTime RequestDate { get; set; }
 		public string RequestStatus { get; set; }
+		public BookingType bookingType { get; set; }
 	}
 }

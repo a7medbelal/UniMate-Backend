@@ -1,10 +1,13 @@
-﻿namespace Uni_Mate.Features.BookingManagement.GetStudenetBookingRequests.Queries
+﻿using Uni_Mate.Models.BookingManagment;
+
+namespace Uni_Mate.Features.BookingManagement.GetStudenetBookingRequests.Queries
 {
 	public class GetStudentBookingHistoryDTO
 	{
 		public int RequestId { get; set; } 
 		public string ApartmentName { get; set; } = string.Empty;
 		public DateTime RequestDate { get; set; }
-		public string Status { get; set; } = string.Empty;          
+		public string Status { get; set; } = string.Empty; 
+		public String booking {  get; set; }
 	}
 }

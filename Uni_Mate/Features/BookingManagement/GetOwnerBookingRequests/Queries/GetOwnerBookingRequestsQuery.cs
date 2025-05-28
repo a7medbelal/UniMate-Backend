@@ -26,7 +26,6 @@ namespace Uni_Mate.Features.BookingManagement.GetOwnerBookingRequests.Queries
 			
 			var requests = await _repository.GetAll()
 			.Where(b => b.Apartment.OwnerID == _userInfo.ID && b.Status == BookingStatus.Pending) 
-			.OrderByDescending(b => b.CreatedDate)
 			.Select(b => new GetOwnerBookingRequestsDTO
 				{
 					RequestId = b.Id,
@@ -37,11 +36,17 @@ namespace Uni_Mate.Features.BookingManagement.GetOwnerBookingRequests.Queries
 						+ b.Apartment.Floor + "الدور الـ",
 					StudentName = b.Student.Fname + " " + b.Student.Lname,
 					RequestStatus = b.Status.ToString(),
-					RequestDate = b.CreatedDate
-				})
-				.ToListAsync(cancellationToken);
+					RequestDate = b.CreatedDate,
+					bookingType = b.Type
+				}).OrderByDescending(b => b.RequestDate)
+                .ToListAsync(cancellationToken);
+			if (requests == null || !requests.Any())
+			{
+				return RequestResult<List<GetOwnerBookingRequestsDTO>>.Failure(ErrorCode.NotFound, "No booking requests found for the owner");
+            }
 
-			return RequestResult<List<GetOwnerBookingRequestsDTO>>.Success(requests, "Requests retrieved successfully");
+
+            return RequestResult<List<GetOwnerBookingRequestsDTO>>.Success(requests, "Requests retrieved successfully");
 		}
 	}
 }
