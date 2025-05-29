@@ -8,10 +8,11 @@
     {
         public int RoomId { get; set; }
         public string? ImageRoomUrl { get; set; }
-        public decimal Price { get; set; }
+        public decimal PricePerBed { get; set; }
         public bool IsFull { get; set; }
-        public int NumOfPeople { get; set; }
-        public bool RoomRequestAvailable { get; set; }
+        public int NumOfBeds { get; set; }
+        public int NumBedNotBooked { get; set; }
+        public bool RoomRequestAvailable { get; set; }  
         public bool BedRequestAvailable { get; set; }
 
         // show if the user book a room or a bed 

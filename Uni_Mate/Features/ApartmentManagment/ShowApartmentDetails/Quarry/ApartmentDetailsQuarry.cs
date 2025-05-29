@@ -47,7 +47,7 @@ namespace Uni_Mate.Features.ApartmentManagment.ShowApartmentDetails.Quarry
             }
 
             //Get Apartment With The Navigate Property To Get Access To All Relation Of The Apartment
-            var apartment = await _repository.GetWithIncludeAsync(request.id, "Images", "Rooms.Beds", "ApartmentFacilities.Facility.FacilityCategory");
+            var apartment = await _repository.GetWithIncludeAsync(request.id, "Images","Rooms.Beds", "ApartmentFacilities.Facility.FacilityCategory");
 
             if (apartment == null)
             {
@@ -147,42 +147,55 @@ namespace Uni_Mate.Features.ApartmentManagment.ShowApartmentDetails.Quarry
              */
 
             // make a list of sleep places
-            var sleepPlaces = apartment.Rooms?.Select(room =>
+            var sleepPlaces = new List<SleepPlace>();
+
+foreach (var room in apartment.Rooms ?? new List<Room>())
+{
+    var beds = room.Beds ?? new List<Bed>();
+    var bookedBeds = beds.Where(b => !b.IsAvailable).ToList();
+    var numPeople = bookedBeds.Count;
+    var totalBeds = beds.Count;
+    var numBedNotBooked = beds.Count(b => b.IsAvailable);
+
+    var students = new List<StudentDTO>();
+
+    foreach (var bed in bookedBeds)
+    {
+        var booking = _bookBedRepo.Get(bk => bk.BedId == bed.Id).FirstOrDefault();
+        if (booking != null)
+        {
+            var student = await _studentRepo.GetByIDAsync(booking.StudentId);
+            if (student != null)
             {
-                var beds = room.Beds ?? new List<Bed>();
-                var bookedBeds = beds.Where(b => !b.IsAvailable).ToList();
-                var numPeople = bookedBeds.Count;
-
-                var students = bookedBeds.Select(b =>
+                students.Add(new StudentDTO
                 {
-                    var booking = _bookBedRepo.Get(bk => bk.BedId == b.Id).FirstOrDefault();
-                    var student = _studentRepo.GetByIDAsync(booking.StudentId).Result;
+                    Collage = student.Faculty,
+                    Level = student.AcademicYear,
+                    // To Solve
+                   // Location = student.Governorate
+                });
+            }
+        }
+    }
 
-                    return new StudentDTO
-                    {
-                        StudentId = student.Id,
-                        Name = $"{student.Fname} {student.Lname}",
-                        Image = student.Image,
-                        Collage = student.Faculty,
-                        Level = student.AcademicYear,
-                        Location = student.Governomet
-                    };
-                }).ToList();
+    var sleepPlace = new SleepPlace
+    {
+        RoomId = room.Id,
+        ImageRoomUrl = room.Image,
+        PricePerBed = beds.FirstOrDefault()?.Price ?? 0,
+        IsFull = totalBeds == numPeople,
+        NumOfBeds = totalBeds,
+        NumBedNotBooked = numBedNotBooked,
+        BedRequestAvailable = numBedNotBooked > 0,
+        RoomRequestAvailable = !_bookRoomRepo.Get(bk => bk.RoomId == room.Id).Any(),
+        StudentDTOs = students
+    };
 
-                return new SleepPlace
-                {
-                    RoomId = room.Id,
-                    ImageRoomUrl = room.Image,
-                    Price = room.Price,
-                    IsFull = beds.Count == numPeople,
-                    NumOfPeople = numPeople,
-                    BedRequestAvailable = beds.Any(b => b.IsAvailable),
-                    RoomRequestAvailable = !_bookRoomRepo.Get(bk => bk.RoomId == room.Id).Any(),
-                    StudentDTOs = students
-                };
-            }).ToList();
+    sleepPlaces.Add(sleepPlace);
+}
 
-            detailsApartment.SleepPlaces = sleepPlaces;
+detailsApartment.SleepPlaces = sleepPlaces;
+
 
 
             #endregion
