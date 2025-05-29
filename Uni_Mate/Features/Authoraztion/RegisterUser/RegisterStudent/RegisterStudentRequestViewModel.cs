@@ -27,11 +27,11 @@ public class RegisterStudentRequestViewModelValidator : AbstractValidator<Regist
 
 		RuleFor(x => x.Fname)
 				.NotEmpty().WithMessage("First Name is required.")
-				.Matches(@"^[\p{L}]+$").WithMessage("First name must contain only letters.");
+				.Matches(@"^[\p{L}\s\u0621-\u064A]+$").WithMessage("First name must contain only letters.");
 
 		RuleFor(x => x.Lname)
 			.NotEmpty().WithMessage("Last Name is required.")
-			.Matches(@"^[\p{L}]+$").WithMessage("Last name must contain only letters.");
+			.Matches(@"^[\p{L}\s\u0621-\u064A]+$").WithMessage("Last name must contain only letters.");
 
 		RuleFor(x => x.ConfrimPassword)
             .NotEmpty().WithMessage("Confrim Password is required.")
