@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using Uni_Mate.Features.ApartmentManagment.UpdateApartment.UpdateApartmentRoomSave;
 using FluentValidation;
 using Uni_Mate.Features.Common.ApartmentManagement.UploadApartmentCommand;
+using Uni_Mate.Features.ApartmentManagment.CreateApartmnetProcess.Commands.CategoryWithFaciltyCommand;
 
 namespace Uni_Mate.Features.ApartmentManagment.UpdateApartment
 {
@@ -17,6 +18,7 @@ namespace Uni_Mate.Features.ApartmentManagment.UpdateApartment
 		Gender GenderAcceptance,
 		ApartmentDurationType DurationType,
 		List<UpdateApartmentRoomSaveViewModel> Rooms,
+		List<FacilityApartmentViewModel> ApartmentFacilities,
 		UploadImagesViewModel ApartmentNewImages,
 		List<Image> ApartmentDeleteImages
 	);
