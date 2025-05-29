@@ -10,7 +10,7 @@ namespace Uni_Mate.Models.ApartmentManagement
     {
         public int Num { get; set; }
         public string? Description { get; set; }
-        public string  Location { get; set; }
+        public Location  Location { get; set; }
         public string ? DescripeLocation{ get; set; }
         public int NumberOfRooms { get; set; }
         public int Capecity { get; set; }

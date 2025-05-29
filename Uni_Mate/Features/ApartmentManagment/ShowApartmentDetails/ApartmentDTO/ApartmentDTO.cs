@@ -1,10 +1,12 @@
-﻿namespace Uni_Mate.Features.ApartmentManagment.ShowApartmentDetails.ApartmentDTO
+﻿using Uni_Mate.Models.ApartmentManagement;
+
+namespace Uni_Mate.Features.ApartmentManagment.ShowApartmentDetails.ApartmentDTO
 {
     public class ApartmentDTO
     {
         public int Id { get; set; }
         public string? Description { get; set; }
-        public string? Location { get; set; }
+        public string ?  Location { get; set; }
         public string? DescripeLocation { get; set; }
         public string? Floor { get; set; }
         public decimal Price { get; set; }

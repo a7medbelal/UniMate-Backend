@@ -19,11 +19,9 @@ public class GetCommentsCommandHandler : BaseRequestHandler<GetCommentsCommand, 
             .Select(x => new GetCommentsDTO
             {
                 Id = x.Id,
-                Message = x.Message,
-                StudentName = !string.IsNullOrEmpty(x.Student.Lname)
-                    ? $"{x.Student.Fname} {x.Student.Lname}"
-                    : x.Student.Fname,
-                StudentImage = x.Student.Image ?? "default-profile.png",
+                Message = x.Message ?? "null",
+                StudentName = (x.Student.Fname + " " + x.Student.Lname) ?? "null",
+               StudentImage = x.Student.Image ?? "default-profile.png",
                 CreatedDate = x.CreatedDate
             }).ToListAsync();
         return RequestResult<List<GetCommentsDTO>>.Success(comments, "Comments retrieved successfully.");

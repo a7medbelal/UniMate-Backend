@@ -63,7 +63,7 @@ namespace Uni_Mate.Features.ApartmentManagment.ShowApartmentDetails.Quarry
                 Id = apartment.Id,
                 Description = apartment.Description,
                 Floor = apartment.Floor,
-                Location = apartment.Location,
+                Location = apartment.Location.ToString(),
                 DescripeLocation = apartment.DescripeLocation,
                 IsAvailable = apartment.IsAvailable,
                 kind = apartment.Gender == Gender.Male ? "Male" : apartment.Gender == Gender.Female ? "Female" : "Null",

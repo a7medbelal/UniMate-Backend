@@ -58,6 +58,9 @@ namespace Uni_Mate.Domain
             modelBuilder.Entity<User>()
                   .Property(u => u.role)
                   .HasConversion<string>();
+            modelBuilder.Entity<Apartment>()
+              .Property(u => u.Location)
+              .HasConversion<string>();
 
             // Store The Enum ImageType As String In The Database
             modelBuilder.Entity<Image>()

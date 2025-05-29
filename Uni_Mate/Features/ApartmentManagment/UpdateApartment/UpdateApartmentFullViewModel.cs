@@ -10,7 +10,7 @@ namespace Uni_Mate.Features.ApartmentManagment.UpdateApartment
 	public record UpdateApartmentFullViewModel(
 		int ApartmentId,
 		string Price,
-		string Location,
+		Location Location,
 		string Description,
 		string DescripeLocation,
 		string Floor,

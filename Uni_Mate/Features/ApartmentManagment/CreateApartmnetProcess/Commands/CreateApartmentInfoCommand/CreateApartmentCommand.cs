@@ -1,4 +1,4 @@
-﻿using MediatR;
+﻿    using MediatR;
 using Uni_Mate.Common.BaseHandlers;
 using Uni_Mate.Common.Data.Enums;
 using Uni_Mate.Common.Views;
@@ -9,10 +9,9 @@ namespace Uni_Mate.Features.ApartmentManagment.CreateApartmnetProcess.Commands.C
 {
     public record CreateApartmentCommand(string OwnerID,
         int Num,
-        string Location,
+        Location Location,
         string? Description,
         int Capecity,
-        int NumberOfRooms,
         string? DescripeLocation,
         string Floor,
         Gender GenderAcceptance,
@@ -36,7 +35,6 @@ namespace Uni_Mate.Features.ApartmentManagment.CreateApartmnetProcess.Commands.C
                 DurationType = request.DurationType,
                 OwnerID = request.OwnerID,
                 Capecity = request.Capecity,
-                NumberOfRooms = request.NumberOfRooms,
             };
 
 

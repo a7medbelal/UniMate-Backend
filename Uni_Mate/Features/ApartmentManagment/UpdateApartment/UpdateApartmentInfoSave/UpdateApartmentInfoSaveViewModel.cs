@@ -8,7 +8,7 @@ namespace Uni_Mate.Features.ApartmentManagment.UpdateApartment.UpdateApartmentIn
 	public record UpdateApartmentInfoSaveViewModel(
 		int ApartmentId,
 		string Price,
-		string Location,
+		Location Location,
 		string Description,
 		string DescripeLocation,
 		string Floor,
@@ -23,11 +23,6 @@ namespace Uni_Mate.Features.ApartmentManagment.UpdateApartment.UpdateApartmentIn
 		{
 			RuleFor(x => x.ApartmentId)
 				.GreaterThan(0).WithMessage("Apartment ID must be greater than zero.");
-
-			RuleFor(x => x.Location)
-				.NotEmpty().WithMessage("Location is required.")
-				.MaximumLength(100).WithMessage("Location can't be longer than 100 characters.")
-				.Matches(@"^[\p{L}\d\s.,\-_]+$").WithMessage("Location must contain letters, digits, spaces, and allowed punctuation only.");
 
 			RuleFor(x => x.Description)
 				.NotEmpty().WithMessage("Description is required.")

@@ -20,7 +20,7 @@ using Uni_Mate.Models.GeneralEnum;
 
 namespace Uni_Mate.Features.ApartmentManagment.SearchForApartment.Queries
 {
-    public record SearchForApartmentQurey(string? Keyword ,  decimal? FromPrice ,decimal? ToPrice , int? Capacity, string? Location , Gender? Gender , int PageSize,int PageNumber, SortOption? SortBy = SortOption.None) : IRequest<RequestResult<Pagination<GetAparmtmentFilterDTO>>>;
+    public record SearchForApartmentQurey(string? Keyword ,  decimal? FromPrice ,decimal? ToPrice , int? Capacity, Location? Location , Gender? Gender , int PageSize,int PageNumber, SortOption? SortBy = SortOption.None) : IRequest<RequestResult<Pagination<GetAparmtmentFilterDTO>>>;
 
     public class SearchForApartmentQureyHandler : BaseRequestHandler<SearchForApartmentQurey, RequestResult<Pagination<GetAparmtmentFilterDTO>>, Apartment>
     {
@@ -49,8 +49,8 @@ namespace Uni_Mate.Features.ApartmentManagment.SearchForApartment.Queries
             // the data that i need from the database
             var apartmentsList = apartments.Select(c => new GetAparmtmentFilterDTO
             {
-                Gender = c.Gender.ToString(),
-                Location = c.Location,
+                Gender = nameof(c.Gender),
+                Location = nameof(c.Location),
                 Floor = c.Floor ??  "unknown" ,
                 OwnerName = c.Owner != null ? (c.Owner.Fname + " " + c.Owner.Lname) : "Unknown",
                 NumberOfRooms = c.NumberOfRooms,
@@ -88,8 +88,7 @@ namespace Uni_Mate.Features.ApartmentManagment.SearchForApartment.Queries
 
                 predicate = predicate.And(x =>
                 EF.Functions.Like(x.Description, term) ||
-                EF.Functions.Like(x.DescripeLocation, term) ||
-                EF.Functions.Like(x.Location, term));
+                EF.Functions.Like(x.DescripeLocation, term));
             }
 
 
@@ -104,7 +103,7 @@ namespace Uni_Mate.Features.ApartmentManagment.SearchForApartment.Queries
             if (request.Capacity.HasValue)
                 predicate = predicate.And(x => x.Capecity == request.Capacity);
 
-            if (!string.IsNullOrWhiteSpace(request.Location))
+            if (request.Location.HasValue)
                 predicate = predicate.And(x => x.Location == request.Location);
 
             if (request.Gender is not null)
