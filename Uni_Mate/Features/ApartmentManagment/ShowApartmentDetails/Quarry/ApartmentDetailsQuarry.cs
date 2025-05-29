@@ -47,7 +47,7 @@ namespace Uni_Mate.Features.ApartmentManagment.ShowApartmentDetails.Quarry
             }
 
             //Get Apartment With The Navigate Property To Get Access To All Relation Of The Apartment
-            var apartment = await _repository.GetWithIncludeAsync(request.id, "Images","Rooms.Beds", "ApartmentFacilities.Facility.FacilityCategory");
+            var apartment = await _repository.GetWithIncludeAsync(request.id, "Images", "Rooms.Beds", "ApartmentFacilities.Facility.FacilityCategory");
 
             if (apartment == null)
             {
@@ -73,8 +73,6 @@ namespace Uni_Mate.Features.ApartmentManagment.ShowApartmentDetails.Quarry
             };
             #endregion
 
-
-            detailsApartment.ApartmentDTO = apartmentDTO;
 
             #region Map The List And The Image To ApartmentDTO
 
@@ -149,6 +147,8 @@ namespace Uni_Mate.Features.ApartmentManagment.ShowApartmentDetails.Quarry
             // make a list of sleep places
             var sleepPlaces = new List<SleepPlace>();
 
+            bool isRequestApartAvailable = true;
+
             foreach (var room in apartment.Rooms ?? new List<Room>())
             {
                 var beds = room.Beds ?? new List<Bed>();
@@ -172,6 +172,7 @@ namespace Uni_Mate.Features.ApartmentManagment.ShowApartmentDetails.Quarry
                             var student = await _studentRepo.GetByIDAsync(booking.StudentId);
                             if (student != null)
                             {
+                                isRequestApartAvailable = false;
                                 students.Add(new StudentDTO
                                 {
                                     Collage = student.Faculty,
@@ -204,6 +205,7 @@ namespace Uni_Mate.Features.ApartmentManagment.ShowApartmentDetails.Quarry
                     var student = await _studentRepo.GetByIDAsync(bookRoom.StudentId);
                     if (student != null)
                     {
+                        isRequestApartAvailable = false;
                         students.Add(new StudentDTO
                         {
                             Collage = student.Faculty,
@@ -232,12 +234,12 @@ namespace Uni_Mate.Features.ApartmentManagment.ShowApartmentDetails.Quarry
 
             }
 
+            // Check If Apartment request Available 
+            apartmentDTO.BookEntireApartment = isRequestApartAvailable;
+
             detailsApartment.SleepPlaces = sleepPlaces;
-
-
-
             #endregion
-
+            detailsApartment.ApartmentDTO = apartmentDTO;
             #region CheckNull
 
             if (roomsDTOs != null)

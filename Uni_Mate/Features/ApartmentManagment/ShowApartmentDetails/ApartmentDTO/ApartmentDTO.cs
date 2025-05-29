@@ -20,6 +20,7 @@
         /// </summary>
         public int BedRoomCount { get; set; }
         public bool IsFavorite { get; set; } = false;
+        public bool BookEntireApartment { get; set; }
 
     }
 }
