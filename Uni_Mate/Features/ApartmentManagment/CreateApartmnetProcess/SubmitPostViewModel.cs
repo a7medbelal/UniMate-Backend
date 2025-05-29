@@ -8,8 +8,7 @@ using Uni_Mate.Models.GeneralEnum;
 
 namespace Uni_Mate.Features.ApartmentManagment.CreateApartmnetProcess
 {
-    public record SubmitPostViewModel(int Num,
-            Location Location,
+    public record SubmitPostViewModel(Location Location,
             string Description,
             int Capecity,
             string DescribeLocation,
@@ -30,10 +29,9 @@ namespace Uni_Mate.Features.ApartmentManagment.CreateApartmnetProcess
    //          .WithMessage("Apartment number must be greater than 0.");
 
 		
-			RuleFor(x => x.Description)
-				.NotEmpty().WithMessage("Description is required.")
-				.Matches(@"^[\p{L}\u0621-\u064A\d .,\-_\\r\\n]+$").WithMessage("Description must contain only letters, digits, spaces, and allowed punctuation (. , - _).");
-
+			//RuleFor(x => x.Description)
+			//	.NotEmpty().WithMessage("Description is required.")
+			//	.Matches(@"^[\p{L}\d\s\u0600-\u06FF]+$").WithMessage("good decs");
 
 
 			//RuleFor(x => x.Floor)

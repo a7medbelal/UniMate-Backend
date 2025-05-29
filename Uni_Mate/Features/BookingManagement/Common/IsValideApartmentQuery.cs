@@ -1,4 +1,5 @@
 using MediatR;
+using System.Data.Entity;
 using Uni_Mate.Common.BaseHandlers;
 using Uni_Mate.Common.Data.Enums;
 using Uni_Mate.Common.Views;
@@ -15,9 +16,9 @@ public class IsValideApartmentQueryHandler : BaseRequestHandler<IsValideApartmen
 
     public async override Task<RequestResult<bool>> Handle(IsValideApartmentQuery request, CancellationToken cancellationToken)
     {
-        var apart = await _repository.GetByIDAsync(request.ApartmentId);
+        var apart = await _repository.Get(c=>c.Id == request.ApartmentId).Select(c=>new { c.IsAvailable , c.Id} ).FirstOrDefaultAsync();
 
-        if (apart == null)
+        if (apart is null)
         {
             return RequestResult<bool>.Failure(ErrorCode.NotFound, "Apartment not found");
         }

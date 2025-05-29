@@ -14,7 +14,6 @@ using Uni_Mate.Models.GeneralEnum;
 namespace Uni_Mate.Features.ApartmentManagment.CreateApartmnetProcess.Commands.CreateFullApartmentOrcasterartor
 {
     public record SubmitPostCommand(
-        int Num,
         Location Location,
         string? Description,
         string? DescribeLocation,
@@ -39,13 +38,12 @@ namespace Uni_Mate.Features.ApartmentManagment.CreateApartmnetProcess.Commands.C
             if (string.IsNullOrEmpty(ownerID))
                 return RequestResult<bool>.Failure(ErrorCode.OwnerNotAuthorized, "Owner Not Authorized");
 
-            var apartmentExist = await _repository.AnyAsync(x => x.Num == request.Num && x.OwnerID == ownerID);
+            var apartmentExist = await _repository.AnyAsync(x => x.OwnerID == ownerID);
             if (apartmentExist)
                 return RequestResult<bool>.Failure(ErrorCode.ApartmentAlreadyExist, "Apartment already exists");
 
             var newApartment = await _mediator.Send(new CreateApartmentCommand(
                 ownerID,
-                request.Num,
                 request.Location,
                 request.Description,
                 request.Capecity,

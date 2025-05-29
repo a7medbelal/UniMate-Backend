@@ -25,7 +25,6 @@ namespace Uni_Mate.Features.ApartmentManagment.CreateApartmnetProcess
 
 
             var result = await _mediator.Send(new SubmitPostCommand(
-                viewmodel.Num,
                 viewmodel.Location,
                 viewmodel.Description,
                 viewmodel.DescribeLocation,

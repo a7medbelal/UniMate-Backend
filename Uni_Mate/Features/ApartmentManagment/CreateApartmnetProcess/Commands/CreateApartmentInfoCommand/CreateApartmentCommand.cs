@@ -8,7 +8,6 @@ using Uni_Mate.Models.GeneralEnum;
 namespace Uni_Mate.Features.ApartmentManagment.CreateApartmnetProcess.Commands.CreateApartmentInfoCommand
 {
     public record CreateApartmentCommand(string OwnerID,
-        int Num,
         Location Location,
         string? Description,
         int Capecity,
@@ -26,7 +25,6 @@ namespace Uni_Mate.Features.ApartmentManagment.CreateApartmnetProcess.Commands.C
         {
             var apartment = new Apartment
             {
-                Num = request.Num,
                 Location = request.Location,
                 Description = request.Description,
                 DescripeLocation = request.DescripeLocation,
