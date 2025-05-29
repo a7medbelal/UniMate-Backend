@@ -21,7 +21,8 @@ namespace Uni_Mate.Features.ApartmentManagment.ShowApartmentDetails.ApartmentDTO
         // عدد االضيوف
         /// </summary>
         public int BedRoomCount { get; set; }
-        public bool IsFavorite { get; set; } = true;
+        public bool IsFavorite { get; set; } = false;
+        public bool BookEntireApartment { get; set; }
 
     }
 }

@@ -30,6 +30,10 @@ namespace Uni_Mate.Domain
         public DbSet<FavoriteApartment> FavoriteApartments { get; set; }
         public DbSet<Booking> Bookings { get; set; }
         public DbSet<Comment> Comments { get; set; }
+        public DbSet<Category> Categories { get; set; }
+        public DbSet<Facility> Facilities { get; set; }
+        public DbSet<ApartmentFacility> ApartmentFacilities { get; set; }
+        public DbSet<Image> Images { get; set; }
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
 

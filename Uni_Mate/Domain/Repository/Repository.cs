@@ -183,6 +183,20 @@ namespace Uni_Mate.Domain.Repository
             return await query.FirstOrDefaultAsync(x => x.Id == id);
         }
 
+        /*public async Task<Entity> GetWithIncludeAsync(int id, params string[] include)
+{
+    // Apply the ID filter first to reduce the initial dataset
+    var query = _dbSet.Where(x => x.Id == id);
+
+    // Then include the related entities
+    foreach (var navigationProperty in include)
+    {
+        query = query.Include(navigationProperty);
+    }
+
+    return await query.FirstOrDefaultAsync();
+}*/
+
         public async Task HardDeleteAsync(Entity entity)
         {
             _dbSet.Remove(entity);
