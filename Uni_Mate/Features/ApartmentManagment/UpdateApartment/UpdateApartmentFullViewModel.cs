@@ -33,11 +33,11 @@ namespace Uni_Mate.Features.ApartmentManagment.UpdateApartment
 
 			RuleFor(x => x.Description)
 				.NotEmpty().WithMessage("Description is required.")
-				.Matches(@"^[\p{L}\d\s.,\-_]+$").WithMessage("Description must contain letters, digits, spaces, and allowed punctuation only.");
+				.Matches(@"^[\p{L}\u0621-\u064A\d .,\-_\\r\\n]+$").WithMessage("Description must contain letters, digits, spaces, and allowed punctuation only.");
 
 			RuleFor(x => x.DescripeLocation)
 				.NotEmpty().WithMessage("Describe Location is required.")
-				.Matches(@"^[\p{L}\d\s.,\-_]+$").WithMessage("Describe Location must contain letters, digits, spaces, and allowed punctuation only.");
+				.Matches(@"^[\p{L}\u0621-\u064A\d .,\-_\\r\\n]+$").WithMessage("Describe Location must contain letters, digits, spaces, and allowed punctuation (. , - _).");
 
 			RuleFor(x => x.Floor)
 				.NotEmpty().WithMessage("Floor is required.");

@@ -18,12 +18,12 @@ namespace Uni_Mate.Features.StudentManager.UpdateAcademicInfoSave
             RuleFor(x => x.University)
                 .NotEmpty().WithMessage("University is required.")
                 .MaximumLength(100).WithMessage("University name cannot exceed 100 characters.")
-				.Matches(@"^[\p{L}]+$").WithMessage("‘University name must contain letters and spaces only.");
+				.Matches(@"^[\p{L}\s\u0621-\u064A]+$").WithMessage("‘University name must contain letters and spaces only.");
 
 			RuleFor(x => x.Faculty)
                 .NotEmpty().WithMessage("Faculty is required.")
                 .MaximumLength(100).WithMessage("Faculty name cannot exceed 100 characters.")
-				.Matches(@"^[\p{L}]+$").WithMessage("‘Faculty must contain letters and spaces only.");
+				.Matches(@"^[\p{L}\s\u0621-\u064A]+$").WithMessage("‘Faculty must contain letters and spaces only.");
 
 			RuleFor(x => x.AcademicYear)
                 .NotEmpty().WithMessage("Academic Year is required.")
@@ -32,7 +32,7 @@ namespace Uni_Mate.Features.StudentManager.UpdateAcademicInfoSave
             RuleFor(x => x.Department)
                 .NotEmpty().WithMessage("Department is required.")
                 .MaximumLength(100).WithMessage("Department name cannot exceed 100 characters.")
-				.Matches(@"^[\p{L}]+$").WithMessage("‘Department must contain letters and spaces only.");
+				.Matches(@"^[\p{L}\s\u0621-\u064A]+$").WithMessage("‘Department must contain letters and spaces only.");
 		}
     }
 }
