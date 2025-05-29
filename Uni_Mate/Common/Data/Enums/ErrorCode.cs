@@ -41,5 +41,8 @@ public enum ErrorCode
     BookingFailed,
     Booked,
     ServerError,
-    DeleteFailed
+    DeleteFailed,
+    ApartmentNotAvailable,
+    RoomNotAvailable,
+    BedNotAvailable
 }
