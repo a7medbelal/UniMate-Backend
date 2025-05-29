@@ -1,6 +1,7 @@
 ﻿using MediatR;
-using System.Data.Entity;
+using Microsoft.EntityFrameworkCore;
 using Uni_Mate.Common.BaseHandlers;
+using Uni_Mate.Common.Data.Enums;
 using Uni_Mate.Common.Views;
 using Uni_Mate.Models.Comment_Review;
 
@@ -15,15 +16,25 @@ public class GetCommentsCommandHandler : BaseRequestHandler<GetCommentsCommand, 
     }
     public async override Task<RequestResult<List<GetCommentsDTO>>> Handle(GetCommentsCommand request, CancellationToken cancellationToken)
     {
-        var comments = await _repository.Get(c => c.ApartmentId == request.ApartmentId)
-            .Select(x => new GetCommentsDTO
-            {
-                Id = x.Id,
-                Message = x.Message ?? "null",
-                StudentName = (x.Student.Fname + " " + x.Student.Lname) ?? "null",
-               StudentImage = x.Student.Image ?? "default-profile.png",
-                CreatedDate = x.CreatedDate
-            }).ToListAsync();
-        return RequestResult<List<GetCommentsDTO>>.Success(comments, "Comments retrieved successfully.");
+
+        if (request.ApartmentId <= 0)
+            return RequestResult<List<GetCommentsDTO>>.Failure(ErrorCode.InvalidData, "Invalid apartment ID");
+
+        var comments = await _repository
+    .Get(c => c.ApartmentId == request.ApartmentId)
+    .Include(c => c.Student)
+    .Select(c => new GetCommentsDTO
+    {
+        Id = c.Id,
+        Message = c.Message ?? "",
+        StudentName = string.IsNullOrEmpty(c.Student!.Lname)
+            ? c.Student.Fname ?? "Unknown"
+            : $"{c.Student.Fname} {c.Student.Lname}",
+        StudentImage = c.Student.Image ?? "default-profile.png",
+        CreatedDate = c.CreatedDate
+    })
+    .ToListAsync(cancellationToken);
+        return RequestResult<List<GetCommentsDTO>>.Success(comments, "تم جلب التعليقات بنجاح");
     }
+
 }

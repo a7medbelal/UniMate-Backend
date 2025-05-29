@@ -29,15 +29,12 @@ namespace Uni_Mate.Features.ApartmentManagment.CreateApartmnetProcess
    //          .GreaterThan(0)
    //          .WithMessage("Apartment number must be greater than 0.");
 
-   //         RuleFor(x => x.Location)
-   //             .NotEmpty()
-   //             .WithMessage("Location is required.")
-			//	.Matches(@"^[\p{L}\d\s.,\-_]+$").WithMessage("Location must contain letters, digits, spaces, and allowed punctuation only.");
+		
+			RuleFor(x => x.Description)
+				.NotEmpty().WithMessage("Description is required.")
+				.Matches(@"^[\p{L}\u0621-\u064A\d .,\-_\\r\\n]+$").WithMessage("Description must contain only letters, digits, spaces, and allowed punctuation (. , - _).");
 
-			//RuleFor(x => x.Description)
-   //             .NotEmpty()
-   //             .WithMessage("Description is required.")
-			//	.Matches(@"^[\p{L}\d\s.,\-_]+$").WithMessage("Description must contain letters, digits, spaces, and allowed punctuation only.");
+
 
 			//RuleFor(x => x.Floor)
    //             .NotEmpty()

@@ -32,11 +32,10 @@ namespace Uni_Mate.Features.ApartmentManagment.UpdateApartment.UpdateApartmentRo
 			RuleFor(x => x.Description)
 				.NotEmpty().WithMessage("Description is required.")
 				.MaximumLength(500).WithMessage("Description can't be longer than 500 characters.")
-				.Matches(@"^[\p{L}\d\s.,\-_]+$").WithMessage("Description must contain letters, digits, spaces, and allowed punctuation only.");
+				.Matches(@"^[\p{L}\u0621-\u064A\d .,\-_\\r\\n]+$").WithMessage("Description must contain letters, digits, spaces, and allowed punctuation (. , - _).");
 
 			RuleFor(x => x.BedCount)
-				.GreaterThan(0)
-				.WithMessage("Bed count must be greater than zero. If you intend to delete the room, please remove it instead of setting the bed count to zero.");
+				.GreaterThan(0).WithMessage("Bed count must be greater than zero. If you intend to delete the room, please remove it instead of setting the bed count to zero.");
 
 			RuleFor(x => x.PricePerBed)
 				.GreaterThan(0).WithMessage("Price per bed must be a positive value.");
