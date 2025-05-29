@@ -26,19 +26,19 @@ namespace Uni_Mate.Features.ApartmentManagment.UpdateApartment.UpdateApartmentIn
 
 			RuleFor(x => x.Location)
 				.NotEmpty().WithMessage("Location is required.")
-				.MaximumLength(100).WithMessage("Location can't be longer than 100 characters.")
-				.Matches(@"^[\p{L}\d\s.,\-_]+$").WithMessage("Location must contain letters, digits, spaces, and allowed punctuation only.");
+				.MaximumLength(100)
+				.Matches(@"^[\p{L}\u0621-\u064A\d .,\-_\\r\\n]+$").WithMessage("Location must contain letters, digits, spaces, and allowed punctuation only.");
 
 			RuleFor(x => x.Description)
 				.NotEmpty().WithMessage("Description is required.")
 				.MaximumLength(500).WithMessage("Description can't be longer than 500 characters.")
-				.Matches(@"^[\p{L}\d\s.,\-_]+$").WithMessage("Description must contain letters, digits, spaces, and allowed punctuation only.");
+				.Matches(@"^[\p{L}\u0621-\u064A\d .,\-_\\r\\n]+$").WithMessage("Description must contain letters, digits, spaces, and allowed punctuation (. , - _).");
 
 
 			RuleFor(x => x.DescripeLocation)
 				.MaximumLength(300).WithMessage("Describe Location can't be longer than 300 characters.")
 				.When(x => !string.IsNullOrEmpty(x.DescripeLocation))
-				.Matches(@"^[\p{L}\d\s.,\-_]+$").WithMessage("Location Description must contain letters, digits, spaces, and allowed punctuation only.");
+				.Matches(@"^[\p{L}\u0621-\u064A\d .,\-_\\r\\n]+$").WithMessage("Location Description must contain letters, digits, spaces, and allowed punctuation (. , - _).");
 
 			RuleFor(x => x.Floor)
 				.NotEmpty().WithMessage("Apartment Floor is required.")
