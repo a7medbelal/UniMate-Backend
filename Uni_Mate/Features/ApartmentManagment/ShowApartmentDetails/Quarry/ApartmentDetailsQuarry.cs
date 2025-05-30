@@ -7,7 +7,6 @@ using Uni_Mate.Models.ApartmentManagement;
 using Uni_Mate.Models.BookingManagement;
 using Uni_Mate.Models.GeneralEnum;
 using Uni_Mate.Models.UserManagment;
-
 namespace Uni_Mate.Features.ApartmentManagment.ShowApartmentDetails.Quarry
 {
     public record ApartmentDetailsQuarry(int id) : IRequest<RequestResult<ApartmentDetailsDTO>>;
@@ -31,6 +30,7 @@ namespace Uni_Mate.Features.ApartmentManagment.ShowApartmentDetails.Quarry
 
         public override async Task<RequestResult<ApartmentDetailsDTO>> Handle(ApartmentDetailsQuarry request, CancellationToken cancellationToken)
         {
+            var userId = _userInfo.ID;
             /*
              * 1- check on the apartment 
              * 2- connect the apartment the images and the rooms 
@@ -47,7 +47,7 @@ namespace Uni_Mate.Features.ApartmentManagment.ShowApartmentDetails.Quarry
             }
 
             //Get Apartment With The Navigate Property To Get Access To All Relation Of The Apartment
-            var apartment = await _repository.GetWithIncludeAsync(request.id, "Images","Rooms.Beds", "ApartmentFacilities.Facility.FacilityCategory");
+            var apartment = await _repository.GetWithIncludeAsync(request.id, "Images", "Rooms.Beds", "ApartmentFacilities.Facility.FacilityCategory");
 
             if (apartment == null)
             {
@@ -63,7 +63,7 @@ namespace Uni_Mate.Features.ApartmentManagment.ShowApartmentDetails.Quarry
                 Id = apartment.Id,
                 Description = apartment.Description,
                 Floor = apartment.Floor,
-                Location = apartment.Location,
+                Location = apartment.Location.ToString(),
                 DescripeLocation = apartment.DescripeLocation,
                 IsAvailable = apartment.IsAvailable,
                 kind = apartment.Gender == Gender.Male ? "Male" : apartment.Gender == Gender.Female ? "Female" : "Null",
@@ -73,8 +73,6 @@ namespace Uni_Mate.Features.ApartmentManagment.ShowApartmentDetails.Quarry
             };
             #endregion
 
-
-            detailsApartment.ApartmentDTO = apartmentDTO;
 
             #region Map The List And The Image To ApartmentDTO
 
@@ -100,16 +98,16 @@ namespace Uni_Mate.Features.ApartmentManagment.ShowApartmentDetails.Quarry
 
             // First Map It To List OF Pair 
             var facilityPairs = apartment.ApartmentFacilities
-    
+
                 .Where(af => af.Facility != null && af.Facility.FacilityCategory != null)
-    
+
                 .Select(af => new KeyValuePair<string, string>(
-    
+
                     // Will Act Like A Key In Dictionary
                     af.Facility.FacilityCategory.Name,
-                   // Will Act Like A Value In Dictionary
+                    // Will Act Like A Value In Dictionary
                     af.Facility.Name
-    
+
                     )).ToList();
 
 
@@ -121,15 +119,15 @@ namespace Uni_Mate.Features.ApartmentManagment.ShowApartmentDetails.Quarry
              *  Will Be Kitchen As Key Van And Fridge Be As List IF Facilities Like ["fridge ", "Van"] As Value
              */
             var groupedFacilities = facilityPairs
-    
+
                 .GroupBy(pair => pair.Key)
-    
+
                 .ToDictionary(
-    
+
                 group => group.Key,
-    
+
                 group => group.Select(pair => pair.Value).ToList()
-    
+
                 );
 
 
@@ -149,57 +147,99 @@ namespace Uni_Mate.Features.ApartmentManagment.ShowApartmentDetails.Quarry
             // make a list of sleep places
             var sleepPlaces = new List<SleepPlace>();
 
-foreach (var room in apartment.Rooms ?? new List<Room>())
-{
-    var beds = room.Beds ?? new List<Bed>();
-    var bookedBeds = beds.Where(b => !b.IsAvailable).ToList();
-    var numPeople = bookedBeds.Count;
-    var totalBeds = beds.Count;
-    var numBedNotBooked = beds.Count(b => b.IsAvailable);
+            bool isRequestApartAvailable = true;
 
-    var students = new List<StudentDTO>();
-
-    foreach (var bed in bookedBeds)
-    {
-        var booking = _bookBedRepo.Get(bk => bk.BedId == bed.Id).FirstOrDefault();
-        if (booking != null)
-        {
-            var student = await _studentRepo.GetByIDAsync(booking.StudentId);
-            if (student != null)
+            foreach (var room in apartment.Rooms ?? new List<Room>())
             {
-                students.Add(new StudentDTO
+                var beds = room.Beds ?? new List<Bed>();
+                var bookedBeds = beds.Where(b => !b.IsAvailable).ToList();
+                var numPeople = bookedBeds.Count;
+                var totalBeds = beds.Count;
+                var numBedNotBooked = beds.Count(b => b.IsAvailable);
+
+                var students = new List<StudentDTO>();
+
+                var bookRoom = _bookRoomRepo.Get(x => x.RoomId == room.Id && x.ApartmentId == room.ApartmentId&& x.Status == BookingStatus.Approved).FirstOrDefault();
+
+
+                if (bookRoom == null)
                 {
-                    Collage = student.Faculty,
-                    Level = student.AcademicYear,
-                    // To Solve
-                   // Location = student.Governorate
-                });
+                    foreach (var bed in bookedBeds)
+                    {
+                        var booking = _bookBedRepo.Get(bk => bk.BedId == bed.Id).FirstOrDefault();
+                        if (booking != null)
+                        {
+                            var student = await _studentRepo.GetByIDAsync(booking.StudentId);
+                            if (student != null)
+                            {
+                                isRequestApartAvailable = false;
+                                students.Add(new StudentDTO
+                                {
+                                    Collage = student.Faculty,
+                                    Level = student.AcademicYear,
+                                    // To Solve
+                                    Location = student.Governomet
+                                });
+                            }
+                        }
+                    }
+                    var sleepPlace = new SleepPlace
+                    {
+                        RoomId = room.Id,
+                        ImageRoomUrl = room.Image,
+                        PricePerBed = beds.FirstOrDefault()?.Price ?? 0,
+                        IsFull = totalBeds == numPeople,
+                        NumOfBeds = totalBeds,
+                        NumBedNotBooked = numBedNotBooked,
+                        BedRequestAvailable = numBedNotBooked > 0,
+                        RoomRequestAvailable = totalBeds == numBedNotBooked,
+                        StudentDTOs = students
+                    };
+
+                    sleepPlaces.Add(sleepPlace);
+                }
+
+                else
+                {
+
+                    var student = await _studentRepo.GetByIDAsync(bookRoom.StudentId);
+                    if (student != null)
+                    {
+                        isRequestApartAvailable = false;
+                        students.Add(new StudentDTO
+                        {
+                            Collage = student.Faculty,
+                            Level = student.AcademicYear,
+                            // To Solve
+                            Location = student.Governomet
+                        });
+                    }
+
+                    var sleepPlace = new SleepPlace
+                    {
+                        RoomId = room.Id,
+                        ImageRoomUrl = room.Image,
+                        PricePerBed = beds.FirstOrDefault()?.Price ?? 0,
+                        IsFull =true,
+                        NumOfBeds = totalBeds,
+                        NumBedNotBooked = 0,
+                        BedRequestAvailable = false,
+                        RoomRequestAvailable = false,
+                        StudentDTOs = students
+                    };
+
+                    sleepPlaces.Add(sleepPlace);
+                }
+
+
             }
-        }
-    }
 
-    var sleepPlace = new SleepPlace
-    {
-        RoomId = room.Id,
-        ImageRoomUrl = room.Image,
-        PricePerBed = beds.FirstOrDefault()?.Price ?? 0,
-        IsFull = totalBeds == numPeople,
-        NumOfBeds = totalBeds,
-        NumBedNotBooked = numBedNotBooked,
-        BedRequestAvailable = numBedNotBooked > 0,
-        RoomRequestAvailable = !_bookRoomRepo.Get(bk => bk.RoomId == room.Id).Any(),
-        StudentDTOs = students
-    };
+            // Check If Apartment request Available 
+            apartmentDTO.BookEntireApartment = isRequestApartAvailable;
 
-    sleepPlaces.Add(sleepPlace);
-}
-
-detailsApartment.SleepPlaces = sleepPlaces;
-
-
-
+            detailsApartment.SleepPlaces = sleepPlaces;
             #endregion
-
+            detailsApartment.ApartmentDTO = apartmentDTO;
             #region CheckNull
 
             if (roomsDTOs != null)
@@ -210,7 +250,7 @@ detailsApartment.SleepPlaces = sleepPlaces;
             {
                 detailsApartment.Images = imageDTOS;
             }
-            if(groupedFacilities != null)
+            if (groupedFacilities != null)
             {
                 detailsApartment.CategoryWithFacilities = groupedFacilities;
             }

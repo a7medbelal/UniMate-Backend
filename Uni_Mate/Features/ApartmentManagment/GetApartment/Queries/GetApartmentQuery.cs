@@ -4,6 +4,7 @@ using Uni_Mate.Common.BaseHandlers;
 using Uni_Mate.Common.Data.Enums;
 using Uni_Mate.Common.Helper;
 using Uni_Mate.Common.Views;
+using Uni_Mate.Domain.Repository;
 using Uni_Mate.Models.ApartmentManagement;
 
 namespace Uni_Mate.Features.ApartmentManagment.GetApartment.Queries;
@@ -11,11 +12,26 @@ public record GetApartmentQuery(int PageNumber, int PageSize) : IRequest<Request
 
 public class GetApartmentQueryHandler : BaseRequestHandler<GetApartmentQuery, RequestResult<Pagination<GetApartmentDTO>>, Apartment>
 {
-    public GetApartmentQueryHandler(BaseRequestHandlerParameter<Apartment> parameters) : base(parameters)
+    IRepository<ApartmentFacility> _apartmentFacilityRepository;
+    IRepository<Room> _roomRepository;
+    IRepository<Image> _imageRepository;
+
+
+    public GetApartmentQueryHandler(BaseRequestHandlerParameter<Apartment> parameters, IRepository<Room> roomRepository, IRepository<Image> imageRepository) : base(parameters)
     {
+        _roomRepository = roomRepository;
+        _imageRepository = imageRepository;
     }
     public override async Task<RequestResult<Pagination<GetApartmentDTO>>> Handle(GetApartmentQuery request, CancellationToken cancellationToken)
     {
+
+
+
+
+
+
+
+
         /**
          * TO DO:
          * add favourite in the future once implemented
@@ -42,6 +58,7 @@ public class GetApartmentQueryHandler : BaseRequestHandler<GetApartmentQuery, Re
                 Price = x.Rooms != null && x.Rooms.Any() ? x.Rooms.FirstOrDefault().Price : 0,
                 Favourite = favourites.Any(y => y == x.Id)
             });
+
         var paginatedResult = await Pagination<GetApartmentDTO>.ToPagedList(query, request.PageNumber, request.PageSize);
 
         return RequestResult<Pagination<GetApartmentDTO>>.Success(paginatedResult, "Pagination Worked");

@@ -56,12 +56,12 @@ namespace Uni_Mate.Common.Mapping
 			config.NewConfig<Owner, GetOwnerDTO>()
 				.Map(dest => dest.Username, src => src.Fname + " " + src.Lname)
 				.Map(dest => dest.Image, src => src.Image)
-				.Map(dest => dest.Phones, src => src.WhatsappNumber)
+				.Map(dest => dest.Phones, src => src.PhoneNumber)
 				.Map(dest => dest.Email, src => src.Email)
 				.Map(dest => dest.BriefOverView, src => src.BriefOverView);
             #endregion
 
-            config.NewConfig<RoomBedViewModel,Room>(). Map(dest => dest.Beds, src => src.Beds) ;
+            config.NewConfig<RoomBedViewModel,Room>();
             config.NewConfig<BedViewModel,Bed>();
 
             config.NewConfig<List<CategoryFacilityViewModel>, List<ApartmentFacility>>()

@@ -37,7 +37,8 @@ namespace Uni_Mate.Features.BookingManagement.GetStudenetBookingRequests.Queries
 						+ b.Apartment.Capecity + " - أشخاص "
 						+ b.Apartment.Floor + "الدور الـ",
 					RequestDate = b.CreatedDate,
-					Status = b.Status.ToString()
+					Status = b.Status.ToString(),
+				    booking = b.Type.ToString(),
 				})
 				.ToListAsync(cancellationToken);
 

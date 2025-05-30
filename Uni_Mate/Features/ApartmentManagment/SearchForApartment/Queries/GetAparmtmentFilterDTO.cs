@@ -1,4 +1,6 @@
-﻿namespace Uni_Mate.Features.ApartmentManagment.SearchForApartment.Queries
+﻿using Uni_Mate.Models.ApartmentManagement;
+
+namespace Uni_Mate.Features.ApartmentManagment.SearchForApartment.Queries
 {
     public class GetAparmtmentFilterDTO
     {

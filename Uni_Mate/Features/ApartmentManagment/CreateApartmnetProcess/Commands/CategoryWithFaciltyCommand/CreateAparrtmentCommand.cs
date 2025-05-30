@@ -13,7 +13,7 @@ namespace Uni_Mate.Features.ApartmentManagment.CreateApartmnetProcess.Commands.C
 {
 
 
-    public record CategoryWithFaciltiesCommand( List<CategoryFacilityViewModel> Categories , int ApartmentID) : IRequest<RequestResult<bool>>;
+    public record CategoryWithFaciltiesCommand( List<FacilityApartmentViewModel> Facility , int ApartmentID) : IRequest<RequestResult<bool>>;
 
     public class CategoryWithFaciltyCommandHandler : BaseRequestHandler<CategoryWithFaciltiesCommand, RequestResult<bool>, ApartmentFacility>
     {
@@ -25,8 +25,16 @@ namespace Uni_Mate.Features.ApartmentManagment.CreateApartmnetProcess.Commands.C
             if (request.ApartmentID < 0)
                 return RequestResult<bool>.Failure(ErrorCode.ApartmentNotFound, "Apartment not found");
 
-                        var facilites = request.Categories.Adapt<List<ApartmentFacility>>(MapsterConfig.Configure());
-                        facilites.ForEach(f => f.ApartmentId = request.ApartmentID);
+            //var facilites = request.Categories.Adapt<List<ApartmentFacility>>(MapsterConfig.Configure());
+            //facilites.ForEach(f => f.ApartmentId = request.ApartmentID);
+            //
+
+            var facilites = request.Facility.Select(f => new ApartmentFacility
+            {
+                ApartmentId = request.ApartmentID,
+                FacilityId = f.FacilityId,
+
+            }).ToList();
             await _repository.AddRangeAsync(facilites);
             return RequestResult<bool>.Success(true, "Categories added successfully");
         }
