@@ -44,5 +44,8 @@ public enum ErrorCode
     DeleteFailed,
     ApartmentNotAvailable,
     RoomNotAvailable,
-    BedNotAvailable
+    BedNotAvailable,
+    SaveFailed,
+    NotAvailable,
+    CanNotBook
 }
