@@ -1,7 +1,7 @@
 ﻿using MediatR;
-using Microsoft.EntityFrameworkCore;
 using System.Linq;
 using Uni_Mate.Common.BaseHandlers;
+using Uni_Mate.Common.Data.Enums;
 using Uni_Mate.Common.Helper;
 using Uni_Mate.Common.Views;
 using Uni_Mate.Domain.Repository;
@@ -35,18 +35,28 @@ public class GetApartmentQueryHandler : BaseRequestHandler<GetApartmentQuery, Re
         /**
          * TO DO:
          * add favourite in the future once implemented
-        // */
+         * Done :)
+         */
+        var favouriteCommand = new GetApartmentFavoriteQuery("2");//_userInfo.ID);
+        var result = _mediator.Send(favouriteCommand, cancellationToken);
+        if (!result.IsCompletedSuccessfully)
+        {
+            return RequestResult<Pagination<GetApartmentDTO>>.Failure(ErrorCode.NotFound, "Favourites not found");
+        }
+        var favourites = result.Result.data;
         var query = _repository.GetAll()
             .Select(x => new GetApartmentDTO
             {
+                Id = x.Id,
                 Images = (List<string>)x.Images.Select(i => i.ImageUrl),
-                Address = nameof(x.Location),
-                Gender = nameof(x.Gender),
+                Address = x.Location,
+                Gender = x.Gender.ToString(),
                 Floor = x.Floor ?? "unknown",
-                OwnerName = (x.Owner.Fname + " " + x.Owner.Lname),
+                OwnerName = (x.Owner != null ? x.Owner.Fname + " " + x.Owner.Lname : string.Empty),
                 NumberOfRooms = x.Rooms != null ? x.Rooms.Count() : 0,
                 Facilities = x.ApartmentFacilities.Select(f => f.Facility.Name).ToList(),
-                Price = x.Rooms != null && x.Rooms.Any() ? x.Rooms.First().Price : 0
+                Price = x.Rooms != null && x.Rooms.Any() ? x.Rooms.FirstOrDefault().Price : 0,
+                Favourite = favourites.Any(y => y == x.Id)
             });
 
         var paginatedResult = await Pagination<GetApartmentDTO>.ToPagedList(query, request.PageNumber, request.PageSize);

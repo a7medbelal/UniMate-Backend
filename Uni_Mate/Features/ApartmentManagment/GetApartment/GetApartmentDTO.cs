@@ -2,7 +2,7 @@
 
 public class GetApartmentDTO
 {
-    public int Id { get; set; } // Assuming Id is an int, adjust as necessary based on your model
+    public int Id { get; set; }
     public List<string> Images { get; set; } = [];
     public string Address { get; set; }
     public string DetailedAddress { get; set; }
