@@ -20,7 +20,19 @@ public class AcceptBookApartmentCommandHandler : BaseRequestHandler<AcceptBookAp
 
     public async override Task<RequestResult<bool>> Handle(AcceptBookApartmentCommand request, CancellationToken cancellationToken)
     {
-        var apartment = await apartmentRepository.Get(i => i.Id == request.ApartmentId).FirstOrDefaultAsync();
+        /*
+         * book the entire apartment  :
+                     must check that the apartment there is not even a single be booked and make sure also that it is valide 
+                     then then clancle all king of the apartment 
+                     then make the apartment as invalide to make the to make sure that no one can else book this apartment 
+         */
+        if (request.BookingId <=0 || request.ApartmentId <=0) 
+            {
+                return RequestResult<bool>.Failure(ErrorCode.NotValide, "The Booking Id And The Apartment Id are Not Valid .");
+            }
+
+        var apartment = await apartmentRepository.Get(i => i.Id == request.ApartmentId).Select(c=> new  { c.Id , c.IsAvailable}).FirstOrDefaultAsync();
+
         if (apartment == null)
         {
             return RequestResult<bool>.Failure(ErrorCode.ApartmentNotFound, "Apartment not found");
@@ -30,18 +42,30 @@ public class AcceptBookApartmentCommandHandler : BaseRequestHandler<AcceptBookAp
             return RequestResult<bool>.Failure(ErrorCode.ApartmentNotAvailable, "Apartment is not available for booking");
         }
 
-        var isApartmentApproved = await _repository.AnyAsync(iaa => iaa.ApartmentId == request.ApartmentId && iaa.Status == BookingStatus.Approved);
-        if (isApartmentApproved)
-        {
-            return RequestResult<bool>.Failure(ErrorCode.ApartmentNotAvailable, "Apartment is not fully empty");
-        }
+        //var isApartmentApproved = await _repository.AnyAsync(iaa => iaa.ApartmentId == request.ApartmentId && iaa.Status == BookingStatus.Approved);
+        //if (isApartmentApproved)
+        //{
+        //    return RequestResult<bool>.Failure(ErrorCode.ApartmentNotAvailable, "You Can Not Book The Entire Apartment.");
+        //}
+        var Booking = await _repository.Get(i => i.Id == request.BookingId).Select(c=> new  { c.Id , c.Status}).FirstOrDefaultAsync();
 
-        var Bookings = _repository.GetAll().Where(i => i.ApartmentId == request.ApartmentId && i.Id != request.BookingId)
+
+
+        var Bookings = _repository.Get(ab => ab.Id == request.BookingId && ab.Id != request.BookingId)
             .ExecuteUpdate(x => x.SetProperty(y => y.Status, y => BookingStatus.Rejected));
 
         var acceptedBooking = _repository.Get(ab => ab.Id == request.ApartmentId)
             .ExecuteUpdate(x => x.SetProperty(xx => xx.Status, BookingStatus.Approved));
 
+        var newAparmtent = new Apartment { Id = request.ApartmentId, IsAvailable = false }; 
+
+        var updateApartment = await apartmentRepository.SaveIncludeAsync(newAparmtent, nameof(newAparmtent.IsAvailable));
+
+      
+        if(!updateApartment)
+        {
+            return RequestResult<bool>.Failure(ErrorCode.SaveFailed, "Saving The Status Of The Apartment Failed");
+        }
         return RequestResult<bool>.Success(true , "Apartment accepted!");
     }
 }
