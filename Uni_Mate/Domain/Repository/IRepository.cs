@@ -33,5 +33,8 @@ namespace Uni_Mate.Domain.Repository
         /// <param name="include">The ICollection Like ["Images","Rooms"]</param>
         /// <returns></returns>
         Task<Entity> GetWithIncludeAsync(int id , params string[] include);
+
+        // new Function Ziad ya jidaan
+        Task<int> CountAsync(Expression<Func<Entity, bool>> predicate = null);
     }
 }
