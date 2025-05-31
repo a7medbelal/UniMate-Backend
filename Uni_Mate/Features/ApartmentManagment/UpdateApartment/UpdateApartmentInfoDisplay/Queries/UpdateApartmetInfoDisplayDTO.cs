@@ -1,4 +1,6 @@
-﻿namespace Uni_Mate.Features.ApartmentManagment.UpdateApartment.UpdatePropertyInfoDisplay.Queries
+﻿using Uni_Mate.Models.ApartmentManagement;
+
+namespace Uni_Mate.Features.ApartmentManagment.UpdateApartment.UpdatePropertyInfoDisplay.Queries
 {
     public class UpdateApartmetInfoDisplayDTO
     {
@@ -9,5 +11,6 @@
         public string DescripeLocation { get; set; }
         public string Gender { get; set; }
         public string DurationType { get; set; }
+        public List<ApartmentFacility> ApartmentFacilities { get; set; }
     }
 }

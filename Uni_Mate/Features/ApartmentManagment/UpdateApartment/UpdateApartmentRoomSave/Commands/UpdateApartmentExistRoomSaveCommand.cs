@@ -1,6 +1,8 @@
 ﻿using MediatR;
+using Microsoft.EntityFrameworkCore;
 using Uni_Mate.Common.BaseHandlers;
 using Uni_Mate.Common.Data.Enums;
+
 using Uni_Mate.Common.Views;
 using Uni_Mate.Domain.Repository;
 using Uni_Mate.Features.Common.DeleteImage.Commands;
@@ -16,6 +18,7 @@ namespace Uni_Mate.Features.ApartmentManagment.UpdateApartmentRoomSave.Commands
 		int NumOfBeds,
 		decimal BedPrice,
 		bool HasAC,
+		int Capacity,
 		IFormFile? RoomPhoto
 		) : IRequest<RequestResult<bool>>;
 
@@ -38,7 +41,7 @@ namespace Uni_Mate.Features.ApartmentManagment.UpdateApartmentRoomSave.Commands
 				return RequestResult<bool>.Failure(ErrorCode.OwnerNotAuthried, "Owner is not authorized.");
 
 			// Fetch the existing room including related Apartment and Beds
-			var room = await _repository.GetWithIncludeAsync(request.RoomId, "Apartment,Beds");
+			var room =await _repository.Get(r => r.Id == request.RoomId).Include(r => r.Apartment).FirstOrDefaultAsync();
 
 			if (room == null)
 				return RequestResult<bool>.Failure(ErrorCode.RoomCreationFailed, "Room not found or not owned by you.");
@@ -94,7 +97,8 @@ namespace Uni_Mate.Features.ApartmentManagment.UpdateApartmentRoomSave.Commands
 				IsAirConditioned = request.HasAC,
 				Price = request.BedPrice * request.NumOfBeds,
 				Beds = room.Beds,
-				Image = room.Image
+				Image = room.Image,
+				Capacity = room.NumOfBeds
 			};
 
 			// Save the updated fields including beds and image
@@ -103,21 +107,26 @@ namespace Uni_Mate.Features.ApartmentManagment.UpdateApartmentRoomSave.Commands
 				nameof(roomToUpdate.IsAirConditioned),
 				nameof(roomToUpdate.Price),
 				nameof(roomToUpdate.Beds),
-				nameof(roomToUpdate.Image)
+				nameof(roomToUpdate.Image),
+				nameof(roomToUpdate.Capacity)
 			);
 
 			// Update the total apartment price based on all its rooms
-			if (room.Apartment != null)
-			{
-				var allRooms = room.Apartment.Rooms;
+			//if (room.Apartment != null)
+			//{
+			//var allRooms = room.Apartment.Rooms;
+			var allRooms = _repository.Get(r => r.ApartmentId == request.ApartmentId);
 				if (allRooms != null && allRooms.Any())
 				{
 					room.Apartment.Price = allRooms.Sum(r => r.Price);
 
+				 await _apartmentRepository.Get(a => a.Id == room.ApartmentId)
+					.ExecuteUpdateAsync(x => x.SetProperty(y => y.Price, room.Apartment.Price));
+
 					await _apartmentRepository.SaveIncludeAsync(room.Apartment, nameof(room.Apartment.Price));
 					await _apartmentRepository.SaveChangesAsync();
 				}
-			}
+			//}
 
 			return RequestResult<bool>.Success(true, "Room updated successfully.");
 		}

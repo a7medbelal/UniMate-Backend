@@ -9,5 +9,6 @@
 		public int BedCount { get; set; }
 
 		public decimal BedPrice { get; set; }
+		public int Capacity { get; set; }
 	}
 }

@@ -47,9 +47,9 @@ public class GetApartmentQueryHandler : BaseRequestHandler<GetApartmentQuery, Re
         var query = _repository.GetAll()
             .Select(x => new GetApartmentDTO
             {
-                Id = x.Id,
+              
                 Images = (List<string>)x.Images.Select(i => i.ImageUrl),
-                Address = x.Location,
+                Address = x.Location.ToString(),
                 Gender = x.Gender.ToString(),
                 Floor = x.Floor ?? "unknown",
                 OwnerName = (x.Owner != null ? x.Owner.Fname + " " + x.Owner.Lname : string.Empty),

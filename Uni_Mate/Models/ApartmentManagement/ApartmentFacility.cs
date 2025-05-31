@@ -2,7 +2,6 @@
 {
     public class ApartmentFacility : BaseEntity
     {
-        public int Id { get; set; }
         public int ApartmentId { get; set; }
         public Apartment Apartment { get; set; }
 

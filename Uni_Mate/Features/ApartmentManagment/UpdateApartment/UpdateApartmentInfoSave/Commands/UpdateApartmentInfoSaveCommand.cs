@@ -3,6 +3,9 @@ using Microsoft.EntityFrameworkCore;
 using Uni_Mate.Common.BaseHandlers;
 using Uni_Mate.Common.Data.Enums;
 using Uni_Mate.Common.Views;
+using Uni_Mate.Domain.Repository;
+using Uni_Mate.Features.ApartmentManagment.CreateApartmnetProcess.Commands.CategoryWithFaciltyCommand;
+using Uni_Mate.Features.ApartmentManagment.UpdateApartment.UpdateApartmentFacility.Commands;
 using Uni_Mate.Models.ApartmentManagement;
 using Uni_Mate.Models.GeneralEnum;
 
@@ -16,13 +19,17 @@ namespace Uni_Mate.Features.ApartmentManagment.UpdateApartment.UpdateApartmentIn
 	string Description,
 	string DescripeLocation,
 	Gender GenderAcceptance,
-	ApartmentDurationType DurationType
+	ApartmentDurationType DurationType,
+	//int Capacity
+	List<FacilityApartmentViewModel> ApartmentFacilities
 	) : IRequest<RequestResult<int>>;
 
 	public class UpdateApartmentInfoSaveCommandHandler : BaseRequestHandler<UpdateApartmentInfoSaveCommand, RequestResult<int>, Apartment>
 	{
-		public UpdateApartmentInfoSaveCommandHandler(BaseRequestHandlerParameter<Apartment> parameters) : base(parameters) 
+		private IRepository<ApartmentFacility> _apartmentFacilities;
+		public UpdateApartmentInfoSaveCommandHandler(BaseRequestHandlerParameter<Apartment> parameters, IRepository<ApartmentFacility> apartmentFacilities) : base(parameters) 
 		{
+			_apartmentFacilities = apartmentFacilities;
 		}
 
 		public override async Task<RequestResult<int>> Handle(UpdateApartmentInfoSaveCommand request, CancellationToken cancellationToken)
@@ -32,10 +39,28 @@ namespace Uni_Mate.Features.ApartmentManagment.UpdateApartment.UpdateApartmentIn
 			if (string.IsNullOrEmpty(ownerID))
 				return RequestResult<int>.Failure(ErrorCode.OwnerNotAuthried, "Owner is not authorized.");
 
-			var apartmentExists = await _repository.Get(a => a.Id == request.ApartmentId && a.OwnerID == ownerID).Select(a => new { a.Id }).FirstOrDefaultAsync();
+			var apartmentExists = await _repository.Get(a => a.Id == request.ApartmentId).Select(a => new { a.Id }).FirstOrDefaultAsync();
 
 			if (apartmentExists == null)
 				return RequestResult<int>.Failure(ErrorCode.ApartmentNotFound, "Apartment not found or not owned by you");
+
+			var apartmentFacilityCommand = new UpdateApartmentFacilityCommand(request.ApartmentFacilities, request.ApartmentId);
+
+			var facilityResult = await _mediator.Send(apartmentFacilityCommand);
+			if (!facilityResult.isSuccess)
+			{
+				return RequestResult<int>.Failure(ErrorCode.NotFound, "apartment facilities not found");
+			}
+
+			List<ApartmentFacility> temp = [];
+			foreach (var facility in request.ApartmentFacilities)
+			{
+				temp.Add(new ApartmentFacility
+				{
+					ApartmentId = request.ApartmentId,
+					FacilityId = facility.FacilityId
+				});
+			}
 
 			// Create a new Apartment object with the updated fields
 			var apartmentToUpdate = new Apartment
@@ -44,9 +69,11 @@ namespace Uni_Mate.Features.ApartmentManagment.UpdateApartment.UpdateApartmentIn
 				Description = request.Description,
 				DescripeLocation = request.DescripeLocation,
 				Gender = request.GenderAcceptance,
-				DurationType = request.DurationType
+				DurationType = request.DurationType,
+				ApartmentFacilities = temp
 			};
 
+			await _apartmentFacilities.AddRangeAsync(temp);
 			// Save changes to the updated fields only
 			await _repository.SaveIncludeAsync(apartmentToUpdate,
 				nameof(apartmentToUpdate.Description),

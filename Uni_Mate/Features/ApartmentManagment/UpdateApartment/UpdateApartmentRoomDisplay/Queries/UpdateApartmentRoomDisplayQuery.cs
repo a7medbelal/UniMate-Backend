@@ -48,7 +48,8 @@ namespace Uni_Mate.Features.ApartmentManagment.UpdateApartment.UpdateApartmentRo
 				Image = room.Image,
 				IsAirConditioned = room.IsAirConditioned,
 				BedCount = room.Beds?.Count ?? 0,
-				BedPrice = room.Beds?.FirstOrDefault()?.Price ?? 0
+				BedPrice = room.Beds?.FirstOrDefault()?.Price ?? 0,
+				Capacity = room.Capacity
 			};
 
 			return RequestResult<UpdateApartmentRoomDisplayDTO>.Success(dto);
