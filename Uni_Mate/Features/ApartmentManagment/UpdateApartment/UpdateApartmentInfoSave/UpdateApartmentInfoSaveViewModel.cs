@@ -8,10 +8,8 @@ namespace Uni_Mate.Features.ApartmentManagment.UpdateApartment.UpdateApartmentIn
 	public record UpdateApartmentInfoSaveViewModel(
 		int ApartmentId,
 		string Price,
-		string Location,
 		string Description,
 		string DescripeLocation,
-		string Floor,
 		Gender GenderAcceptance,
 		ApartmentDurationType DurationType
 	);
@@ -24,25 +22,15 @@ namespace Uni_Mate.Features.ApartmentManagment.UpdateApartment.UpdateApartmentIn
 			RuleFor(x => x.ApartmentId)
 				.GreaterThan(0).WithMessage("Apartment ID must be greater than zero.");
 
-			RuleFor(x => x.Location)
-				.NotEmpty().WithMessage("Location is required.")
-				.MaximumLength(100)
-				.Matches(@"^[\p{L}\u0621-\u064A\d .,\-_\\r\\n]+$").WithMessage("Location must contain letters, digits, spaces, and allowed punctuation only.");
-
 			RuleFor(x => x.Description)
 				.NotEmpty().WithMessage("Description is required.")
 				.MaximumLength(500).WithMessage("Description can't be longer than 500 characters.")
 				.Matches(@"^[\p{L}\u0621-\u064A\d .,\-_\\r\\n]+$").WithMessage("Description must contain letters, digits, spaces, and allowed punctuation (. , - _).");
 
-
 			RuleFor(x => x.DescripeLocation)
 				.MaximumLength(300).WithMessage("Describe Location can't be longer than 300 characters.")
 				.When(x => !string.IsNullOrEmpty(x.DescripeLocation))
 				.Matches(@"^[\p{L}\u0621-\u064A\d .,\-_\\r\\n]+$").WithMessage("Location Description must contain letters, digits, spaces, and allowed punctuation (. , - _).");
-
-			RuleFor(x => x.Floor)
-				.NotEmpty().WithMessage("Apartment Floor is required.")
-				.MaximumLength(50).WithMessage("Floor info can't be longer than 50 characters.");
 
 			RuleFor(x => x.GenderAcceptance)
 				.IsInEnum().WithMessage("Invalid gender acceptance value.");

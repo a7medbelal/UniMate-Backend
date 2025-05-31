@@ -32,7 +32,7 @@ public class GlobalErrorHandlerMiddleware
 
                 await context.Response.WriteAsJsonAsync(response);
             }
-            File.WriteAllText(@"C:\Users\Elnour Tech\source\repos\UniMate-Backend\started.txt", $"error{ex.Message}");
+            //File.WriteAllText(@"C:\Users\Elnour Tech\source\repos\UniMate-Backend\started.txt", $"error{ex.Message}");
 
         }
 

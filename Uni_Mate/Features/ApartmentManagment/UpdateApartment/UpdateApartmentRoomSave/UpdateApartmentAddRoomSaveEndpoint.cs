@@ -26,7 +26,6 @@ namespace Uni_Mate.Features.ApartmentManagment.UpdateApartment.UpdateApartmentRo
 			// Since this is add, RoomId should not be set (or ignored)
 			var response = await _mediator.Send(new UpdateApartmentAddRoomSaveCommand(
 				request.ApartmentId,
-				request.RoomName,
 				request.Description,
 				request.BedCount,
 				request.PricePerBed,

@@ -27,10 +27,8 @@ namespace Uni_Mate.Features.ApartmentManagment.UpdateApartment.UpdateApartmentIn
 			var response = await _mediator.Send(new UpdateApartmentInfoSaveCommand(
 				request.ApartmentId,
 				request.Price,
-				request.Location,
 				request.Description,
 				request.DescripeLocation,
-				request.Floor,
 				request.GenderAcceptance,
 				request.DurationType));
 

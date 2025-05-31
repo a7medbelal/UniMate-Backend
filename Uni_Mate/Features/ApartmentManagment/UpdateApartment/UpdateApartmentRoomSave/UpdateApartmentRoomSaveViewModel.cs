@@ -6,7 +6,6 @@ namespace Uni_Mate.Features.ApartmentManagment.UpdateApartment.UpdateApartmentRo
 	public record UpdateApartmentRoomSaveViewModel(
 	int? RoomId,  // Because the room might not exist yet, we allow it to be nullable
 	int ApartmentId,
-	string RoomName,
 	string Description,
 	IFormFile? RoomPhoto,
 	int BedCount,
@@ -24,10 +23,6 @@ namespace Uni_Mate.Features.ApartmentManagment.UpdateApartment.UpdateApartmentRo
 
 			RuleFor(x => x.ApartmentId)
 				.GreaterThan(0).WithMessage("Apartment ID is required.");
-
-			RuleFor(x => x.RoomName)
-				.NotEmpty().WithMessage("Room name is required.")
-				.MaximumLength(100).WithMessage("Room name can't exceed 100 characters.");
 
 			RuleFor(x => x.Description)
 				.NotEmpty().WithMessage("Description is required.")

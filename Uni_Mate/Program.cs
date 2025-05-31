@@ -33,7 +33,7 @@ namespace Uni_Mate
             builder.Services.AddSwaggerGen();
 
             builder.Services.AddDbContext<Context>(options =>
-       options.UseSqlServer(builder.Configuration.GetConnectionString("ZiadConnection")));
+       options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 
 
             #region Identity Configration

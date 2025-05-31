@@ -9,7 +9,6 @@ public record UpdateApartmentAddRoomSaveCommand(
 
 	// New Room info 
 	int ApartmentId,
-	string RoomName,
 	string Description,
 	int NumOfBeds,
 	decimal BedPrice,

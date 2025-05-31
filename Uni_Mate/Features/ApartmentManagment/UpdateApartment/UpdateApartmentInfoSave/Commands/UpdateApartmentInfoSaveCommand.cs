@@ -13,10 +13,8 @@ namespace Uni_Mate.Features.ApartmentManagment.UpdateApartment.UpdateApartmentIn
 	// Apartment Info to be Edited
 	int ApartmentId,
 	string Price,
-	string Location,
 	string Description,
 	string DescripeLocation,
-	string Floor,
 	Gender GenderAcceptance,
 	ApartmentDurationType DurationType
 	) : IRequest<RequestResult<int>>;
@@ -43,21 +41,17 @@ namespace Uni_Mate.Features.ApartmentManagment.UpdateApartment.UpdateApartmentIn
 			var apartmentToUpdate = new Apartment
 			{
 				Id = request.ApartmentId,
-				Location = request.Location,
 				Description = request.Description,
 				DescripeLocation = request.DescripeLocation,
 				Gender = request.GenderAcceptance,
-				Floor = request.Floor,
 				DurationType = request.DurationType
 			};
 
 			// Save changes to the updated fields only
 			await _repository.SaveIncludeAsync(apartmentToUpdate,
-				nameof(apartmentToUpdate.Location),
 				nameof(apartmentToUpdate.Description),
 				nameof(apartmentToUpdate.DescripeLocation),
 				nameof(apartmentToUpdate.Gender),
-				nameof(apartmentToUpdate.Floor),
 				nameof(apartmentToUpdate.DurationType)
 			);
 			await _repository.SaveChangesAsync();

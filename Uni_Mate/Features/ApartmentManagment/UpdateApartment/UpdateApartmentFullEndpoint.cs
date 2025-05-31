@@ -28,10 +28,8 @@ namespace Uni_Mate.Features.ApartmentManagment.UpdateApartment
 			var updateInfoResult = await _mediator.Send(new UpdateApartmentInfoSaveCommand(
 				request.ApartmentId,
 				request.Price,
-				request.Location,
 				request.Description,
 				request.DescripeLocation,
-				request.Floor,
 				request.GenderAcceptance,
 				request.DurationType
 			));
@@ -50,7 +48,6 @@ namespace Uni_Mate.Features.ApartmentManagment.UpdateApartment
 					var updateRoomResult = await _mediator.Send(new UpdateApartmentExistRoomSaveCommand(
 						room.RoomId.Value,
 						request.ApartmentId,
-						room.RoomName,
 						room.Description,
 						room.BedCount,
 						room.PricePerBed,
@@ -60,7 +57,7 @@ namespace Uni_Mate.Features.ApartmentManagment.UpdateApartment
 
 					if (!updateRoomResult.isSuccess)
 					{
-						return EndpointResponse<int>.Failure(updateRoomResult.errorCode, $"Failed to update room '{room.RoomName}': {updateRoomResult.message}");
+						return EndpointResponse<int>.Failure(updateRoomResult.errorCode, $"Failed to update room '{room.RoomId}': {updateRoomResult.message}");
 					}
 				}
 				else
@@ -68,7 +65,6 @@ namespace Uni_Mate.Features.ApartmentManagment.UpdateApartment
 					// New room: add it
 					var addRoomResult = await _mediator.Send(new UpdateApartmentAddRoomSaveCommand(
 						request.ApartmentId,
-						room.RoomName,
 						room.Description,
 						room.BedCount,
 						room.PricePerBed,
@@ -78,7 +74,7 @@ namespace Uni_Mate.Features.ApartmentManagment.UpdateApartment
 
 					if (!addRoomResult.isSuccess)
 					{
-						return EndpointResponse<int>.Failure(addRoomResult.errorCode, $"Failed to add room '{room.RoomName}': {addRoomResult.message}");
+						return EndpointResponse<int>.Failure(addRoomResult.errorCode, $"Failed to add room '{room.RoomId}': {addRoomResult.message}");
 					}
 				}
 			}

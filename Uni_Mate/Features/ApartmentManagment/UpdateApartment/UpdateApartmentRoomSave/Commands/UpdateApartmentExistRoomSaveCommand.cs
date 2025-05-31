@@ -12,7 +12,6 @@ namespace Uni_Mate.Features.ApartmentManagment.UpdateApartmentRoomSave.Commands
 	public record UpdateApartmentExistRoomSaveCommand(
 		int RoomId,
 		int ApartmentId,
-		string RoomName,
 		string Description,
 		int NumOfBeds,
 		decimal BedPrice,
@@ -106,8 +105,6 @@ namespace Uni_Mate.Features.ApartmentManagment.UpdateApartmentRoomSave.Commands
 				nameof(roomToUpdate.Beds),
 				nameof(roomToUpdate.Image)
 			);
-
-			await _repository.SaveChangesAsync();
 
 			// Update the total apartment price based on all its rooms
 			if (room.Apartment != null)

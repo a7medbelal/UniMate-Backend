@@ -32,7 +32,6 @@ namespace Uni_Mate.Features.ApartmentManagment.UpdateApartment.UpdateApartmentRo
 			var response = await _mediator.Send(new UpdateApartmentExistRoomSaveCommand(
 				request.RoomId.Value,
 				request.ApartmentId,
-				request.RoomName,
 				request.Description,
 				request.BedCount,
 				request.PricePerBed,
