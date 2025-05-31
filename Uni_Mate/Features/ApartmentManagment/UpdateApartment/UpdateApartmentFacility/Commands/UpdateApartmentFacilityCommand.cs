@@ -20,7 +20,7 @@ public class UpdateApartmentFacilityCommandHandler : BaseRequestHandler<UpdateAp
                 ApartmentFacility apartmentFacility = new ApartmentFacility
                 {
                     ApartmentId = request.ApartmentID,
-                    Id = facility.FacilityId
+                     FacilityId = facility.FacilityId
                 };
                 await _repository.Add(apartmentFacility);
             }

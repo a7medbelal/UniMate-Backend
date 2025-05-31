@@ -15,7 +15,7 @@ namespace Uni_Mate.Features.ApartmentManagment.UpdateApartment.UpdateApartmentIn
 
 	// Apartment Info to be Edited
 	int ApartmentId,
-	string Price,
+	decimal Price,
 	string Description,
 	string DescripeLocation,
 	Gender GenderAcceptance,

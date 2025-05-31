@@ -10,7 +10,7 @@ namespace Uni_Mate.Features.ApartmentManagment.UpdateApartment.UpdateApartmentIn
 {
 	public record UpdateApartmentInfoSaveViewModel(
 		int ApartmentId,
-		string Price,
+		decimal Price,
 		string Description,
 		string DescripeLocation,
 		Gender GenderAcceptance,
@@ -48,9 +48,9 @@ namespace Uni_Mate.Features.ApartmentManagment.UpdateApartment.UpdateApartmentIn
 			RuleFor(x => x.DurationType)
 				.IsInEnum().WithMessage("Invalid apartment duration type.");
 
-			RuleFor(x => x.Price)
-				.NotEmpty().WithMessage("Price is required.")
-				.Must(price => decimal.TryParse(price, out var result) && result > 0).WithMessage("Price must be a valid positive number.");
+			//RuleFor(x => x.Price)
+			//	.NotEmpty().WithMessage("Price is required.")
+			//	.Must(price => decimal.TryParse(price, out var result) && result > 0).WithMessage("Price must be a valid positive number.");
 
 			RuleFor(x => x.ApartmentFacilities)
 				.SetValidator(new UpdateApartmentFacilityViewModelValidator());

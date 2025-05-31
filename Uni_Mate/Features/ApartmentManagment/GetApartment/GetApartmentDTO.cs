@@ -6,7 +6,7 @@ public class GetApartmentDTO
 {
     public int Id { get; set; }
     public List<string> Images { get; set; } = [];
-    public Location Address { get; set; }
+    public string Address { get; set; }
     public string DetailedAddress { get; set; }
     public string Gender { get; set; }
     public List<string> Facilities { get; set; } = [];
