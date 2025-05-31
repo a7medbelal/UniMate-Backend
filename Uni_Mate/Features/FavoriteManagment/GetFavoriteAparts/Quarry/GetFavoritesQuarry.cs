@@ -23,18 +23,15 @@ namespace Uni_Mate.Features.FavoriteManagment.GetFavoriteAparts.Quarry
              .Select(f => new FavoriteApartDTO
              {
                  ApartmentId = f.ApartmentId,
-                 ImageUrl = f.Apartment.Images.FirstOrDefault()  .ImageUrl,
+                 ImageUrl = f.Apartment.Images.FirstOrDefault().ImageUrl,
                  Title = $"{f.Apartment.Location} . {f.Apartment.Gender} . {f.Apartment.Floor}",
-<<<<<<< Updated upstream
-                 Description =f.Apartment.Description ,
-                 DescriptionLocation =f.Apartment.DescripeLocation,
-=======
-                 Description = $"{f.Apartment.Rooms.Count} غرف . {f.Apartment.Rooms.SelectMany(r => r.Beds).Count()} ضيف",
-                 Price = (decimal)f.Apartment.Price,
-                 OwnerName = $"{f.Apartment.Owner.Fname} {f.Apartment.Owner.Lname}",
-                 OwnerImage = f.Apartment.Owner.Image,
-                 Rating = 5 // لو عندك تقييمات، حط الحسبة هنا
->>>>>>> Stashed changes
+                 Description = f.Apartment.Description,
+                 DescriptionLocation = f.Apartment.DescripeLocation,
+                 //Description = $"{f.Apartment.Rooms.Count} {f.Apartment.Rooms.SelectMany(r => r.Beds).Count()}",
+                 //Price = (decimal)f.Apartment.Price,
+                 //OwnerName = $"{f.Apartment.Owner.Fname} {f.Apartment.Owner.Lname}",
+                 //OwnerImage = f.Apartment.Owner.Image,
+                 //Rating = 5
              }).ToListAsync();
             return RequestResult<List<FavoriteApartDTO>>.Success(favorites, "Favorites loaded");
         }

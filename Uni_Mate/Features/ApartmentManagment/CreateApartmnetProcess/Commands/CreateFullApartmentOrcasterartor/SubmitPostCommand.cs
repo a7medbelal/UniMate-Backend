@@ -7,6 +7,7 @@ using Uni_Mate.Features.ApartmentManagment.CreateApartmnetProcess.Commands.AddRo
 using Uni_Mate.Features.ApartmentManagment.CreateApartmnetProcess.Commands.CategoryWithFaciltyCommand;
 using Uni_Mate.Features.ApartmentManagment.CreateApartmnetProcess.Commands.CategoryWithFaciltyCommands;
 using Uni_Mate.Features.ApartmentManagment.CreateApartmnetProcess.Commands.CreateApartmentInfoCommand;
+using Uni_Mate.Features.ApartmentManagment.UpdateApartment.UpdatePropertyImages;
 using Uni_Mate.Features.Common.ApartmentManagement.UploadApartmentCommand;
 using Uni_Mate.Models.ApartmentManagement;
 using Uni_Mate.Models.GeneralEnum;
@@ -23,7 +24,7 @@ namespace Uni_Mate.Features.ApartmentManagment.CreateApartmnetProcess.Commands.C
         ApartmentDurationType DurationType,
         List<RoomBedViewModel> Rooms,
         List<FacilityApartmentViewModel> CategoryFacilities,
-        UploadImagesViewModel Images    
+		UploadApartmentImagesViewModel Images    
         ) : IRequest<RequestResult<bool>>;
 
     public class SubmitPostCommandHandler : BaseRequestHandler<SubmitPostCommand, RequestResult<bool>, Apartment>

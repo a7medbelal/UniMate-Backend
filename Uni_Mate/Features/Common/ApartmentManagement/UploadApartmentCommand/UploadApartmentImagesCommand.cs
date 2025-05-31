@@ -5,9 +5,10 @@ using Uni_Mate.Models.ApartmentManagement;
 using MediatR;
 using Uni_Mate.Features.Common.UploadImageCommand.Commands;
 using Uni_Mate.Models.ApartmentManagement.Enum;
+using Uni_Mate.Features.ApartmentManagment.UpdateApartment.UpdatePropertyImages;
 
 namespace Uni_Mate.Features.Common.ApartmentManagement.UploadApartmentCommand;
-public record UploadApartmentImagesCommand(int ApartmentId, UploadImagesViewModel Images) : IRequest<RequestResult<List<Image>>>;
+public record UploadApartmentImagesCommand(int ApartmentId, UploadApartmentImagesViewModel Images) : IRequest<RequestResult<List<Image>>>;
 
 public class UploadApartmentImagesCommandHandler : BaseRequestHandler<UploadApartmentImagesCommand, RequestResult<List<Image>>, Image>
 {
