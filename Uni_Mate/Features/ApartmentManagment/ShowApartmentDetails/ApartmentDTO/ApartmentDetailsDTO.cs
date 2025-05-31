@@ -8,6 +8,7 @@
         public List<ImageApartDTO>? Images { get; set; }
         public Dictionary<string,List<string>>? CategoryWithFacilities { get; set; }
         public List<SleepPlace>? SleepPlaces { get; set; }
+        public OwnerDTO OwnerDTO { get; set; } = new OwnerDTO();
     }
    
     public class RoomDTO

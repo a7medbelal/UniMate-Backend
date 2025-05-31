@@ -8,9 +8,9 @@ namespace Uni_Mate.Features.Common;
 
 public record IsUserExistQuery(string UserId) : IRequest<RequestResult<bool>>;
 
-public class IsUserExistQueryHandler : BaseWithoutRepositoryRequestHandler<IsUserExistQuery, RequestResult<bool>, User>
+public class IsUserExistQueryHandler : BaseWithoutRepositoryRequestHandler<IsUserExistQuery, RequestResult<bool>, Student>
 {
-    public IsUserExistQueryHandler(BaseWithoutRepositoryRequestHandlerParameters<User> parameters) : base(parameters)
+    public IsUserExistQueryHandler(BaseWithoutRepositoryRequestHandlerParameters<Student> parameters) : base(parameters)
     {
     }
 

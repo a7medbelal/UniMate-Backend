@@ -28,6 +28,7 @@ public class GetApartmentEndpoint : BaseEndpoint<GetApartmentViewModel, GetApart
         {
             Apartments = apartments.data.Select(x => new GetApartmentDTO
             {
+                Id = x.Id,
                 Images = x.Images,
                 DetailedAddress = x.DetailedAddress,
                 Address = x.Address,
@@ -35,7 +36,8 @@ public class GetApartmentEndpoint : BaseEndpoint<GetApartmentViewModel, GetApart
                 Floor = x.Floor,
                 OwnerName = x.OwnerName,
                 NumberOfRooms = x.NumberOfRooms,
-                Price = x.Price
+                Price = x.Price,
+                Favourite = x.Favourite
             }).ToList(),
             TotalCount = apartments.data.TotalCount,
             PageNumber = apartments.data.CurrentPage,

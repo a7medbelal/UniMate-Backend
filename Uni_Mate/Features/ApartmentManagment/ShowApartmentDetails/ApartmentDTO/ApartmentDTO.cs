@@ -6,11 +6,12 @@ namespace Uni_Mate.Features.ApartmentManagment.ShowApartmentDetails.ApartmentDTO
     {
         public int Id { get; set; }
         public string? Description { get; set; }
-        public string ?  Location { get; set; }
+        public  string?  Location { get; set; }
         public string? DescripeLocation { get; set; }
         public string? Floor { get; set; }
         public decimal Price { get; set; }
         public string? DurationType { get; set; }
+        public int Capecity { get; set; }
         public bool IsAvailable { get; set; }
         /// <summary>
         /// for boys or girls
@@ -24,5 +25,6 @@ namespace Uni_Mate.Features.ApartmentManagment.ShowApartmentDetails.ApartmentDTO
         public bool IsFavorite { get; set; } = false;
         public bool BookEntireApartment { get; set; }
 
+       
     }
 }

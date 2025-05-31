@@ -33,14 +33,14 @@ namespace Uni_Mate.Features.ApartmentManagment.CreateApartmnetProcess.Commands.C
 
         public override async Task<RequestResult<bool>> Handle(SubmitPostCommand request, CancellationToken cancellationToken)
         {
-            var ownerID = "6ed8fc7d-c8c8-41da-9813-b4ad1ae7b0ce";
+            var ownerID = _userInfo.ID;
 
             if (string.IsNullOrEmpty(ownerID))
                 return RequestResult<bool>.Failure(ErrorCode.OwnerNotAuthorized, "Owner Not Authorized");
 
-            var apartmentExist = await _repository.AnyAsync(x => x.OwnerID == ownerID);
-            if (apartmentExist)
-                return RequestResult<bool>.Failure(ErrorCode.ApartmentAlreadyExist, "Apartment already exists");
+            //var apartmentExist = await _repository.AnyAsync(x => x.OwnerID == ownerID);
+            //if (apartmentExist)
+            //    return RequestResult<bool>.Failure(ErrorCode.ApartmentAlreadyExist, "Apartment already exists");
 
             var newApartment = await _mediator.Send(new CreateApartmentCommand(
                 ownerID,

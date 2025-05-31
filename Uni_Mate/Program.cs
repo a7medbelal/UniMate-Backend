@@ -1,18 +1,19 @@
 
-using Autofac.Extensions.DependencyInjection;
 using Autofac;
-using Uni_Mate.Configrution;
-using Microsoft.AspNetCore.Identity;
-using Uni_Mate.Models.UserManagment;
-using Uni_Mate.Domain;
+using Autofac.Core;
+using Autofac.Extensions.DependencyInjection;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
 using Uni_Mate.Common.helper;
 using Uni_Mate.Common.Views;
+using Uni_Mate.Configrution;
+using Uni_Mate.Domain;
 using Uni_Mate.Middlewares;
 using Uni_Mate.Middlewares;
-using Microsoft.EntityFrameworkCore;
+using Uni_Mate.Models.UserManagment;
 
 namespace Uni_Mate
 {
@@ -105,11 +106,15 @@ namespace Uni_Mate
                 app.UseSwagger();
                 app.UseSwaggerUI();
             }
-            app.UseCors(builder =>
+
+
+            app.UseCors(options =>
             {
-                builder.AllowAnyOrigin()
-                       .AllowAnyHeader();
+                options.AllowAnyOrigin()
+                       .AllowAnyHeader()
+                       .AllowAnyMethod();
             });
+
             app.UseHttpsRedirection();
             app.UseAuthentication();
             app.UseAuthorization();

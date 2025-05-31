@@ -1,4 +1,5 @@
 ﻿using MediatR;
+using Microsoft.EntityFrameworkCore;
 using Uni_Mate.Common.BaseHandlers;
 using Uni_Mate.Common.Views;
 using Uni_Mate.Domain.Repository;
@@ -13,24 +14,38 @@ namespace Uni_Mate.Features.ApartmentManagment.ShowApartmentDetails.Quarry
 
     public class ApartmentDetailsHandler : BaseRequestHandler<ApartmentDetailsQuarry, RequestResult<ApartmentDetailsDTO>, Apartment>
     {
+        private readonly IRepositoryIdentity<Owner> _ownerRep;
         private readonly IRepository<BookRoom> _bookRoomRepo;
         private readonly IRepository<BookBed> _bookBedRepo;
         private readonly IRepositoryIdentity<Student> _studentRepo;
+        private readonly IRepository<FavoriteApartment> _favoriteApartmentRepo;
         public ApartmentDetailsHandler(
             BaseRequestHandlerParameter<Apartment> parameters,
             IRepositoryIdentity<Student> studentRepo,
             IRepository<BookRoom> bookRoomRepo,
-            IRepository<BookBed> bookBedRepo
+            IRepository<BookBed> bookBedRepo,
+            IRepositoryIdentity<Owner> ownerRepo,
+             IRepository<FavoriteApartment> favoriteApartmentRep
             ) : base(parameters)
         {
             _bookBedRepo = bookBedRepo;
             _studentRepo = studentRepo;
             _bookRoomRepo = bookRoomRepo;
+            _ownerRep = ownerRepo;
+            _favoriteApartmentRepo = favoriteApartmentRep;
         }
 
         public override async Task<RequestResult<ApartmentDetailsDTO>> Handle(ApartmentDetailsQuarry request, CancellationToken cancellationToken)
         {
+
+            bool authorized = false;
+
             var userId = _userInfo.ID;
+
+            if (!string.IsNullOrEmpty(userId) && userId == "-1")
+            {
+                authorized = true;
+            }
             /*
              * 1- check on the apartment 
              * 2- connect the apartment the images and the rooms 
@@ -54,6 +69,19 @@ namespace Uni_Mate.Features.ApartmentManagment.ShowApartmentDetails.Quarry
                 return RequestResult<ApartmentDetailsDTO>.Failure(Uni_Mate.Common.Data.Enums.ErrorCode.NotFound, "The Apartment Not Found");
             }
 
+            // make the OwnerDTO
+            var owner = await _ownerRep.Get(x => x.Id == apartment.OwnerID).FirstOrDefaultAsync();
+            var ownerDTO = new OwnerDTO();
+
+            if (owner != null)
+            {
+                ownerDTO.Id = owner.Id;
+                ownerDTO.Image = owner.Image;
+                ownerDTO.FName = owner.Fname;
+                ownerDTO.LName = owner.Lname;
+                ownerDTO.ApartmentsOwned = await _repository.Get(x => x.OwnerID == owner.Id).CountAsync();
+            }
+
             var detailsApartment = new ApartmentDetailsDTO();
 
             #region Map The Details Of Apartment To apartmmentDTO
@@ -63,7 +91,8 @@ namespace Uni_Mate.Features.ApartmentManagment.ShowApartmentDetails.Quarry
                 Id = apartment.Id,
                 Description = apartment.Description,
                 Floor = apartment.Floor,
-                Location = apartment.Location.ToString(),
+                Capecity = apartment.Capecity,
+                Location = nameof(apartment.Location),
                 DescripeLocation = apartment.DescripeLocation,
                 IsAvailable = apartment.IsAvailable,
                 kind = apartment.Gender == Gender.Male ? "Male" : apartment.Gender == Gender.Female ? "Female" : "Null",
@@ -71,6 +100,16 @@ namespace Uni_Mate.Features.ApartmentManagment.ShowApartmentDetails.Quarry
                 RoomCount = apartment.Rooms?.Count() ?? 0,
                 BedRoomCount = apartment.Rooms?.SelectMany(r => r.Beds ?? Enumerable.Empty<Bed>()).Count() ?? 0,
             };
+
+            // check if the apartmet is forvorite to the authenticated user 
+            if (authorized)
+            {
+                var favoriteApart = _favoriteApartmentRepo.Get(x => x.UserId == userId && x.ApartmentId == apartment.Id);
+                if (favoriteApart != null)
+                {
+                    apartmentDTO.IsFavorite = true;
+                }
+            }
             #endregion
 
 
@@ -159,14 +198,14 @@ namespace Uni_Mate.Features.ApartmentManagment.ShowApartmentDetails.Quarry
 
                 var students = new List<StudentDTO>();
 
-                var bookRoom = _bookRoomRepo.Get(x => x.RoomId == room.Id && x.ApartmentId == room.ApartmentId&& x.Status == BookingStatus.Approved).FirstOrDefault();
+                var bookRoom = _bookRoomRepo.Get(x => x.RoomId == room.Id && x.ApartmentId == room.ApartmentId && x.Status == BookingStatus.Approved).FirstOrDefault();
 
 
                 if (bookRoom == null)
                 {
                     foreach (var bed in bookedBeds)
                     {
-                        var booking = _bookBedRepo.Get(bk => bk.BedId == bed.Id).FirstOrDefault();
+                        var booking = _bookBedRepo.Get(bk => bk.BedId == bed.Id && bk.Status == BookingStatus.Approved).FirstOrDefault();
                         if (booking != null)
                         {
                             var student = await _studentRepo.GetByIDAsync(booking.StudentId);
@@ -193,7 +232,8 @@ namespace Uni_Mate.Features.ApartmentManagment.ShowApartmentDetails.Quarry
                         NumBedNotBooked = numBedNotBooked,
                         BedRequestAvailable = numBedNotBooked > 0,
                         RoomRequestAvailable = totalBeds == numBedNotBooked,
-                        StudentDTOs = students
+                        StudentDTOs = students,
+                        HasAC = room.IsAirConditioned
                     };
 
                     sleepPlaces.Add(sleepPlace);
@@ -220,7 +260,7 @@ namespace Uni_Mate.Features.ApartmentManagment.ShowApartmentDetails.Quarry
                         RoomId = room.Id,
                         ImageRoomUrl = room.Image,
                         PricePerBed = beds.FirstOrDefault()?.Price ?? 0,
-                        IsFull =true,
+                        IsFull = true,
                         NumOfBeds = totalBeds,
                         NumBedNotBooked = 0,
                         BedRequestAvailable = false,
@@ -236,10 +276,10 @@ namespace Uni_Mate.Features.ApartmentManagment.ShowApartmentDetails.Quarry
 
             // Check If Apartment request Available 
             apartmentDTO.BookEntireApartment = isRequestApartAvailable;
-
             detailsApartment.SleepPlaces = sleepPlaces;
             #endregion
             detailsApartment.ApartmentDTO = apartmentDTO;
+            detailsApartment.OwnerDTO = ownerDTO;
             #region CheckNull
 
             if (roomsDTOs != null)

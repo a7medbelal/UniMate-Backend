@@ -17,6 +17,7 @@
 
         // show if the user book a room or a bed 
         public List<StudentDTO>? StudentDTOs { get; set; }
+        public bool HasAC { get; set; } = false;
 
     }
 }

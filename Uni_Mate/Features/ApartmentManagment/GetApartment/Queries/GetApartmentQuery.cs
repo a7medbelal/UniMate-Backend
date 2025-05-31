@@ -37,7 +37,9 @@ public class GetApartmentQueryHandler : BaseRequestHandler<GetApartmentQuery, Re
          * add favourite in the future once implemented
          * Done :)
          */
-        var favouriteCommand = new GetApartmentFavoriteQuery("2");//_userInfo.ID);
+ 
+         var userId = _userInfo.ID; 
+        var favouriteCommand = new GetApartmentFavoriteQuery(userId);//_userInfo.ID);
         var result = _mediator.Send(favouriteCommand, cancellationToken);
         if (!result.IsCompletedSuccessfully)
         {

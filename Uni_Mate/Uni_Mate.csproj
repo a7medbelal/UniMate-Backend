@@ -9,6 +9,7 @@
   <ItemGroup>
     <Compile Remove="Features\ApartmentManagment\apartment\**" />
     <Compile Remove="Features\ApartmentManagment\Beds\**" />
+    <Compile Remove="Features\ApartmentManagment\Facilites\**" />
     <Compile Remove="Features\ApartmentManagment\Rooms\**" />
     <Compile Remove="Features\ApartmentManagment\UpdateApartment\UpdataPropertyInfoSave\**" />
     <Compile Remove="Features\BookingManagment\**" />
@@ -17,6 +18,7 @@
     <Compile Remove="Models\BookingManagment\**" />
     <Content Remove="Features\ApartmentManagment\apartment\**" />
     <Content Remove="Features\ApartmentManagment\Beds\**" />
+    <Content Remove="Features\ApartmentManagment\Facilites\**" />
     <Content Remove="Features\ApartmentManagment\Rooms\**" />
     <Content Remove="Features\ApartmentManagment\UpdateApartment\UpdataPropertyInfoSave\**" />
     <Content Remove="Features\BookingManagment\**" />
@@ -25,6 +27,7 @@
     <Content Remove="Models\BookingManagment\**" />
     <EmbeddedResource Remove="Features\ApartmentManagment\apartment\**" />
     <EmbeddedResource Remove="Features\ApartmentManagment\Beds\**" />
+    <EmbeddedResource Remove="Features\ApartmentManagment\Facilites\**" />
     <EmbeddedResource Remove="Features\ApartmentManagment\Rooms\**" />
     <EmbeddedResource Remove="Features\ApartmentManagment\UpdateApartment\UpdataPropertyInfoSave\**" />
     <EmbeddedResource Remove="Features\BookingManagment\**" />
@@ -33,6 +36,7 @@
     <EmbeddedResource Remove="Models\BookingManagment\**" />
     <None Remove="Features\ApartmentManagment\apartment\**" />
     <None Remove="Features\ApartmentManagment\Beds\**" />
+    <None Remove="Features\ApartmentManagment\Facilites\**" />
     <None Remove="Features\ApartmentManagment\Rooms\**" />
     <None Remove="Features\ApartmentManagment\UpdateApartment\UpdataPropertyInfoSave\**" />
     <None Remove="Features\BookingManagment\**" />
@@ -83,7 +87,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Features\ApartmentManagment\Facilites\AddFacilty\command\" />
     <Folder Include="Features\Authoraztion\RoleAcess\Commands\" />
     <Folder Include="Features\StudentManager\" />
   </ItemGroup>
