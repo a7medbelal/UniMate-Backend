@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Uni_Mate.Features.ApartmentManagment.CreateApartmnetProcess.Commands.AddRoomWithBedsCommands;
 using Uni_Mate.Features.ApartmentManagment.CreateApartmnetProcess.Commands.CategoryWithFaciltyCommand;
+using Uni_Mate.Features.ApartmentManagment.UpdateApartment.UpdatePropertyImages;
 using Uni_Mate.Features.Common.ApartmentManagement.UploadApartmentCommand;
 using Uni_Mate.Models.ApartmentManagement;
 using Uni_Mate.Models.GeneralEnum;
@@ -17,7 +18,7 @@ namespace Uni_Mate.Features.ApartmentManagment.CreateApartmnetProcess
             ApartmentDurationType DurationType,
             List<RoomBedViewModel> Rooms,
             List<FacilityApartmentViewModel> CategoryFacilities,
-            UploadImagesViewModel Images
+			UploadApartmentImagesViewModel Images
             );
 
     public class SubmitPostViewModleValidator : AbstractValidator<SubmitPostViewModel>
