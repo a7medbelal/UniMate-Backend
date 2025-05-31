@@ -30,7 +30,10 @@ namespace Uni_Mate.Features.ApartmentManagment.UpdateApartment.UpdateApartmentIn
 				request.Description,
 				request.DescripeLocation,
 				request.GenderAcceptance,
-				request.DurationType));
+				request.DurationType,
+				//request.Capacity
+				request.ApartmentFacilities.Facilities
+				));
 
 			return EndpointResponse<int>.Success(response.data, response.message);
 		}

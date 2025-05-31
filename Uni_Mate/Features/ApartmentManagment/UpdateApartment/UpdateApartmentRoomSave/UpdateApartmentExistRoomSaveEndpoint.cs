@@ -36,6 +36,7 @@ namespace Uni_Mate.Features.ApartmentManagment.UpdateApartment.UpdateApartmentRo
 				request.BedCount,
 				request.PricePerBed,
 				request.HasAC,
+				request.Capacity,
 				request.RoomPhoto));
 
 			return EndpointResponse<bool>.Success(response.data, response.message);

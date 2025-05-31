@@ -2,6 +2,9 @@
 using Uni_Mate.Models.ApartmentManagement.Enum;
 using Uni_Mate.Models.ApartmentManagement;
 using FluentValidation;
+using Uni_Mate.Features.ApartmentManagment.UpdateApartment.UpdateApartmentRoomSave;
+using Uni_Mate.Features.ApartmentManagment.UpdateApartment.UpdateApartmentFacility;
+using Uni_Mate.Features.ApartmentManagment.CreateApartmnetProcess.Commands.CategoryWithFaciltyCommand;
 
 namespace Uni_Mate.Features.ApartmentManagment.UpdateApartment.UpdateApartmentInfoSave
 {
@@ -11,7 +14,9 @@ namespace Uni_Mate.Features.ApartmentManagment.UpdateApartment.UpdateApartmentIn
 		string Description,
 		string DescripeLocation,
 		Gender GenderAcceptance,
-		ApartmentDurationType DurationType
+		ApartmentDurationType DurationType,
+		//int Capacity
+		UpdateApartmentFacilityViewModel ApartmentFacilities
 	);
 
 	public class UpdateApartmentInfoSaveViewModelValidator : AbstractValidator<UpdateApartmentInfoSaveViewModel>
@@ -46,6 +51,9 @@ namespace Uni_Mate.Features.ApartmentManagment.UpdateApartment.UpdateApartmentIn
 			RuleFor(x => x.Price)
 				.NotEmpty().WithMessage("Price is required.")
 				.Must(price => decimal.TryParse(price, out var result) && result > 0).WithMessage("Price must be a valid positive number.");
+
+			RuleFor(x => x.ApartmentFacilities)
+				.SetValidator(new UpdateApartmentFacilityViewModelValidator());
 		}
 	}
 }

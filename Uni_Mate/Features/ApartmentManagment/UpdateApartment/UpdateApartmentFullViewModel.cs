@@ -5,6 +5,7 @@ using Uni_Mate.Features.ApartmentManagment.UpdateApartment.UpdateApartmentRoomSa
 using FluentValidation;
 using Uni_Mate.Features.Common.ApartmentManagement.UploadApartmentCommand;
 using Uni_Mate.Features.ApartmentManagment.CreateApartmnetProcess.Commands.CategoryWithFaciltyCommand;
+using Uni_Mate.Features.ApartmentManagment.UpdateApartment.UpdateApartmentFacility;
 
 namespace Uni_Mate.Features.ApartmentManagment.UpdateApartment
 {
@@ -13,12 +14,13 @@ namespace Uni_Mate.Features.ApartmentManagment.UpdateApartment
 		string Price,
 		string? Location,
 		string Description,
-		string DescripeLocation,
+		string? DescripeLocation,
 		string Floor,
 		Gender GenderAcceptance,
 		ApartmentDurationType DurationType,
+		int Capacity,
 		List<UpdateApartmentRoomSaveViewModel> Rooms,
-		List<FacilityApartmentViewModel> ApartmentFacilities,
+		List<UpdateApartmentFacilityViewModel> ApartmentFacilities,
 		UploadImagesViewModel ApartmentNewImages,
 		List<Image> ApartmentDeleteImages
 	);

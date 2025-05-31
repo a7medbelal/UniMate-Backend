@@ -10,7 +10,8 @@ namespace Uni_Mate.Features.ApartmentManagment.UpdateApartment.UpdateApartmentRo
 	IFormFile? RoomPhoto,
 	int BedCount,
 	decimal PricePerBed,
-	bool HasAC
+	bool HasAC,
+	int Capacity
 );
 
 

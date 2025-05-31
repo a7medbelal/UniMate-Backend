@@ -1,4 +1,5 @@
 ﻿using MediatR;
+using Microsoft.EntityFrameworkCore;
 using Uni_Mate.Common.BaseHandlers;
 using Uni_Mate.Common.Views;
 using Uni_Mate.Features.ApartmentManagment.CreateApartmnetProcess.Commands.CategoryWithFaciltyCommand;
@@ -25,8 +26,9 @@ public class UpdateApartmentFacilityCommandHandler : BaseRequestHandler<UpdateAp
             }
             else
             {
-                ApartmentFacility? existingFacility = await _repository.GetByIDAsync(facility.FacilityId);
-                await _repository.DeleteAsync(existingFacility);
+                var existingFacility = await _repository.Get(lol => lol.ApartmentId == request.ApartmentID && lol.FacilityId == facility.FacilityId)
+                    .ExecuteUpdateAsync(x => x.SetProperty(y => y.Deleted, true));
+                //await _repository.DeleteAsync(existingFacility);
             }
         }
         return RequestResult<bool>.Success(true, "Facilities updated successfully");

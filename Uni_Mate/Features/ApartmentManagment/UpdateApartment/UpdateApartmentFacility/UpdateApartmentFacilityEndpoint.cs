@@ -21,7 +21,7 @@ public class UpdateApartmentFacilityEndpoint : BaseEndpoint<List<FacilityApartme
         {
             return validationResult;
         }
-        var command = new UpdateApartmentFacilityCommand(viewmodel, 3);
+        var command = new UpdateApartmentFacilityCommand(viewmodel, 5);
         var result = await _mediator.Send(command);
         if (!result.isSuccess)
         {

@@ -63,7 +63,6 @@ namespace Uni_Mate.Features.SeedingData
                 // 3. Create Apartment
                 var apartment = new Apartment
                 {
-              
                     Location = Location.QenaUniversity,
                     Description = "Demo apartment",
                     Gender = Gender.Male,
