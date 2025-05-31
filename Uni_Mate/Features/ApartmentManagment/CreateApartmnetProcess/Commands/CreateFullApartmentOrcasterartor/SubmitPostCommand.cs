@@ -1,4 +1,5 @@
 ﻿using MediatR;
+using Microsoft.AspNetCore.Mvc;
 using Uni_Mate.Common.BaseHandlers;
 using Uni_Mate.Common.Data.Enums;
 using Uni_Mate.Common.Views;
@@ -13,17 +14,15 @@ using Uni_Mate.Models.GeneralEnum;
 namespace Uni_Mate.Features.ApartmentManagment.CreateApartmnetProcess.Commands.CreateFullApartmentOrcasterartor
 {
     public record SubmitPostCommand(
-        int Num,
-        string Location,
+        Location Location,
         string? Description,
         string? DescribeLocation,
         string Floor,
-        int Capecity,
-        int NumberOfRooms,  
+        int Capecity,  
         Gender GenderAcceptance,
         ApartmentDurationType DurationType,
         List<RoomBedViewModel> Rooms,
-        List<CategoryFacilityViewModel> CategoryFacilities,
+        List<FacilityApartmentViewModel> CategoryFacilities,
         UploadImagesViewModel Images    
         ) : IRequest<RequestResult<bool>>;
 
@@ -34,22 +33,20 @@ namespace Uni_Mate.Features.ApartmentManagment.CreateApartmnetProcess.Commands.C
 
         public override async Task<RequestResult<bool>> Handle(SubmitPostCommand request, CancellationToken cancellationToken)
         {
-            var ownerID = _userInfo.ID;
+            var ownerID = "6ed8fc7d-c8c8-41da-9813-b4ad1ae7b0ce";
 
             if (string.IsNullOrEmpty(ownerID))
                 return RequestResult<bool>.Failure(ErrorCode.OwnerNotAuthorized, "Owner Not Authorized");
 
-            var apartmentExist = await _repository.AnyAsync(x => x.Num == request.Num && x.OwnerID == ownerID);
+            var apartmentExist = await _repository.AnyAsync(x => x.OwnerID == ownerID);
             if (apartmentExist)
                 return RequestResult<bool>.Failure(ErrorCode.ApartmentAlreadyExist, "Apartment already exists");
 
             var newApartment = await _mediator.Send(new CreateApartmentCommand(
                 ownerID,
-                request.Num,
                 request.Location,
                 request.Description,
                 request.Capecity,
-                request.NumberOfRooms,
                 request.DescribeLocation,
                 request.Floor,
                 request.GenderAcceptance,
@@ -59,7 +56,7 @@ namespace Uni_Mate.Features.ApartmentManagment.CreateApartmnetProcess.Commands.C
             if (!newApartment.isSuccess)
                 return RequestResult<bool>.Failure(newApartment.errorCode, newApartment.message);
 
-            var addRooms = await _mediator.Send(new AddRoomCommand(request.Rooms, newApartment.data));
+            var addRooms = await _mediator.Send(new AddRoomCommand( request.Rooms, newApartment.data));
             if (!addRooms.isSuccess)
                 return RequestResult<bool>.Failure(addRooms.errorCode, addRooms.message);
 
@@ -71,6 +68,7 @@ namespace Uni_Mate.Features.ApartmentManagment.CreateApartmnetProcess.Commands.C
             if (!uploadImages.isSuccess)
                 return RequestResult<bool>.Failure(uploadImages.errorCode, uploadImages.message);
 
+            await _repository.SaveChangesAsync(); 
             return RequestResult<bool>.Success(true);
         }
     }

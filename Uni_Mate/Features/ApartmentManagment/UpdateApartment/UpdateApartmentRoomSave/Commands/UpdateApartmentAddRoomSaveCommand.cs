@@ -65,7 +65,7 @@ public class UpdateApartmentAddRoomSaveCommandHandler : BaseRequestHandler<Updat
 			newRoom.Beds.Add(new Bed { Price = request.BedPrice });
 		}
 
-		// Set the room's total price
+		// Set the room's total price 
 		newRoom.Price = totalPrice;
 
 		// Add the new room to the apartment's room list

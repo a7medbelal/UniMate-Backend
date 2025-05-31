@@ -12,7 +12,8 @@ namespace Uni_Mate.Features.ApartmentManagment.CreateApartmnetProcess.Commands.C
         public CategoryFacilityViewModelValidator()
         {
             RuleFor(x => x.Name)
-                .NotEmpty().WithMessage("Category name is required.");
+                .NotEmpty().WithMessage("Category name is required.")
+               .Matches(@"^[\p{L}\d\s.,\-_]+$").WithMessage("FAcility must contain letters, digits, spaces, and allowed punctuation only.");
 
             RuleFor(x => x.Facilities)
                 .NotNull().WithMessage("Facilities list is required.")
@@ -23,7 +24,7 @@ namespace Uni_Mate.Features.ApartmentManagment.CreateApartmnetProcess.Commands.C
 
     public class FacilityApartmentViewModel
     {
-        public bool IsSelected { get; set; }
+        public bool IsSelected { get; set; }  
         public int FacilityId { get; set; }
     }
     public class FacilityApartmentViewModelValidator : AbstractValidator<FacilityApartmentViewModel>
@@ -36,16 +37,24 @@ namespace Uni_Mate.Features.ApartmentManagment.CreateApartmnetProcess.Commands.C
     }
 
 
-    public class CategoryFacilityListValidator : AbstractValidator<List<CategoryFacilityViewModel>>
+    public class LFacilityApartmentViewModelValidator : AbstractValidator<List<FacilityApartmentViewModel>>
     {
-        public CategoryFacilityListValidator()
+        public LFacilityApartmentViewModelValidator()
         {
-            RuleForEach(x => x).SetValidator(new CategoryFacilityViewModelValidator());
-
-            RuleFor(x => x)
-                .Must(list => list.Any(cat => cat.Facilities.Any(f => f.IsSelected)))
-                .WithMessage("At least one facility must be selected across all categories.");
+            RuleForEach(x => x).SetValidator(new FacilityApartmentViewModelValidator());
         }
     }
+
+    //public class CategoryFacilityListValidator : AbstractValidator<List<CategoryFacilityViewModel>>
+    //{
+    //    public CategoryFacilityListValidator()
+    //    {
+    //        RuleForEach(x => x).SetValidator(new CategoryFacilityViewModelValidator());
+
+    //        RuleFor(x => x)
+    //            .Must(list => list.Any(cat => cat.Facilities.Any(f => f.IsSelected)))
+    //            .WithMessage("At least one facility must be selected across all categories.");
+    //    }
+    //}
 
 }

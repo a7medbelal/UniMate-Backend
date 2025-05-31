@@ -6,7 +6,7 @@ using Uni_Mate.Features.BookingManagement.GetOwnerBookingRequests.Queries;
 
 namespace Uni_Mate.Features.BookingManagement.GetOwnerBookingRequests
 {
-	[Authorize(Roles = "Owner")]
+	[Authorize]
 	public class GetOwnerBookingRequestsEndpoint : BaseWithoutTRequestEndpoint<List<GetOwnerBookingRequestsDTO>>
 	{
 		public GetOwnerBookingRequestsEndpoint(BaseWithoutTRequestEndpointParameters parameters)

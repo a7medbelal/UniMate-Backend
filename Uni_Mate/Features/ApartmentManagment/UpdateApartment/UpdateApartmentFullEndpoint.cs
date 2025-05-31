@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using Uni_Mate.Common.BaseEndpoints;
 using Uni_Mate.Common.Data.Enums;
 using Uni_Mate.Common.Views;
+using Uni_Mate.Features.ApartmentManagment.UpdateApartment.UpdateApartmentFacility.Commands;
 using Uni_Mate.Features.ApartmentManagment.UpdateApartment.UpdateApartmentInfoSave.Commands;
 using Uni_Mate.Features.ApartmentManagment.UpdateApartment.UpdatePropertyImages.Commands;
 using Uni_Mate.Features.ApartmentManagment.UpdateApartmentRoomSave.Commands;
@@ -90,6 +91,14 @@ namespace Uni_Mate.Features.ApartmentManagment.UpdateApartment
 			if (!updateImagesResult.isSuccess)
 			{
 				return EndpointResponse<int>.Failure(ErrorCode.UpdateFailed, $"Failed to update apartment images: {updateImagesResult.message}");
+			}
+
+			var updateFacility = new UpdateApartmentFacilityCommand(request.ApartmentFacilities, request.ApartmentId);
+			var updateFacilityResult = await _mediator.Send(updateFacility, cancellationToken);
+
+			if (!updateFacilityResult.isSuccess)
+			{
+				return EndpointResponse<int>.Failure(ErrorCode.UpdateFailed, $"Failed to update apartment facilities");
 			}
 
 			return EndpointResponse<int>.Success(request.ApartmentId, "Apartment and rooms updated successfully.");

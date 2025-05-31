@@ -40,6 +40,12 @@ public enum ErrorCode
     BedNotFound,
     BookingFailed,
     Booked,
-    ServerError
-
+    ServerError,
+    DeleteFailed,
+    ApartmentNotAvailable,
+    RoomNotAvailable,
+    BedNotAvailable,
+    SaveFailed,
+    NotAvailable,
+    CanNotBook
 }

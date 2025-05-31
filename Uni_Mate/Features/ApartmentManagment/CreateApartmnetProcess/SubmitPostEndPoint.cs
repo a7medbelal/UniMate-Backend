@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Uni_Mate.Common.BaseEndpoints;
+using Uni_Mate.Common.Data.Enums;
 using Uni_Mate.Common.Views;
 using Uni_Mate.Features.ApartmentManagment.CreateApartmnetProcess.Commands.CreateFullApartmentOrcasterartor;
 
@@ -13,14 +14,22 @@ namespace Uni_Mate.Features.ApartmentManagment.CreateApartmnetProcess
         [HttpPost]
         public async Task<EndpointResponse<bool>> SubmitPost([FromForm] SubmitPostViewModel viewmodel, CancellationToken cancellationToken)
         {
+            // Validate the viewmodel data
+            var validationResult = ValidateRequest(viewmodel);
+            
+            if (!validationResult.isSuccess)
+                {
+                return EndpointResponse<bool>.Failure(validationResult.errorCode, validationResult.message);
+            }
+
+
+
             var result = await _mediator.Send(new SubmitPostCommand(
-                viewmodel.Num,
                 viewmodel.Location,
                 viewmodel.Description,
                 viewmodel.DescribeLocation,
                 viewmodel.Floor,
                 viewmodel.Capecity,
-                viewmodel.NumberOfRooms,
                 viewmodel.GenderAcceptance,
                 viewmodel.DurationType,
                 viewmodel.Rooms,

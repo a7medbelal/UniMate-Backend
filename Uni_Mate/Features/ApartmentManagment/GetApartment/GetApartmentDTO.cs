@@ -2,6 +2,7 @@
 
 public class GetApartmentDTO
 {
+    public int Id { get; set; }
     public List<string> Images { get; set; } = [];
     public string Address { get; set; }
     public string DetailedAddress { get; set; }

@@ -16,8 +16,8 @@ public class IsUserExistQueryHandler : BaseWithoutRepositoryRequestHandler<IsUse
 
     public override async Task<RequestResult<bool>> Handle(IsUserExistQuery request, CancellationToken cancellationToken)
     {
-        var user = await _repositoryIdentity.GetByIDAsync(request.UserId);
-        if (user == null)
+        var user = await _repositoryIdentity.AnyAsync(c=>c.Id == request.UserId);
+        if (!user)
         {
             return RequestResult<bool>.Failure(ErrorCode.NotFound, "User not found");
         }

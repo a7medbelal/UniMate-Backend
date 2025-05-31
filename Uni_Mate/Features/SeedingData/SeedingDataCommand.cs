@@ -64,7 +64,7 @@ namespace Uni_Mate.Features.SeedingData
                 var apartment = new Apartment
                 {
                     Num = 101,
-                    Location = "Nasr City",
+                    Location = Location.QenaUniversity,
                     Description = "Demo apartment",
                     Gender = Gender.Male,
                     Floor = "2",

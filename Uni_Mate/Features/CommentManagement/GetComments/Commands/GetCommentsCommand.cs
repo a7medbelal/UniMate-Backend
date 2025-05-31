@@ -16,6 +16,7 @@ public class GetCommentsCommandHandler : BaseRequestHandler<GetCommentsCommand, 
     }
     public async override Task<RequestResult<List<GetCommentsDTO>>> Handle(GetCommentsCommand request, CancellationToken cancellationToken)
     {
+
         if (request.ApartmentId <= 0)
             return RequestResult<List<GetCommentsDTO>>.Failure(ErrorCode.InvalidData, "Invalid apartment ID");
 
