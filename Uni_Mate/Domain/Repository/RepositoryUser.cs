@@ -130,5 +130,12 @@ public class RepositoryUser<Entity> : IRepositoryIdentity<Entity> where Entity :
         {
             return false;
         }
+    }   
+    public async Task<int> CountAsync(Expression<Func<Entity, bool>> predicate = null)
+    {
+        if (predicate == null)
+            return await _dbSet.CountAsync();
+
+        return await _dbSet.CountAsync(predicate);
     }
 }
