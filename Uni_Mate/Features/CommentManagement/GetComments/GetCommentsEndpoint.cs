@@ -11,7 +11,7 @@ public class GetCommentEndpoint : BaseEndpoint<GetCommentsViewMode, List<GetComm
     {
     }
     [HttpGet]
-    public async Task<EndpointResponse<List<GetCommentsDTO>>> GetComments([FromBody] GetCommentsViewMode viewmodel)
+    public async Task<EndpointResponse<List<GetCommentsDTO>>> GetComments([FromQuery] GetCommentsViewMode viewmodel)
     {
         var validationResult = ValidateRequest(viewmodel);
         if (!validationResult.isSuccess)

@@ -8,7 +8,6 @@ namespace Uni_Mate.Models.ApartmentManagement
 {
     public class Apartment : BaseEntity
     {
-        public  int? Num { get; set; }
         public string? Description { get; set; }
         public Location  Location { get; set; }
         public string ? DescripeLocation{ get; set; }

@@ -1,5 +1,5 @@
 using MediatR;
-using System.Data.Entity;
+using Microsoft.EntityFrameworkCore;
 using Uni_Mate.Common.BaseHandlers;
 using Uni_Mate.Common.Data.Enums;
 using Uni_Mate.Common.Views;

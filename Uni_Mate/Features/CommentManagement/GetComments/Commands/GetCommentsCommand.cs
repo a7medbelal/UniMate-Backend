@@ -21,20 +21,19 @@ public class GetCommentsCommandHandler : BaseRequestHandler<GetCommentsCommand, 
             return RequestResult<List<GetCommentsDTO>>.Failure(ErrorCode.InvalidData, "Invalid apartment ID");
 
         var comments = await _repository
-    .Get(c => c.ApartmentId == request.ApartmentId)
-    .Include(c => c.Student)
-    .Select(c => new GetCommentsDTO
-    {
+        .Get(c => c.ApartmentId == request.ApartmentId)
+        .Select(c => new GetCommentsDTO
+         {
         Id = c.Id,
-        Message = c.Message ?? "",
-        StudentName = string.IsNullOrEmpty(c.Student!.Lname)
+          Message = c.Message ?? "",
+           StudentName = string.IsNullOrEmpty(c.Student!.Lname)
             ? c.Student.Fname ?? "Unknown"
             : $"{c.Student.Fname} {c.Student.Lname}",
         StudentImage = c.Student.Image ?? "default-profile.png",
         CreatedDate = c.CreatedDate
     })
     .ToListAsync(cancellationToken);
-        return RequestResult<List<GetCommentsDTO>>.Success(comments, "تم جلب التعليقات بنجاح");
+        return RequestResult<List<GetCommentsDTO>>.Success(comments, "تم جلب التعليقات بنجاح"); 
     }
 
 }
