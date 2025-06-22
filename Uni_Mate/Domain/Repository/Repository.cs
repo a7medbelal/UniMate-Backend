@@ -18,12 +18,12 @@ namespace Uni_Mate.Domain.Repository
 
         public async Task<DbSet<Entity>> Query()
         {
-            return  _dbSet;
+            return _dbSet;
         }
         public async Task Add(Entity entity)
         {
             entity.CreatedDate = DateTime.Now;
-           await _dbSet.AddAsync(entity);
+            await _dbSet.AddAsync(entity);
         }
 
         public async Task<int> AddAsync(Entity entity)
@@ -95,7 +95,7 @@ namespace Uni_Mate.Domain.Repository
 
                 entity.UpdatedDate = DateTime.UtcNow;
                 entry.Property(nameof(entity.UpdatedBy)).IsModified = true;
-                
+
                 return true;
             }
             catch (Exception ex)
@@ -117,9 +117,9 @@ namespace Uni_Mate.Domain.Repository
         }
 
 
-        public  IQueryable<Entity>Get(Expression<Func<Entity, bool>> predicate)
+        public IQueryable<Entity> Get(Expression<Func<Entity, bool>> predicate)
         {
-            return  GetAll().Where(predicate);
+            return GetAll().Where(predicate);
         }
 
         public IQueryable<Entity> GetAll()
@@ -170,7 +170,7 @@ namespace Uni_Mate.Domain.Repository
             }
         }
 
-        
+
         public async Task<Entity> GetWithIncludeAsync(int id, params string[] include)
         {
             IQueryable<Entity> query = _dbSet;
@@ -217,5 +217,9 @@ namespace Uni_Mate.Domain.Repository
             return _dbSet.FromSqlRaw(sql, parameters);
         }
 
+        public Task<int> CountAsync(Expression<Func<Entity, bool>> predicate = null)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

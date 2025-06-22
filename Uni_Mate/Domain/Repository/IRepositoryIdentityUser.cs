@@ -19,5 +19,6 @@ namespace Uni_Mate.Domain.Repository
         // To Return The Entity With The Navigation Properties 
         Entity GetInclude(Expression<Func<Entity, bool>> predicate, params string[] properties);
         Task<bool> UpdateAsync(Entity entity);
+        Task<int> CountAsync(Expression<Func<Entity, bool>> predicate = null);
     }
 }

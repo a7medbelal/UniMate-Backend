@@ -1,4 +1,4 @@
-﻿using BenchmarkDotNet.Attributes;
+﻿
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 using System.Diagnostics;
