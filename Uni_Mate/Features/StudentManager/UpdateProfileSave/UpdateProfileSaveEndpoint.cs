@@ -15,12 +15,12 @@ namespace Uni_Mate.Features.StudentManager.UpdateProfileSave
         }
 
         [HttpPost]
-        public EndpointResponse<bool> UpdateProfileSave([FromBody] UpdateProfileSaveVM request)
+        public EndpointResponse<bool> UpdateProfileSave([FromForm] UpdateProfileSaveVM request)
         {
             var result = _validator.Validate(request);
             if(result.IsValid)
             {
-                var response = _mediator.Send(new UpdateProfileSaveCommand(request.FirstName, request.LastName, request.Governorate, request.Address, request.BriefOverView));
+                var response = _mediator.Send(new UpdateProfileSaveCommand(request.FirstName, request.LastName, request.Governorate, request.Address, request.BriefOverView ,request.ProfilePic));
                 return EndpointResponse<bool>.Success(response.Result.data,response.Result.message);
             }
             else

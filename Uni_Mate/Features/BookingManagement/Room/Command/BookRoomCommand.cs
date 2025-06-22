@@ -5,6 +5,7 @@ using Uni_Mate.Common.Views;
 using Uni_Mate.Domain.Repository;
 using Uni_Mate.Features.BookingManagement.Common;
 using Uni_Mate.Features.Common;
+using Uni_Mate.Features.Notifiaction.NottifcationForBooking;
 using Uni_Mate.Models.BookingManagement;
 using Uni_Mate.Models.BookingManagment;
 
@@ -87,6 +88,8 @@ namespace Uni_Mate.Features.BookingManagement.Room.Command
             };
             await _repository.Add(bookRoom);
             await _repository.SaveChangesAsync();
+            await _mediator.Publish(new BookingAccepteNotification(bookRoom.Id, userCheck.data, bookRoom.Type, apartmentCheck.data, bookRoom.CreatedDate));
+
 
             return RequestResult<bool>.Success(true, "Bed booked successfully");
         }

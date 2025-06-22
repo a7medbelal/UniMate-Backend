@@ -212,5 +212,10 @@ namespace Uni_Mate.Domain.Repository
         //{
         //    throw new NotImplementedException();
         //}
+        public IQueryable<Entity> FromSqlQuery(string sql, params object[] parameters)
+        {
+            return _dbSet.FromSqlRaw(sql, parameters);
+        }
+
     }
 }

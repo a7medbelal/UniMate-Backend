@@ -16,11 +16,6 @@ namespace Uni_Mate.Features.ApartmentManagment.UpdateApartment.UpdateApartmentRo
 		[HttpPost]
 		public async Task<EndpointResponse<bool>> UpdateApartmentRoomSave([FromForm] UpdateApartmentRoomSaveViewModel request)
 		{
-			if (!request.RoomId.HasValue)
-			{
-				// Return an error if RoomId is not provided because update requires RoomId
-				return EndpointResponse<bool>.Failure(ErrorCode.InvalidData, "RoomId is required for update.");
-			}
 
 			var result = _validator.Validate(request);
 			if (!result.IsValid)
@@ -30,7 +25,7 @@ namespace Uni_Mate.Features.ApartmentManagment.UpdateApartment.UpdateApartmentRo
 			}
 
 			var response = await _mediator.Send(new UpdateApartmentExistRoomSaveCommand(
-				request.RoomId.Value,
+				request.RoomId,
 				request.ApartmentId,
 				request.Description,
 				request.BedCount,

@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using System.Threading.Tasks;
 using Uni_Mate.Common.BaseEndpoints;
 using Uni_Mate.Common.Data.Enums;
 using Uni_Mate.Common.Views;
@@ -7,7 +8,7 @@ using Uni_Mate.Features.OwnerManager.GetOwner.Queries;
 
 namespace Uni_Mate.Features.OwnerManager.GetOwner
 {
-	[Authorize]
+	
 	public class GetOwnerEndpoint : BaseWithoutTRequestEndpoint<GetOwnerEndpoint>
 	{
 		public GetOwnerEndpoint(BaseWithoutTRequestEndpointParameters parameters) : base(parameters)
@@ -15,9 +16,9 @@ namespace Uni_Mate.Features.OwnerManager.GetOwner
 		}
 
 		[HttpGet]
-		public EndpointResponse<GetOwnerDTO> GetOwner()
+		public async Task<EndpointResponse<GetOwnerDTO>> GetOwner(string OwnerID)
 		{
-			var ownerResult = _mediator.Send(new GetOwnerQuery()).Result;
+			var ownerResult = await _mediator.Send(new GetOwnerQuery(OwnerID));
 			if (!ownerResult.isSuccess)
 			{
 				return EndpointResponse<GetOwnerDTO>.Failure(ErrorCode.NotFound, "Owner not found");

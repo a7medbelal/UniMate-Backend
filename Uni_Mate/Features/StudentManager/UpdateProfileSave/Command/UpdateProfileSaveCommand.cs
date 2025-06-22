@@ -3,11 +3,12 @@ using System.Security.Claims;
 using Uni_Mate.Common.BaseHandlers;
 using Uni_Mate.Common.Data.Enums;
 using Uni_Mate.Common.Views;
+using Uni_Mate.Features.Common.UserProfilePicture.Commands;
 using Uni_Mate.Models.UserManagment;
 
 namespace Uni_Mate.Features.StudentManager.UpdateProfileSave.Command
 {
-    public record UpdateProfileSaveCommand(string? FirstName, string? LastName, string? Governorate, string? Address, string? BriefOverView) : IRequest<RequestResult<bool>>;
+    public record UpdateProfileSaveCommand(string? FirstName, string? LastName, string? Governorate, string? Address, string? BriefOverView , IFormFile ImageProfile) : IRequest<RequestResult<bool>>;
 
     public class UpdateProfileSaveCommandHandler : BaseWithoutRepositoryRequestHandler<UpdateProfileSaveCommand, RequestResult<bool>, User>
     {
@@ -32,13 +33,14 @@ namespace Uni_Mate.Features.StudentManager.UpdateProfileSave.Command
             {
                 return RequestResult<bool>.Failure(ErrorCode.NotFound, "Student not found");
             }
+            var imageProfile = await _mediator.Send(new UploadProfilePictureCommand(request.ImageProfile)); 
 
             student.Fname = request.FirstName;
             student.Lname = request.LastName;
             student.Governomet = request.Governorate;
             student.Address = request.Address;
             student.BriefOverView = request.BriefOverView;
-
+            student.Image = imageProfile.data; // Assuming UploadProfilePictureCommand returns the image path or URL
             try
             {
                 await _repositoryIdentity.UpdateAsync(student);

@@ -69,6 +69,28 @@ namespace Uni_Mate.Features.ApartmentManagment.CreateApartmnetProcess.Commands.C
             if (!uploadImages.isSuccess)
                 return RequestResult<bool>.Failure(uploadImages.errorCode, uploadImages.message);
 
+            #region SetSome Information toApatrtment
+
+            //need to set the price for the apartment and number of rooms and beds
+            // Assuming you want to set the price from the first room 
+            var price = addRooms.data.Price;
+            var NumberOfRooms = addRooms.data.NumberOfRooms;
+            var NumberOfBeds = addRooms.data.NumberOfBeds;
+            if (price  >  0)
+            {
+                var apartmentMoreInfo = new Apartment
+                {
+                    Id = newApartment.data,
+                    Price = price,
+                    NumberOfRooms = NumberOfRooms,
+                    Capecity = addRooms.data.NumberOfBeds,  
+
+                };
+                await _repository.SaveIncludeAsync(apartmentMoreInfo, nameof(apartmentMoreInfo.Price) , nameof(apartmentMoreInfo.NumberOfRooms), nameof(apartmentMoreInfo.Capecity));
+            }   
+
+            #endregion
+
             await _repository.SaveChangesAsync(); 
             return RequestResult<bool>.Success(true);
         }

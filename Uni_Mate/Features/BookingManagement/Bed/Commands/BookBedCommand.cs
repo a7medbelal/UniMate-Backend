@@ -7,6 +7,7 @@ using Uni_Mate.Models.BookingManagement;
 using Uni_Mate.Features.Common;
 using Uni_Mate.Domain.Repository;
 using Uni_Mate.Models.BookingManagment;
+using Uni_Mate.Features.Notifiaction.NottifcationForBooking;
 
 namespace Uni_Mate.Features.BookingManagement.Beds.Commands;
 
@@ -99,6 +100,9 @@ public class BookBedCommandHandler : BaseRequestHandler<BookBedCommand, RequestR
         };
         await _repository.Add(bookBed);
         await _repository.SaveChangesAsync();
+
+        //publis an event here to send email to owner
+        await _mediator.Publish(new BookingAccepteNotification(bookBed.Id ,userCheck.data , bookBed.Type ,  apartmentCheck.data ,bookBed.CreatedDate)); 
         
         return RequestResult<bool>.Success(true, "Bed booked successfully");
     }

@@ -4,6 +4,7 @@ using Uni_Mate.Common.BaseHandlers;
 using Uni_Mate.Common.Data.Enums;
 using Uni_Mate.Common.Views;
 using Uni_Mate.Domain.Repository;
+using Uni_Mate.Features.Notifiaction.NottifcationForApproveTheRequest;
 using Uni_Mate.Models.BookingManagement;
 using Uni_Mate.Models.BookingManagment;
 
@@ -25,7 +26,7 @@ public class  AcceptBookingCommandHandler : BaseRequestHandler<AcceptBookingComm
 
     public override async Task<RequestResult<bool>> Handle(AcceptBookingCommand request, CancellationToken cancellationToken)
     {
-        var booking = await _repository.Get(x => x.Id == request.BookingId).FirstOrDefaultAsync();
+        var booking = await _repository.Get(x => x.Id == request.BookingId).Include(c=>c.Student).FirstOrDefaultAsync();
         if (booking == null)
         {
             return RequestResult<bool>.Failure(ErrorCode.NotFound, "booking not found.");
@@ -38,6 +39,7 @@ public class  AcceptBookingCommandHandler : BaseRequestHandler<AcceptBookingComm
             if(result.isSuccess)
             {
                await _repository.SaveChangesAsync();
+                await _mediator.Publish(new BookingAccepteNotification(booking.Student.Email, booking.Student.Fname, booking.Type.ToString(), booking.CreatedDate));
                 return RequestResult<bool>.Success(result.data,result.message);
             }
             else
@@ -58,6 +60,7 @@ public class  AcceptBookingCommandHandler : BaseRequestHandler<AcceptBookingComm
             if (result.isSuccess)
             {
                 await _repository.SaveChangesAsync();
+                await _mediator.Publish(new BookingAccepteNotification(booking.Student.Email, booking.Student.Fname, booking.Type.ToString(), booking.CreatedDate));
                 return RequestResult<bool>.Success(result.data, result.message);
             }
             else
@@ -76,6 +79,8 @@ public class  AcceptBookingCommandHandler : BaseRequestHandler<AcceptBookingComm
             if (result.isSuccess)
             {
                 await _repository.SaveChangesAsync();
+                // Publish an event here to send email to owner
+                await _mediator.Publish(new BookingAccepteNotification(booking.Student.Email, booking.Student.Fname, booking.Type.ToString(), booking.CreatedDate));
                 return RequestResult<bool>.Success(result.data, result.message);
             }
             else

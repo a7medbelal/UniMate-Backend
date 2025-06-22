@@ -39,7 +39,8 @@ namespace Uni_Mate.Common.Mapping
                 .Map(dest => dest.LastName, src => src.Lname)
                 .Map(dest => dest.Governorate, src => src.Governomet)
                 .Map(dest => dest.Address, src => src.Address)
-                .Map(dest => dest.BriefOverView, src => src.BriefOverView);
+                .Map(dest => dest.BriefOverView, src => src.BriefOverView).
+                Map(des=> des.Image , src => src.Image);
             #endregion
 
             #region mapping From UpdateProfileSaveVM to Student

@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using System.Diagnostics;
+using Uni_Mate.Features.ApartmentManagment.GetApartment;
 using Uni_Mate.Models.ApartmentManagement;
 using Uni_Mate.Models.BookingManagement;
 using Uni_Mate.Models.Comment_Review;
@@ -34,6 +35,7 @@ namespace Uni_Mate.Domain
         public DbSet<Facility> Facilities { get; set; }
         public DbSet<ApartmentFacility> ApartmentFacilities { get; set; }
         public DbSet<Image> Images { get; set; }
+    
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
 
@@ -49,6 +51,8 @@ namespace Uni_Mate.Domain
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+
+
             // appley the TPT inhertance for the User
             modelBuilder.Entity<Student>().ToTable("Students");
             modelBuilder.Entity<Owner>().ToTable("Owners");
@@ -156,26 +160,27 @@ namespace Uni_Mate.Domain
 
             modelBuilder.Entity<User>()
                 .HasIndex(u => u.UserName)
-                .IsUnique();    
+                .IsUnique();
 
-            // Create the indexes for Search for apartments
-            modelBuilder.Entity<Apartment>()
-                .HasIndex(a => a.Location);
-
-            modelBuilder.Entity<Apartment>()
-               .HasIndex(a => a.Gender);
-
-            modelBuilder.Entity<Apartment>()
-                .HasIndex(a => a.Capecity); 
+            // Create the indexes for Search for apartment
 
             modelBuilder.Entity<Apartment>()
                 .HasIndex(a => a.CreatedDate);
 
             modelBuilder.Entity<Apartment>()
-                .HasIndex(a => new { a.Location, a.Gender, a.Capecity });
+                .HasIndex(a => new { a.Deleted ,  a.Location, a.Gender, a.Capecity });
 
             modelBuilder.Entity<Room>()
-                .HasIndex(r => new { r.ApartmentId ,r.Price});
+                .HasIndex(r => new { r.ApartmentId, r.Price });
+
+
+
+            // create index for the imagaes table 
+            modelBuilder.Entity<Image>()
+             .HasIndex(i => new { i.ApartmentId, i.Deleted })
+             .IncludeProperties(i => new { i.ImageUrl })
+             .HasDatabaseName("IX_Images_ApartmentId_Deleted_Include_ImageUrl");
+
 
 
             base.OnModelCreating(modelBuilder);

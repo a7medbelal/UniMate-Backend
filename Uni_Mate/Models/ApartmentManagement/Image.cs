@@ -8,7 +8,7 @@ namespace Uni_Mate.Models.ApartmentManagement
         public string? ImageUrl { get; set; }
         public ImageType? ImageType { get; set; }
         [ForeignKey(nameof(Apartment))]
-        public int? ApartmentId { get; set; }
+        public int ApartmentId { get; set; }
         public Apartment? Apartment { get; set; }
     }
 }

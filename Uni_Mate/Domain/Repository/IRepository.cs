@@ -33,5 +33,6 @@ namespace Uni_Mate.Domain.Repository
         /// <param name="include">The ICollection Like ["Images","Rooms"]</param>
         /// <returns></returns>
         Task<Entity> GetWithIncludeAsync(int id , params string[] include);
+        IQueryable<Entity> FromSqlQuery(string sql, params object[] parameters); 
     }
 }

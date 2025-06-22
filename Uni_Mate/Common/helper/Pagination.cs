@@ -1,6 +1,7 @@
 ﻿
 using System.Collections;
 using System.Collections.ObjectModel;
+using System.Diagnostics;
 using Microsoft.EntityFrameworkCore;
 
 namespace Uni_Mate.Common.Helper
@@ -26,10 +27,14 @@ namespace Uni_Mate.Common.Helper
         }
 
         public static async Task<Pagination<T>>  ToPagedList(IQueryable<T> source, int PageNumber, int pageSize) { 
-        var Count = await  source.CountAsync(); 
-        var Items = await  source.Skip((PageNumber-1) * pageSize).Take(pageSize).ToListAsync();
+        var Count = await  source.CountAsync();
+            var stopwatch = new Stopwatch();
+            stopwatch.Start();
+            var Items = await source.Skip((PageNumber - 1) * pageSize).Take(pageSize).ToListAsync();
+            stopwatch.Stop();
+            Console.WriteLine($"Main query: {stopwatch.ElapsedMilliseconds} ms");
 
-        return  new Pagination<T>(Items, Count, PageNumber, pageSize);      
+            return  new Pagination<T>(Items, Count, PageNumber, pageSize);      
         }
 
      

@@ -31,7 +31,7 @@ public class GetApartmentEndpoint : BaseEndpoint<GetApartmentViewModel, GetApart
                 Id = x.Id,
                 Images = x.Images,
                 DetailedAddress = x.DetailedAddress,
-                Address = x.Address,
+                Location = x.Location,
                 Gender = x.Gender,
                 Floor = x.Floor,
                 OwnerName = x.OwnerName,

@@ -2,6 +2,7 @@
 using Autofac;
 using Autofac.Core;
 using Autofac.Extensions.DependencyInjection;
+using BenchmarkDotNet.Running;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
@@ -11,6 +12,7 @@ using Uni_Mate.Common.helper;
 using Uni_Mate.Common.Views;
 using Uni_Mate.Configrution;
 using Uni_Mate.Domain;
+using Uni_Mate.Features.ApartmentManagment.GetApartment.Queries;
 using Uni_Mate.Middlewares;
 using Uni_Mate.Middlewares;
 using Uni_Mate.Models.UserManagment;
@@ -32,6 +34,8 @@ namespace Uni_Mate
 
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
+
+            BenchmarkRunner.Run<GetApartmentQueryHandler>();
 
             builder.Services.AddDbContext<Context>(options =>
        options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));

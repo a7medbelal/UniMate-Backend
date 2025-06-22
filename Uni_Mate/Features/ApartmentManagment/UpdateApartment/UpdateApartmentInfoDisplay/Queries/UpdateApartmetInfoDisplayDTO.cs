@@ -11,6 +11,6 @@ namespace Uni_Mate.Features.ApartmentManagment.UpdateApartment.UpdatePropertyInf
         public string DescripeLocation { get; set; }
         public string Gender { get; set; }
         public string DurationType { get; set; }
-        public List<ApartmentFacility> ApartmentFacilities { get; set; }
+        public List<int> ApartmentFacilities { get; set; }
     }
 }

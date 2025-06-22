@@ -9,16 +9,16 @@ using Uni_Mate.Models.ApartmentManagement;
 
 namespace Uni_Mate.Features.ApartmentManagment.CreateApartmnetProcess.Commands.AddRoomWithBedsCommands;
 
-public record AddRoomCommand(IList<RoomBedViewModel> RoomBedViewModels, int ApartmentId) : IRequest<RequestResult<bool>>;
+public record AddRoomCommand(IList<RoomBedViewModel> RoomBedViewModels, int ApartmentId) : IRequest<RequestResult<RoomInfoDTO>>;
 
-public class AddRoomCommandHandler : BaseRequestHandler<AddRoomCommand, RequestResult<bool>, Room>
+public class AddRoomCommandHandler : BaseRequestHandler<AddRoomCommand, RequestResult<RoomInfoDTO>, Room>
 {
     public AddRoomCommandHandler(BaseRequestHandlerParameter<Room> parameter) : base(parameter)
     {
         
     }
 
-    public override async Task<RequestResult<bool>> Handle(AddRoomCommand request, CancellationToken cancellationToken)
+    public override async Task<RequestResult<RoomInfoDTO>> Handle(AddRoomCommand request, CancellationToken cancellationToken)
     {
         //var rooms = request.RoomBedViewModels.Adapt<List<Room>>();
         //foreach (var room in rooms)
@@ -30,20 +30,38 @@ public class AddRoomCommandHandler : BaseRequestHandler<AddRoomCommand, RequestR
         var imageUrls = await Task.WhenAll(imageUploadTasks);
 
         var rooms = request.RoomBedViewModels
-      .Zip(imageUrls, (roomDto, imageUrl) => new Room
-      {
-        ApartmentId = request.ApartmentId,
-        Description = roomDto.Description ,
-        Capacity = roomDto.BedsNumber,
-        Price = roomDto.Price, 
-        IsAirConditioned = roomDto.HasAC,
-        Image =  imageUrl.data,
-        Beds = Enumerable.Range(0, roomDto.BedsNumber)
+        .Zip(imageUrls, (roomDto, imageUrl) => new Room
+          {
+              ApartmentId = request.ApartmentId,
+              Description = roomDto.Description ,
+              Capacity = roomDto.BedsNumber,
+              Price = roomDto.Price, 
+              IsAirConditioned = roomDto.HasAC,
+              Image =  imageUrl.data,
+              Beds = Enumerable.Range(0, roomDto.BedsNumber)
                          .Select(_ => new Bed {  Price= roomDto.Price })
-                         .ToList()}).ToList();
-
+                         .ToList()
+          }).ToList();
+     
            
 
+
+
+        await _repository.AddRangeAsync(rooms);
+
+
+        decimal priceOfTheApartment = rooms.Sum(r => r.Price);  
+        var NumOfRooms = rooms.Count; 
+        var NumOfBeds = rooms.Sum(r => r.Beds.Count);
+        // Update the apartment's total price and number of rooms and beds
+        var RoomInfo = new RoomInfoDTO
+        {
+            Price = priceOfTheApartment,
+            NumberOfRooms = NumOfRooms,
+            NumberOfBeds = NumOfBeds
+        };  
+
+        return RequestResult<RoomInfoDTO>.Success(RoomInfo, "Room created successfully");
 
         //foreach (var room in rooms)
         //{
@@ -53,7 +71,7 @@ public class AddRoomCommandHandler : BaseRequestHandler<AddRoomCommand, RequestR
         // Handle photo upload for each room
         //foreach (var room in rooms)
         //{
-           
+
         //    if (room.Image != null)
         //    {
         //        var uploadResult = await _mediator.Send(new UploadImageCommand());
@@ -64,12 +82,7 @@ public class AddRoomCommandHandler : BaseRequestHandler<AddRoomCommand, RequestR
         //        room.Image = uploadResult.data;
         //    }
         //}
-
-       await _repository.AddRangeAsync(rooms);
-
-
-        return RequestResult<bool>.Success(true, "Room created successfully");
-    }   
+    }
 }
 public static class RoomExtensions
 {

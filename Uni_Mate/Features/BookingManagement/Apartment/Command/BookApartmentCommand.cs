@@ -4,6 +4,7 @@ using Uni_Mate.Common.Data.Enums;
 using Uni_Mate.Common.Views;
 using Uni_Mate.Domain.Repository;
 using Uni_Mate.Features.Common;
+using Uni_Mate.Features.Notifiaction.NottifcationForBooking;
 using Uni_Mate.Models.BookingManagement;
 
 namespace Uni_Mate.Features.BookingManagement.Apartments.Command
@@ -51,7 +52,7 @@ namespace Uni_Mate.Features.BookingManagement.Apartments.Command
                 return RequestResult<bool>.Failure(ErrorCode.ApartmentNotFound, "Apartment not found");
             }
 
-            var apartment = await _apartmentRepository.GetWithIncludeAsync(request.ApartmentId, "Rooms.Beds");
+            var apartment = await _apartmentRepository.GetWithIncludeAsync(request.ApartmentId, "Rooms.Beds", "Owner");
 
             if (apartment == null)
                 return RequestResult<bool>.Failure(ErrorCode.ApartmentNotFound, "Apartment not found");
@@ -77,7 +78,7 @@ namespace Uni_Mate.Features.BookingManagement.Apartments.Command
             {
                 return RequestResult<bool>.Failure(ErrorCode.AlreadyExists,"User Already Booked room or bed in the apartment");
             }
-
+            var Owner = apartment.Owner?.Email; 
 
             // finally Halal alaik el Apartment 
             var booking = new BookApartment
@@ -88,6 +89,9 @@ namespace Uni_Mate.Features.BookingManagement.Apartments.Command
 
             await _repository.AddAsync(booking);
             await _repository.SaveChangesAsync();
+
+            await _mediator.Publish(new BookingAccepteNotification(booking.Id, userCheck.data, booking.Type, Owner, booking.CreatedDate));
+
 
             return RequestResult<bool>.Success(true, "Apartment booked successfully");
 

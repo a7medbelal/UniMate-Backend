@@ -49,8 +49,8 @@ namespace Uni_Mate.Features.ApartmentManagment.SearchForApartment.Queries
             // the data that i need from the database
             var apartmentsList = apartments.Select(c => new GetAparmtmentFilterDTO
             {
-                Gender = nameof(c.Gender),
-                Location = nameof(c.Location),
+                Gender = c.Gender,
+                Location = c.Location,
                 Floor = c.Floor ??  "unknown" ,
                 OwnerName = c.Owner != null ? (c.Owner.Fname + " " + c.Owner.Lname) : "Unknown",
                 NumberOfRooms = c.NumberOfRooms,

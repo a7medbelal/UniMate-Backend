@@ -2,7 +2,8 @@
 {
 	public class GetOwnerDTO
 	{
-		public string? Username { get; set; }
+		
+        public string? Username { get; set; }
 		public string? Image { get; set; }
 		public string ? Phones { get; set; }
 		public string? Email { get; set; }

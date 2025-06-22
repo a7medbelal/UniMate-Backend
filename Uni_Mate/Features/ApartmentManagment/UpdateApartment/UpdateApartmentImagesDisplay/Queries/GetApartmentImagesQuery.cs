@@ -16,7 +16,7 @@ public class GetApartmentImagesQueryHandler : BaseRequestHandler<GetApartmentIma
     }
     public async override Task<RequestResult<GetApartmentImagesDTO>> Handle(GetApartmentImagesQuery request, CancellationToken cancellationToken)
     {
-        GetApartmentImagesDTO allImages = new GetApartmentImagesDTO
+            GetApartmentImagesDTO allImages = new GetApartmentImagesDTO
         {
             Kitchen = [],
             Outside = [],
@@ -24,7 +24,8 @@ public class GetApartmentImagesQueryHandler : BaseRequestHandler<GetApartmentIma
             Living = [],
             Additional = []
         };
-        var images = await _repository.Get(i => i.ApartmentId == request.ApartmentId).ToListAsync();
+        var images = await  _repository.Get(i => i.ApartmentId == request.ApartmentId).ToListAsync();
+         
         foreach (var image in images)
         {
             if (image != null)

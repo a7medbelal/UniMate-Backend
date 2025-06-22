@@ -37,7 +37,7 @@ namespace Uni_Mate.Features.Authoraztion.LoginUser.Commands
 
             var token = await  _tokenHelper.GenerateToken(UserExist.Id.ToString() ,UserExist.role);
 
-            return RequestResult<TokenDTO>.Success(new TokenDTO(Token : token , Role : UserExist.role));
+            return RequestResult<TokenDTO>.Success(new TokenDTO(Token : token , Role : UserExist.role , UserExist.Id));
         }
     }
 

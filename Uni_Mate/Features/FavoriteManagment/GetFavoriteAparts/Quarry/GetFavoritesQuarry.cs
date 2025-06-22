@@ -27,13 +27,6 @@ namespace Uni_Mate.Features.FavoriteManagment.GetFavoriteAparts.Quarry
                  Title = $"{f.Apartment.Location} . {f.Apartment.Gender} . {f.Apartment.Floor}",
                  Description =f.Apartment.Description ,
                  DescriptionLocation =f.Apartment.DescripeLocation,
-
-                 OwnerImage = f.Apartment.Owner.Image,
-                 Rating = 5 // لو عندك تقييمات، حط الحسبة هنا
->>>>>>> Stashed changes
-                 OwnerImage = f.Apartment.Owner.Image,
-                 Rating = 5 // لو عندك تقييمات، حط الحسبة هنا
->>>>>>> Stashed changes
              }).ToListAsync();
             return RequestResult<List<FavoriteApartDTO>>.Success(favorites, "Favorites loaded");
         }

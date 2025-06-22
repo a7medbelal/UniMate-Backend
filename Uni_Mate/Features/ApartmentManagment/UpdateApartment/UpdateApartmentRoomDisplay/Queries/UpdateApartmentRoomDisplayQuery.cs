@@ -4,6 +4,8 @@ using Uni_Mate.Common.Data.Enums;
 using Uni_Mate.Common.Views;
 using Uni_Mate.Models.ApartmentManagement;
 using Uni_Mate.Domain.Repository;
+using Microsoft.EntityFrameworkCore;
+
 
 namespace Uni_Mate.Features.ApartmentManagment.UpdateApartment.UpdateApartmentRoomDisplay.Queries
 {
@@ -30,14 +32,23 @@ namespace Uni_Mate.Features.ApartmentManagment.UpdateApartment.UpdateApartmentRo
 
 		public async Task<RequestResult<UpdateApartmentRoomDisplayDTO>> Handle(UpdateApartmentRoomDisplayQuery request, CancellationToken cancellationToken)
 		{
-			var room = await _roomRepository.GetByIDAsync(request.RoomId);
+			var room = await _roomRepository.Get(c => c.Id == request.RoomId).Select(c => new {
+				c.Description,
+				c.Image,
+				c.IsAirConditioned,
+				c.Capacity,
+				c.ApartmentId,
+				c.Beds.FirstOrDefault().Price
+
+			}).FirstOrDefaultAsync();
 
 			if (room == null)
 			{
 				return RequestResult<UpdateApartmentRoomDisplayDTO>.Failure(ErrorCode.NotFound, "Room not found");
 			}
 
-			if (room.Apartment?.OwnerID != _userInfo.ID)
+			var OwnerID = _userInfo.ID;
+			if (OwnerID == "-1")
 			{
 				return RequestResult<UpdateApartmentRoomDisplayDTO>.Failure(ErrorCode.Forbidden, "You are not authorized to access this room");
 			}
@@ -47,9 +58,10 @@ namespace Uni_Mate.Features.ApartmentManagment.UpdateApartment.UpdateApartmentRo
 				Description = room.Description,
 				Image = room.Image,
 				IsAirConditioned = room.IsAirConditioned,
-				BedCount = room.Beds?.Count ?? 0,
-				BedPrice = room.Beds?.FirstOrDefault()?.Price ?? 0,
-				Capacity = room.Capacity
+				BedCount =room.Capacity,
+				BedPrice = room.Price,
+                Capacity = room.Capacity
+
 			};
 
 			return RequestResult<UpdateApartmentRoomDisplayDTO>.Success(dto);

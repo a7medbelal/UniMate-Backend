@@ -2,7 +2,7 @@
 
 namespace Uni_Mate.Features.StudentManager.UpdateProfileSave
 {
-    public record UpdateProfileSaveVM(string? FirstName, string? LastName, string? Governorate, string? Address, string? BriefOverView);
+    public record UpdateProfileSaveVM(string? FirstName, string? LastName, string? Governorate, string? Address, string? BriefOverView , IFormFile ProfilePic);
     
 
     public class UpdateProfileSaveVMValidation : AbstractValidator<UpdateProfileSaveVM>

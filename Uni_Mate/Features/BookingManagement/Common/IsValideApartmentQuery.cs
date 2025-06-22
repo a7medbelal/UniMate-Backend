@@ -6,28 +6,28 @@ using Uni_Mate.Common.Views;
 
 namespace Uni_Mate.Features.BookingManagement.Common;
 
-public record IsValideApartmentQuery(int ApartmentId) : IRequest<RequestResult<bool>>;
+public record IsValideApartmentQuery(int ApartmentId) : IRequest<RequestResult<string>>;
 
-public class IsValideApartmentQueryHandler : BaseRequestHandler<IsValideApartmentQuery, RequestResult<bool>, Uni_Mate.Models.ApartmentManagement.Apartment>
+public class IsValideApartmentQueryHandler : BaseRequestHandler<IsValideApartmentQuery, RequestResult<string>, Uni_Mate.Models.ApartmentManagement.Apartment>
 {
     public IsValideApartmentQueryHandler(BaseRequestHandlerParameter<Models.ApartmentManagement.Apartment> parameters) : base(parameters)
     {
     }
 
-    public async override Task<RequestResult<bool>> Handle(IsValideApartmentQuery request, CancellationToken cancellationToken)
+    public async override Task<RequestResult<string>> Handle(IsValideApartmentQuery request, CancellationToken cancellationToken)
     {
-        var apart = await _repository.Get(c=>c.Id == request.ApartmentId).Select(c=>new { c.IsAvailable , c.Id} ).FirstOrDefaultAsync();
+        var apart = await _repository.Get(c=>c.Id == request.ApartmentId).Select(c=>new { c.IsAvailable , c.Id, c.Owner.Email } ).FirstOrDefaultAsync();
 
         if (apart is null)
         {
-            return RequestResult<bool>.Failure(ErrorCode.NotFound, "Apartment not found");
+            return RequestResult<string>.Failure(ErrorCode.NotFound, "Apartment not found");
         }
 
         if (apart.IsAvailable == false)
         {
-            return RequestResult<bool>.Failure(ErrorCode.NotValide, "The Apartment is not Available .");
+            return RequestResult<string>.Failure(ErrorCode.NotValide, "The Apartment is not Available .");
         }
 
-        return RequestResult<bool>.Success(true, "Apartment exists");
+        return RequestResult<string>.Success(apart.Email, "Apartment exists");
     }
 }

@@ -6,45 +6,48 @@ using Uni_Mate.Common.Views;
 using Uni_Mate.Models.ApartmentManagement;
 using Uni_Mate.Domain.Repository;
 using Uni_Mate.Features.ApartmentManagment.UpdateApartment.UpdatePropertyInfoDisplay.Queries;
+using Microsoft.EntityFrameworkCore;
+
 
 namespace Uni_Mate.Features.ApartmentManagment.UpdateApartment.UpdateApartmentInfoDisplay.Queries
 {
-	public class UpdateApartmentInfoDisplayQuery : IRequest<RequestResult<UpdateApartmetInfoDisplayDTO>>
+	public record UpdateApartmentInfoDisplayQuery(int ApartmetntID) : IRequest<RequestResult<UpdateApartmetInfoDisplayDTO>>;
+	public class UpdateApartmentInfoDisplayQueryHandler : BaseRequestHandler<UpdateApartmentInfoDisplayQuery, RequestResult<UpdateApartmetInfoDisplayDTO>, Apartment>
 	{
-		public int ApartmentId { get; set; }
+        public UpdateApartmentInfoDisplayQueryHandler(BaseRequestHandlerParameter<Apartment> parameters) : base(parameters)
+        {
+        }
 
-		public UpdateApartmentInfoDisplayQuery(int apartmentId)
-		{
-			ApartmentId = apartmentId;
-		}
-	}
 
-	public class UpdateApartmentInfoDisplayQueryHandler : IRequestHandler<UpdateApartmentInfoDisplayQuery, RequestResult<UpdateApartmetInfoDisplayDTO>>
-	{
-		private readonly IRepository<Apartment> _repository;
-		private readonly UserInfo _userInfo;
+        public override async Task<RequestResult<UpdateApartmetInfoDisplayDTO>> Handle(UpdateApartmentInfoDisplayQuery request, CancellationToken cancellationToken)
+        {
+            var userid = _userInfo.ID; 
+            var apartment = await _repository.Get(c=> c.Id ==  request.ApartmetntID).Include(c=>c.ApartmentFacilities).FirstOrDefaultAsync();
+            if (apartment == null)
+            {
+                return RequestResult<UpdateApartmetInfoDisplayDTO>.Failure(ErrorCode.NotFound, "Apartment not found");
+            }
 
-		public UpdateApartmentInfoDisplayQueryHandler(BaseRequestHandlerParameter<Apartment> parameters)
-		{
-			_repository = parameters.Repository;
-			_userInfo = parameters.UserInfo;
-		}
+            if (apartment.OwnerID != _userInfo.ID)
+            {
+                return RequestResult<UpdateApartmetInfoDisplayDTO>.Failure(ErrorCode.Forbidden, "You are not authorized to access this apartment");
+            }
 
-		public async Task<RequestResult<UpdateApartmetInfoDisplayDTO>> Handle(UpdateApartmentInfoDisplayQuery request, CancellationToken cancellationToken)
-		{
-			var apartment = await _repository.GetByIDAsync(request.ApartmentId);
-			if (apartment == null)
-			{
-				return RequestResult<UpdateApartmetInfoDisplayDTO>.Failure(ErrorCode.NotFound, "Apartment not found");
-			}
+            var dto = new UpdateApartmetInfoDisplayDTO
+            {
+                Id = apartment.Id,
+                Price = apartment.Rooms?.FirstOrDefault()?.Price ?? 0,
+                Description = apartment.Description,
+                DescripeLocation = apartment.DescripeLocation,
+                Gender = apartment.Gender.ToString(),
+                DurationType = apartment.DurationType.ToString(),
+                ApartmentFacilities = apartment.ApartmentFacilities.Select(f => f.FacilityId).ToList()
 
-			if (apartment.OwnerID != _userInfo.ID)
-			{
-				return RequestResult<UpdateApartmetInfoDisplayDTO>.Failure(ErrorCode.Forbidden, "You are not authorized to access this apartment");
-			}
+            };
 
-			var dto = apartment.Adapt<UpdateApartmetInfoDisplayDTO>();
-			return RequestResult<UpdateApartmetInfoDisplayDTO>.Success(dto);
-		}
-	}
+
+
+            return RequestResult<UpdateApartmetInfoDisplayDTO>.Success(dto);
+        }
+    }
 }

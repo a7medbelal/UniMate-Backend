@@ -13,15 +13,15 @@ public class UpdateApartmentFacilityEndpoint : BaseEndpoint<List<FacilityApartme
     {
     }
 
-    [HttpPost]
-    public async Task<EndpointResponse<bool>> UpdateApartmentFacility([FromBody] List<FacilityApartmentViewModel> viewmodel)
+    [HttpPut]
+    public async Task<EndpointResponse<bool>> UpdateApartmentFacility(int ApartmentID ,  List<FacilityApartmentViewModel> viewmodel)
     {
         var validationResult = ValidateRequest(viewmodel);
         if (!validationResult.isSuccess)
         {
             return validationResult;
         }
-        var command = new UpdateApartmentFacilityCommand(viewmodel, 5);
+        var command = new UpdateApartmentFacilityCommand(viewmodel, ApartmentID);
         var result = await _mediator.Send(command);
         if (!result.isSuccess)
         {

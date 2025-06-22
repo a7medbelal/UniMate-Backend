@@ -9,7 +9,7 @@ using Uni_Mate.Common.Mapping;
 
 namespace Uni_Mate.Features.OwnerManager.GetOwner.Queries
 {
-	public record GetOwnerQuery() : IRequest<RequestResult<GetOwnerDTO>>;
+	public record GetOwnerQuery(string OwnerId) : IRequest<RequestResult<GetOwnerDTO>>;
 
 	public class GetOwnerQueryHandler : BaseWithoutRepositoryRequestHandler<GetOwnerQuery, RequestResult<GetOwnerDTO>, Owner>
 	{
@@ -23,16 +23,10 @@ namespace Uni_Mate.Features.OwnerManager.GetOwner.Queries
 
 		public override async Task<RequestResult<GetOwnerDTO>> Handle(GetOwnerQuery request, CancellationToken cancellationToken)
 		{
-			var userId =  _httpContextAccessor.HttpContext?.User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
-			if (userId == null)
-			{
-				return RequestResult<GetOwnerDTO>.Failure(ErrorCode.NotFound, "User not found");
-			}
-
 			Owner owner;
 			try
 			{
-				owner = await _repositoryIdentity.GetByIDAsync(userId);
+				owner = await _repositoryIdentity.GetByIDAsync(request.OwnerId);
 				if (owner == null)
 				{
 					return RequestResult<GetOwnerDTO>.Failure(ErrorCode.NotFound, "Owner not found");
