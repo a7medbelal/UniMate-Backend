@@ -2,10 +2,15 @@
 using Autofac;
 using Autofac.Core;
 using Autofac.Extensions.DependencyInjection;
+using CloudinaryDotNet.Actions;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
+using Serilog;
+using Serilog.Events;
+using Serilog.Sinks.MSSqlServer;
+using System.Data.SqlClient;
 using System.Text;
 using Uni_Mate.Common.helper;
 using Uni_Mate.Common.Views;
@@ -102,6 +107,29 @@ namespace Uni_Mate
 
 
             builder.Services.AddScoped<IHttpContextAccessor, HttpContextAccessor>();
+
+
+            var coonfig = new ConfigurationBuilder()
+             .AddJsonFile("appsettings.json")
+             .Build(); 
+
+            Log.Logger = new LoggerConfiguration()
+               .ReadFrom.Configuration(coonfig)
+               .WriteTo.File("Logs/unimate-log.txt", rollingInterval: RollingInterval.Day)
+            
+                   .MinimumLevel.Override("Microsoft", LogEventLevel.Warning)
+                   .MinimumLevel.Override("System", LogEventLevel.Warning)
+                   .MinimumLevel.Information()
+               .WriteTo.MSSqlServer(
+                    connectionString: coonfig.GetConnectionString("HostConnection"),
+                    restrictedToMinimumLevel: Serilog.Events.LogEventLevel.Information,
+                    sinkOptions : new MSSqlServerSinkOptions { TableName = "Logs"   , AutoCreateSqlTable = true})
+                .CreateLogger();
+
+
+
+            builder.Host.UseSerilog();
+
             var app = builder.Build();
             // Configure the HTTP request pipeline.
             if (app.Environment.IsDevelopment())
@@ -123,7 +151,7 @@ namespace Uni_Mate
             app.UseAuthorization();
             app.UseMiddleware<GlobalErrorHandlerMiddleware>();
             app.UseMiddleware<TransactionMiddleware>();
-
+            app.UseSerilogRequestLogging();
             app.MapControllers();
 
             app.Run();

@@ -16,6 +16,6 @@ namespace Uni_Mate.Features.ApartmentManagment.UpdateApartment.UpdateApartmentFa
 			RuleFor(x => x.Facilities)
 			.NotNull().WithMessage("Facilities list cannot be null.")
 			.Must(rooms => rooms.Any()).WithMessage("At least one facility must be provided.");
-		}
+		//}
 	}
-}
+}}

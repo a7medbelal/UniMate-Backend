@@ -1,11 +1,14 @@
 ﻿using MediatR;
+using Serilog;
 using Uni_Mate.Common.BaseHandlers;
 using Uni_Mate.Common.Data.Enums;
 using Uni_Mate.Common.Views;
 using Uni_Mate.Domain.Repository;
 using Uni_Mate.Features.Common;
 using Uni_Mate.Features.Notifiaction.NottifcationForBooking;
+using Uni_Mate.Models.ApartmentManagement;
 using Uni_Mate.Models.BookingManagement;
+using Uni_Mate.Models.UserManagment;
 
 namespace Uni_Mate.Features.BookingManagement.Apartments.Command
 {
@@ -92,7 +95,7 @@ namespace Uni_Mate.Features.BookingManagement.Apartments.Command
 
             await _mediator.Publish(new BookingAccepteNotification(booking.Id, userCheck.data, booking.Type, Owner, booking.CreatedDate));
 
-
+            Log.Information("Student {StudentId} applied to apartment {ApartmentId}",booking.StudentId, booking.ApartmentId)  ;
             return RequestResult<bool>.Success(true, "Apartment booked successfully");
 
         }
