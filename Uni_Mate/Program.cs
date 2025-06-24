@@ -1,8 +1,6 @@
 
 using Autofac;
-using Autofac.Core;
 using Autofac.Extensions.DependencyInjection;
-using CloudinaryDotNet.Actions;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
@@ -10,14 +8,11 @@ using Microsoft.IdentityModel.Tokens;
 using Serilog;
 using Serilog.Events;
 using Serilog.Sinks.MSSqlServer;
-using System.Data.SqlClient;
 using System.Text;
 using Uni_Mate.Common.helper;
 using Uni_Mate.Common.Views;
 using Uni_Mate.Configrution;
 using Uni_Mate.Domain;
-using Uni_Mate.Features.ApartmentManagment.GetApartment.Queries;
-using Uni_Mate.Middlewares;
 using Uni_Mate.Middlewares;
 using Uni_Mate.Models.UserManagment;
 
@@ -116,7 +111,7 @@ namespace Uni_Mate
             Log.Logger = new LoggerConfiguration()
                .ReadFrom.Configuration(coonfig)
                .WriteTo.File("Logs/unimate-log.txt", rollingInterval: RollingInterval.Day)
-            
+               .WriteTo.Seq("http://localhost:5341")
                    .MinimumLevel.Override("Microsoft", LogEventLevel.Warning)
                    .MinimumLevel.Override("System", LogEventLevel.Warning)
                    .MinimumLevel.Information()
