@@ -38,10 +38,9 @@ namespace Uni_Mate.Domain
     
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-
             //here as i can see every quary i can see the sql sentacse about that query in the debug console
-            //I made NoTracking prevent the change tracker from tracking the entities  that will be slow the perfomance 
-
+            //I made NoTracking prevent the change tracker
+            //from tracking the entities  that will be slow the perfomance 
             optionsBuilder
                 .UseQueryTrackingBehavior(QueryTrackingBehavior.NoTracking)
                 .LogTo(log => Debug.WriteLine(log), LogLevel.Information)

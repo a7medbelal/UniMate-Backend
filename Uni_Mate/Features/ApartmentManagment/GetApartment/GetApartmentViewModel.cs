@@ -1,5 +1,6 @@
 ﻿using FluentValidation;
 using Uni_Mate.Common.Helper;
+using Uni_Mate.Features.Common.ApartmentManagement.ApartmerntDTO;
 
 namespace Uni_Mate.Features.ApartmentManagment.GetApartment;
 public class GetApartmentViewModel : QueryStringParamater

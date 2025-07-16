@@ -1,6 +1,5 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Mvc.Filters;
-using System.Security.Claims;
 using Uni_Mate.Features.Authoraztion.RoleAcess.Querys;
 using Uni_Mate.Models.UserManagment.Enum;
 
@@ -19,7 +18,7 @@ namespace Uni_Mate.Filters
             _mediator = mediator;
         }
 
-        public override async void OnActionExecuting(ActionExecutingContext context)
+        public override  void OnActionExecuting(ActionExecutingContext context)
         {
             var claims = context.HttpContext.User;
 
@@ -33,7 +32,7 @@ namespace Uni_Mate.Filters
 
             var role = (Role)int.Parse(RoleID.Value);
 
-            var hasAccess = await _mediator.Send(new HasAccessQuery(role,_feature));
+            var hasAccess =  _mediator.Send(new HasAccessQuery(role, _feature)).Result;
 
             if (!hasAccess.isSuccess)
             {
@@ -42,5 +41,27 @@ namespace Uni_Mate.Filters
 
             base.OnActionExecuting(context);
         }
+
+        //public async Task OnActionExecutionAsync(ActionExecutingContext context, ActionExecutionDelegate next)
+        //{
+        //    var claims = context.HttpContext.User;
+
+        //    var RoleID = claims.FindFirst("roleType");
+
+        //    if (RoleID == null || string.IsNullOrEmpty(RoleID.Value))
+        //    {
+
+        //        throw new UnauthorizedAccessException();
+        //    }
+
+        //    var role = (Role)int.Parse(RoleID.Value);
+
+        //    var hasAccess = await _mediator.Send(new HasAccessQuery(role, _feature));
+
+        //    if (!hasAccess.isSuccess)
+        //    {
+        //        throw new UnauthorizedAccessException();
+        //    }
+        }
     }
-}
+

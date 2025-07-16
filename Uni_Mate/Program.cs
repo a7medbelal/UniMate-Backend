@@ -105,14 +105,13 @@ namespace Uni_Mate
 
 
             var coonfig = new ConfigurationBuilder()
-             .AddJsonFile("appsettings.json")
-             .Build(); 
+           .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)
+            .Build();
 
+            Serilog.Debugging.SelfLog.Enable(msg => File.AppendAllText("serilog-selflog.txt", msg));
             Log.Logger = new LoggerConfiguration()
                .ReadFrom.Configuration(coonfig)
-               .WriteTo.File("Logs/unimate-log.txt", rollingInterval: RollingInterval.Day)
-               .WriteTo.Seq("http://localhost:5341")
-                   .MinimumLevel.Override("Microsoft", LogEventLevel.Warning)
+               .WriteTo.Seq("http://localhost:5341", apiKey: "emYn6SpwRspgook4D281")
                    .MinimumLevel.Override("System", LogEventLevel.Warning)
                    .MinimumLevel.Information()
                .WriteTo.MSSqlServer(
@@ -120,7 +119,6 @@ namespace Uni_Mate
                     restrictedToMinimumLevel: Serilog.Events.LogEventLevel.Information,
                     sinkOptions : new MSSqlServerSinkOptions { TableName = "Logs"   , AutoCreateSqlTable = true})
                 .CreateLogger();
-
 
 
             builder.Host.UseSerilog();

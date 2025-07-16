@@ -154,7 +154,16 @@ namespace Uni_Mate.Domain.Repository
 
         public async Task<bool> AnyAsync(Expression<Func<Entity, bool>> predicate)
         {
-            return await Get(predicate).AnyAsync();
+            try
+            {
+                return await Get(predicate).AnyAsync();
+            }
+            catch (TaskCanceledException ex)
+            {
+                // Log it or handle as needed
+                Console.WriteLine("Query was cancelled: " + ex.Message);
+                return false; // or rethrow depending on context
+            }
         }
         public async Task AddRangeAsync(IEnumerable<Entity> entities)
         {

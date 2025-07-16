@@ -1,7 +1,7 @@
 ﻿using System.Security;
 using Uni_Mate.Models.ApartmentManagement;
 
-namespace Uni_Mate.Features.ApartmentManagment.GetApartment;
+namespace Uni_Mate.Features.Common.ApartmentManagement.ApartmerntDTO;
 
 public class GetApartmentDTO
 {
@@ -9,8 +9,8 @@ public class GetApartmentDTO
     public List<string> Images { get; set; } = [];
     public Location Location { get; set; }
     public string DetailedAddress { get; set; }
-    public Enum Gender { get; set; }
-    public List<String> Facilities { get; set; } = [];
+    public string Gender { get; set; }
+    public List<string> Facilities { get; set; } = [];
     public string Floor { get; set; }
     public string OwnerName { get; set; }
     public int NumberOfRooms { get; set; }

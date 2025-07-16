@@ -10,6 +10,7 @@
         updaApartment=6,
         FavriteApartment=7,
         deleteFavioriteApartment=8,
+        GetApartmentsOwner=9,
 
     }
 }

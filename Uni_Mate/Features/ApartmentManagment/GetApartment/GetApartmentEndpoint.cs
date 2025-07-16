@@ -5,6 +5,7 @@ using Uni_Mate.Common.Data.Enums;
 using Uni_Mate.Common.Helper;
 using Uni_Mate.Common.Views;
 using Uni_Mate.Features.ApartmentManagment.GetApartment.Queries;
+using Uni_Mate.Features.Common.ApartmentManagement.ApartmerntDTO;
 
 namespace Uni_Mate.Features.ApartmentManagment.GetApartment;
 

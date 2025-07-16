@@ -9,6 +9,7 @@ using Uni_Mate.Common.Data.Enums;
 using Uni_Mate.Common.Helper;
 using Uni_Mate.Common.Views;
 using Uni_Mate.Domain.Repository;
+using Uni_Mate.Features.Common.ApartmentManagement.ApartmerntDTO;
 using Uni_Mate.Models.ApartmentManagement;
 
 namespace Uni_Mate.Features.ApartmentManagment.GetApartment.Queries;
@@ -49,10 +50,10 @@ public class GetApartmentQueryHandler : BaseRequestHandler<GetApartmentQuery, Re
             {
                 Id = x.Id,
                 Location = x.Location,
-                Gender = x.Gender,
+                Gender = x.Gender.ToString(),
                 Floor = x.Floor ?? "unknown",
                 DetailedAddress = x.DescripeLocation ?? "unknown",
-                OwnerName = (x.Owner != null ? x.Owner.Fname + " " + x.Owner.Lname : string.Empty),
+                OwnerName = x.Owner != null ? x.Owner.Fname + " " + x.Owner.Lname : string.Empty,
                 NumberOfRooms = x.NumberOfRooms,
                 Price = x.Price,
                 Favourite = favourites.Contains(x.Id)
@@ -94,7 +95,7 @@ public class GetApartmentQueryHandler : BaseRequestHandler<GetApartmentQuery, Re
 
         Console.WriteLine($"Second Query : {stopwatch.ElapsedMilliseconds} ms");
         stopwatch.Stop();
-
+            
 
         var imagesGrouped = imageTask
             .GroupBy(i => i.ApartmentId)
